@@ -15,7 +15,7 @@
   z-index: 1;
 }
 
-.heroSection{
+#heroSection{
   position: relative;
 }
 
@@ -23,7 +23,9 @@
   position: absolute;
   left: 0;
   width: 100%;
+  height: 40rem;
   z-index: 0;
+  object-fit: cover;
 }
 
 #heroText1{
@@ -70,6 +72,7 @@
 
 .navbarLink{
   margin: 1rem;
+  cursor: pointer;
 }
 
 #bookingCheck_landing{
@@ -118,6 +121,7 @@
   border: none;
   border-radius: 100%;
   color: "#ffffff";
+  cursor: pointer;
 }
 
 .material-symbols-rounded{
@@ -133,4 +137,58 @@
   background-color: #f3e4d8;
   font-weight: bold;
   color: #613919e7;
+}
+
+#gallerySection{
+  width: 100%;
+  height: 40rem;
+  margin: 40rem 0 0 0;
+}
+
+.galleryGrid{
+  display: flex;
+  width: 100%;
+  height: 80%;
+}
+
+.heroGridImg{
+  width: 50%;
+  height: 100%;
+  margin: 5rem 0 0 2rem;
+}
+
+.sideGridImgs{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  margin: 5rem 2rem 0 0;
+}
+
+.sideGridImgsTop{
+  width: 100%;
+  height: 50%;
+}
+
+.sideGridImgsBottom{
+  width: 100%;
+  height: 50%;
+}
+
+.subGridImg{
+  width: 100%;
+  height: 100%;
+}
+
+.galleryImgHero{
+  width: 95%;
+  height: 95%;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.galleryImg{
+  width: 90%;
+  height: 90%;
+  border-radius: 1rem;
+  object-fit: cover;
 }
