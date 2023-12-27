@@ -246,6 +246,7 @@ html{
   flex-direction: column;
   text-align: center;
   margin: 20px;
+
 }
 
 .testimonial {
@@ -274,4 +275,25 @@ html{
 .prevBtn:active, .nextBtn:active{
   background-color: #f9d4b5;
   color: #ffffff;
+}
+
+.testimonialCard{
+  font-size: 1.5rem;
+  width: 50rem;
+  height: 15rem;
+  background-color: #f3e4d8;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #996132;
+  margin: 5rem 0 0 0;
+}
+
+.quoteSymbol{
+  position: absolute;
+  opacity: 0.3;
+  width: 10rem;
+  left: 16rem;
+  margin: 8rem 0 12rem 0;
 }
