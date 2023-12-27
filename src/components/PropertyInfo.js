@@ -29,7 +29,7 @@ const PropertyInfo = () => {
                 </div>
 
                 <div className="amenContent">
-                    <img className="leaf3Img" src={Leaf3}></img>
+                    <img alt = "leaf decoration" className="leaf3Img" src={Leaf3}></img>
                     <p style={{ margin: '3.5rem 10rem 2rem 0', textAlign: 'left' }}>Immerse yourself in nature's embrace as you gaze upon the breathtaking forest and valley views from the comfort of your room. Nestled amidst lush greenery and rolling hills, our location offers a symphony of sights that redefine tranquility and serenity.</p>
                     <p style={{ margin: '0 10rem 0 0', textAlign: 'left' }}>Explore the city with ease using our concierge services, which provide insider knowledge and assistance in planning your excursions and experiences.</p>
                     <p style={{ margin: '2rem 10rem 2rem 0', textAlign: 'left' }}>At Navut, our commitment to your comfort and satisfaction is unwavering. Elevate your stay with our array of amenities, meticulously curated to cater to your every need.</p>

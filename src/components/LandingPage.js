@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import Hero from './Hero'
 import Gallery from './Gallery'
 import PropertyInfo from './PropertyInfo'
+import TestimonialSlider from './TestimonialSlider'
 import SquareLogo from '../images/navut_logo_square.jpg'
 
 const LandingPage = () => {
@@ -13,6 +14,7 @@ const LandingPage = () => {
             <Hero />
             <Gallery />
             <PropertyInfo />
+            <TestimonialSlider />
         </div>
     )
 }

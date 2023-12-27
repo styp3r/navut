@@ -238,3 +238,40 @@ html{
   height: 30rem;
   z-index: -1;
 }
+
+.testimonial-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 20px;
+}
+
+.testimonial {
+  max-width: 80%;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.slideBtns{
+  display: flex;
+}
+
+.prevBtn, .nextBtn{
+  width: 3rem;
+  height: 3rem;
+  margin: 0.5rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.prevBtn:active, .nextBtn:active{
+  background-color: #f9d4b5;
+  color: #ffffff;
+}
