@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from './Navbar'
 import Hero from './Hero'
 import Gallery from './Gallery'
+import PropertyInfo from './PropertyInfo'
 import SquareLogo from '../images/navut_logo_square.jpg'
 
 const LandingPage = () => {
@@ -11,6 +12,7 @@ const LandingPage = () => {
             <Navbar />
             <Hero />
             <Gallery />
+            <PropertyInfo />
         </div>
     )
 }
