@@ -5,6 +5,9 @@ import Gallery from './Gallery'
 import PropertyInfo from './PropertyInfo'
 import TestimonialSlider from './TestimonialSlider'
 import SquareLogo from '../images/navut_logo_square.jpg'
+import BookNowSection from './BookNowSection'
+import Map from './MapComponent'
+import Footer from './Footer'
 
 const LandingPage = () => {
     return (
@@ -15,6 +18,9 @@ const LandingPage = () => {
             <Gallery />
             <PropertyInfo />
             <TestimonialSlider />
+            <BookNowSection />
+            <Map />
+            <Footer />
         </div>
     )
 }
