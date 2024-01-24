@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import HeroImg from '../images/heroImg.jpg'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
 
@@ -41,7 +42,7 @@ const Hero = () => {
                         </select>
                     </p>
                 </div>
-                <button id="checkBookingDatesBtn"><span style={{ color: "#ffffff" }} class="material-symbols-outlined">arrow_forward</span></button>
+                <Link to = "/bookings"><div id="checkBookingDatesBtn"><span style={{ color: "#ffffff" }} class="material-symbols-outlined">arrow_forward</span></div></Link>
             </div>
         </div>
     );

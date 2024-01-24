@@ -33,24 +33,24 @@ const Footer = () => {
                 <img className="partnerLogoItem" src={yatraLogo} alt="partner" width="60" height="25"></img>
             </div>
             <hr className="footerDivider"></hr>
-            <div className = "footerContent">
-                <div className = "socialMedia">
-                    <p style = {{color: '#996132'}}>Find Us On Social Media</p>
-                    <img className = "socialItem" src = {fbLogo} alt = "link to facebook page"></img>
-                    <img className = "socialItem" src = {instaLogo} alt = "link to instagram page"></img>
-                    <img className = "socialItem" src = {whatsappLogo} alt = "link to whatsapp chat"></img>
+            <div className="footerContent">
+                <div className="socialMedia">
+                    <p style={{ color: '#996132' }}>Find Us On Social Media</p>
+                    <img className="socialItem" src={fbLogo} alt="link to facebook page"></img>
+                    <img className="socialItem" src={instaLogo} alt="link to instagram page"></img>
+                    <img className="socialItem" src={whatsappLogo} alt="link to whatsapp chat"></img>
                 </div>
-                <div className = "usefulLinks">
-                    <p style = {{color: '#996132'}}>Useful Links</p>
-                    <Link to = "/"><p className="navbarLink">Home</p></Link>
-                    <Link to = "/bookings"><p className="navbarLink">Bookings</p></Link>
-                    <Link to = "/about"><p className="navbarLink">About Us</p></Link>
-                    <Link to = "/contact"><p className="navbarLink">Contact Us</p></Link>
+                <div className="usefulLinks">
+                    <p style={{ color: '#996132' }}>Useful Links</p>
+                    <Link style={{ textDecoration: 'none', color: '#000000' }} to="/"><p >Home</p></Link>
+                    <Link style={{ textDecoration: 'none', color: '#000000' }} to="/bookings"><p >Bookings</p></Link>
+                    <Link style={{ textDecoration: 'none', color: '#000000' }} to="/about"><p >About Us</p></Link>
+                    <Link style={{ textDecoration: 'none', color: '#000000' }} to="/contact"><p >Contact Us</p></Link>
                 </div>
-                <div className = "newsletter">
-                    <p style = {{color: '#996132'}}>Join Our Newsletter</p>
-                    <input className = "newsletterEmailInput" placeholder = "Email"></input>
-                    <button className = "joinNewsletterBtn">Join</button>
+                <div className="newsletter">
+                    <p style={{ color: '#996132' }}>Join Our Newsletter</p>
+                    <input className="newsletterEmailInput" placeholder="Email"></input>
+                    <button className="joinNewsletterBtn">Join</button>
                 </div>
             </div>
         </div>
