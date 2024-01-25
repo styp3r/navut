@@ -19,26 +19,14 @@ const Hero = () => {
                 <div className="bookingCheck_landing_container">
                     <p className="bookingCheck_titles">CHECK IN <DatePicker id="checkInDate_landing" dateFormat="dd/MM/yyyy" closeOnScroll={true} selected={startDate} onChange={(date) => setStartDate(date)} /></p>
                     <p className="bookingCheck_titles">CHECK OUT <DatePicker id="checkOutDate_landing" dateFormat="dd/MM/yyyy" closeOnScroll={true} selected={endDate} onChange={(date) => setEndDate(date)} /></p>
-                    <p className="bookingCheck_titles">GUESTS
+                    <p className="bookingCheck_titles">ROOMS
                         <select name="guests" id="numOfGuestsSelect_landing">
-                            <option value="1">1</option>
-                            <option value="2" selected>2</option>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
                         </select>
                     </p>
                 </div>

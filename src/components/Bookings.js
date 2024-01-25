@@ -6,6 +6,8 @@ import DisplayRooms from './DisplayRooms'
 
 const Bookings = () => {
 
+    window.scrollTo(0, 0);
+
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [selectedDates, setSelectedDates] = useState([]);
@@ -56,26 +58,14 @@ const Bookings = () => {
                                 <DatePicker id="checkOutDate" dateFormat="dd/MM/yyyy" closeOnScroll={true} minDate={startDate} selected={endDate} onChange={(date) => handleEndDateChange(date, 'end')} />
                             </div>
                             <div>
-                                <p className="titles">NO. OF GUESTS</p>
+                                <p className="titles">NO. OF ROOMS</p>
                                 <select name="guests" id="numOfGuestsSelect">
-                                    <option value="1">1</option>
-                                    <option value="2" selected>2</option>
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                     <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
                                 </select>
                             </div>
                             <button id="checkBookingDatesBtn_bookingPage" onClick={handleGenerateDates}>Check Availability</button>

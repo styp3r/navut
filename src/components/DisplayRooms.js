@@ -4,7 +4,7 @@ import Rooms from './Rooms'
 const DisplayRooms = () => {
 
     const roomList = Rooms.map((r) => {
-        if (r.isAvailable == false) {
+        if (r.isAvailable === false) {
             return (
                 <div className="roomDetailsContainer">
                     <div className="roomDetails">
