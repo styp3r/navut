@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 
 const ReviewBooking = ({ bookedRooms }) => {
   return (
@@ -13,6 +14,7 @@ const ReviewBooking = ({ bookedRooms }) => {
       ) : (
         <p>No rooms booked yet. Go back and book some rooms!</p>
       )}
+      <Footer />
     </div>
   );
 };

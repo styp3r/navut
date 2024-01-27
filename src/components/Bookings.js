@@ -1,98 +1,126 @@
-import Footer from './Footer'
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import DisplayRooms from './DisplayRooms'
+import React, { useState, useEffect } from 'react';
+import { isBefore, isAfter, eachDayOfInterval } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
+import rooms from './Rooms'
 
-const Bookings = () => {
+const About = ({ bookedRooms, setBookedRooms }) => {
+    const navigate = useNavigate();
+    const [checkin, setCheckin] = useState('');
+    const [checkout, setCheckout] = useState('');
+    const [availableRooms, setAvailableRooms] = useState([]);
+    const [disabledButtons, setDisabledButtons] = useState([]);
+    const [isCheckAvailBtnDisabled, setisCheckAvailBtnDisabled] = useState(true);
+    const [isDisabled, setIsDisabled] = useState('none');
 
-    window.scrollTo(0, 0);
+    useEffect(() => {
+        // Reset bookedRooms to an empty array on page load
+        setBookedRooms([]);
+        // Set up the beforeunload event listener
+        const beforeUnloadListener = (event) => {
+            // No need to do anything here since the state has already been reset
+        };
+        window.addEventListener('beforeunload', beforeUnloadListener);
+        // Cleanup the event listener when the component is unmounted
+        return () => {
+            window.removeEventListener('beforeunload', beforeUnloadListener);
+        };
+    }, [setBookedRooms]);
 
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    const [selectedDates, setSelectedDates] = useState([]);
+    const checkAvailability = () => {
+        const checkinDate = new Date(checkin);
+        const checkoutDate = new Date(checkout);
 
-    const handleStartDateChange = (date) => {
-        setStartDate(date);
-        // If there's an end date selected, ensure it's after the new start date
-        if (endDate && date > endDate) {
-            setEndDate(null);
+        if (isNaN(checkinDate) || isNaN(checkoutDate) || isAfter(checkoutDate, checkinDate)) {
+            const selectedDates = eachDayOfInterval({ start: checkinDate, end: checkoutDate });
+
+            const conflictingDates = selectedDates.slice(1, -1); // Exclude the start and end dates
+
+            const availableRooms = rooms.filter(room => {
+
+                const hasConflictingDates = room.bookings.some(booking =>
+                    conflictingDates.some(date =>
+                        isBefore(date, new Date(booking.endDate)) && isAfter(date, new Date(booking.startDate))
+                    )
+                );
+
+                return !hasConflictingDates;
+            });
+
+            setAvailableRooms(availableRooms);
+        } else {
+            alert('Invalid date range');
         }
     };
 
-    const handleEndDateChange = (date) => {
-        setEndDate(date);
+    const handleBookNow = (roomId) => {
+        const selectedRoom = availableRooms.find(room => room.id === roomId);
+        if (selectedRoom && bookedRooms.length < 6) {
+            setBookedRooms(prevBookedRooms => [...prevBookedRooms, { ...selectedRoom, isSelected: true }]);
+            setDisabledButtons(prevDisabledButtons => [...prevDisabledButtons, roomId]);
+        } else if (bookedRooms.length >= 6) {
+            alert('You can book a maximum of 6 rooms.');
+        }
     };
 
-    const generateDateRange = (start, end) => {
-        const dateList = [];
-        let currentDate = new Date(start);
-
-        while (currentDate <= end) {
-            dateList.push(new Date(currentDate));
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
-
-        return dateList;
+    const handleDeleteRoom = (roomId) => {
+        setBookedRooms(prevBookedRooms =>
+            prevBookedRooms.filter(room => {
+                if (room.id === roomId) {
+                    setDisabledButtons(prevDisabledButtons => prevDisabledButtons.filter(disabledId => disabledId !== roomId));
+                    return false; // Exclude the room from the bookedRooms array
+                }
+                return true;
+            })
+        );
     };
 
-    const handleGenerateDates = () => {
-        if (startDate && endDate) {
-            const dates = generateDateRange(startDate, endDate);
-            setSelectedDates(dates);
-        }
+    const handleReviewBooking = () => {
+        navigate('/reviewBooking');
     };
 
     return (
-        <div>
-            <div id="bookingsPage">
-                <div className="bookingParameters">
-                    <div id="bookingCheck">
-                        <div className="bookingCheck_container">
-                            <div>
-                                <p className="titles">CHECK IN DATE</p>
-                                <DatePicker id="checkInDate" dateFormat="dd/MM/yyyy" closeOnScroll={true} minDate={new Date()} selected={startDate} onChange={(date) => handleStartDateChange(date, 'start')} />
-                            </div>
-                            <div>
-                                <p className="titles">CHECK OUT DATE</p>
-                                <DatePicker id="checkOutDate" dateFormat="dd/MM/yyyy" closeOnScroll={true} minDate={startDate} selected={endDate} onChange={(date) => handleEndDateChange(date, 'end')} />
-                            </div>
-                            <div>
-                                <p className="titles">NO. OF ROOMS</p>
-                                <select name="guests" id="numOfGuestsSelect">
-                                    <option value="1" selected>1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </div>
-                            <button id="checkBookingDatesBtn_bookingPage" onClick={handleGenerateDates}>Check Availability</button>
-                        </div>
+        <div id="bookingsPage">
+            <h1>Bookings</h1>
+            <div className="dateInputsContainer">
+                <div className="checkInDateInput">
+                    <label htmlFor="checkin">Check-in Date: </label>
+                    <input type="date" id="checkin" value={checkin} onChange={(e) => setCheckin(e.target.value)} />
+                </div>
 
-                    </div>
-                    <ul>
-                        {selectedDates.length > 0 && (
-                            <div>
-                                <h3>Selected Dates:</h3>
-                                <ul>
-                                    {selectedDates.map((date) => (
-                                        <li key={date.toISOString()}>{date.toDateString()}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </ul>
+                <div className="checkOutDateInput">
+                    <label htmlFor="checkout">Check-out Date: </label>
+                    <input type="date" id="checkout" value={checkout} onChange={(e) => {setisCheckAvailBtnDisabled(false); setCheckout(e.target.value) }} />
                 </div>
-                <div className="bookingDetails">
-                    <DisplayRooms />
-                    <p style={{ display: 'inline-block', margin: '15rem 0 0 0' }} >Oops! We Are All Booked!</p>
+                <button disabled={isCheckAvailBtnDisabled} className="checkAvailBtn1" onClick={() => {setIsDisabled('flex'); checkAvailability();}}>Check Availability</button>
+            </div>
+            <div className = "displayRooms" style = {{display: isDisabled}}>
+                <div className="availRooms">
+                    <h2>Available Rooms</h2>
+                    {availableRooms.map(room => (
+                        <div key={room.id}>
+                            {room.name}{' '}
+                            <button onClick={() => handleBookNow(room.id)} disabled={disabledButtons.includes(room.id)}>Select</button>
+                        </div>
+                    ))}
                 </div>
+
+                {bookedRooms.length > 0 && (
+                    <div className="selectedRooms">
+                    <h2>Selected Rooms</h2>
+                    {bookedRooms.map(room => (
+                        <div key={room.id}>
+                            {room.name}{' '}
+                            <button onClick={() => handleDeleteRoom(room.id)}>Delete</button>
+                        </div>
+                    ))}
+                    <button onClick={handleReviewBooking}>Review Booking</button>
+                </div>
+                )}
             </div>
             <Footer />
         </div>
     );
-}
+};
 
-export default Bookings;
+export default About;

@@ -51,16 +51,6 @@ html {
   font-family: 'Caveat', cursive;
 }
 
-#heroSubText {
-  text-align: left;
-  width: 25rem;
-  position: absolute;
-  color: #ffffff;
-  left: 7rem;
-  top: 32rem;
-  font-size: 1.2rem;
-}
-
 .navbarItems_container {
   display: flex;
 }
@@ -77,60 +67,42 @@ html {
   color: #996132;
 }
 
-#bookingCheck_landing {
-  position: absolute;
-  width: 30rem;
-  height: 5rem;
-  border-radius: 10rem;
-  background-color: #f3e4d8;
-  top: 36rem;
-  left: 5rem;
-  z-index: 1;
-  animation-name: glow;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-}
-
-.bookingCheck_landing_container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  margin: 0 5rem 0 0;
-}
-
-.bookingCheck_titles {
-  font-size: 0.8rem;
-  color: #996132;
-  display: flex;
-  flex-direction: column;
-}
-
-#checkInDate_landing,
-#checkOutDate_landing {
-  width: 4.5rem;
-  margin: 1rem 0 0 0;
-  background-color: #f3e4d8;
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  outline: none;
-  color: #613919e7;
-}
-
 #checkBookingDatesBtn {
   position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
-  width: 4rem;
-  height: 4rem;
-  background-color: #996132;
+  left: 7rem;
+  top: 26rem;
+  width: 12rem;
+  height: 3rem;
+  background-color:#996132;
   border: none;
-  border-radius: 100%;
+  border-radius: 1rem;
   color: "#ffffff";
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: 3s linear .1s growShrink;
+  animation-duration: 0.4s;
+  animation-iteration-count: 2;
+  animation-delay: 2s;
+  animation-timing-function: linear;
+}
+
+#checkBookingDatesBtn:active{
+  background-color: #d49c6e;
+}
+
+
+@keyframes growShrink {
+  0% {
+    background-color:#996132;
+  }
+  50%{
+    background-color: #d49c6e;
+    }
+  100%{
+    background-color:#996132;
+  }
 }
 
 .material-symbols-rounded {
@@ -439,75 +411,56 @@ html {
   background-color: #996132;
 }
 
-#bookingsPage{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.bookingParameters{
-  width: 80%;
+.dateInputsContainer{
+  width: 40rem;
   height: 7rem;
   background-color: #f3e4d8;
-  margin: 10rem 0 0 0;
-  border-radius: 1.5rem;
-}
-
-.bookingDetails{
-  width: 80rem;
-  background-color: #ffffff;
-  margin: 6rem 2rem 10rem 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0px 0px 8px 0px #d7d7d7;
+  border-radius: 1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  margin: 2rem;
+  padding: 0 2rem 0 2rem;
 }
 
-.roomDetailsContainer{
-  width: 75rem;
-  height: 20rem;
-  display: flex;
-  flex-direction: column;
-  margin: 2rem 0 2rem 0;
-}
-
-.roomDetails{
-  width: 75rem;
-  height: 20rem;
-  border: 1px solid #e6e6e6;
-}
-
-.bookingCheck_container{
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-#checkBookingDatesBtn_bookingPage{
-  width: 10rem;
+.checkAvailBtn{
+  width: 7rem;
   height: 3rem;
-  background-color: #996132;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  margin: 2rem 0 0 0;
-  border-radius: 1.5rem;
-  outline: none;
   border: none;
+  background-color: #996132;
+  color: #ffffff;
+  outline: none;
+  border-radius: 0.5rem;
 }
 
-#checkBookingDatesBtn_bookingPage:hover{
+.checkAvailBtn:hover{
   cursor: pointer;
 }
 
-#checkBookingDatesBtn_bookingPage:active{
-  background-color: #593418;
+.checkAvailBtn:active{
+  background-color: #5c3a1e;
 }
 
-.titles{
-  color: #996132;
+#bookingsPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.displayRooms{
+  width: 80rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.availRooms{
+  width: 70%;
+}
+
+.selectedRooms{
+  width: 30%;
+  background-color: blue;
 }

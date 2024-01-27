@@ -22,8 +22,8 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/bookings" element={<Bookings />} />
-            <Route path="/about" element={<About bookedRooms={bookedRooms} setBookedRooms={setBookedRooms}/>} />
+            <Route path="/bookings" element={<Bookings bookedRooms={bookedRooms} setBookedRooms={setBookedRooms}/>} />
+            <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/reviewBooking" element={<ReviewBooking bookedRooms={bookedRooms}/>} />
           </Routes>
