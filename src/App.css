@@ -425,9 +425,9 @@ html {
 
 .checkAvailBtn{
   width: 7rem;
-  height: 3rem;
+  height: 2rem;
   border: none;
-  background-color: #996132;
+  background-color: #d49c6e;
   color: #ffffff;
   outline: none;
   border-radius: 0.5rem;
@@ -446,6 +446,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .displayRooms{
@@ -457,10 +458,117 @@ html {
 }
 
 .availRooms{
-  width: 70%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .selectedRooms{
-  width: 30%;
-  background-color: blue;
+  width: 95%;
+  height: 5rem;
+  position: fixed;
+  bottom: 0;
+  background-color: #efc9aa;
+  border-radius: 1rem;
+  margin: 1rem;
+  z-index: 5;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.roomDetails{
+  position: relative;
+  width: 60rem;
+  height: 30rem;
+  border-radius: 1rem;
+  margin: 2rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.selectRoomBtn{
+  width: 50rem;
+  height: 3rem;
+  position: absolute;
+  bottom: 2rem;
+  border-radius: 0.8rem;
+  outline: none;
+  border: none;
+  background-color: #efc9aa;
+  color: #996132;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.selectRoomBtn:hover{
+  cursor: pointer;
+}
+
+.selectRoomBtn:disabled{
+  background-color: #d5d5d5;
+  color: #838383;
+  opacity: 0.5;
+  cursor: default;
+}
+
+.reviewBookingBtn{
+  position: absolute;
+  right: 5rem;
+  background-color: #bb8456;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  width: 7rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+}
+
+.reviewBookingBtn:hover{
+  cursor: pointer;
+}
+
+.reviewBookingBtn:active{
+  background-color: #d49c6e;
+}
+
+.divider{
+  width: 80%;
+  border: 1px solid #e9ba93;
+}
+
+.bookingHero{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0rem;
+  z-index: -10;
+  object-fit: cover;
+}
+
+.booking-content{ 
+  width: 60rem;
+  text-align: left;
+  margin: 0 0 5rem 0;
+}
+
+.bookingPageTitleContent{
+  width: 50rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  margin: 0;
+  color: #996132;
+}
+
+.bookingPageTitle{
+  font-family: 'Caveat', cursive;
+  font-size: 3rem;
+  margin: 3rem 0 0 0;
+  color: #d49c6e;
 }

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import rooms from './Rooms'
 
-const About = ({ bookedRooms, setBookedRooms }) => {
+const Bookings = ({ bookedRooms, setBookedRooms }) => {
     const navigate = useNavigate();
     const [checkin, setCheckin] = useState('');
     const [checkout, setCheckout] = useState('');
@@ -81,7 +81,8 @@ const About = ({ bookedRooms, setBookedRooms }) => {
 
     return (
         <div id="bookingsPage">
-            <h1>Bookings</h1>
+            <p className = "bookingPageTitle">Reservations</p>
+            <p className = "bookingPageTitleContent">Book now and let the anticipation of your upcoming stay fill you with excitement!</p>
             <div className="dateInputsContainer">
                 <div className="checkInDateInput">
                     <label htmlFor="checkin">Check-in Date: </label>
@@ -90,37 +91,75 @@ const About = ({ bookedRooms, setBookedRooms }) => {
 
                 <div className="checkOutDateInput">
                     <label htmlFor="checkout">Check-out Date: </label>
-                    <input type="date" id="checkout" value={checkout} onChange={(e) => {setisCheckAvailBtnDisabled(false); setCheckout(e.target.value) }} />
+                    <input type="date" id="checkout" value={checkout} onChange={(e) => { setisCheckAvailBtnDisabled(false); setCheckout(e.target.value) }} />
                 </div>
-                <button disabled={isCheckAvailBtnDisabled} className="checkAvailBtn1" onClick={() => {setIsDisabled('flex'); checkAvailability();}}>Check Availability</button>
+                <button disabled={isCheckAvailBtnDisabled} className="checkAvailBtn" onClick={() => { setIsDisabled('flex'); checkAvailability(); }}>View Availability</button>
             </div>
-            <div className = "displayRooms" style = {{display: isDisabled}}>
+
+            <div className="displayRooms" style={{ display: isDisabled }}>
                 <div className="availRooms">
-                    <h2>Available Rooms</h2>
+                    <h2>Select a Room</h2>
                     {availableRooms.map(room => (
                         <div key={room.id}>
-                            {room.name}{' '}
-                            <button onClick={() => handleBookNow(room.id)} disabled={disabledButtons.includes(room.id)}>Select</button>
+                            <div className="roomDetails">
+                                <p>{room.name}{' '}</p>
+                                <p>{room.price}</p>
+                                <button className="selectRoomBtn" onClick={() => handleBookNow(room.id)} disabled={disabledButtons.includes(room.id)}>Select Room</button>
+                            </div>
                         </div>
                     ))}
                 </div>
 
                 {bookedRooms.length > 0 && (
                     <div className="selectedRooms">
-                    <h2>Selected Rooms</h2>
-                    {bookedRooms.map(room => (
-                        <div key={room.id}>
-                            {room.name}{' '}
-                            <button onClick={() => handleDeleteRoom(room.id)}>Delete</button>
-                        </div>
-                    ))}
-                    <button onClick={handleReviewBooking}>Review Booking</button>
-                </div>
+                        {bookedRooms.map(room => (
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 1rem 0 1rem', color: '#ffffff' }} key={room.id}>
+                                <div>
+                                    <p style={{ margin: '0', color: '#996132', fontWeight: 'bold' }}>{room.name}{' '}</p>
+                                    <p style={{ margin: '0', color: '#996132' }}>{room.price}{' '}</p>
+                                </div>
+                                <button style={{ display: 'block', borderRadius: '1rem', outline: 'none', border: 'none', cursor: 'pointer', margin: '0 0.4rem 0 0.4rem', color: '#737373' }} onClick={() => handleDeleteRoom(room.id)}>x</button>
+                            </div>
+                        ))}
+                        <button className="reviewBookingBtn" onClick={handleReviewBooking}>Review Booking</button>
+                    </div>
                 )}
+            </div>
+
+            <hr className="divider"></hr>
+
+            <div className="booking-content">
+                <h2 style = {{color: '#d49c6e', margin: '2rem 0 3rem 0'}}>Terms & Conditions</h2>
+                <h3>Check-In and Check-Out Timings</h3>
+                <p>
+                    Check-in time is from 3:00 PM onwards, and check-out time is until 11:00 AM. If you require an early check-in or late check-out, please contact us in advance, and we will do our best to accommodate your request.
+                </p>
+
+                <h3>General Rules</h3>
+                <ul>
+                    <li>Please be considerate of other guests and maintain a quiet atmosphere in common areas.</li>
+                    <li>No smoking is allowed inside the rooms or common areas.</li>
+                    <li>Pets are not permitted in our homestay.</li>
+                    <li>Kindly respect the property and its surroundings.</li>
+                </ul>
+
+                <h3>Cancellation Policy</h3>
+                <p>
+                    We understand that plans can change. If you need to cancel your reservation, please do so at least 48 hours before your scheduled check-in time to avoid any cancellation charges. Late cancellations or no-shows may incur a cancellation fee.
+                </p>
+
+                <h3>Contact Information</h3>
+                <p>
+                    If you have any questions, concerns, or special requests, feel free to reach out to our team at [Your Contact Email/Phone]. We are here to make your stay memorable and enjoyable.
+                </p>
+
+                <p>
+                    We look forward to hosting you at our homestay and wish you a wonderful stay!
+                </p>
             </div>
             <Footer />
         </div>
     );
 };
 
-export default About;
+export default Bookings;
