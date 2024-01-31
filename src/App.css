@@ -441,6 +441,13 @@ html {
   background-color: #5c3a1e;
 }
 
+.checkAvailBtn:disabled{
+  background-color: #d5d5d5;
+  color: #838383;
+  opacity: 0.5;
+  cursor: default;
+}
+
 #bookingsPage{
   display: flex;
   flex-direction: column;
@@ -467,7 +474,7 @@ html {
 
 .selectedRooms{
   width: 95%;
-  height: 5rem;
+  height: 6rem;
   position: fixed;
   bottom: 0;
   background-color: #efc9aa;
@@ -477,6 +484,12 @@ html {
   display: flex;
   justify-content: left;
   align-items: center;
+}
+
+.yourStayTitle{
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem
 }
 
 .roomDetails{
@@ -516,6 +529,22 @@ html {
   color: #838383;
   opacity: 0.5;
   cursor: default;
+}
+
+.totalRoomAmountTitle_bookingPage{
+    position: absolute;
+    right: 17.6rem;
+    top: 0.5rem;
+    color: #996132;
+    font-weight: bold;
+}
+
+.totalRoomAmount_bookingPage{
+  position: absolute;
+  right: 15rem;
+  top: 2rem;
+  font-weight: bold;
+  color: #996132;
 }
 
 .reviewBookingBtn{

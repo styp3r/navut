@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SquareLogo from './images/navut_logo_square.jpg'
 import Home from './components/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -8,10 +8,25 @@ import Bookings from './components/Bookings'
 import About from './components/About'
 import Contact from './components/Contact'
 import ReviewBooking from './components/ReviewBooking'
+import PaymentGateway from './components/PaymentGateway'
 
 function App() {
 
   const [bookedRooms, setBookedRooms] = useState([]);
+
+  useEffect(() => {
+    // Reset bookedRooms to an empty array on page load
+    setBookedRooms([]);
+    // Set up the beforeunload event listener
+    const beforeUnloadListener = (event) => {
+        // No need to do anything here since the state has already been reset
+    };
+    window.addEventListener('beforeunload', beforeUnloadListener);
+    // Cleanup the event listener when the component is unmounted
+    return () => {
+        window.removeEventListener('beforeunload', beforeUnloadListener);
+    };
+}, [setBookedRooms]);
 
   return (
     <div className="App">
@@ -26,6 +41,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/reviewBooking" element={<ReviewBooking bookedRooms={bookedRooms}/>} />
+            <Route path="/paymentGateway" element={<PaymentGateway bookedRooms={bookedRooms}/>} />
           </Routes>
         </div>
       </Router>
