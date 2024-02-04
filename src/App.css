@@ -495,7 +495,7 @@ html {
 .roomDetails{
   position: relative;
   width: 60rem;
-  height: 30rem;
+  height: 33rem;
   border-radius: 1rem;
   margin: 2rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -503,7 +503,21 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+}
+
+.roomImgIcon{
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  border: solid 1px #e1e1e1;
+  border-radius: 0.5rem;
+}
+
+.roomAboutContent{
+  position: absolute;
+  top: 1rem;
+  right: 12rem;
+  text-align: left;
 }
 
 .selectRoomBtn{
@@ -533,7 +547,7 @@ html {
 
 .totalRoomAmountTitle_bookingPage{
     position: absolute;
-    right: 17.6rem;
+    right: 15rem;
     top: 0.5rem;
     color: #996132;
     font-weight: bold;
@@ -600,4 +614,52 @@ html {
   font-size: 3rem;
   margin: 3rem 0 0 0;
   color: #d49c6e;
+}
+
+.yourStayDetails{
+  width: 30rem;
+  border: solid 1px #bebebe;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+  margin: 0 0 10rem 0;
+}
+
+.roomRow{
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 24rem;
+  margin: 0;
+}
+
+.roomRowGST{
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 24rem;
+  margin: 0;
+  font-style: italic;
+}
+
+.confirmBookingBtn{
+  width: 20rem;
+  height: 3rem;
+  margin: 3rem 0 0 0;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  background-color: #bb8456;
+}
+
+.confirmBookingBtn:hover{
+  cursor: pointer;
+}
+
+.confirmBookingBtn:active{
+  background-color: #5c3a1e;
 }

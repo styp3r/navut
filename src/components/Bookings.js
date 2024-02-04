@@ -3,10 +3,9 @@ import { isBefore, isAfter, eachDayOfInterval } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import rooms from './Rooms'
+import RoomImg from '../images/decoration/roomImg.png'
 
 const Bookings = ({ bookedRooms, setBookedRooms }) => {
-
-    window.scrollTo(0, 0);
 
     const navigate = useNavigate();
     const [checkin, setCheckin] = useState('');
@@ -25,7 +24,6 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
             price: bookedRooms[i].price,
             checkInDate: checkin,
             checkOutDate: checkout,
-            tax: "18%",
             grandTotal: grandTotalRoomAmt.reduce((acc, current) => acc + current, 0)
         }
     }
@@ -95,12 +93,12 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
             <div className="dateInputsContainer">
                 <div className="checkInDateInput">
                     <label htmlFor="checkin">Check-in Date: </label>
-                    <input type="date" id="checkin" value={checkin} onChange={(e) => setCheckin(e.target.value)} />
+                    <input type="date" id="checkin" required value={checkin} onChange={(e) => setCheckin(e.target.value)} />
                 </div>
 
                 <div className="checkOutDateInput">
                     <label htmlFor="checkout">Check-out Date: </label>
-                    <input type="date" id="checkout" value={checkout} onChange={(e) => { setisCheckAvailBtnDisabled(false); setCheckout(e.target.value) }} />
+                    <input type="date" id="checkout" required value={checkout} onChange={(e) => { setisCheckAvailBtnDisabled(false); setCheckout(e.target.value) }} />
                 </div>
                 <button disabled={isCheckAvailBtnDisabled} className="checkAvailBtn" onClick={() => { setIsDisabled('flex'); checkAvailability(); }}>View Availability</button>
             </div>
@@ -110,8 +108,30 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
                     {availableRooms.map(room => (
                         <div key={room.id}>
                             <div className="roomDetails">
-                                <p>{room.name}{' '}</p>
-                                <p>Rs. {room.price}</p>
+                                <div className="roomImgIcon">
+                                    <img alt='room img template' style={{ objectFit: 'cover' }} src={RoomImg} width='350' height='300'></img>
+                                </div>
+                                <div className="roomAboutContent"> {/* Amenities according to room type*/}
+                                    <p style = {{fontSize: '1.5rem'}}>{room.name}{' '}</p>
+                                    <div style={{ display: 'flex' }}>
+                                        <div>
+                                            <p>Room Size : x sq.ft.</p>
+                                            <p>Queen Size Bed</p>
+                                            <p>Nightstand</p>
+                                            <p>Towels & Essentials</p>
+                                            <p>Smoking Allowed</p>
+                                        </div>
+                                        <div style={{ margin: '0 0 2rem 2rem' }}>
+                                            <p>Air Conditioner</p>
+                                            <p>Electric Kettle</p>
+                                            <p>Housekeeping Services</p>
+                                            <p>Free Wifi</p>
+                                            {room.name === 'Deluxe Room' ? <p>Private Balcony</p> : <p>Private Porche</p>}
+                                        </div>
+                                    </div>
+                                    <p style={{ fontWeight: 'bold', color: '#996132', fontSize: '1.5rem', margin: '0'}} >&#8377;{room.price}<span style = {{color: '#9a9a9a', fontWeight: '350', fontSize: '1rem'}}> Per Night</span></p>
+                                    <p style = {{color: '#9a9a9a', fontWeight: '350', fontSize: '1rem', margin: '0'}}> (Excluding Taxes & Fees)</p>
+                                </div>
                                 <button className="selectRoomBtn" onClick={() => handleBookNow(room.id, room.price)} disabled={disabledButtons.includes(room.id)}>Select Room</button>
                             </div>
                         </div>
@@ -124,12 +144,12 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 1rem 0 1rem', color: '#ffffff' }} key={room.id}>
                                 <div>
                                     <p style={{ margin: '0', color: '#996132', fontWeight: 'bold' }}>{room.name}{' '}</p>
-                                    <p style={{ margin: '0', color: '#996132' }}>{room.price}{' '}</p>
+                                    <p style={{ margin: '0', color: '#996132' }}>&#8377;{room.price}{' '}</p>
                                 </div>
                                 <button style={{ display: 'block', borderRadius: '1rem', outline: 'none', border: 'none', cursor: 'pointer', margin: '0 0.4rem 0 0.4rem', color: '#737373' }} onClick={() => handleDeleteRoom(room.id, room.price)}>x</button>
 
                                 <p className="totalRoomAmountTitle_bookingPage">Total</p>
-                                <p className="totalRoomAmount_bookingPage">Rs. {grandTotalRoomAmt.reduce((acc, current) => acc + current, 0)}</p>
+                                <p className="totalRoomAmount_bookingPage">&#8377;{grandTotalRoomAmt.reduce((acc, current) => acc + current, 0)}</p>
                             </div>
                         ))}
                         <button className="reviewBookingBtn" onClick={handleReviewBooking}>Review Booking</button>
