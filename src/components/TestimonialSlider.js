@@ -36,8 +36,8 @@ const TestimonialSlider = () => {
                 </div>
             </div>
             <div className="slideBtns">
-                <button className="prevBtn" onClick={prevSlide}><span class="material-symbols-outlined">chevron_left</span></button>
-                <button className="nextBtn" onClick={nextSlide}><span class="material-symbols-outlined">chevron_right</span></button>
+                <button className="prevBtn" onClick={prevSlide}><span className="material-symbols-outlined">chevron_left</span></button>
+                <button className="nextBtn" onClick={nextSlide}><span className="material-symbols-outlined">chevron_right</span></button>
             </div>
         </div>
     );

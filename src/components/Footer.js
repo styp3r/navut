@@ -28,7 +28,7 @@ const Footer = () => {
                 <img className="partnerLogoItem" src={expediaLogo} alt="partner" width="100" height="30"></img>
                 <img className="partnerLogoItem" src={goibiboLogo} alt="partner" width="100" height="35"></img>
                 <img className="partnerLogoItem" src={kayakLogo} alt="partner" width="100" height="25"></img>
-                <img className="partnerLogoItem" src={makemytripLogo} alt="partner" width="120" height="50"></img>
+                <img className="partnerLogoItem" src={makemytripLogo} alt="partner" width="120" height="45"></img>
                 <img className="partnerLogoItem" src={trivagoLogo} alt="partner" width="80" height="25"></img>
                 <img className="partnerLogoItem" src={yatraLogo} alt="partner" width="60" height="25"></img>
             </div>
@@ -49,7 +49,7 @@ const Footer = () => {
                 </div>
                 <div className="newsletter">
                     <p style={{ color: '#996132' }}>Join Our Newsletter</p>
-                    <input className="newsletterEmailInput" placeholder="Email"></input>
+                    <input id="newsletterEmailInput" placeholder="Email"></input>
                     <button className="joinNewsletterBtn">Join</button>
                 </div>
             </div>

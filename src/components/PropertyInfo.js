@@ -8,22 +8,22 @@ const PropertyInfo = () => {
                 <div className="amenList">
                     <div className="amenBlocks">
                         <div className="amenBlockLeft">
-                            <p className="amenItem"><span class="material-symbols-outlined">local_parking</span>Parking</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">wifi</span>Wifi</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">psychiatry</span>Coffee Plantation</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">landscape</span>Valley View</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">pets</span>Pets Allowed</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">restaurant</span>Restaurant</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">table_lamp</span>Dedicated Workspace</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">local_parking</span>Parking</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">wifi</span>Wifi</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">psychiatry</span>Coffee Plantation</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">landscape</span>Valley View</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">pets</span>Pets Allowed</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">restaurant</span>Restaurant</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">table_lamp</span>Dedicated Workspace</p>
                         </div>
                         <div className="amenBlockRight">
-                            <p className="amenItem"><span class="material-symbols-outlined">device_thermostat</span>Hot Water</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">self_care</span>Essentials</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">balcony</span>Balcony</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">deck</span>Terrace</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">concierge</span>Self Check-In</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">smoking_rooms</span>Smoking Allowed</p>
-                            <p className="amenItem"><span class="material-symbols-outlined">accessibility</span>Building Staff</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">device_thermostat</span>Hot Water</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">self_care</span>Essentials</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">balcony</span>Balcony</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">deck</span>Terrace</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">concierge</span>Self Check-In</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">smoking_rooms</span>Smoking Allowed</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">accessibility</span>Building Staff</p>
                         </div>
                     </div>
                 </div>
