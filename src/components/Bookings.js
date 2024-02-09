@@ -15,6 +15,7 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
     const [isCheckAvailBtnDisabled, setisCheckAvailBtnDisabled] = useState(true);
     const [isDisabled, setIsDisabled] = useState('none');
     const [grandTotalRoomAmt, setGrandTotalRoomAmt] = useState([]);
+    const [noOfDays, setNoOfDays] = useState(0);
 
     let roomData = [];
     for (let i = 0; i < bookedRooms.length; i++) {
@@ -24,6 +25,7 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
             price: bookedRooms[i].price,
             checkInDate: checkin,
             checkOutDate: checkout,
+            noOfDays: noOfDays,
             grandTotal: grandTotalRoomAmt.reduce((acc, current) => acc + current, 0)
         }
     }
@@ -35,6 +37,10 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
     const checkAvailability = () => {
         const checkinDate = new Date(checkin);
         const checkoutDate = new Date(checkout);
+
+        const timeDifference = checkoutDate - checkinDate;
+        const numberOfDays = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+        setNoOfDays(numberOfDays);
 
         if (isNaN(checkinDate) || isNaN(checkoutDate) || isAfter(checkoutDate, checkinDate)) {
             const selectedDates = eachDayOfInterval({ start: checkinDate, end: checkoutDate });
@@ -93,12 +99,12 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
             <div className="dateInputsContainer">
                 <div className="checkInDateInput">
                     <label htmlFor="checkin">Check-in Date: </label>
-                    <input type="date" id="checkin" required value={checkin} onChange={(e) => setCheckin(e.target.value)} />
+                    <input style = {{border: 'none', width: '7rem', height: '2rem', borderRadius: '0.5rem', margin: '0 0 0 0.5rem', padding: '0.3rem'}} type="date" id="checkin" required value={checkin} onChange={(e) => setCheckin(e.target.value)} />
                 </div>
 
                 <div className="checkOutDateInput">
                     <label htmlFor="checkout">Check-out Date: </label>
-                    <input type="date" id="checkout" required value={checkout} onChange={(e) => { setisCheckAvailBtnDisabled(false); setCheckout(e.target.value) }} />
+                    <input style = {{border: 'none', width: '7rem', height: '2rem', borderRadius: '0.5rem', margin: '0 0 0 0.5rem', padding: '0.3rem'}} type="date" id="checkout" required value={checkout} onChange={(e) => { setisCheckAvailBtnDisabled(false); setCheckout(e.target.value) }} />
                 </div>
                 <button disabled={isCheckAvailBtnDisabled} className="checkAvailBtn" onClick={() => { setIsDisabled('flex'); checkAvailability(); }}>View Availability</button>
             </div>

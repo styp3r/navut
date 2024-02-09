@@ -8,7 +8,6 @@ import Bookings from './components/Bookings'
 import About from './components/About'
 import Contact from './components/Contact'
 import ReviewBooking from './components/ReviewBooking'
-import PaymentGateway from './components/PaymentGateway'
 
 function App() {
 
@@ -41,7 +40,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/reviewBooking" element={<ReviewBooking bookedRooms={bookedRooms}/>} />
-            <Route path="/paymentGateway" element={<PaymentGateway bookedRooms={bookedRooms}/>} />
           </Routes>
         </div>
       </Router>
