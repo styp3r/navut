@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import NavutLogo from '../images/navut_logo_minimal.jpg'
 import Footer from './Footer';
-import Axios from "axios";
 
 const ReviewBooking = ({ bookedRooms }) => {
 
@@ -33,41 +32,12 @@ const ReviewBooking = ({ bookedRooms }) => {
   const currency = "INR";
   const receiptID = "NAVUTNEWBOOKING";
 
-  const paymentHandler = async (e) => {
-    const API_URL = 'http://localhost:8000/'
-    e.preventDefault();
-    const orderUrl = `${API_URL}order`;
-    const response = await Axios.get(orderUrl);
-    const { data } = response;
-    const options = {
-      key: process.env.RAZOR_PAY_KEY_ID,
-      name: "Navut Hotels",
-      description: "Test Booking",
-      order_id: data.id,
-      handler: async (response) => {
-        try {
-         const paymentId = response.razorpay_payment_id;
-         const url = `${API_URL}capture/${paymentId}`;
-         const captureResponse = await Axios.post(url, {})
-         console.log(captureResponse.data);
-        } catch (err) {
-          console.log(err);
-        }
-      },
-      theme: {
-        color: "#686CFD",
-      },
-    };
-    const rzp1 = new window.Razorpay(options);
-    rzp1.open();
-    };
-
+  
   return (
     <div id="reviewBookingPage">
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
 
         <div id="reviewBookingSection">
-          <div style={{ display: 'flex' }}>
             {bookedRooms.length > 0 ? (
               <div className="yourStayDetails">
                 <h3 style={{ fontFamily: '"Caveat", cursive', fontSize: "3rem", margin: '1rem 0 2rem 0' }}>Your Stay</h3>
@@ -110,6 +80,8 @@ const ReviewBooking = ({ bookedRooms }) => {
               <p>No rooms booked yet. Go back and book some rooms!</p>
             )}
 
+            <hr className = "divider" style = {{width: "40rem", margin: "3rem 0 3rem 0"}}></hr>
+
             <div id="paymentGateway">
               <div className="yourDetails">
                 <h3 style={{ fontFamily: '"Caveat", cursive', fontSize: "3rem", margin: '1rem 0 2rem 0' }}>Your Details</h3>
@@ -121,10 +93,9 @@ const ReviewBooking = ({ bookedRooms }) => {
                 </div>
               </div>
             </div>
-          </div>
 
           <div>
-            <button onClick={paymentHandler} className="buy_btn">Confirm & Pay</button>
+            <button className="confirmBtn">Confirm & Pay</button>
           </div>
 
         </div>

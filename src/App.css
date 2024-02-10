@@ -213,7 +213,7 @@ html {
 
 .leaf3Img {
   position: absolute;
-  right: -5rem;
+  right: -8rem;
   width: 32rem;
   height: 30rem;
   z-index: -1;
@@ -622,13 +622,11 @@ html {
 
 .yourStayDetails {
   width: 30rem;
-  position: absolute;
-  top: 5rem;
-  left: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 5rem 0 0 0;
 }
 
 .roomRow {
@@ -648,34 +646,7 @@ html {
   font-style: italic;
 }
 
-.confirmBookingBtn {
-  width: 20rem;
-  height: 3rem;
-  border-radius: 0.5rem;
-  margin: 50rem 0 5rem 0;
-  outline: none;
-  border: none;
-  color: #ffffff;
-  background-color: #bb8456;
-}
-
-.confirmBookingBtn:hover {
-  cursor: pointer;
-}
-
-.confirmBookingBtn:active {
-  background-color: #5c3a1e;
-}
-
-#paymentGateway{
-  display: flex;
-  justify-content: center;
-}
-
 .yourDetails {
-  position: absolute;
-  top: 5rem;
-  right: 5rem;
   width: 30rem;
   display: flex;
   justify-content: center;
@@ -683,17 +654,32 @@ html {
   flex-direction: column;
 }
 
+.confirmBtn{
+  width: 30rem;
+  height: 3rem;
+  border-radius: 0.8rem;
+  outline: none;
+  border: none;
+  background-color: #efc9aa;
+  color: #996132;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 2rem;
+}
+
+.confirmBtn:hover {
+  cursor: pointer;
+}
+
 #reviewBookingSection{
   width: 70rem;
-  height: 53rem;
+  height: 80rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
   position: relative;
-  margin: 5rem 0 10rem 5rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background-color: #ffffff;
   margin: 10rem 0 10rem 0;
