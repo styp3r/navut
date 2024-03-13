@@ -5,8 +5,6 @@ import Footer from './Footer';
 
 const ReviewBooking = ({ bookedRooms }) => {
 
-  window.scrollTo(0, 0);
-
   const location = useLocation();
   const receivedData = location.state?.data || [];
   const [email, setEmail] = useState("");

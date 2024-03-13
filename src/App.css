@@ -610,14 +610,14 @@ html {
   font-family: 'Caveat', cursive;
   font-size: 1.5rem;
   margin: 0;
-  color: #996132;
+  color: #d49c6e;
 }
 
 .bookingPageTitle {
   font-family: 'Caveat', cursive;
   font-size: 3rem;
-  margin: 3rem 0 0 0;
-  color: #d49c6e;
+  margin: 8rem 0 0 0;
+  color: #996132;
 }
 
 .yourStayDetails {
@@ -683,4 +683,40 @@ html {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background-color: #ffffff;
   margin: 10rem 0 10rem 0;
+}
+
+#aboutUsPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutUsSection{
+  width: 60rem;
+  text-align: left;
+  margin: 3rem 15rem 8rem 15rem;
+}
+
+.aboutUsContent-container{
+  width: 35rem;
+  float: right;
+}
+
+.aboutUsContent{
+  margin: 3rem 0 0 0;
+}
+
+#bookStayBtn{
+  width: 18rem;
+  height: 3rem;
+  background-color: #996132;
+  border: none;
+  border-radius: 1rem;
+  color: "#ffffff";
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 5rem 0;
 }
