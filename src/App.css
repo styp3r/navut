@@ -322,7 +322,24 @@ html {
 }
 
 #map {
+  width: 100%;
   height: 20rem;
+}
+
+#mapContact {
+  width: 60%;
+  height: 30rem;
+  border-radius: 2rem;
+}
+
+.map-overlay{
+  position: absolute;
+  top: 2rem; /* Adjust as needed */
+  left: 5rem; /* Adjust as needed */
+  background-color: #f3f3f3;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 500;
 }
 
 #footer {
@@ -719,4 +736,56 @@ html {
   justify-content: center;
   align-items: center;
   margin: 0 0 5rem 0;
+}
+
+#contactUsPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contactCardsContainer{
+  width: 65rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem;
+}
+
+.callUsCard, .reachUsCard{
+  width: 30rem;
+  height: 25rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: #ffffff;
+  margin: 2rem;
+  border-radius: 1rem;
+}
+
+.help-supportCard{
+  width: 30rem;
+  height: 30rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: #ffffff;
+  border-radius: 1rem;
+}
+
+#whatsappUsBtn{
+  width: 10rem; 
+  height: 2.5rem;
+  border-radius: 0.8rem; 
+  background-color: #25D366; 
+  color: #ffffff; 
+  border: none;
+  outline: none;
+}
+
+#whatsappUsBtn:hover{
+  cursor: pointer;
+}
+
+.contactItem{
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
