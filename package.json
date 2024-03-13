@@ -1,5 +1,6 @@
 {
   "name": "navut",
+  "homepage": "https://navuthotels.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

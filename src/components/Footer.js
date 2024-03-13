@@ -16,6 +16,10 @@ import instaLogo from '../images/instaLogo.png'
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+
+    const d = new Date();
+    let year = d.getFullYear();
+
     return (
         <div id="footer">
             <img className="smallLogo" alt="logo small" src={smalllogo}></img>
@@ -53,6 +57,7 @@ const Footer = () => {
                     <button className="joinNewsletterBtn">Join</button>
                 </div>
             </div>
+            <p style={{ color: '#996132' }}>Copyright &copy; {year} Xyka Hotels India Private Limited - All Rights Reserved</p>
         </div>
     );
 }
