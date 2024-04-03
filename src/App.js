@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router scrollRestoration="auto">
         <div id='landingPage'>
           <img id="squareLogo" width="130" height="130" alt="logo" src={SquareLogo}></img>
           <Navbar />
