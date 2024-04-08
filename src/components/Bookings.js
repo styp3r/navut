@@ -1,169 +1,71 @@
-import React, { useState, useEffect } from 'react';
-import { isBefore, isAfter, eachDayOfInterval } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import Footer from './Footer';
-import rooms from './Rooms'
-import RoomImg from '../images/decoration/roomImg.png'
+import useStore from './store'
+import moment from 'moment';
 
-const Bookings = ({ bookedRooms, setBookedRooms }) => {
+const Bookings = () => {
 
-    const navigate = useNavigate();
-    const [checkin, setCheckin] = useState('');
-    const [checkout, setCheckout] = useState('');
-    const [availableRooms, setAvailableRooms] = useState([]);
-    const [disabledButtons, setDisabledButtons] = useState([]);
-    const [isCheckAvailBtnDisabled, setisCheckAvailBtnDisabled] = useState(true);
-    const [isDisabled, setIsDisabled] = useState('none');
-    const [grandTotalRoomAmt, setGrandTotalRoomAmt] = useState([]);
-    const [noOfDays, setNoOfDays] = useState(0);
+    const { startDate, endDate, updateCheckIn, updateCheckOut, editIndex, setEditIndex } = useStore();
+    const bookingCart = useStore((state) => state.bookingCart);
+    const addRoom = useStore((state) => state.addRoom);
 
-    let roomData = [];
-    for (let i = 0; i < bookedRooms.length; i++) {
-        roomData[i] = {
-            id: bookedRooms[i].id,
-            name: bookedRooms[i].name,
-            price: bookedRooms[i].price,
-            checkInDate: checkin,
-            checkOutDate: checkout,
-            noOfDays: noOfDays,
-            grandTotal: grandTotalRoomAmt.reduce((acc, current) => acc + current, 0)
-        }
+    const newBooking = { id: 1, room_name: 'Premium Room', room_price: '2000', checkIn: '2024-04-09', checkOut: '2024-04-11', nights: 2 };
+
+    const handleAddRoom = (newRoom) => {
+        addRoom(newRoom)
     }
 
-    useEffect(() => {
-        setBookedRooms([]);
-    }, [setBookedRooms]);
-
-    const checkAvailability = () => {
-        const checkinDate = new Date(checkin);
-        const checkoutDate = new Date(checkout);
-
-        const timeDifference = checkoutDate - checkinDate;
-        const numberOfDays = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-        setNoOfDays(numberOfDays);
-
-        if (isNaN(checkinDate) || isNaN(checkoutDate) || isAfter(checkoutDate, checkinDate)) {
-            const selectedDates = eachDayOfInterval({ start: checkinDate, end: checkoutDate });
-
-            const conflictingDates = selectedDates.slice(1, -1); // Exclude the start and end dates
-
-            const availableRooms = rooms.filter(room => {
-
-                const hasConflictingDates = room.bookings.some(booking =>
-                    conflictingDates.some(date =>
-                        isBefore(date, new Date(booking.endDate)) && isAfter(date, new Date(booking.startDate))
-                    )
-                );
-
-                return !hasConflictingDates;
-            });
-
-            setAvailableRooms(availableRooms);
-        } else {
-            alert('Invalid date range');
-        }
+    const handleCheckInChange = (roomId, newCheckInDate) => {
+        updateCheckIn(roomId, newCheckInDate);
     };
 
-    const handleBookNow = (roomId, roomPrice) => {
-        const selectedRoom = availableRooms.find(room => room.id === roomId);
-        if (selectedRoom && bookedRooms.length < 6) {
-            setBookedRooms(prevBookedRooms => [...prevBookedRooms, { ...selectedRoom, isSelected: true }]);
-            setDisabledButtons(prevDisabledButtons => [...prevDisabledButtons, roomId]);
-            setGrandTotalRoomAmt(grandTotalRoomAmt => [...grandTotalRoomAmt, roomPrice]);
-        } else if (bookedRooms.length >= 6) {
-            alert('You can book a maximum of 6 rooms.');
-        }
+    const handleCheckOutChange = (roomId, newCheckOutDate) => {
+        updateCheckOut(roomId, newCheckOutDate);
     };
 
-    const handleDeleteRoom = (roomId, roomPrice) => {
-        setBookedRooms(prevBookedRooms =>
-            prevBookedRooms.filter(room => {
-                if (room.id === roomId) {
-                    setDisabledButtons(prevDisabledButtons => prevDisabledButtons.filter(disabledId => disabledId !== roomId));
-                    setGrandTotalRoomAmt(grandTotalRoomAmt.filter(Item => Item !== roomPrice));
-                    return false; // Exclude the room from the bookedRooms array
-                }
-                return true;
-            })
-        );
-    };
-
-    const handleReviewBooking = () => {
-        navigate('/reviewBooking', { state: { data: roomData } });
+    const handleEditClick = (index) => {
+        setEditIndex(index);
     };
 
     return (
         <div id="bookingsPage">
-            <p className="bookingPageTitle">Reservations</p>
-            <p className="bookingPageTitleContent">Book now and let the anticipation of your upcoming stay fill you with excitement!</p>
-            <div className="dateInputsContainer">
-                <div className="checkInDateInput">
-                    <label htmlFor="checkin">Check-in Date: </label>
-                    <input style = {{border: 'none', width: '7rem', height: '2rem', borderRadius: '0.5rem', margin: '0 0 0 0.5rem', padding: '0.3rem'}} type="date" id="checkin" required value={checkin} onChange={(e) => setCheckin(e.target.value)} />
-                </div>
+            <p style={{ color: '#996132', fontSize: "2.5rem", fontFamily: "'Caveat', cursive", margin: '5rem 0 0 0' }}>Book Your Stay</p>
 
-                <div className="checkOutDateInput">
-                    <label htmlFor="checkout">Check-out Date: </label>
-                    <input style = {{border: 'none', width: '7rem', height: '2rem', borderRadius: '0.5rem', margin: '0 0 0 0.5rem', padding: '0.3rem'}} type="date" id="checkout" required value={checkout} onChange={(e) => { setisCheckAvailBtnDisabled(false); setCheckout(e.target.value) }} />
-                </div>
-                <button disabled={isCheckAvailBtnDisabled} className="checkAvailBtn" onClick={() => { setIsDisabled('flex'); checkAvailability(); }}>View Availability</button>
-            </div>
+            <div id="bookingDashboard">
+                <div id="room-selection-container">
 
-            <div className="displayRooms" style={{ display: isDisabled }}>
-                <div className="availRooms">
-                    {availableRooms.map(room => (
-                        <div key={room.id}>
-                            <div className="roomDetails">
-                                <div className="roomImgIcon">
-                                    <img alt='room img template' style={{ objectFit: 'cover' }} src={RoomImg} width='350' height='300'></img>
-                                </div>
-                                <div className="roomAboutContent"> {/* Amenities according to room type*/}
-                                    <p style = {{fontSize: '1.5rem'}}>{room.name}{' '}</p>
-                                    <div style={{ display: 'flex' }}>
-                                        <div>
-                                            <p>Room Size : x sq.ft.</p>
-                                            <p>Queen Size Bed</p>
-                                            <p>Nightstand</p>
-                                            <p>Towels & Essentials</p>
-                                            <p>Smoking Allowed</p>
-                                        </div>
-                                        <div style={{ margin: '0 0 2rem 2rem' }}>
-                                            <p>Air Conditioner</p>
-                                            <p>Electric Kettle</p>
-                                            <p>Housekeeping Services</p>
-                                            <p>Free Wifi</p>
-                                            {room.name === 'Deluxe Room' ? <p>Private Balcony</p> : <p>Private Porche</p>}
-                                        </div>
-                                    </div>
-                                    <p style={{ fontWeight: 'bold', color: '#996132', fontSize: '1.5rem', margin: '0'}} >&#8377;{room.price}<span style = {{color: '#9a9a9a', fontWeight: '350', fontSize: '1rem'}}> Per Night</span></p>
-                                    <p style = {{color: '#9a9a9a', fontWeight: '350', fontSize: '1rem', margin: '0'}}> (Excluding Taxes & Fees)</p>
-                                </div>
-                                <button className="selectRoomBtn" onClick={() => handleBookNow(room.id, room.price)} disabled={disabledButtons.includes(room.id)}>Select Room</button>
+                </div>
+                <div id="room-selection-cart">
+                    {bookingCart.length === 0 ? (<p>Your booking cart is currently empty.</p>) :
+                        bookingCart.map((item, index) => (
+                            <div key={item.id} className={editIndex === index ? "editing" : "default"}>
+                                <p>{item.id}</p>
+                                <p>{item.room_name}</p>
+                                <p>{item.room_price}</p>
+                                <p>{moment(item.checkIn).format('DD-MM-YYYY')}</p>
+                                <p>{moment(item.checkOut).format('DD-MM-YYYY')}</p>
+                                <p>{item.nights}</p>
+                                {editIndex === index ?
+                                    <div>
+                                        <input id="checkInDateInput-cart"
+                                            type="date"
+                                            value={item.checkIn}
+                                            onChange={(event) => handleCheckInChange(item.id, event.target.value)}
+                                        />
+                                        <input id="checkOutDateInput-cart"
+                                            type="date"
+                                            value={item.checkOut}
+                                            onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
+                                        />
+                                    </div> : null}
+                                <button onClick={() => handleEditClick(index)}>Edit</button>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    }
+
+                    <button onClick={() => { handleAddRoom(newBooking) }}>Add Room</button>
                 </div>
-
-                {bookedRooms.length > 0 && (
-                    <div className="selectedRooms">
-                        {bookedRooms.map(room => (
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 1rem 0 1rem', color: '#ffffff' }} key={room.id}>
-                                <div>
-                                    <p style={{ margin: '0', color: '#996132', fontWeight: 'bold' }}>{room.name}{' '}</p>
-                                    <p style={{ margin: '0', color: '#996132' }}>&#8377;{room.price}{' '}</p>
-                                </div>
-                                <button style={{ display: 'block', borderRadius: '1rem', outline: 'none', border: 'none', cursor: 'pointer', margin: '0 0.4rem 0 0.4rem', color: '#737373' }} onClick={() => handleDeleteRoom(room.id, room.price)}>x</button>
-
-                                <p className="totalRoomAmountTitle_bookingPage">Total</p>
-                                <p className="totalRoomAmount_bookingPage">&#8377;{grandTotalRoomAmt.reduce((acc, current) => acc + current, 0)}</p>
-                            </div>
-                        ))}
-                        <button className="reviewBookingBtn" onClick={handleReviewBooking}>Review Booking</button>
-                    </div>
-                )}
             </div>
-
-            <hr className="divider"></hr>
 
             <div className="booking-content">
                 <h2 style={{ color: '#d49c6e', margin: '2rem 0 3rem 0' }}>Terms & Conditions</h2>
@@ -200,3 +102,34 @@ const Bookings = ({ bookedRooms, setBookedRooms }) => {
 };
 
 export default Bookings;
+
+
+/*
+-Data To Be Uploaded To Server After Successful Payment-
+
+1. checkInDate - roomData[0].checkInDate
+2. checkOutDate - roomData[0].checkOutDate
+3. roomType - rd.name
+4. priceWOtax - rd.price * noOfDays
+5. priceWithTax - (rd.price * noOfDays)* 0.18
+6. grandTotal - (grandTotal) + ((grandTotal) * 0.18)
+7. guestEmail - email
+8. guestPhone - phNo
+9. guestName - name
+10. specialReq- spReq
+11. roomId - rd.id
+12. noOfDays - noOfDays
+*/
+
+/*
+{console.log(bookingCart.map((item, index) => (
+                    <div key = {index}>
+                        <p>{item.id}</p>
+                        <p>{item.room_name}</p>
+                        <p>{item.room_price}</p>
+                        <p>{item.checkIn}</p>
+                        <p>{item.checkOut}</p>
+                        <p>{item.nights}</p>
+                    </div>
+                )))}
+                <button onClick = {() => {handleAddRoom(newBooking)}}>Add Room</button> */

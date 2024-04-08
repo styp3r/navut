@@ -30,6 +30,27 @@ html {
   object-fit: cover;
 }
 
+#checkBookingDatesBtn{
+  position: absolute;
+  left: 7rem;
+  top: 26rem;
+  width: 12rem;
+  height: 3rem;
+  background-color: #996132;
+  border: none;
+  border-radius: 1rem;
+  color: "#ffffff";
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: 3s linear .1s flash;
+  animation-duration: 0.4s;
+  animation-iteration-count: 2;
+  animation-delay: 2s;
+  animation-timing-function: linear;
+}
+
 #heroText1 {
   text-align: left;
   width: 25rem;
@@ -68,33 +89,7 @@ html {
   color: #996132;
 }
 
-#checkBookingDatesBtn {
-  position: absolute;
-  left: 7rem;
-  top: 26rem;
-  width: 12rem;
-  height: 3rem;
-  background-color: #996132;
-  border: none;
-  border-radius: 1rem;
-  color: "#ffffff";
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: 3s linear .1s growShrink;
-  animation-duration: 0.4s;
-  animation-iteration-count: 2;
-  animation-delay: 2s;
-  animation-timing-function: linear;
-}
-
-#checkBookingDatesBtn:active {
-  background-color: #d49c6e;
-}
-
-
-@keyframes growShrink {
+@keyframes flash {
   0% {
     background-color: #996132;
   }
@@ -347,7 +342,7 @@ html {
 
 #footer {
   width: 100%;
-  height: 30rem;
+  height: 20rem;
   background-color: #f3e4d8;
 }
 
@@ -371,7 +366,7 @@ html {
 .smallLogo {
   position: absolute;
   left: 5rem;
-  margin: 13rem 0 0 0;
+  margin: 10rem 0 0 0;
   width: 5rem;
   height: 5rem;
 }
@@ -379,33 +374,18 @@ html {
 .footerContent {
   display: flex;
   width: 70rem;
-  height: 15rem;
+  height: 7rem;
   margin: 2rem 0 0 20rem;
 }
 
-.socialMedia {
-  width: 17.5rem;
-  height: 20rem;
-}
-
 .usefulLinks {
-  width: 17.5rem;
-  height: 20rem;
+  width: 25rem;
+  height: 8rem;
 }
 
 .newsletter {
   width: 35rem;
-  height: 20rem;
-}
-
-.socialItem {
-  width: 2rem;
-  height: 2rem;
-  margin: 1rem;
-}
-
-.socialItem:hover {
-  cursor: pointer;
+  height: 7rem;
 }
 
 #newsletterEmailInput {
@@ -434,175 +414,12 @@ html {
   background-color: #996132;
 }
 
-.dateInputsContainer {
-  width: 44rem;
-  height: 7rem;
-  background-color: #f3e4d8;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 2rem;
-  padding: 0 2rem 0 2rem;
-}
-
-.checkAvailBtn {
-  width: 7rem;
-  height: 2.6rem;
-  border: none;
-  background-color: #d49c6e;
-  color: #ffffff;
-  outline: none;
-  border-radius: 0.5rem;
-  padding: 0.3rem;
-}
-
-.checkAvailBtn:hover {
-  cursor: pointer;
-}
-
-.checkAvailBtn:active {
-  background-color: #5c3a1e;
-}
-
-.checkAvailBtn:disabled {
-  background-color: #d5d5d5;
-  color: #838383;
-  opacity: 0.5;
-  cursor: default;
-}
-
 #bookingsPage {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-}
-
-.displayRooms {
-  width: 80rem;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.availRooms {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.selectedRooms {
-  width: 95%;
-  height: 6rem;
-  position: fixed;
-  bottom: 0;
-  background-color: #efc9aa;
-  border-radius: 1rem;
-  margin: 1rem;
-  z-index: 5;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-.yourStayTitle {
-  position: absolute;
-  top: 0.5rem;
-  left: 1rem
-}
-
-.roomDetails {
-  position: relative;
-  width: 60rem;
-  height: 33rem;
-  border-radius: 1rem;
-  margin: 2rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.roomImgIcon {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  border: solid 1px #e1e1e1;
-  border-radius: 0.5rem;
-}
-
-.roomAboutContent {
-  position: absolute;
-  top: 1rem;
-  right: 12rem;
-  text-align: left;
-}
-
-.selectRoomBtn {
-  width: 50rem;
-  height: 3rem;
-  position: absolute;
-  bottom: 2rem;
-  border-radius: 0.8rem;
-  outline: none;
-  border: none;
-  background-color: #efc9aa;
-  color: #996132;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.selectRoomBtn:hover {
-  cursor: pointer;
-}
-
-.selectRoomBtn:disabled {
-  background-color: #d5d5d5;
-  color: #838383;
-  opacity: 0.5;
-  cursor: default;
-}
-
-.totalRoomAmountTitle_bookingPage {
-  position: absolute;
-  right: 15rem;
-  top: 0.5rem;
-  color: #996132;
-  font-weight: bold;
-}
-
-.totalRoomAmount_bookingPage {
-  position: absolute;
-  right: 15rem;
-  top: 2rem;
-  font-weight: bold;
-  color: #996132;
-}
-
-.reviewBookingBtn {
-  position: absolute;
-  right: 5rem;
-  background-color: #bb8456;
-  color: #ffffff;
-  outline: none;
-  border: none;
-  width: 7rem;
-  height: 2rem;
-  border-radius: 0.5rem;
-}
-
-.reviewBookingBtn:hover {
-  cursor: pointer;
-}
-
-.reviewBookingBtn:active {
-  background-color: #d49c6e;
 }
 
 .divider {
@@ -638,80 +455,6 @@ html {
   font-size: 3rem;
   margin: 8rem 0 0 0;
   color: #996132;
-}
-
-.yourStayDetails {
-  width: 30rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 5rem 0 0 0;
-}
-
-.roomRow {
-  margin: 1rem;
-  display: flex;
-  justify-content: space-between;
-  width: 24rem;
-  margin: 0;
-}
-
-.roomRowGST {
-  margin: 1rem;
-  display: flex;
-  justify-content: space-between;
-  width: 24rem;
-  margin: 0;
-  font-style: italic;
-}
-
-.yourDetails {
-  width: 30rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-#confirmBtn{
-  width: 30rem;
-  height: 3rem;
-  border-radius: 0.8rem;
-  outline: none;
-  border: none;
-  background-color: #efc9aa;
-  color: #996132;
-  font-weight: bold;
-  font-size: 1rem;
-  margin: 2rem;
-}
-
-#confirmBtn:disabled{
-  background-color: #cacaca;
-  color: #757575;
-  opacity: 0.5;
-}
-
-#confirmBtn:disabled:hover{
-  cursor: default;
-}
-
-#confirmBtn:hover {
-  cursor: pointer;
-}
-
-#reviewBookingSection{
-  width: 70rem;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  background-color: #ffffff;
-  margin: 10rem 0 10rem 0;
 }
 
 #aboutUsPage{
@@ -802,38 +545,47 @@ html {
   align-items: center;
 }
 
-#errorModal{
+
+
+/*Booking Functionality Styling*/
+
+#bookingDashboard{
+  width: 90%;
+  height: 30rem;
+  display: flex;
+  margin: 3rem;
+}
+
+#room-selection-container{
+  width: 70%;
+  height: 100%;
+}
+
+#room-selection-cart{
+  width: 30%;
+  height: 100%;
+}
+
+#checkInDateInput-cart{
   position: absolute;
-  width: 25rem;
-  height: 10rem;
-  background-color: #bb8456;
-  color: #ffffff;
-  z-index: 100;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 1rem;
-  left: 50%;
-  top: 80rem;
-  transform: translateX(-50%);
+  top: 15rem;
+  left: 10rem;
 }
 
-#modalClose{
-  width: 4rem;
-  height: 2rem;
-  border-radius: 0.5rem;
-  outline: none;
-  border: 2px solid #5c3a1e;
+#checkOutDateInput-cart{
+  position: absolute;
+  top: 15rem;
+  left: 20rem;
 }
 
-#modalClose:active{
-  background-color: #5c381b;
-  color: #ffffff;
+.default {
+  /* Default background color and other styles */
+  background-color: #ffffff;
 }
 
-#modalClose:hover{
-  cursor: pointer;
+.editing {
+  background-color: #e9ba93; /* Example highlight color */
+  /* Additional styles for editing state if needed */
 }
 
 /*Responsive Design Code */
