@@ -7,8 +7,6 @@ const RoomDetailsContainer = (props) => {
     const { bookingCart, addRoom } = useStore();
     const [disabledButtons, setDisabledButtons] = useState([]);
 
-    window.scrollTo(0, 1);
-
     const formatDate = (date) => {
         const dd = String(date.getDate()).padStart(2, '0'); // Day with leading zero
         const mm = String(date.getMonth() + 1).padStart(2, '0'); // Month with leading zero (January is 0!)
@@ -22,12 +20,13 @@ const RoomDetailsContainer = (props) => {
         id: props.id,
         room_name: props.roomName,
         room_price: props.roomPrice,
+        count: props.count,
         checkIn: formatDate(new Date()),
         checkOut: formatDate(new Date()),
-        isBreakfast: props.isBreakfast,
     }
 
     const handleAddRoom = (newRoom) => {
+        window.scrollTo(0, 0);
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         setDisabledButtons(prevDisabledButtons => [...prevDisabledButtons, newRoom.id]);
@@ -41,7 +40,6 @@ const RoomDetailsContainer = (props) => {
                 <p>{props.id}</p>
                 <p>{props.roomName}</p>
                 <p>{props.roomPrice}</p>
-                {props.isBreakfast ? <p>Breakfast Included</p> : <p>Only Room</p>}
             </div>
             <button id = "book-room-btn" onClick={() => { handleAddRoom(newBooking) }} className = "classicBtn" disabled={disabledButtons.includes(props.id)}>Book Room</button>
         </div>

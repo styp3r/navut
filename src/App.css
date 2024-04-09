@@ -562,7 +562,7 @@ html {
 
 #room-selection-cart{
   width: 30%;
-  height: 31rem;
+  height: 36rem;
   border: solid 1px #e9ba93;
   margin: 2rem;
   padding: 1rem;
@@ -660,8 +660,8 @@ html {
   justify-content: center;
   align-items: center;
   top: 14.5rem;
-  left: 50rem;
-  width: 8rem;
+  left: 49rem;
+  width: 9rem;
   height: 2rem;
 }
 
@@ -703,7 +703,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem;
+  margin: 1rem 1rem 0 1rem;
   background-color: #d49c6e;
   color: #ffffff;
   border: none;

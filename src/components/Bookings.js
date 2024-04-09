@@ -1,16 +1,15 @@
 import React from 'react';
 import Footer from './Footer';
 import useStore from './store'
-import moment from 'moment';
 import RoomDetailsCont from './RoomDetailsContainer';
 
 const Bookings = () => {
 
-    const { startDate, endDate, availableRooms, bookingCart, updateCheckIn, updateCheckOut, editIndex, setEditIndex } = useStore();
+    const { availableRooms, bookingCart, updateCheckIn, updateCheckOut, editIndex, setEditIndex, inc, dec } = useStore();
 
     const isEmpty = bookingCart.length === 0;
 
-    //const newBooking = { id: 1, room_name: 'Premium Room', room_price: '2000', checkIn: '2024-04-09', checkOut: '2024-04-11', nights: 2, isBreakfast: true };
+    //const newBooking = { id: 1, room_name: 'Premium Room', room_price: '2000', checkIn: '2024-04-09', checkOut: '2024-04-11', nights: 2 };
 
     const handleAddRoom = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
@@ -33,6 +32,14 @@ const Bookings = () => {
     const handleCheckOutChange = (roomId, newCheckOutDate) => {
         updateCheckOut(roomId, newCheckOutDate);
     };
+
+    const handleOneUp = (roomId, count) => {
+        inc(roomId, count);
+    }
+
+    const handleOneDown = (roomId, count) => {
+        dec(roomId, count);
+    }
 
     const handleEditClick = (index) => {
         document.getElementById('room-selection-list-container').style.display = "flex";
@@ -66,7 +73,7 @@ const Bookings = () => {
                     <div id="room-selection-list-container"> {/* Left Dashboard - Main - 1 - default*/}
                         {availableRooms.map((ar) => (
                             <div key={ar.id} id="room-selection-list">
-                                <RoomDetailsCont key={ar.id} id={ar.id} roomName={ar.room_name} roomPrice={ar.room_price} isBreakfast={ar.isBreakfast} />
+                                <RoomDetailsCont key={ar.id} id={ar.id} count = {ar.count} roomName={ar.room_name} roomPrice={ar.room_price} />
                             </div>
                         ))}
                     </div>
@@ -94,32 +101,35 @@ const Bookings = () => {
                                 <p>{item.id}</p>
                                 <p>{item.room_name}</p>
                                 <p>{item.room_price}</p>
-                                <p>{formateDateStr(item.checkIn)}</p>
-                                <p>{formateDateStr(item.checkOut)}</p>
+                                <button onClick={() => handleOneUp(item.id, item.count)}>+</button>
+                                <p>{item.count}</p>
+                                <button onClick={() => handleOneDown(item.id, item.count)}>-</button>
+                                <p>{formateDateStr(item.checkIn)} | {formateDateStr(item.checkOut)}</p>
+                                <p></p>
                                 <p>{item.nights}</p>
                                 {editIndex === index ?
                                     <div>
-                                        <label id = "checkInDateInput-cart-label">Check-in</label>
+                                        <label id="checkInDateInput-cart-label">Check-in</label>
                                         <input id="checkInDateInput-cart"
                                             type="date"
                                             value={item.checkIn}
-                                            label = "Check-in"
+                                            label="Check-in"
                                             onChange={(event) => handleCheckInChange(item.id, event.target.value)}
                                         />
-                                        <label id = "checkOutDateInput-cart-label">Check-out</label>
+                                        <label id="checkOutDateInput-cart-label">Check-out</label>
                                         <input id="checkOutDateInput-cart"
                                             type="date"
                                             value={item.checkOut}
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
                                     </div> : null}
-                                <button id="edit-booking-btn" className = "classicBtn" onClick={() => handleEditClick(index)}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>edit_square</span>Edit</button>
-                                <button id="save-changes-btn" className = "classicBtn" onClick={() => handleSaveChanges(index)}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>done</span>Save Booking</button>
+                                <button id="edit-booking-btn" className="classicBtn" onClick={() => handleEditClick(index)}><span class="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>edit_square</span>Edit</button>
+                                <button id="save-changes-btn" className="classicBtn" onClick={() => handleSaveChanges(index)}><span class="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Changes</button>
                             </div>
                         ))
                     }
 
-                    {!isEmpty && <button id="add-room-btn" className = "classicBtn" onClick={() => { handleAddRoom() }}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>add_home</span>Add Room</button>}
+                    {!isEmpty && <button id="add-room-btn" onClick={() => { handleAddRoom() }}><span class="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>add_home</span>Add Room</button>}
                 </div>
             </div>
 
