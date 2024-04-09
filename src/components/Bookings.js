@@ -2,17 +2,27 @@ import React from 'react';
 import Footer from './Footer';
 import useStore from './store'
 import moment from 'moment';
+import RoomDetailsCont from './RoomDetailsContainer';
 
 const Bookings = () => {
 
-    const { startDate, endDate, updateCheckIn, updateCheckOut, editIndex, setEditIndex } = useStore();
-    const bookingCart = useStore((state) => state.bookingCart);
-    const addRoom = useStore((state) => state.addRoom);
+    const { startDate, endDate, availableRooms, bookingCart, updateCheckIn, updateCheckOut, editIndex, setEditIndex } = useStore();
 
-    const newBooking = { id: 1, room_name: 'Premium Room', room_price: '2000', checkIn: '2024-04-09', checkOut: '2024-04-11', nights: 2 };
+    const isEmpty = bookingCart.length === 0;
 
-    const handleAddRoom = (newRoom) => {
-        addRoom(newRoom)
+    //const newBooking = { id: 1, room_name: 'Premium Room', room_price: '2000', checkIn: '2024-04-09', checkOut: '2024-04-11', nights: 2, isBreakfast: true };
+
+    const handleAddRoom = () => {
+        document.getElementById('room-selection-list-container').style.display = "flex";
+        document.getElementById('guest-details-input-container').style.display = "none";
+        document.getElementById('save-changes-btn').style.display = "none";
+    }
+
+    const handleSaveChanges = () => {
+        document.getElementById('room-selection-list-container').style.display = "none";
+        document.getElementById('guest-details-input-container').style.display = "flex";
+        document.getElementById('save-changes-btn').style.display = "none";
+        setEditIndex(null);
     }
 
     const handleCheckInChange = (roomId, newCheckInDate) => {
@@ -24,26 +34,66 @@ const Bookings = () => {
     };
 
     const handleEditClick = (index) => {
+        document.getElementById('room-selection-list-container').style.display = "flex";
+        document.getElementById('guest-details-input-container').style.display = "none";
+        document.getElementById('save-changes-btn').style.display = "flex";
         setEditIndex(index);
     };
+
+    const formateDateStr = (dateString) => {
+        const year = parseInt(dateString.slice(0, 4));
+        const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
+        const day = parseInt(dateString.slice(8, 10));
+
+        // Check if date is valid (optional)
+        if (year > 0 && month >= 0 && month < 12 && day > 0 && day <= 31) {
+            const formattedDate = day.toString().padStart(2, '0') + '-' + (month + 1).toString().padStart(2, '0') + '-' + year;
+            return formattedDate; // Output: 19-11-2023
+        } else {
+            alert("Invalid date format provided");
+        }
+    }
 
     return (
         <div id="bookingsPage">
             <p style={{ color: '#996132', fontSize: "2.5rem", fontFamily: "'Caveat', cursive", margin: '5rem 0 0 0' }}>Book Your Stay</p>
 
             <div id="bookingDashboard">
-                <div id="room-selection-container">
+                <div id="dashboard-main">
+
+                    <div id="room-selection-list-container"> {/* Left Dashboard - Main - 1 - default*/}
+                        {availableRooms.map((ar) => (
+                            <div key={ar.id} id="room-selection-list">
+                                <RoomDetailsCont key={ar.id} id={ar.id} roomName={ar.room_name} roomPrice={ar.room_price} isBreakfast={ar.isBreakfast} />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div id="guest-details-input-container"> {/* Left Dashboard - Main - 2*/}
+                        <h3>Guest Details</h3>
+                        <p>* Required</p>
+                        <div className="guest-details-input-form">
+                            <input required className="guest-input-item1" type="text" placeholder="Full Name *"></input>
+                            <input required className="guest-input-item1" type="text" placeholder="Email Address *"></input>
+                            <input required className="guest-input-item1" type="text" placeholder="Phone Number *"></input>
+                            <textarea style={{ width: '20rem', height: '5rem', resize: 'none', margin: '1rem' }} type="text" placeholder="Special Requests and Preferences (Optional)"></textarea>
+                        </div>
+                    </div>
 
                 </div>
-                <div id="room-selection-cart">
-                    {bookingCart.length === 0 ? (<p>Your booking cart is currently empty.</p>) :
+
+                <div id="room-selection-cart">  {/* Right Dashboard*/}
+                    <h3>Your Bookings</h3>
+                    {bookingCart.length === 0 ? (
+                        <p>No Bookings Available.</p>
+                    ) :
                         bookingCart.map((item, index) => (
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
                                 <p>{item.id}</p>
                                 <p>{item.room_name}</p>
                                 <p>{item.room_price}</p>
-                                <p>{moment(item.checkIn).format('DD-MM-YYYY')}</p>
-                                <p>{moment(item.checkOut).format('DD-MM-YYYY')}</p>
+                                <p>{formateDateStr(item.checkIn)}</p>
+                                <p>{formateDateStr(item.checkOut)}</p>
                                 <p>{item.nights}</p>
                                 {editIndex === index ?
                                     <div>
@@ -58,12 +108,13 @@ const Bookings = () => {
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
                                     </div> : null}
-                                <button onClick={() => handleEditClick(index)}>Edit</button>
+                                <button id="edit-booking-btn" onClick={() => handleEditClick(index)}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>edit_square</span>Edit</button>
+                                <button id="save-changes-btn" onClick={() => handleSaveChanges(index)}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>done</span>Save Booking</button>
                             </div>
                         ))
                     }
 
-                    <button onClick={() => { handleAddRoom(newBooking) }}>Add Room</button>
+                    {!isEmpty && <button id="add-room-btn" onClick={() => { handleAddRoom() }}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>add_home</span>Add Room</button>}
                 </div>
             </div>
 

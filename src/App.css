@@ -551,19 +551,25 @@ html {
 
 #bookingDashboard{
   width: 90%;
-  height: 30rem;
   display: flex;
-  margin: 3rem;
+  margin: 8rem 3rem 3rem 3rem;
 }
 
-#room-selection-container{
+#dashboard-main{
   width: 70%;
-  height: 100%;
+  margin: 2rem;
 }
 
 #room-selection-cart{
   width: 30%;
   height: 100%;
+  border: solid 1px #e9ba93;
+  margin: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #checkInDateInput-cart{
@@ -581,11 +587,103 @@ html {
 .default {
   /* Default background color and other styles */
   background-color: #ffffff;
+  border: solid 1px #e9ba93;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 1rem 0;
 }
 
 .editing {
   background-color: #e9ba93; /* Example highlight color */
   /* Additional styles for editing state if needed */
+  border: solid 1px #e9ba93;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 1rem 0;
+}
+
+#guest-details-input-container{
+  display: none;
+}
+
+#room-selection-list-container{
+  display: flex;
+  flex-direction: column;
+}
+
+#room-selection-list{
+  width: 100%; 
+}
+
+#save-changes-btn{
+  display: none;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 15rem;
+  left: 50rem;
+}
+
+#guest-details-input-container{
+  display: inline-block;
+  width: 100%;
+  display: none;
+  border: solid 1px #d49c6e;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.guest-details-input-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.guest-input-item1{
+  width: 20rem;
+  height: 2.5rem;
+  margin: 1rem;
+}
+
+#room-details-container{
+  width: 90%;
+  height: 30rem;
+  border: solid 1px #996132;
+  margin: 0 0 2rem 0;
+  padding: 2rem;
+}
+
+.room-details-content{
+  display: flex;
+}
+
+#add-room-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  width: 8rem;
+  height: 2rem;
+}
+
+#edit-booking-btn{
+  margin: 1rem;
+  width: 5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#add-room-to-cart-btn{
+  width: 80%;
+  margin: 15rem 0 0 0;
 }
 
 /*Responsive Design Code */
