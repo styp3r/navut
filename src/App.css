@@ -562,14 +562,14 @@ html {
 
 #room-selection-cart{
   width: 30%;
-  height: 100%;
+  height: 31rem;
   border: solid 1px #e9ba93;
   margin: 2rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #checkInDateInput-cart{
@@ -578,10 +578,22 @@ html {
   left: 10rem;
 }
 
+#checkInDateInput-cart-label{
+  position: absolute;
+  top: 13.5rem;
+  left: 11.3rem;
+}
+
 #checkOutDateInput-cart{
   position: absolute;
   top: 15rem;
   left: 20rem;
+}
+
+#checkOutDateInput-cart-label{
+  position: absolute;
+  top: 13.5rem;
+  left: 20.9rem;
 }
 
 .default {
@@ -597,7 +609,7 @@ html {
 }
 
 .editing {
-  background-color: #e9ba93; /* Example highlight color */
+  background-color: #ffe3cb; /* Example highlight color */
   /* Additional styles for editing state if needed */
   border: solid 1px #e9ba93;
   width: 100%;
@@ -621,18 +633,42 @@ html {
   width: 100%; 
 }
 
+.classicBtn{
+  background-color: #d49c6e;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+}
+
+.classicBtn:hover{
+  cursor: pointer;
+}
+
+.classicBtn:active{
+  background-color: #996132;
+}
+
+.classicBtn:disabled{
+  background-color: #d3d3d3;
+  color: #ffffff;
+}
+
 #save-changes-btn{
   display: none;
   position: absolute;
   justify-content: center;
   align-items: center;
-  top: 15rem;
+  top: 14.5rem;
   left: 50rem;
+  width: 8rem;
+  height: 2rem;
 }
 
 #guest-details-input-container{
   display: inline-block;
   width: 100%;
+  height: 33rem;
   display: none;
   border: solid 1px #d49c6e;
   flex-direction: column;
@@ -653,7 +689,7 @@ html {
 
 #room-details-container{
   width: 90%;
-  height: 30rem;
+  height: 29rem;
   border: solid 1px #996132;
   margin: 0 0 2rem 0;
   padding: 2rem;
@@ -668,8 +704,20 @@ html {
   justify-content: center;
   align-items: center;
   margin: 1rem;
-  width: 8rem;
-  height: 2rem;
+  background-color: #d49c6e;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+#add-room-btn:hover{
+  cursor: pointer;
+}
+
+#add-room-btn:active{
+  background-color: #996132;
 }
 
 #edit-booking-btn{
@@ -684,6 +732,11 @@ html {
 #add-room-to-cart-btn{
   width: 80%;
   margin: 15rem 0 0 0;
+}
+
+#book-room-btn{
+  width: 6rem;
+  height: 2rem;
 }
 
 /*Responsive Design Code */

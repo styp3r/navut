@@ -22,6 +22,7 @@ const Bookings = () => {
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "none";
+        document.getElementById('add-room-btn').style.display = "flex";
         setEditIndex(null);
     }
 
@@ -37,6 +38,7 @@ const Bookings = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
         document.getElementById('guest-details-input-container').style.display = "none";
         document.getElementById('save-changes-btn').style.display = "flex";
+        document.getElementById('add-room-btn').style.display = "none";
         setEditIndex(index);
     };
 
@@ -97,24 +99,27 @@ const Bookings = () => {
                                 <p>{item.nights}</p>
                                 {editIndex === index ?
                                     <div>
+                                        <label id = "checkInDateInput-cart-label">Check-in</label>
                                         <input id="checkInDateInput-cart"
                                             type="date"
                                             value={item.checkIn}
+                                            label = "Check-in"
                                             onChange={(event) => handleCheckInChange(item.id, event.target.value)}
                                         />
+                                        <label id = "checkOutDateInput-cart-label">Check-out</label>
                                         <input id="checkOutDateInput-cart"
                                             type="date"
                                             value={item.checkOut}
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
                                     </div> : null}
-                                <button id="edit-booking-btn" onClick={() => handleEditClick(index)}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>edit_square</span>Edit</button>
-                                <button id="save-changes-btn" onClick={() => handleSaveChanges(index)}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>done</span>Save Booking</button>
+                                <button id="edit-booking-btn" className = "classicBtn" onClick={() => handleEditClick(index)}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>edit_square</span>Edit</button>
+                                <button id="save-changes-btn" className = "classicBtn" onClick={() => handleSaveChanges(index)}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>done</span>Save Booking</button>
                             </div>
                         ))
                     }
 
-                    {!isEmpty && <button id="add-room-btn" onClick={() => { handleAddRoom() }}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>add_home</span>Add Room</button>}
+                    {!isEmpty && <button id="add-room-btn" className = "classicBtn" onClick={() => { handleAddRoom() }}><span class="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>add_home</span>Add Room</button>}
                 </div>
             </div>
 

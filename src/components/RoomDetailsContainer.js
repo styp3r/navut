@@ -43,7 +43,7 @@ const RoomDetailsContainer = (props) => {
                 <p>{props.roomPrice}</p>
                 {props.isBreakfast ? <p>Breakfast Included</p> : <p>Only Room</p>}
             </div>
-            <button onClick={() => { handleAddRoom(newBooking) }} disabled={disabledButtons.includes(props.id)}>Book Room</button>
+            <button id = "book-room-btn" onClick={() => { handleAddRoom(newBooking) }} className = "classicBtn" disabled={disabledButtons.includes(props.id)}>Book Room</button>
         </div>
     );
 }
