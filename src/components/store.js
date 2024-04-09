@@ -17,6 +17,9 @@ const useStore = create((set) => ({
     bookingCart: [],
 
     addRoom: (roomData) => set((state) => ({ bookingCart: [...state.bookingCart, roomData] })),
+    deleteRoom: (roomId) => set((state) => ({
+        bookingCart: state.bookingCart.filter((product) => product.id !== roomId),
+    })),
 
     updateCheckIn: (roomId, newCheckInDate) => set((state) => ({
         bookingCart: state.bookingCart.map((room) =>

@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Bookings from './components/Bookings'
 import About from './components/About'
 import Contact from './components/Contact'
+import ReviewBooking from './ReviewBooking';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient('https://tbfhmugkjiiwrlavunae.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRiZmhtdWdramlpd3JsYXZ1bmFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDYwOTcyMTUsImV4cCI6MjAyMTY3MzIxNX0.I6jAJI-1M_VUpbvcVhOxiWA4_gVuTvIdg4KMT8yn3MU');
@@ -28,6 +29,7 @@ function App() {
               <Route path="/bookings" element={<Bookings />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/review-booking" element={<ReviewBooking />} />
             </Routes>
           </div>
         </Router>

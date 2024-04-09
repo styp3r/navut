@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from './Footer';
 import useStore from './store'
 import RoomDetailsCont from './RoomDetailsContainer';
+import { Link } from 'react-router-dom'
 
 const Bookings = () => {
 
-    const { availableRooms, bookingCart, updateCheckIn, updateCheckOut, editIndex, setEditIndex, inc, dec } = useStore();
+    const { availableRooms, bookingCart, updateCheckIn, updateCheckOut, editIndex, setEditIndex, inc, dec, deleteRoom } = useStore();
 
     const isEmpty = bookingCart.length === 0;
 
@@ -49,6 +50,14 @@ const Bookings = () => {
         setEditIndex(index);
     };
 
+    const handleDeleteClick = (roomId) => {
+        document.getElementById('room-selection-list-container').style.display = "flex";
+        document.getElementById('guest-details-input-container').style.display = "none";
+        document.getElementById('save-changes-btn').style.display = "none";
+        document.getElementById('add-room-btn').style.display = "flex";
+        deleteRoom(roomId);
+    }
+
     const formateDateStr = (dateString) => {
         const year = parseInt(dateString.slice(0, 4));
         const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
@@ -73,7 +82,7 @@ const Bookings = () => {
                     <div id="room-selection-list-container"> {/* Left Dashboard - Main - 1 - default*/}
                         {availableRooms.map((ar) => (
                             <div key={ar.id} id="room-selection-list">
-                                <RoomDetailsCont key={ar.id} id={ar.id} count = {ar.count} roomName={ar.room_name} roomPrice={ar.room_price} />
+                                <RoomDetailsCont key={ar.id} id={ar.id} count={ar.count} roomName={ar.room_name} roomPrice={ar.room_price}/>
                             </div>
                         ))}
                     </div>
@@ -87,6 +96,7 @@ const Bookings = () => {
                             <input required className="guest-input-item1" type="text" placeholder="Phone Number *"></input>
                             <textarea style={{ width: '20rem', height: '5rem', resize: 'none', margin: '1rem' }} type="text" placeholder="Special Requests and Preferences (Optional)"></textarea>
                         </div>
+                        <Link to="/review-booking" style={{ textDecoration: 'none', color: '#ffffff' }}><button id="complete-booking-btn" className="classicBtn"><span className="material-symbols-outlined">verified_user</span>Complete Booking</button></Link>
                     </div>
 
                 </div>
@@ -107,6 +117,7 @@ const Bookings = () => {
                                 <p>{formateDateStr(item.checkIn)} | {formateDateStr(item.checkOut)}</p>
                                 <p></p>
                                 <p>{item.nights}</p>
+                                <button id="delete-booking-btn" className="classicBtn" onClick={() => handleDeleteClick(item.id)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>delete</span></button>
                                 {editIndex === index ?
                                     <div>
                                         <label id="checkInDateInput-cart-label">Check-in</label>
@@ -123,13 +134,13 @@ const Bookings = () => {
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
                                     </div> : null}
-                                <button id="edit-booking-btn" className="classicBtn" onClick={() => handleEditClick(index)}><span class="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>edit_square</span>Edit</button>
-                                <button id="save-changes-btn" className="classicBtn" onClick={() => handleSaveChanges(index)}><span class="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Changes</button>
+                                <button id="edit-booking-btn" className="classicBtn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>edit_square</span>Edit</button>
+                                <button id="save-changes-btn" className="classicBtn" onClick={() => handleSaveChanges(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Changes</button>
                             </div>
                         ))
                     }
 
-                    {!isEmpty && <button id="add-room-btn" onClick={() => { handleAddRoom() }}><span class="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>add_home</span>Add Room</button>}
+                    {!isEmpty && <button id="add-room-btn" onClick={() => { handleAddRoom() }}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>add_home</span>Add Room</button>}
                 </div>
             </div>
 

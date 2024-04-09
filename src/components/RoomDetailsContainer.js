@@ -1,11 +1,10 @@
 import gal from '../images/gallery/gal1.jpeg'
 import useStore from './store'
-import React, { useState } from 'react'
+import React from 'react'
 
 const RoomDetailsContainer = (props) => {
 
-    const { bookingCart, addRoom } = useStore();
-    const [disabledButtons, setDisabledButtons] = useState([]);
+    const { addRoom } = useStore();
 
     const formatDate = (date) => {
         const dd = String(date.getDate()).padStart(2, '0'); // Day with leading zero
@@ -29,7 +28,6 @@ const RoomDetailsContainer = (props) => {
         window.scrollTo(0, 0);
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
-        setDisabledButtons(prevDisabledButtons => [...prevDisabledButtons, newRoom.id]);
         addRoom(newRoom)
     }
 
@@ -41,7 +39,7 @@ const RoomDetailsContainer = (props) => {
                 <p>{props.roomName}</p>
                 <p>{props.roomPrice}</p>
             </div>
-            <button id = "book-room-btn" onClick={() => { handleAddRoom(newBooking) }} className = "classicBtn" disabled={disabledButtons.includes(props.id)}>Book Room</button>
+            <button id="book-room-btn" onClick={() => { handleAddRoom(newBooking) }} className="classicBtn" >Book Room</button>
         </div>
     );
 }
