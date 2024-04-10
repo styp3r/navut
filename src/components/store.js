@@ -58,6 +58,13 @@ const useStore = create((set) => ({
             room.id === roomId ? { ...room, isSelected: false } : room
         ),
     })),
+
+    guestName: null,
+    guestEmail: null,
+    guestPhone: null,
+    setGuestName: (name) => set({ guestName: name }),
+    setGuestEmail: (email) => set({ guestEmail: email }),
+    setGuestPhone: (phone) => set({ guestPhone: phone }),
 }))
 
 export default useStore;

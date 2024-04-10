@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from './Footer';
 import useStore from './store'
 import gal from '../images/gallery/gal1.jpeg'
@@ -17,9 +17,22 @@ const Bookings = () => {
         addRoom,
         deleteRoom,
         setIsSelected,
-        setIsNotSelected } = useStore();
+        setIsNotSelected,
+        setGuestName,
+        setGuestEmail,
+        setGuestPhone } = useStore();
 
     const isEmpty = bookingCart.length === 0;
+
+    /*These are state management variables for input fields for guest details.
+    This is to ensure that the inputted values meet valid criteria */
+    const [inputValue1, setInputValue1] = useState('');
+    const [isValid1, setIsValid1] = useState(false);
+    const [inputValue2, setInputValue2] = useState('');
+    const [isValid2, setIsValid2] = useState(false);
+    const [inputValue3, setInputValue3] = useState('');
+    const [isValid3, setIsValid3] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
     //const newBooking = { id: 1, room_name: 'Premium Room', room_price: '2000', checkIn: '2024-04-09', checkOut: '2024-04-11', nights: 2 };
 
@@ -115,6 +128,31 @@ const Bookings = () => {
         addRoom(newBooking);
     }
 
+    const handleChange1 = (event) => {
+        setInputValue1(event.target.value);
+        setIsValid1(event.target.value.trim() !== '');
+    };
+
+    const handleChange2 = (event) => {
+        setInputValue2(event.target.value);
+        setIsValid2(event.target.value.trim() !== '');
+    };
+
+    const handleChange3 = (event) => {
+        setInputValue3(event.target.value);
+        setIsValid3(event.target.value.trim() !== '');
+    };
+
+    const handleChange4 = (event) => {
+        setIsChecked(event.target.checked);
+    };
+
+    const handleConfirmBooking = () => {
+        console.log(inputValue1, inputValue2, inputValue3)
+        setGuestName(inputValue1)
+        setGuestEmail(inputValue2)
+        setGuestPhone(inputValue3)
+    }
     return (
         <div id="bookingsPage">
             <p style={{ color: '#996132', fontSize: "2.5rem", fontFamily: "'Caveat', cursive", margin: '7rem 0 0 0' }}>Book Your Stay</p>
@@ -139,15 +177,20 @@ const Bookings = () => {
 
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
                         <h3>Guest Details</h3>
-                        <p style = {{margin: 0}}>* Required Fields</p>
+                        <p style={{ margin: 0 }}>* Required Fields</p>
                         <div className="guest-details-input-form">
-                            <input required className="guest-input-item1" type="text" placeholder="Full Name *"></input>
-                            <input required className="guest-input-item-email" type="email" placeholder="Email Address *"></input>
-                            <p style = {{margin: 0, fontSize: '0.8rem'}}>Your booking details will be sent to this Email ID.</p>
-                            <input required className="guest-input-item1" type="text" placeholder="Phone Number *"></input>
-                            <textarea className = "spReqInput" type="text" placeholder="Special Requests and Preferences"></textarea>
+                            <input className="guest-input-item1" type="text" placeholder="Full Name *" value={inputValue1} onChange={handleChange1}></input>
+                            <input className="guest-input-item-email" type="text" placeholder="Email Address *" value={inputValue2} onChange={handleChange2}></input>
+                            <p style={{ margin: 0, fontSize: '0.8rem' }}>Your booking details will be sent to this Email ID.</p>
+                            <input className="guest-input-item1" type="text" placeholder="Phone Number *" value={inputValue3} onChange={handleChange3}></input>
+                            <textarea className="spReqInput" type="text" placeholder="Special Requests and Preferences"></textarea>
+                            <div style={{ display: 'flex' }}>
+                                <input style={{ display: 'inline-block' }} type="checkbox" checked={isChecked} onChange={handleChange4}></input>
+                                <p style={{ display: 'inline-block', margin: 0 }}>I confirm that all information provided is accurate</p>
+                            </div>
+                            <p style={{ margin: 0 }}>& I agree with the booking conditions.</p>
                         </div>
-                        <Link to="/review-booking" style={{ textDecoration: 'none', color: '#ffffff' }}><button id="complete-booking-btn" className="classicBtn"><span className="material-symbols-outlined">verified_user</span>Complete Booking</button></Link>
+                        {isValid1 && isValid2 && isValid3 && inputValue2.includes("@") && isChecked && <Link to="/review-booking" style={{ textDecoration: 'none', color: '#ffffff' }}><button id="confirm-booking-btn" onClick={() => handleConfirmBooking()} className="classicBtn">Confirm Booking</button></Link>}
                     </div>
 
                 </div>
@@ -165,7 +208,7 @@ const Bookings = () => {
                                 <p>{item.id}</p>
                                 <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
                                 <p>{item.room_price}</p>
-                                <div style = {{border: 'solid 1px #d49c6e', display: 'inline-block', padding: '0 0.5rem 0 0.5rem', borderRadius: '0.5rem'}}>
+                                <div style={{ border: 'solid 1px #d49c6e', display: 'inline-block', padding: '0 0.5rem 0 0.5rem', borderRadius: '0.5rem' }}>
                                     <button style={{ display: 'inline-block', width: '1.5rem', height: '1.5rem' }} className="classicBtn" onClick={() => handleOneDown(item.id, item.count)}>-</button>
                                     <p style={{ display: 'inline-block', margin: '0.5rem 1rem 0.5rem 1rem' }}>{item.count}</p>
                                     <button style={{ display: 'inline-block', width: '1.5rem', height: '1.5rem' }} className="classicBtn" onClick={() => handleOneUp(item.id, item.count)}>+</button>
