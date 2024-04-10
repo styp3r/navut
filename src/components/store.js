@@ -2,10 +2,10 @@ import { create } from 'zustand'
 
 const useStore = create((set) => ({
     availableRooms: [
-        { id: 0, room_name: 'Deluxe Room', count: 1, room_price: 1000 },
-        { id: 1, room_name: 'Deluxe Room (Breakfast Included)', count: 1, room_price: 1500 },
-        { id: 2, room_name: 'Family Room', count: 1, room_price: 2000 },
-        { id: 3, room_name: 'Family Room (Breakfast Included)', count: 1, room_price: 2500 },
+        { id: 0, room_name: 'Deluxe Room', count: 1, room_price: 1000, isSelected: false },
+        { id: 1, room_name: 'Deluxe Room (Breakfast Included)', count: 1, room_price: 1500, isSelected: false },
+        { id: 2, room_name: 'Family Room', count: 1, room_price: 2000, isSelected: false },
+        { id: 3, room_name: 'Family Room (Breakfast Included)', count: 1, room_price: 2500, isSelected: false },
     ],
 
     startDate: new Date(),
@@ -45,6 +45,17 @@ const useStore = create((set) => ({
     dec: (roomId, count) => set((state) => ({
         bookingCart: state.bookingCart.map((room) =>
             room.id === roomId && count > 1 ? { ...room, count: count - 1 } : room
+        ),
+    })),
+
+    setIsSelected: (roomId) => set((state) => ({
+        availableRooms: state.availableRooms.map((room) =>
+            room.id === roomId ? { ...room, isSelected: true } : room
+        ),
+    })),
+    setIsNotSelected: (roomId) => set((state) => ({
+        availableRooms: state.availableRooms.map((room) =>
+            room.id === roomId ? { ...room, isSelected: false } : room
         ),
     })),
 }))

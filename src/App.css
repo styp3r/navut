@@ -344,7 +344,7 @@ html {
 
 #footer {
   width: 100%;
-  height: 20rem;
+  height: 25rem;
   background-color: #f3e4d8;
 }
 
@@ -376,7 +376,7 @@ html {
 .footerContent {
   display: flex;
   width: 70rem;
-  height: 7rem;
+  height: 11rem;
   margin: 2rem 0 0 20rem;
 }
 
@@ -388,6 +388,7 @@ html {
 .newsletter {
   width: 35rem;
   height: 7rem;
+  margin: 0 0 0 10rem;
 }
 
 #newsletterEmailInput {
@@ -565,8 +566,9 @@ html {
 
 #room-selection-cart {
   width: 30%;
-  height: 36rem;
-  border: solid 1px #e9ba93;
+  height: 31rem;
+  border: solid 1px #f3e4d8;
+  border-radius: 1rem 0 0 1rem;
   margin: 2rem;
   padding: 1rem;
   display: flex;
@@ -577,55 +579,62 @@ html {
 
 #checkInDateInput-cart {
   position: absolute;
-  top: 15rem;
-  left: 10rem;
+  top: 13rem;
+  right: 21rem;
+  border: solid 1px #d49c6e;
+  font-family: 'Montserrat', sans-serif;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
 #checkInDateInput-cart-label {
   position: absolute;
-  top: 13.5rem;
-  left: 11.3rem;
+  top: 11.5rem;
+  right: 24.5rem;
 }
 
 #checkOutDateInput-cart {
   position: absolute;
-  top: 15rem;
-  left: 20rem;
+  font-family: 'Montserrat', sans-serif;
+  top: 13rem;
+  right: 7rem;
+  border: solid 1px #d49c6e;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
 #checkOutDateInput-cart-label {
   position: absolute;
-  top: 13.5rem;
-  left: 20.9rem;
+  top: 11.5rem;
+  right: 8.8rem;
 }
 
 .default {
   /* Default background color and other styles */
   background-color: #ffffff;
-  border: solid 1px #e9ba93;
+  border: solid 1px #d49c6e;
+  border-radius: 1rem;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 0 0 1rem 0;
 }
 
 .editing {
-  background-color: #ffe3cb;
+  background-color: #f3e4d8;
   /* Example highlight color */
   /* Additional styles for editing state if needed */
-  border: solid 1px #e9ba93;
+  border: solid 1px #d49c6e;
+  border-radius: 1rem;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 0 0 1rem 0;
 }
 
-#guest-details-input-container {
-  display: none;
+#delete-booking-btn {
+  margin: 1rem;
+  width: 5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #room-selection-list-container {
@@ -663,10 +672,10 @@ html {
   position: absolute;
   justify-content: center;
   align-items: center;
-  top: 14.5rem;
-  left: 49rem;
-  width: 9rem;
-  height: 2rem;
+  top: 17rem;
+  right: 7rem;
+  width: 24rem;
+  height: 2.3rem;
 }
 
 #guest-details-input-container {
@@ -674,7 +683,9 @@ html {
   width: 100%;
   height: 33rem;
   display: none;
-  border: solid 1px #d49c6e;
+  color: #996132;
+  background-color: #f3e4d8;
+  border-radius: 1rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -689,12 +700,42 @@ html {
   width: 20rem;
   height: 2.5rem;
   margin: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.guest-input-item-email{
+  width: 20rem;
+  height: 2.5rem;
+  margin: 1rem 1rem 0.3rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.spReqInput {
+  width: 20rem;
+  height: 5rem;
+  resize: none;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.5rem;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #room-details-container {
   width: 90%;
   height: 29rem;
-  border: solid 1px #996132;
+  border-radius: 1rem;
+  background-color: #f3e4d8;
+  color: #996132;
   margin: 0 0 2rem 0;
   padding: 2rem;
 }
@@ -739,11 +780,12 @@ html {
 }
 
 #book-room-btn {
-  width: 6rem;
-  height: 2rem;
+  width: 10rem;
+  height: 2.5rem;
+  display: inline-block;
 }
 
-#complete-booking-btn{
+#complete-booking-btn {
   width: 12rem;
   height: 2.5rem;
   display: flex;
