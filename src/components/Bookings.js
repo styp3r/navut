@@ -6,21 +6,31 @@ import { Link } from 'react-router-dom'
 
 const Bookings = () => {
 
-    const { availableRooms,
+    const { availableRoomCategory,
         bookingCart,
         updateCheckIn,
         updateCheckOut,
         editIndex,
         setEditIndex,
-        inc,
-        dec,
         addRoom,
         deleteRoom,
-        setIsSelected,
-        setIsNotSelected,
         setGuestName,
         setGuestEmail,
-        setGuestPhone } = useStore();
+        setGuestPhone,
+        deluxeCount,
+        incDC,
+        decDC,
+        familyCount,
+        incFC,
+        decFC,
+        deluxeIdArrayCount,
+        familyIdArrayCount,
+        incDeluxeIdArrayCount,
+        incFamilyIdArrayCount,
+        decDeluxeIdArrayCount,
+        decFamilyIdArrayCount,
+        deluxeIddArray,
+        familyIddArray } = useStore();
 
     const isEmpty = bookingCart.length === 0;
 
@@ -59,14 +69,6 @@ const Bookings = () => {
         updateCheckOut(roomId, newCheckOutDate);
     };
 
-    const handleOneUp = (roomId, count) => {
-        inc(roomId, count);
-    }
-
-    const handleOneDown = (roomId, count) => {
-        dec(roomId, count);
-    }
-
     const handleEditClick = (index) => {
         window.scrollTo(0, 0);
         document.getElementById('room-selection-list-container').style.display = "none";
@@ -76,12 +78,23 @@ const Bookings = () => {
         setEditIndex(index);
     };
 
-    const handleDeleteClick = (roomId) => {
+    const handleDeleteClick = (roomId, type) => {
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "none";
         document.getElementById('add-room-btn').style.display = "flex";
-        setIsNotSelected(roomId)
+
+
+        if (type === 'd') {
+            incDC();
+            decDeluxeIdArrayCount();
+        }
+
+        if (type === 'f') {
+            incFC();
+            decFamilyIdArrayCount();
+        }
+
         deleteRoom(roomId);
         setEditIndex(null);
     }
@@ -109,25 +122,34 @@ const Bookings = () => {
         }
     }
 
-    const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, newRoomCount, isBreakfastVal) => {
+    const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, isBreakfastVal, type) => {
 
         const newDate = new Date();
         newDate.setDate(newDate.getDate() + 1);
 
         let newBooking = {
-            id: newRoomId,
+            id: type === 'd' ? deluxeIdArrayCount : type === 'f' ? familyIdArrayCount : newRoomId, // here is the cat
             room_name: newRoomName,
             room_price: newRoomPrice,
             isBreakfast: isBreakfastVal,
-            count: newRoomCount,
+            type: type,
             checkIn: formatDate(new Date()),
             checkOut: formatDate(newDate),
+        }
+
+        if (type === 'd') {
+            decDC();
+            incDeluxeIdArrayCount();
+        }
+
+        if (type === 'f') {
+            decFC();
+            incFamilyIdArrayCount();
         }
 
         window.scrollTo(0, 0);
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
-        setIsSelected(newRoomId)
         setEditIndex(null);
         addRoom(newBooking);
     }
@@ -157,18 +179,40 @@ const Bookings = () => {
         setGuestEmail(inputValue2)
         setGuestPhone(inputValue3)
     }
+
+    function nightsBetween(startDate, endDate) {
+        // Ensure valid Date objects
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
+
+        // Check if start date is after end date (invalid scenario)
+        if (startDate > endDate) {
+            alert("Invalid: Start date cannot be after end date");
+            return (startDate)
+        }
+
+        // Get the time difference in milliseconds
+        const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+
+        // Convert to days and round up to include the last night
+        const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+        // Subtract 1 to exclude the check-in day
+        return parseInt(days);
+    }
+
+
     return (
         <div id="bookingsPage">
             <p id="select-room-title">Book Your Stay</p>
             <div id="bookingDashboard">
                 <div id="dashboard-main">
                     <div id="room-selection-list-container" style={{ display: bookingCart.length === 0 ? "flex" : "none" }}> {/* Left Dashboard - Main - 1 - default*/}
-                        {availableRooms.map((ar) => (
+                        {availableRoomCategory.map((ar) => (
                             <div key={ar.id} id="room-selection-list">
                                 <div id="room-details-container">
                                     <div className="room-details-content">
                                         <img alt='bedroom shot' src={gal} width='280' height='200' style={{ borderRadius: '0.5rem', objectFit: 'cover' }}></img>
-
                                         <div className="room-amenities">
                                             <div style={{ display: 'flex', margin: '0 0 0 2rem', textAlign: 'left' }}>
                                                 <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold' }}>{ar.room_name} {ar.isBreakfast ? <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room with Breakfast)</span> : <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room Only)</span>}</p>
@@ -197,7 +241,10 @@ const Bookings = () => {
                                         <p style={{ fontWeight: 'bold', fontSize: '1.5rem', margin: '2rem 5rem 0 0' }}>&#8377;{ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
                                         <span style={{ margin: '0 5rem 0 0', color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Excluding Taxes & Fees)</span>
                                     </div>
-                                    <button id="book-room-btn" disabled={ar.isSelected} onClick={() => handleAddRoomToCart(ar.id, ar.room_name, ar.room_price, ar.count, ar.isBreakfast)} className="classicBtn" >Book Room</button>
+                                    <button id="book-room-btn" disabled=
+                                        {
+                                            ar.type === 'd' ? (deluxeCount > 0 ? false : true) :
+                                                ar.type === 'f' ? (familyCount > 0 ? false : true) : false} onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room {ar.type === 'd' ? deluxeCount : ar.type === 'f' ? familyCount : null}</button>
                                 </div>
                             </div>
                         ))}
@@ -235,23 +282,19 @@ const Bookings = () => {
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
                                 <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
                                 {item.isBreakfast ? <p>Room with Breakfast</p> : <p>Room Only</p>}
-                                <div>
-                                    <button id="one-down-btn" onClick={() => handleOneDown(item.id, item.count)}>-</button>
-                                    <p style={{ display: 'inline-block', margin: '0.5rem 1rem 0.5rem 1rem' }}>{item.count}</p>
-                                    <button id="one-up-btn" onClick={() => handleOneUp(item.id, item.count)}>+</button>
-                                </div>
                                 <br></br>
-                                <hr style = {{width: '3rem', border: 'solid 1px #ececec'}}></hr>
+                                <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formateDateStr(item.checkIn)}</p>
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formateDateStr(item.checkOut)}</p>
                                 <p>{item.nights}</p>
-                                <hr style = {{width: '3rem', border: 'solid 1px #ececec'}}></hr>
+                                <p>{nightsBetween(item.checkIn, item.checkOut)}</p>
+                                <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
                                 <br></br>
-                                <div style = {{display: 'flex', justifyContent: 'space-evenly', alignItems: 'center'}}>
-                                    <p style = {{margin: '0 0 0 3rem'}}>Total</p>
-                                    <p style = {{fontWeight: 'bold', margin: '0 3rem 0 0'}}>&#8377;{item.room_price * item.count}</p>
+                                <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                    <p style={{ margin: '0 0 0 3rem' }}>Total</p>
+                                    <p style={{ fontWeight: 'bold', margin: '0 3rem 0 0' }}>&#8377;{item.room_price}</p>
                                 </div>
-                                
+
                                 {editIndex === index ?
                                     <div>
                                         <label id="checkInDateInput-cart-label">Check-in</label>
@@ -268,8 +311,8 @@ const Bookings = () => {
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
                                     </div> : null}
-                                <div style = {{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                    <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id, item.type)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
                                     <div id="edit-booking-btn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0', fontSize: '1rem' }}>edit_square</span>Edit</div>
                                 </div>
                                 <button id="save-changes-btn" className="classicBtn" onClick={() => handleSaveChanges(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Edits</button>

@@ -36,7 +36,6 @@ const ReviewBooking = () => {
                     </div>
                 ) : bookingCart.map((item) => (
                     <div key={item.id}>
-                        <p>{item.id}</p>
                         <p>{item.room_name} x {item.count}</p>
                         <p>{item.room_price}</p>
                         <p>{formateDateStr(item.checkIn)} | {formateDateStr(item.checkOut)}</p>

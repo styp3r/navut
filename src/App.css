@@ -651,26 +651,6 @@ html {
   margin: 0 0 1rem 0;
 }
 
-#one-up-btn,
-#one-down-btn {
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: solid 1px #e3e3e3;
-  background-color: #ffffff;
-  border-radius: 0.3rem;
-}
-
-#one-up-btn:hover,
-#one-down-btn:hover {
-  cursor: pointer;
-}
-
-#one-up-btn:active,
-#one-down-btn:active {
-  background-color: #e3e3e3;
-}
-
 #delete-booking-btn {
   margin: 1rem;
   width: 2rem;

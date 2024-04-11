@@ -1,12 +1,39 @@
 import { create } from 'zustand'
 
 const useStore = create((set) => ({
-    availableRooms: [
-        { id: 0, room_name: 'Deluxe Room', count: 1, room_price: 1000, isBreakfast: false, isSelected: false },
-        { id: 1, room_name: 'Deluxe Room ', count: 1, room_price: 1500, isBreakfast: true, isSelected: false },
-        { id: 2, room_name: 'Family Room', count: 1, room_price: 2000, isBreakfast: false, isSelected: false },
-        { id: 3, room_name: 'Family Room', count: 1, room_price: 2500, isBreakfast: true, isSelected: false },
+
+    deluxeIddArray: [0, 1, 2, 3],
+    familyIddArray: [4, 5],
+    deluxeIdArrayCount: 0,
+    incDeluxeIdArrayCount: () => set((state) => ({ deluxeIdArrayCount: state.deluxeIdArrayCount + 1 })),
+    decDeluxeIdArrayCount: () => set((state) => ({ deluxeIdArrayCount: state.deluxeIdArrayCount - 1 })),
+    familyIdArrayCount: 4,
+    incFamilyIdArrayCount: () => set((state) => ({ familyIdArrayCount: state.familyIdArrayCount + 1 })),
+    decFamilyIdArrayCount: () => set((state) => ({ familyIdArrayCount: state.familyIdArrayCount - 1 })),
+
+    allRooms: [
+        { id: 0, room_name: 'Deluxe Room', type: 'd', room_price: 1000, isBreakfast: false },
+        { id: 1, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
+        { id: 2, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
+        { id: 3, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
+        { id: 4, room_name: 'Family Room', type: 'f', room_price: 2000, isBreakfast: false },
+        { id: 5, room_name: 'Family Room', type: 'f', room_price: 2000, isBreakfast: false },
     ],
+
+
+    availableRoomCategory: [
+        { id: 0, room_name: 'Deluxe RoomWOB ', type: 'd', room_price: 1000, isBreakfast: false },
+        { id: 1, room_name: 'Deluxe RoomWB ', type: 'd', room_price: 1000, isBreakfast: true },
+        { id: 11, room_name: 'Family RoomWOB ', type: 'f', room_price: 1000, isBreakfast: false },
+        { id: 12, room_name: 'Family RoomWB ', type: 'f', room_price: 1000, isBreakfast: true },
+    ],
+
+    deluxeCount: 4,
+    familyCount: 2,
+    incDC: () => set((state) => ({ deluxeCount: state.deluxeCount + 1 })),
+    decDC: () => set((state) => ({ deluxeCount: state.deluxeCount - 1 })),
+    incFC: () => set((state) => ({ familyCount: state.familyCount + 1 })),
+    decFC: () => set((state) => ({ familyCount: state.familyCount - 1 })),
 
     startDate: new Date(),
     endDate: new Date(),
@@ -35,29 +62,6 @@ const useStore = create((set) => ({
 
     editIndex: null,
     setEditIndex: (index) => set({ editIndex: index }),
-
-    inc: (roomId, count) => set((state) => ({
-        bookingCart: state.bookingCart.map((room) =>
-            room.id === roomId && count < 4 ? { ...room, count: count + 1 } : room
-        ),
-    })),
-
-    dec: (roomId, count) => set((state) => ({
-        bookingCart: state.bookingCart.map((room) =>
-            room.id === roomId && count > 1 ? { ...room, count: count - 1 } : room
-        ),
-    })),
-
-    setIsSelected: (roomId) => set((state) => ({
-        availableRooms: state.availableRooms.map((room) =>
-            room.id === roomId ? { ...room, isSelected: true } : room
-        ),
-    })),
-    setIsNotSelected: (roomId) => set((state) => ({
-        availableRooms: state.availableRooms.map((room) =>
-            room.id === roomId ? { ...room, isSelected: false } : room
-        ),
-    })),
 
     guestName: null,
     guestEmail: null,
