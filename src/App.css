@@ -578,8 +578,8 @@ html {
 
 #room-selection-cart {
   width: 30%;
-  height: 31rem;
-  border: solid 1px #f3e4d8;
+  height: 33rem;
+  border: solid 1px #f2f2f2;
   border-radius: 0.5rem;
   margin: 2rem;
   padding: 1rem;
@@ -634,7 +634,7 @@ html {
 .default {
   /* Default background color and other styles */
   background-color: #ffffff;
-  border: solid 1px #d49c6e;
+  border: solid 1px #e0e0e0;
   border-radius: 0.5rem;
   width: 100%;
   margin: 0 0 1rem 0;
@@ -651,13 +651,38 @@ html {
   margin: 0 0 1rem 0;
 }
 
+#one-up-btn,
+#one-down-btn {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: solid 1px #e3e3e3;
+  background-color: #ffffff;
+  border-radius: 0.3rem;
+}
+
+#one-up-btn:hover,
+#one-down-btn:hover {
+  cursor: pointer;
+}
+
+#one-up-btn:active,
+#one-down-btn:active {
+  background-color: #e3e3e3;
+}
+
 #delete-booking-btn {
   margin: 1rem;
-  width: 5rem;
+  width: 2rem;
   height: 2rem;
+  color: #ed5e68;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#delete-booking-btn:hover {
+  cursor: pointer;
 }
 
 #room-selection-list-container {
@@ -781,11 +806,25 @@ html {
 
 #edit-booking-btn {
   margin: 1rem;
-  width: 5rem;
-  height: 2rem;
+  width: 4.5rem;
+  height: 1.5rem;
   display: flex;
+  font-size: 0.8rem;
   justify-content: center;
   align-items: center;
+  border: solid 1px #d49c6e;
+  border-radius: 0.3rem;
+  background-color: #ffffff;
+  color: #d49c6e;
+}
+
+#edit-booking-btn:hover {
+  cursor: pointer;
+}
+
+#edit-booking-btn:active {
+  background-color: #996132;
+  color: #ffffff
 }
 
 #add-room-to-cart-btn {

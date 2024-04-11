@@ -1,6 +1,5 @@
 import Footer from "./Footer";
 import aboutUsHeroImg from '../images/aboutUsHeroImg.jpg'
-import { Link } from 'react-router-dom'
 
 const About = () => {
 
@@ -20,11 +19,6 @@ const About = () => {
                 <p className="aboutUsContent">At our homestay, hospitality is not just a service; it's a philosophy ingrained in every aspect of our guest experience. From the moment you arrive, our dedicated staff is committed to ensuring that your stay is nothing short of exceptional. Welcomed with warm smiles and genuine hospitality, you'll find yourself enveloped in an atmosphere of care and attention to detail.</p>
                 <p className="aboutUsContent">Throughout the year, Kedamallur offers a tapestry of weather conditions, each season painting its own unique portrait. From the refreshing showers of the monsoon season, which breathe new life into the emerald landscapes, to the crisp, cool air of winter that blankets the region in a serene hush, every visit promises a different yet equally enchanting experience. Whether you're seeking adventure amidst the vibrant hues of autumn or seeking refuge from the summer heat amidst the shade of ancient trees, our homestay offers a warm welcome to all who yearn to reconnect with nature's rhythm.</p>
             </div>
-
-            <div>
-                <Link to="/bookings" style={{ textDecoration: 'none', color: '#ffffff' }}><div id="bookStayBtn">Book Your Stay</div></Link>
-            </div>
-
             <Footer />
 
 

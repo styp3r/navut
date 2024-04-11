@@ -109,15 +109,19 @@ const Bookings = () => {
         }
     }
 
-    const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, newRoomCount) => {
+    const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, newRoomCount, isBreakfastVal) => {
+
+        const newDate = new Date();
+        newDate.setDate(newDate.getDate() + 1);
 
         let newBooking = {
             id: newRoomId,
             room_name: newRoomName,
             room_price: newRoomPrice,
+            isBreakfast: isBreakfastVal,
             count: newRoomCount,
             checkIn: formatDate(new Date()),
-            checkOut: formatDate(new Date()),
+            checkOut: formatDate(newDate),
         }
 
         window.scrollTo(0, 0);
@@ -175,7 +179,7 @@ const Bookings = () => {
                                                     <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">fit_Screen</span> Room Size: xyz sq. ft.</p>
                                                     <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">bed</span> Queen Bed</p>
                                                     <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">bathtub</span> Bathtub</p>
-                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">groups</span> Occupancy</p>
+                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">groups</span> 3 pax maximum</p>
                                                     {ar.isBreakfast ? <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">dinner_dining</span> Breakfast Included</p> : <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">no_meals</span> Breakfast Not Included</p>}
                                                 </div>
                                                 <div style={{ margin: '0 0 0 1rem' }}>
@@ -193,7 +197,7 @@ const Bookings = () => {
                                         <p style={{ fontWeight: 'bold', fontSize: '1.5rem', margin: '2rem 5rem 0 0' }}>&#8377;{ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
                                         <span style={{ margin: '0 5rem 0 0', color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Excluding Taxes & Fees)</span>
                                     </div>
-                                    <button id="book-room-btn" disabled={ar.isSelected} onClick={() => handleAddRoomToCart(ar.id, ar.room_name, ar.room_price, ar.count)} className="classicBtn" >Book Room</button>
+                                    <button id="book-room-btn" disabled={ar.isSelected} onClick={() => handleAddRoomToCart(ar.id, ar.room_name, ar.room_price, ar.count, ar.isBreakfast)} className="classicBtn" >Book Room</button>
                                 </div>
                             </div>
                         ))}
@@ -219,8 +223,8 @@ const Bookings = () => {
 
                 </div>
 
-                <div id="room-selection-cart" style={{ overflowY: bookingCart.length === 0 ? 'hidden' : 'scroll', borderRadius: bookingCart.length === 0 ? '0.5rem' : '0.5rem 0 0 0.5rem' }}>  {/* Right Dashboard*/}
-                    <h3>Your Bookings</h3>
+                <div id="room-selection-cart" style={{ overflowY: bookingCart.length > 1 ? 'scroll' : 'hidden', borderRadius: bookingCart.length > 1 ? '0.5rem 0 0 0.5rem' : '0.5rem' }}>  {/* Right Dashboard*/}
+                    <h3>Your Bookings ({bookingCart.length})</h3>
                     {bookingCart.length === 0 ? (
                         <div style={{ margin: '3rem 0 0 0' }}>
                             <span style={{ fontSize: '2rem', color: '#996132' }} className="material-symbols-outlined">more_horiz</span>
@@ -229,18 +233,25 @@ const Bookings = () => {
                     ) :
                         bookingCart.map((item, index) => (
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
-                                <p>{item.id}</p>
                                 <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
-                                <p>{item.room_price}</p>
-                                <div style={{ border: 'solid 1px #d49c6e', display: 'inline-block', padding: '0 0.5rem 0 0.5rem', borderRadius: '0.5rem' }}>
-                                    <button style={{ display: 'inline-block', width: '1.5rem', height: '1.5rem' }} className="classicBtn" onClick={() => handleOneDown(item.id, item.count)}>-</button>
+                                {item.isBreakfast ? <p>Room with Breakfast</p> : <p>Room Only</p>}
+                                <div>
+                                    <button id="one-down-btn" onClick={() => handleOneDown(item.id, item.count)}>-</button>
                                     <p style={{ display: 'inline-block', margin: '0.5rem 1rem 0.5rem 1rem' }}>{item.count}</p>
-                                    <button style={{ display: 'inline-block', width: '1.5rem', height: '1.5rem' }} className="classicBtn" onClick={() => handleOneUp(item.id, item.count)}>+</button>
+                                    <button id="one-up-btn" onClick={() => handleOneUp(item.id, item.count)}>+</button>
                                 </div>
-                                <p>{formateDateStr(item.checkIn)} | {formateDateStr(item.checkOut)}</p>
-                                <p></p>
+                                <br></br>
+                                <hr style = {{width: '3rem', border: 'solid 1px #ececec'}}></hr>
+                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formateDateStr(item.checkIn)}</p>
+                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formateDateStr(item.checkOut)}</p>
                                 <p>{item.nights}</p>
-                                <button id="delete-booking-btn" className="classicBtn" onClick={() => handleDeleteClick(item.id)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span>Delete</button>
+                                <hr style = {{width: '3rem', border: 'solid 1px #ececec'}}></hr>
+                                <br></br>
+                                <div style = {{display: 'flex', justifyContent: 'space-evenly', alignItems: 'center'}}>
+                                    <p style = {{margin: '0 0 0 3rem'}}>Total</p>
+                                    <p style = {{fontWeight: 'bold', margin: '0 3rem 0 0'}}>&#8377;{item.room_price * item.count}</p>
+                                </div>
+                                
                                 {editIndex === index ?
                                     <div>
                                         <label id="checkInDateInput-cart-label">Check-in</label>
@@ -257,7 +268,10 @@ const Bookings = () => {
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
                                     </div> : null}
-                                <button id="edit-booking-btn" className="classicBtn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>edit_square</span>Edit</button>
+                                <div style = {{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                    <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
+                                    <div id="edit-booking-btn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0', fontSize: '1rem' }}>edit_square</span>Edit</div>
+                                </div>
                                 <button id="save-changes-btn" className="classicBtn" onClick={() => handleSaveChanges(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Edits</button>
                             </div>
                         ))

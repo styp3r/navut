@@ -16,7 +16,6 @@ const Contact = () => {
                     <div style={{ margin: '3rem 0 0 0', padding: '1rem' }}>
                         <p className="contactItem"><span class="material-symbols-outlined">call</span>+91 63644 01444</p>
                         <p className="contactItem"><span class="material-symbols-outlined">call</span>+91 99452 58005</p>
-                        <p className="contactItem"><span class="material-symbols-outlined">call</span>+91 72590 31520</p>
                         <p className="contactItem"><span class="material-symbols-outlined">mail</span>navuthotels@gmail.com</p>
                     </div>
                 </div>
@@ -25,7 +24,7 @@ const Contact = () => {
                     <h3 style={{ fontWeight: 'bold' }}>Help & Support</h3>
                     <div style={{ margin: '5rem 0 0 0', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <p style={{ width: '15rem', margin: '0 0 2rem 0' }}>We've Got Your Back! Count on us for supportive assistance whenever you need it</p>
-                        <button id="whatsappUsBtn">WhatsApp Us Now</button>
+                        <a href = "https://wa.me/message/C3TZD5GHNKRHE1"><button id="whatsappUsBtn">WhatsApp Us Now</button></a>
                         <p style={{ fontStyle: 'italic', margin: '7rem 0 0 0' }}>Response Time  ~15min</p>
                     </div>
                 </div>
