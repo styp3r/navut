@@ -2,10 +2,10 @@ import { create } from 'zustand'
 
 const useStore = create((set) => ({
     availableRooms: [
-        { id: 0, room_name: 'Deluxe Room', count: 1, room_price: 1000, isSelected: false },
-        { id: 1, room_name: 'Deluxe Room (Breakfast Included)', count: 1, room_price: 1500, isSelected: false },
-        { id: 2, room_name: 'Family Room', count: 1, room_price: 2000, isSelected: false },
-        { id: 3, room_name: 'Family Room (Breakfast Included)', count: 1, room_price: 2500, isSelected: false },
+        { id: 0, room_name: 'Deluxe Room', count: 1, room_price: 1000, isBreakfast: false, isSelected: false },
+        { id: 1, room_name: 'Deluxe Room ', count: 1, room_price: 1500, isBreakfast: true, isSelected: false },
+        { id: 2, room_name: 'Family Room', count: 1, room_price: 2000, isBreakfast: false, isSelected: false },
+        { id: 3, room_name: 'Family Room', count: 1, room_price: 2500, isBreakfast: true, isSelected: false },
     ],
 
     startDate: new Date(),

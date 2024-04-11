@@ -9,10 +9,10 @@ const PropertyInfo = () => {
                     <div className="amenBlocks">
                         <div className="amenBlockLeft">
                             <p className="amenItem"><span className="material-symbols-outlined">local_parking</span>Parking</p>
-                            <p className="amenItem"><span className="material-symbols-outlined">wifi</span>Wifi</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">wifi</span>Free WiFi</p>
                             <p className="amenItem"><span className="material-symbols-outlined">psychiatry</span>Coffee Plantation</p>
                             <p className="amenItem"><span className="material-symbols-outlined">landscape</span>Valley View</p>
-                            <p className="amenItem"><span className="material-symbols-outlined">pets</span>Pets Allowed</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">pets</span>Furry Friends Allowed</p>
                             <p className="amenItem"><span className="material-symbols-outlined">restaurant</span>Restaurant</p>
                             <p className="amenItem"><span className="material-symbols-outlined">table_lamp</span>Dedicated Workspace</p>
                         </div>
@@ -23,7 +23,7 @@ const PropertyInfo = () => {
                             <p className="amenItem"><span className="material-symbols-outlined">deck</span>Terrace</p>
                             <p className="amenItem"><span className="material-symbols-outlined">concierge</span>Self Check-In</p>
                             <p className="amenItem"><span className="material-symbols-outlined">smoking_rooms</span>Smoking Allowed</p>
-                            <p className="amenItem"><span className="material-symbols-outlined">accessibility</span>Building Staff</p>
+                            <p className="amenItem"><span className="material-symbols-outlined">room_Service</span>Room Service</p>
                         </div>
                     </div>
                 </div>

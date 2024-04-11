@@ -148,15 +148,14 @@ const Bookings = () => {
     };
 
     const handleConfirmBooking = () => {
-        console.log(inputValue1, inputValue2, inputValue3)
+        //simple function just to store the name, email and phone number values to be taken to review booking page
         setGuestName(inputValue1)
         setGuestEmail(inputValue2)
         setGuestPhone(inputValue3)
     }
     return (
         <div id="bookingsPage">
-            <p style={{ color: '#996132', fontSize: "2.5rem", fontFamily: "'Caveat', cursive", margin: '7rem 0 0 0' }}>Book Your Stay</p>
-
+            <p id="select-room-title">Book Your Stay</p>
             <div id="bookingDashboard">
                 <div id="dashboard-main">
                     <div id="room-selection-list-container" style={{ display: bookingCart.length === 0 ? "flex" : "none" }}> {/* Left Dashboard - Main - 1 - default*/}
@@ -165,9 +164,34 @@ const Bookings = () => {
                                 <div id="room-details-container">
                                     <div className="room-details-content">
                                         <img alt='bedroom shot' src={gal} width='280' height='200' style={{ borderRadius: '0.5rem', objectFit: 'cover' }}></img>
-                                        <p>{ar.id}</p>
-                                        <p>{ar.room_name}</p>
-                                        <p>{ar.room_price}</p>
+
+                                        <div className="room-amenities">
+                                            <div style={{ display: 'flex', margin: '0 0 0 2rem', textAlign: 'left' }}>
+                                                <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold' }}>{ar.room_name} {ar.isBreakfast ? <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room with Breakfast)</span> : <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room Only)</span>}</p>
+                                            </div>
+
+                                            <div style={{ display: 'flex', textAlign: 'left', margin: '2rem' }}>
+                                                <div style={{ margin: 0 }}>
+                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">fit_Screen</span> Room Size: xyz sq. ft.</p>
+                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">bed</span> Queen Bed</p>
+                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">bathtub</span> Bathtub</p>
+                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">groups</span> Occupancy</p>
+                                                    {ar.isBreakfast ? <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">dinner_dining</span> Breakfast Included</p> : <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">no_meals</span> Breakfast Not Included</p>}
+                                                </div>
+                                                <div style={{ margin: '0 0 0 1rem' }}>
+                                                    <p className='amenItem'><span className="material-symbols-outlined">wifi</span> Free WiFi</p>
+                                                    <p className='amenItem'><span className="material-symbols-outlined">chair</span> Pull-out Bed/Sofa</p>
+                                                    <p className='amenItem'><span className="material-symbols-outlined">balcony</span> Private Balcony</p>
+                                                    <p className='amenItem'><span className="material-symbols-outlined">self_care</span> Towels & Essentials</p>
+                                                    <p className='amenItem'><span className="material-symbols-outlined">table_lamp</span> Personal Workspace</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div style={{ display: 'block', textAlign: 'right' }}>
+                                        <p style={{ fontWeight: 'bold', fontSize: '1.5rem', margin: '2rem 5rem 0 0' }}>&#8377;{ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
+                                        <span style={{ margin: '0 5rem 0 0', color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Excluding Taxes & Fees)</span>
                                     </div>
                                     <button id="book-room-btn" disabled={ar.isSelected} onClick={() => handleAddRoomToCart(ar.id, ar.room_name, ar.room_price, ar.count)} className="classicBtn" >Book Room</button>
                                 </div>
@@ -195,7 +219,7 @@ const Bookings = () => {
 
                 </div>
 
-                <div id="room-selection-cart">  {/* Right Dashboard*/}
+                <div id="room-selection-cart" style={{ overflowY: bookingCart.length === 0 ? 'hidden' : 'scroll', borderRadius: bookingCart.length === 0 ? '0.5rem' : '0.5rem 0 0 0.5rem' }}>  {/* Right Dashboard*/}
                     <h3>Your Bookings</h3>
                     {bookingCart.length === 0 ? (
                         <div style={{ margin: '3rem 0 0 0' }}>

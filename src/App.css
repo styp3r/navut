@@ -36,10 +36,11 @@ html {
   top: 26rem;
   width: 12rem;
   height: 3rem;
-  background-color: #996132;
+  background-color: #f3e4d8;
   border: none;
-  border-radius: 1rem;
-  color: "#ffffff";
+  font-weight: bold;
+  border-radius: 0.5rem;
+  color: #996132;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -91,15 +92,18 @@ html {
 
 @keyframes flash {
   0% {
-    background-color: #996132;
+    background-color: #f3e4d8;
+    color: #996132;
   }
 
   50% {
-    background-color: #d49c6e;
+    background-color: #996132;
+    color: #ffffff;
   }
 
   100% {
-    background-color: #996132;
+    background-color: #f3e4d8;
+    color: #996132;
   }
 }
 
@@ -556,31 +560,38 @@ html {
 #bookingDashboard {
   width: 90%;
   display: flex;
-  margin: 8rem 3rem 3rem 3rem;
+  margin: 12rem 3rem 3rem 3rem;
 }
 
 #dashboard-main {
-  width: 70%;
-  margin: 2rem;
+  width: 90%;
+  margin: 2rem 0 2rem 2rem;
+}
+
+#select-room-title {
+  position: absolute;
+  top: 8.5rem;
+  left: 7.5rem;
+  font-size: 2rem;
+  color: #996132;
 }
 
 #room-selection-cart {
   width: 30%;
   height: 31rem;
   border: solid 1px #f3e4d8;
-  border-radius: 1rem 0 0 1rem;
+  border-radius: 0.5rem;
   margin: 2rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   overflow-x: hidden;
 }
 
 #checkInDateInput-cart {
   position: absolute;
-  top: 13rem;
-  right: 21rem;
+  top: 7rem;
+  right: 18rem;
   border: solid 1px #d49c6e;
   font-family: 'Montserrat', sans-serif;
   padding: 1rem;
@@ -589,14 +600,14 @@ html {
 
 #checkInDateInput-cart-label {
   position: absolute;
-  top: 11.5rem;
-  right: 24.5rem;
+  top: 5rem;
+  right: 21rem;
 }
 
 #checkOutDateInput-cart {
   position: absolute;
   font-family: 'Montserrat', sans-serif;
-  top: 13rem;
+  top: 7rem;
   right: 7rem;
   border: solid 1px #d49c6e;
   padding: 1rem;
@@ -605,15 +616,26 @@ html {
 
 #checkOutDateInput-cart-label {
   position: absolute;
-  top: 11.5rem;
-  right: 8.8rem;
+  top: 5rem;
+  right: 9.4rem;
+}
+
+#save-changes-btn {
+  display: none;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 11rem;
+  right: 7rem;
+  width: 21rem;
+  height: 2.3rem;
 }
 
 .default {
   /* Default background color and other styles */
   background-color: #ffffff;
   border: solid 1px #d49c6e;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   width: 100%;
   margin: 0 0 1rem 0;
 }
@@ -623,7 +645,8 @@ html {
   /* Example highlight color */
   /* Additional styles for editing state if needed */
   border: solid 1px #d49c6e;
-  border-radius: 1rem;
+  color: #996132;
+  border-radius: 0.5rem;
   width: 100%;
   margin: 0 0 1rem 0;
 }
@@ -667,17 +690,6 @@ html {
   color: #ffffff;
 }
 
-#save-changes-btn {
-  display: none;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  top: 17rem;
-  right: 7rem;
-  width: 24rem;
-  height: 2.3rem;
-}
-
 #guest-details-input-container {
   display: inline-block;
   width: 100%;
@@ -685,7 +697,7 @@ html {
   display: none;
   color: #996132;
   background-color: #f3e4d8;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -709,7 +721,7 @@ html {
   padding: 0 0.5rem 0 0.5rem;
 }
 
-.guest-input-item-email{
+.guest-input-item-email {
   width: 20rem;
   height: 2.5rem;
   margin: 1rem 1rem 0.3rem 1rem;
@@ -734,8 +746,8 @@ html {
 
 #room-details-container {
   width: 90%;
-  height: 29rem;
-  border-radius: 1rem;
+  height: 35rem;
+  border-radius: 0.5rem;
   background-color: #f3e4d8;
   color: #996132;
   margin: 0 0 2rem 0;
@@ -785,6 +797,7 @@ html {
   width: 10rem;
   height: 2.5rem;
   display: inline-block;
+  margin: 1rem 0 0 32rem;
 }
 
 #confirm-booking-btn {
