@@ -1,7 +1,7 @@
-import React from 'react'
-import Footer from './Footer'
-import useStore from './store'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import Footer from './Footer';
+import useStore from './store';
+import { Link } from 'react-router-dom';
 
 const ReviewBooking = () => {
 
@@ -9,7 +9,7 @@ const ReviewBooking = () => {
     const windowHeight = window.innerHeight;
     let total = 0;
 
-    const formateDateStr = (dateString) => {
+    const formatDateStr = (dateString) => {
         const year = parseInt(dateString.slice(0, 4));
         const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
         const day = parseInt(dateString.slice(8, 10));
@@ -21,7 +21,7 @@ const ReviewBooking = () => {
         } else {
             alert("Invalid date format provided");
         }
-    }
+    };
 
     function nightsBetween(startDate, endDate) {
         // Ensure valid Date objects
@@ -31,7 +31,7 @@ const ReviewBooking = () => {
         // Check if start date is after end date (invalid scenario)
         if (startDate > endDate) {
             alert("Invalid: Start date cannot be after end date");
-            return (startDate)
+            return (startDate);
         }
 
         // Get the time difference in milliseconds
@@ -52,42 +52,51 @@ const ReviewBooking = () => {
     return (
         <div id="review-booking-page">
             <h3 style={{ margin: '7rem 0 0 0' }}>Review Bookings</h3>
-            <div id="display-final-booking-container">
-                <div id="display-booking-details-container">
-                    <div id = "display-guest-details">
-                        <p>{guestName}</p>
-                        <p>{guestEmail}</p>
-                        <p>{guestPhone}</p>
-                    </div>
-
-                    <div id="display-booking-details">
-                        {bookingCart.length === 0 ? (
-                            <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
-                                <span style={{ fontSize: '3rem', color: '#996132' }} className="material-symbols-outlined">error</span>
-                                <p>Looks like you haven't made any Bookings.</p>
-                                <p>Please book your stay from our <Link to="/bookings" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link></p>
+            {bookingCart.length === 0 ? (
+                <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
+                    <span style={{ fontSize: '3rem', color: '#996132' }} className="material-symbols-outlined">error</span>
+                    <p>Looks like you haven't made any Bookings.</p>
+                    <p>Please book your stay from our <Link to="/bookings" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link></p>
+                </div>
+            ) : (
+                <div id="display-final-booking-container">
+                    <div id="display-booking-details-container">
+                        <div id="display-guest-details">
+                            <div style={{ width: '50%', textAlign: 'left', margin: '0 0 0 3.1rem' }}>
+                                <p>Guest Name: {guestName}</p>
+                                <p>Email Address: {guestEmail}</p>
                             </div>
-                        ) : bookingCart.map((item) => (
-                            <div key={item.id}>
-                                <p>{item.room_name}</p>
-                                <p>{item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
-                                <p>{formateDateStr(item.checkIn)}</p>
-                                <p>{formateDateStr(item.checkOut)}</p>
-                                <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + "Night"}</p>
+                            <div style={{ width: '50%', textAlign: 'left' }}>
+                                <p>Phone: {guestPhone}</p>
+                            </div>
+                        </div>
+                        {bookingCart.map((item) => (
+                            <div id="display-booking-details" key={item.id}>
+                                <div style={{ width: '20rem', margin: '1rem 40rem 0 3.1rem', textAlign: 'left' }}>
+                                    <p style={{ fontWeight: 'bold', fontSize: '1.3rem', color: '#996132' }}>{item.room_name}</p>
+                                    <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights, \u20B9" + item.room_price + " per night" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night, \u20B9" + item.room_price + " per night"}</p>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                                    <p style={{ margin: '1rem 1rem 1rem 3.1rem' }} >{"Check-in: " + formatDateStr(item.checkIn)}</p>
+                                    <p>{"Check-out: " + formatDateStr(item.checkOut)}</p>
+                                </div>
+                                <div style = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', margin: '0 3.1rem 0 3.1rem'}}>
+                                    <p>{item.isBreakfast ? "Extras: Breakfast Included" : "Extras: N/A"}</p>
+                                    <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{"\u20B9" + item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
+                    <div id="display-payment-details-container">
+                        <p>Payment Details</p>
+                        <p>Grand Total {total}</p>
+                    </div>
                 </div>
 
-                <div id = "display-payment-details-container">
-                    <p>Payment Details</p>
-                    <p>Grand Total {total}</p>
-                </div>
-
-            </div>
+            )}
             <Footer />
         </div>
     );
-}
+};
 
 export default ReviewBooking;
