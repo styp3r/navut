@@ -61,6 +61,7 @@ const ReviewBooking = () => {
             ) : (
                 <div id="display-final-booking-container">
                     <div id="display-booking-details-container">
+                        <p style={{ margin: '1rem 44rem 0 0', fontWeight: 'bold' }}>Guest Details</p>
                         <div id="display-guest-details">
                             <div style={{ width: '50%', textAlign: 'left', margin: '0 0 0 3.1rem' }}>
                                 <p>Guest Name: {guestName}</p>
@@ -70,6 +71,7 @@ const ReviewBooking = () => {
                                 <p>Phone: {guestPhone}</p>
                             </div>
                         </div>
+                        <p style={{ margin: '2rem 46rem 1rem 0', fontWeight: 'bold' }}>Your Stay</p>
                         {bookingCart.map((item) => (
                             <div id="display-booking-details" key={item.id}>
                                 <div style={{ width: '20rem', margin: '1rem 40rem 0 3.1rem', textAlign: 'left' }}>
@@ -80,7 +82,7 @@ const ReviewBooking = () => {
                                     <p style={{ margin: '1rem 1rem 1rem 3.1rem' }} >{"Check-in: " + formatDateStr(item.checkIn)}</p>
                                     <p>{"Check-out: " + formatDateStr(item.checkOut)}</p>
                                 </div>
-                                <div style = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', margin: '0 3.1rem 0 3.1rem'}}>
+                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', margin: '0 3.1rem 1rem 3.1rem' }}>
                                     <p>{item.isBreakfast ? "Extras: Breakfast Included" : "Extras: N/A"}</p>
                                     <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{"\u20B9" + item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
                                 </div>
