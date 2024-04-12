@@ -22,10 +22,10 @@ const useStore = create((set) => ({
 
 
     availableRoomCategory: [
-        { id: 0, room_name: 'Deluxe RoomWOB ', type: 'd', room_price: 1000, isBreakfast: false },
-        { id: 1, room_name: 'Deluxe RoomWB ', type: 'd', room_price: 1000, isBreakfast: true },
-        { id: 11, room_name: 'Family RoomWOB ', type: 'f', room_price: 1000, isBreakfast: false },
-        { id: 12, room_name: 'Family RoomWB ', type: 'f', room_price: 1000, isBreakfast: true },
+        { id: 0, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
+        { id: 1, room_name: 'Deluxe Room ', type: 'd', room_price: 1500, isBreakfast: true },
+        { id: 11, room_name: 'Family Room ', type: 'f', room_price: 2000, isBreakfast: false },
+        { id: 12, room_name: 'Family Room ', type: 'f', room_price: 2500, isBreakfast: true },
     ],
 
     deluxeCount: 4,
@@ -40,7 +40,7 @@ const useStore = create((set) => ({
     setStartDate: (date) => set({ startDate: date }),
     setEndDate: (date) => set({ endDate: date }),
 
-    //bookingCart: [{ id: 0, room_name: 'Deluxe Room', room_price: '1000', checkIn: '2024-04-08', checkOut: '2024-04-09', nights: 1 }],
+    //bookingCart: [{ id: 0, room_name: 'Deluxe Room', room_price: '1000', isBreakfast: true, type: 'd', checkIn: '2024-04-08', checkOut: '2024-04-09' }],
     bookingCart: [],
 
     addRoom: (roomData) => set((state) => ({ bookingCart: [...state.bookingCart, roomData] })),

@@ -655,7 +655,7 @@ html {
   margin: 1rem;
   width: 2rem;
   height: 2rem;
-  color: #ed5e68;
+  color: #b9b9b9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -663,6 +663,11 @@ html {
 
 #delete-booking-btn:hover {
   cursor: pointer;
+  color: #ed5e68;
+}
+
+#delete-booking-btn:active {
+  color: #ed5e68;
 }
 
 #room-selection-list-container {

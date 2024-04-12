@@ -44,8 +44,6 @@ const Bookings = () => {
     const [isValid3, setIsValid3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
-    //const newBooking = { id: 1, room_name: 'Premium Room', room_price: '2000', checkIn: '2024-04-09', checkOut: '2024-04-11', nights: 2 };
-
     const handleAddRoom = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
         document.getElementById('guest-details-input-container').style.display = "none";
@@ -127,6 +125,8 @@ const Bookings = () => {
         const newDate = new Date();
         newDate.setDate(newDate.getDate() + 1);
 
+        //const newBooking = { id: 0, room_name: 'Deluxe Room', room_price: '1000', isBreakfast: true, type: 'd', checkIn: '2024-04-08', checkOut: '2024-04-09' };
+
         let newBooking = {
             id: type === 'd' ? deluxeIdArrayCount : type === 'f' ? familyIdArrayCount : newRoomId, // here is the cat
             room_name: newRoomName,
@@ -198,9 +198,8 @@ const Bookings = () => {
         const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
         // Subtract 1 to exclude the check-in day
-        return parseInt(days);
+        return days;
     }
-
 
     return (
         <div id="bookingsPage">
@@ -244,7 +243,7 @@ const Bookings = () => {
                                     <button id="book-room-btn" disabled=
                                         {
                                             ar.type === 'd' ? (deluxeCount > 0 ? false : true) :
-                                                ar.type === 'f' ? (familyCount > 0 ? false : true) : false} onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room {ar.type === 'd' ? deluxeCount : ar.type === 'f' ? familyCount : null}</button>
+                                                ar.type === 'f' ? (familyCount > 0 ? false : true) : false} onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room</button>
                                 </div>
                             </div>
                         ))}
@@ -281,18 +280,17 @@ const Bookings = () => {
                         bookingCart.map((item, index) => (
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
                                 <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
-                                {item.isBreakfast ? <p>Room with Breakfast</p> : <p>Room Only</p>}
+                                {item.isBreakfast ? <p>Breakfast Included</p> : <p>Room Only</p>}
+                                <p style={{ fontStyle: 'italic' }}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</p>
                                 <br></br>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formateDateStr(item.checkIn)}</p>
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formateDateStr(item.checkOut)}</p>
-                                <p>{item.nights}</p>
-                                <p>{nightsBetween(item.checkIn, item.checkOut)}</p>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
                                 <br></br>
                                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                     <p style={{ margin: '0 0 0 3rem' }}>Total</p>
-                                    <p style={{ fontWeight: 'bold', margin: '0 3rem 0 0' }}>&#8377;{item.room_price}</p>
+                                    <p style={{ fontWeight: 'bold', margin: '0 3rem 0 0' }}>&#8377;{item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
                                 </div>
 
                                 {editIndex === index ?
@@ -359,21 +357,3 @@ const Bookings = () => {
 };
 
 export default Bookings;
-
-
-/*
--Data To Be Uploaded To Server After Successful Payment-
-
-1. checkInDate - roomData[0].checkInDate
-2. checkOutDate - roomData[0].checkOutDate
-3. roomType - rd.name
-4. priceWOtax - rd.price * noOfDays
-5. priceWithTax - (rd.price * noOfDays)* 0.18
-6. grandTotal - (grandTotal) + ((grandTotal) * 0.18)
-7. guestEmail - email
-8. guestPhone - phNo
-9. guestName - name
-10. specialReq- spReq
-11. roomId - rd.id
-12. nights - nights
-*/

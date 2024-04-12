@@ -1,3 +1,4 @@
+import React from 'react'
 import Footer from './Footer'
 import useStore from './store'
 import { Link } from 'react-router-dom'
@@ -6,6 +7,7 @@ const ReviewBooking = () => {
 
     const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
     const windowHeight = window.innerHeight;
+    let total = 0;
 
     const formateDateStr = (dateString) => {
         const year = parseInt(dateString.slice(0, 4));
@@ -19,6 +21,32 @@ const ReviewBooking = () => {
         } else {
             alert("Invalid date format provided");
         }
+    }
+
+    function nightsBetween(startDate, endDate) {
+        // Ensure valid Date objects
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
+
+        // Check if start date is after end date (invalid scenario)
+        if (startDate > endDate) {
+            alert("Invalid: Start date cannot be after end date");
+            return (startDate)
+        }
+
+        // Get the time difference in milliseconds
+        const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+
+        // Convert to days and round up to include the last night
+        const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+        // Subtract 1 to exclude the check-in day
+        return days;
+    }
+
+    // This is to calculate the grand total for all the selected rooms in cart
+    for (let i = 0; i < bookingCart.length; i++) {
+        total = total + (bookingCart[i].room_price * nightsBetween(bookingCart[i].checkIn, bookingCart[i].checkOut));
     }
 
     return (
@@ -36,12 +64,14 @@ const ReviewBooking = () => {
                     </div>
                 ) : bookingCart.map((item) => (
                     <div key={item.id}>
-                        <p>{item.room_name} x {item.count}</p>
-                        <p>{item.room_price}</p>
-                        <p>{formateDateStr(item.checkIn)} | {formateDateStr(item.checkOut)}</p>
-                        <p>{item.nights}</p>
+                        <p>{item.room_name}</p>
+                        <p>{item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
+                        <p>{formateDateStr(item.checkIn)}</p>
+                        <p>{formateDateStr(item.checkOut)}</p>
+                        <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + "Night"}</p>
                     </div>
                 ))}
+                <p>Grand Total {total}</p>
             </div>
             <Footer />
         </div>
