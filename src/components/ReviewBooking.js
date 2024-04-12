@@ -52,26 +52,38 @@ const ReviewBooking = () => {
     return (
         <div id="review-booking-page">
             <h3 style={{ margin: '7rem 0 0 0' }}>Review Bookings</h3>
-            <p>{guestName}</p>
-            <p>{guestEmail}</p>
-            <p>{guestPhone}</p>
             <div id="display-final-booking-container">
-                {bookingCart.length === 0 ? (
-                    <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
-                        <span style={{ fontSize: '3rem', color: '#996132' }} className="material-symbols-outlined">error</span>
-                        <p>Looks like you haven't made any Bookings.</p>
-                        <p>Please book your stay from our <Link to="/bookings" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link></p>
+                <div id="display-booking-details-container">
+                    <div id = "display-guest-details">
+                        <p>{guestName}</p>
+                        <p>{guestEmail}</p>
+                        <p>{guestPhone}</p>
                     </div>
-                ) : bookingCart.map((item) => (
-                    <div key={item.id}>
-                        <p>{item.room_name}</p>
-                        <p>{item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
-                        <p>{formateDateStr(item.checkIn)}</p>
-                        <p>{formateDateStr(item.checkOut)}</p>
-                        <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + "Night"}</p>
+
+                    <div id="display-booking-details">
+                        {bookingCart.length === 0 ? (
+                            <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
+                                <span style={{ fontSize: '3rem', color: '#996132' }} className="material-symbols-outlined">error</span>
+                                <p>Looks like you haven't made any Bookings.</p>
+                                <p>Please book your stay from our <Link to="/bookings" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link></p>
+                            </div>
+                        ) : bookingCart.map((item) => (
+                            <div key={item.id}>
+                                <p>{item.room_name}</p>
+                                <p>{item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
+                                <p>{formateDateStr(item.checkIn)}</p>
+                                <p>{formateDateStr(item.checkOut)}</p>
+                                <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + "Night"}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-                <p>Grand Total {total}</p>
+                </div>
+
+                <div id = "display-payment-details-container">
+                    <p>Payment Details</p>
+                    <p>Grand Total {total}</p>
+                </div>
+
             </div>
             <Footer />
         </div>
