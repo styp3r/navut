@@ -872,8 +872,32 @@ html {
   height: 21.6rem;
   background-color: #ffffff;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  margin: 2rem;
+  margin: 3.1rem 2rem 2rem 2rem;
   border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#pay-now-btn{
+  width: 80%;
+  height: 2.5rem;
+  background-color: #30be64;
+  border: none;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pay-now-btn:hover{
+  cursor: pointer;
+  background-color: #25D366;
 }
 
 

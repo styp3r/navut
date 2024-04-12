@@ -10,9 +10,6 @@ import makemytripLogo from '../images/makemytriplogo.png'
 import trivagoLogo from '../images/trivagologo.png'
 import yatraLogo from '../images/yatralogo.png'
 import smalllogo from '../images/navut_logo_minimal.jpg'
-import fbLogo from '../images/fbLogo.png'
-import whatsappLogo from '../images/whatsappLogo.png'
-import instaLogo from '../images/instaLogo.png'
 import { Link } from 'react-router-dom';
 
 const Footer = () => {

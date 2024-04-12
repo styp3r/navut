@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from './Footer';
 import useStore from './store';
 import { Link } from 'react-router-dom';
+import { supabase } from './supabase'
 
 const ReviewBooking = () => {
 
@@ -49,6 +50,47 @@ const ReviewBooking = () => {
         total = total + (bookingCart[i].room_price * nightsBetween(bookingCart[i].checkIn, bookingCart[i].checkOut));
     }
 
+    const handleUploadData = async () => {
+        try {
+
+            let createdNow = String(new Date());
+            let uploadData = {}; // Array to accumulate data from each item
+            bookingCart.forEach((item) => {
+                uploadData = {
+                    "booking_id": 1,
+                    "guest_name": guestName,
+                    "guest_email": guestEmail,
+                    "guest_phone": guestPhone,
+                    "room_name": item.room_name,
+                    "room_price": item.room_price,
+                    "check_in": formatDateStr(item.checkIn),
+                    "check_out": formatDateStr(item.checkOut),
+                    "nights": String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night",
+                    "extras": item.isBreakfast ? "Breakfast Included" : "Breakfast Not Included",
+                };
+            });
+
+            // Insert the array of data into the Supabase table
+            const { data, error } = await supabase
+                .from('bookingData')
+                .insert(
+                    {
+                        created_at: createdNow,
+                        bookings: uploadData
+                    });
+            console.log(uploadData); // Insert the array of objects
+
+            if (error) {
+                throw error;
+            }
+
+            console.log('Data uploaded successfully');
+        } catch (error) {
+            console.error('Error uploading data:', error.message);
+        }
+    };
+
+
     return (
         <div id="review-booking-page">
             <h3 style={{ margin: '7rem 0 0 0' }}>Review Bookings</h3>
@@ -92,6 +134,7 @@ const ReviewBooking = () => {
                     <div id="display-payment-details-container">
                         <p>Payment Details</p>
                         <p>Grand Total {total}</p>
+                        <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
                     </div>
                 </div>
 

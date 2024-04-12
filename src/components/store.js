@@ -11,16 +11,6 @@ const useStore = create((set) => ({
     incFamilyIdArrayCount: () => set((state) => ({ familyIdArrayCount: state.familyIdArrayCount + 1 })),
     decFamilyIdArrayCount: () => set((state) => ({ familyIdArrayCount: state.familyIdArrayCount - 1 })),
 
-    allRooms: [
-        { id: 0, room_name: 'Deluxe Room', type: 'd', room_price: 1000, isBreakfast: false },
-        { id: 1, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
-        { id: 2, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
-        { id: 3, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
-        { id: 4, room_name: 'Family Room', type: 'f', room_price: 2000, isBreakfast: false },
-        { id: 5, room_name: 'Family Room', type: 'f', room_price: 2000, isBreakfast: false },
-    ],
-
-
     availableRoomCategory: [
         { id: 0, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
         { id: 1, room_name: 'Deluxe Room ', type: 'd', room_price: 1500, isBreakfast: true },
