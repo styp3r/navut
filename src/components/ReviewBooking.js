@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import useStore from './store';
 import { Link } from 'react-router-dom';
 import { supabase } from './supabase'
+import RazorpayIcon from '../images/decoration/razorpay-icon.png'
 
 const ReviewBooking = () => {
 
     const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
+    const [bookingID, setBookingID] = useState('')
     const windowHeight = window.innerHeight;
     let total = 0;
 
@@ -50,14 +52,40 @@ const ReviewBooking = () => {
         total = total + (bookingCart[i].room_price * nightsBetween(bookingCart[i].checkIn, bookingCart[i].checkOut));
     }
 
+    function generateBookingId(length) {
+        // Define the character set for alphanumeric characters
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        // Create an empty string to store the booking ID
+        let bookingId = "";
+
+        // Loop for the desired length of the booking ID
+        for (let i = 0; i < length; i++) {
+            // Get a random index from the character set
+            const randomIndex = Math.floor(Math.random() * chars.length);
+
+            // Extract the character at the random index and append it to the booking ID
+            bookingId += chars.charAt(randomIndex);
+        }
+
+        // Return the generated booking ID
+        setBookingID(bookingId);
+    }
+
+    useEffect(() => {
+        // Your side effect logic here
+        generateBookingId(10);
+      }, []);
+
     const handleUploadData = async () => {
         try {
-
             let createdNow = String(new Date());
-            let uploadData = {}; // Array to accumulate data from each item
-            bookingCart.forEach((item) => {
-                uploadData = {
-                    "booking_id": 1,
+
+            console.log(bookingCart);
+
+            for (const item of bookingCart) {
+                const bookingObject = {
+                    "booking_id": bookingID,
                     "guest_name": guestName,
                     "guest_email": guestEmail,
                     "guest_phone": guestPhone,
@@ -67,33 +95,36 @@ const ReviewBooking = () => {
                     "check_out": formatDateStr(item.checkOut),
                     "nights": String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night",
                     "extras": item.isBreakfast ? "Breakfast Included" : "Breakfast Not Included",
+                    created_at: createdNow
                 };
-            });
 
-            // Insert the array of data into the Supabase table
-            const { data, error } = await supabase
-                .from('bookingData')
-                .insert(
-                    {
-                        created_at: createdNow,
-                        bookings: uploadData
+                // Insert each booking object individually
+                const { error } = await supabase
+                    .from('bookingData')
+                    .insert({
+                        created_at: String(new Date()),
+                        bookings: bookingObject,
                     });
-            console.log(uploadData); // Insert the array of objects
 
-            if (error) {
-                throw error;
+                if (error) {
+                    throw error;
+                }
             }
 
-            console.log('Data uploaded successfully');
+            console.log('Booking Data uploaded successfully');
+            document.getElementById('error-booking-upload').style.display = 'none';
         } catch (error) {
+            document.getElementById('error-booking-upload').style.display = 'flex';
             console.error('Error uploading data:', error.message);
         }
     };
 
 
+
     return (
         <div id="review-booking-page">
             <h3 style={{ margin: '7rem 0 0 0' }}>Review Bookings</h3>
+            <p id="error-booking-upload"><span className="material-symbols-outlined">warning</span>Internal Server Error. Please Try Again Later.</p>
             {bookingCart.length === 0 ? (
                 <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
                     <span style={{ fontSize: '3rem', color: '#996132' }} className="material-symbols-outlined">error</span>
@@ -103,13 +134,14 @@ const ReviewBooking = () => {
             ) : (
                 <div id="display-final-booking-container">
                     <div id="display-booking-details-container">
-                        <p style={{ margin: '1rem 44rem 0 0', fontWeight: 'bold' }}>Guest Details</p>
+                        <p style={{ margin: '1rem 44.1rem 0 0', fontWeight: 'bold' }}>Guest Details</p>
                         <div id="display-guest-details">
                             <div style={{ width: '50%', textAlign: 'left', margin: '0 0 0 3.1rem' }}>
+                                <p>Booking ID: </p>
                                 <p>Guest Name: {guestName}</p>
-                                <p>Email Address: {guestEmail}</p>
                             </div>
                             <div style={{ width: '50%', textAlign: 'left' }}>
+                                <p>Email Address: {guestEmail}</p>
                                 <p>Phone: {guestPhone}</p>
                             </div>
                         </div>
@@ -126,15 +158,28 @@ const ReviewBooking = () => {
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', margin: '0 3.1rem 1rem 3.1rem' }}>
                                     <p>{item.isBreakfast ? "Extras: Breakfast Included" : "Extras: N/A"}</p>
-                                    <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{"\u20B9" + item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
+                                    <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{"\u20B9 " + item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
                     <div id="display-payment-details-container">
-                        <p>Payment Details</p>
-                        <p>Grand Total {total}</p>
+                        <p style={{ fontWeight: 'bold', margin: '1rem 1rem 2rem 1rem' }}>Payment Summary</p>
+                        <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
+                            <p>Total</p>
+                            <p>&#8377; {total}</p>
+                        </div>
+                        <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
+                            <p>Taxes & Fees</p>
+                            <p>18%</p>
+                        </div>
+                        <p style={{ margin: 0, color: '#cecece' }}>---------------------------------</p>
+                        <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
+                            <h3>Grand Total</h3>
+                            <h3>&#8377; {total + (total * 0.18)}</h3>
+                        </div>
                         <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
+                        <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
                     </div>
                 </div>
 

@@ -129,6 +129,7 @@ const Bookings = () => {
 
         let newBooking = {
             id: type === 'd' ? deluxeIdArrayCount : type === 'f' ? familyIdArrayCount : newRoomId, // here is the cat
+            booking_id: null,
             room_name: newRoomName,
             room_price: newRoomPrice,
             isBreakfast: isBreakfastVal,
@@ -237,7 +238,7 @@ const Bookings = () => {
 
                                     </div>
                                     <div style={{ display: 'block', textAlign: 'right' }}>
-                                        <p style={{ fontWeight: 'bold', fontSize: '1.5rem', margin: '2rem 5rem 0 0' }}>&#8377;{ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
+                                        <p style={{ fontWeight: 'bold', fontSize: '1.5rem', margin: '2rem 5rem 0 0' }}>&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
                                         <span style={{ margin: '0 5rem 0 0', color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Excluding Taxes & Fees)</span>
                                     </div>
                                     <button id="book-room-btn" disabled=
@@ -290,7 +291,7 @@ const Bookings = () => {
                                 <br></br>
                                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                     <p style={{ margin: '0 0 0 3rem' }}>Total</p>
-                                    <p style={{ fontWeight: 'bold', margin: '0 3rem 0 0' }}>&#8377;{item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
+                                    <p style={{ fontWeight: 'bold', margin: '0 3rem 0 0' }}>&#8377; {item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
                                 </div>
 
                                 {editIndex === index ?

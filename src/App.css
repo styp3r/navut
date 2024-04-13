@@ -833,6 +833,13 @@ html {
   align-items: center;
 }
 
+#review-booking-page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #display-final-booking-container{
   display: flex;
   flex-direction: row;
@@ -869,7 +876,7 @@ html {
 
 #display-payment-details-container{
   width: 30%;
-  height: 21.6rem;
+  height: 25rem;
   background-color: #ffffff;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   margin: 3.1rem 2rem 2rem 2rem;
@@ -893,6 +900,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 3rem 0 0 0;
 }
 
 #pay-now-btn:hover{
@@ -900,6 +908,17 @@ html {
   background-color: #25D366;
 }
 
+#error-booking-upload{
+  width: 30rem;
+  color: #ed5e68;
+  font-weight: bold;
+  display: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: solid 1px #ed5e68;
+  justify-content: center;
+  align-items: center;
+}
 
 /*Responsive Design Code */
 @media only screen and (max-width: 1024px) {
