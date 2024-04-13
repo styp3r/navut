@@ -9,6 +9,7 @@ const ReviewBooking = () => {
 
     const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
     const [bookingID, setBookingID] = useState('')
+    const [data, setData] = useState([]);
     const windowHeight = window.innerHeight;
     let total = 0;
 
@@ -119,7 +120,27 @@ const ReviewBooking = () => {
         }
     };
 
+    const checkConflicts = async () => {
+        
+        try {
+            // Fetch bookings from the 'bookingData' table
+            const { data , error } = await supabase
+                .from('bookingData')
+                .select('bookings');
 
+            if (error) {
+                throw error;
+            }
+
+            setData(data);
+        } catch (error) {
+            console.error('Error checking conflicts:', error.message);
+            // Handle error, maybe set conflict state to true or show an error message to the user
+            //setConflict(true);
+        }
+    };
+
+    checkConflicts();
 
     return (
         <div id="review-booking-page">
@@ -137,11 +158,10 @@ const ReviewBooking = () => {
                         <p style={{ margin: '1rem 44.1rem 0 0', fontWeight: 'bold' }}>Guest Details</p>
                         <div id="display-guest-details">
                             <div style={{ width: '50%', textAlign: 'left', margin: '0 0 0 3.1rem' }}>
-                                <p>Booking ID: </p>
                                 <p>Guest Name: {guestName}</p>
+                                <p>Email Address: {guestEmail}</p>
                             </div>
                             <div style={{ width: '50%', textAlign: 'left' }}>
-                                <p>Email Address: {guestEmail}</p>
                                 <p>Phone: {guestPhone}</p>
                             </div>
                         </div>
@@ -184,6 +204,18 @@ const ReviewBooking = () => {
                 </div>
 
             )}
+            {data.map((item) => (
+                    <div key={item.id}>
+                        <p>Server</p>
+                        <p>{item.bookings.check_in}</p>
+                        <p>{item.bookings.check_out}</p>
+                        <p>Local</p>
+                        <p>{formatDateStr(bookingCart[0].checkIn)}</p>
+                        <p>{formatDateStr(bookingCart[0].checkOut)}</p>
+                        <p>{item.bookings.check_in <= formatDateStr(bookingCart[0].checkIn) ? "Yes" : "No"}</p>
+                        <p>{item.bookings.check_out <= formatDateStr(bookingCart[0].checkOut) ? "Yes" : "No"}</p>
+                        </div>
+                ))}
             <Footer />
         </div>
     );

@@ -265,7 +265,8 @@ const Bookings = () => {
                             </div>
                             <p style={{ margin: 0 }}>& I agree with the booking conditions.</p>
                         </div>
-                        {isValid1 && isValid2 && isValid3 && inputValue2.includes("@") && isChecked && <Link to="/review-booking" style={{ textDecoration: 'none', color: '#ffffff' }}><button id="confirm-booking-btn" onClick={() => handleConfirmBooking()} className="classicBtn">Confirm Booking</button></Link>}
+                        {/* This button tag below had <Link></Link> tags wrapping it redirecting it to review booking page*/}
+                        {isValid1 && isValid2 && isValid3 && inputValue2.includes("@") && isChecked && <button id="confirm-booking-btn" onClick={() => handleConfirmBooking()} className="classicBtn">Confirm Booking</button>}
                     </div>
 
                 </div>
