@@ -93,7 +93,7 @@ const ReviewBooking = () => {
                     "room_price": item.room_price,
                     "check_in": formatDateStr(item.checkIn),
                     "check_out": formatDateStr(item.checkOut),
-                    "nights": String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night",
+                    "nights": nightsBetween(item.checkIn, item.checkOut),
                     "extras": item.isBreakfast ? "Breakfast Included" : "Breakfast Not Included",
                     created_at: createdNow
                 };
