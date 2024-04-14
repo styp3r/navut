@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Footer from './Footer';
 import useStore from './store'
 import gal from '../images/gallery/gal1.jpeg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from './supabase'
 
 const Bookings = () => {
@@ -11,6 +11,7 @@ const Bookings = () => {
         bookingCart,
         updateCheckIn,
         updateCheckOut,
+        updateConflictStatus,
         editIndex,
         setEditIndex,
         addRoom,
@@ -34,6 +35,7 @@ const Bookings = () => {
         familyIddArray } = useStore();
 
     const isEmpty = bookingCart.length === 0;
+    const navigate = useNavigate();
 
     /*These are state management variables for input fields for guest details.
     This is to ensure that the inputted values meet valid criteria */
@@ -44,7 +46,6 @@ const Bookings = () => {
     const [inputValue3, setInputValue3] = useState('');
     const [isValid3, setIsValid3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
-    const [data, setData] = useState([]);
 
     const handleAddRoom = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
@@ -75,6 +76,7 @@ const Bookings = () => {
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "flex";
         document.getElementById('add-room-btn').style.display = "none";
+        updateConflictStatus(index, false)
         setEditIndex(index);
     };
 
@@ -135,6 +137,7 @@ const Bookings = () => {
             room_name: newRoomName,
             room_price: newRoomPrice,
             isBreakfast: isBreakfastVal,
+            isConflict: false,
             type: type,
             checkIn: formatDate(new Date()),
             checkOut: formatDate(newDate),
@@ -188,7 +191,35 @@ const Bookings = () => {
                 throw error;
             }
 
-            setData(data);
+            let flag = 0;
+            for (let i = 0; i < data.length; i++) {
+                if (flag === 0) {
+                    for (let j = 0; j < bookingCart.length; j++) {
+                        if (formatDateStr(bookingCart[j].checkIn) < data[i].bookings.check_out && formatDateStr(bookingCart[j].checkOut) > data[i].bookings.check_in) {
+                            //dates are conflicting
+                            updateConflictStatus(bookingCart[j].id, true);
+                            console.log(bookingCart[j].checkIn + 'and ' + bookingCart[j].checkOut + ' - ' + bookingCart[j].room_name + ' is already booked for these dates!');
+                            console.log("conflicting with " + data[i].bookings.check_in + " and " + data[i].bookings.check_out + " of type " + data[i].bookings.room_name)
+                            flag = 1;
+                        }
+                    }
+                } else {
+                    break;
+                }
+            }
+            //no conflicting dates
+            if (flag === 0) {
+                console.log("No conflicting dates!")
+                //store the name, email and phone number values to be taken to review booking page
+                setGuestName(inputValue1)
+                setGuestEmail(inputValue2)
+                setGuestPhone(inputValue3)
+
+                navigate("/review-booking")
+            } else {
+                console.log("Cannot Redirect.")
+            }
+
         } catch (error) {
             console.error('Error fetching booking data:', error.message);
         }
@@ -197,28 +228,6 @@ const Bookings = () => {
     const handleConfirmBooking = () => {
         // check for date conflicts with existing bookings
         fetchBookingsFromServer(); //fetching booking data from supabase
-        let flag = 0;
-        for (let i = 0; i < data.length; i++) {
-            if (flag === 0) {
-                for (let j = 0; j < bookingCart.length; j++) {
-                    if (formatDateStr(bookingCart[j].checkIn) < data[i].bookings.check_out && formatDateStr(bookingCart[j].checkOut) > data[i].bookings.check_in) {
-                        //dates are conflicting
-                        console.log(bookingCart[j].checkIn + 'and ' + bookingCart[j].checkOut + ' - ' + bookingCart[j].room_name + ' is already booked for these dates!');
-                        console.log("conflicting with " + data[i].bookings.check_in + " and " + data[i].bookings.check_out + " of type " + data[i].bookings.room_name)
-                        flag = 1;
-                    }
-                }
-            } else {
-                break;
-            }
-        }
-        //no conflicting dates
-        console.log("No conflicting dates!")
-
-        //store the name, email and phone number values to be taken to review booking page
-        setGuestName(inputValue1)
-        setGuestEmail(inputValue2)
-        setGuestPhone(inputValue3)
     }
 
     function nightsBetween(startDate, endDate) {
@@ -321,6 +330,7 @@ const Bookings = () => {
                     ) :
                         bookingCart.map((item, index) => (
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
+                                {item.isConflict ? <p style={{ color: '#ed5e68', fontWeight: 'bold' }}>These dates are already booked!</p> : null}
                                 <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
                                 {item.isBreakfast ? <p>Breakfast Included</p> : <p>Room Only</p>}
                                 <p style={{ fontStyle: 'italic' }}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</p>

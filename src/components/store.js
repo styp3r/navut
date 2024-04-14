@@ -50,6 +50,12 @@ const useStore = create((set) => ({
         ),
     })),
 
+    updateConflictStatus: (roomId, conflictStatus) => set((state) => ({
+        bookingCart: state.bookingCart.map((room) =>
+            room.id === roomId ? { ...room, isConflict: conflictStatus } : room
+        ),
+    })),
+
     editIndex: null,
     setEditIndex: (index) => set({ editIndex: index }),
 

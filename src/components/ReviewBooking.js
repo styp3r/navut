@@ -9,7 +9,6 @@ const ReviewBooking = () => {
 
     const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
     const [bookingID, setBookingID] = useState('')
-    const [data, setData] = useState([]);
     const windowHeight = window.innerHeight;
     let total = 0;
 
@@ -120,28 +119,6 @@ const ReviewBooking = () => {
         }
     };
 
-    const checkConflicts = async () => {
-        
-        try {
-            // Fetch bookings from the 'bookingData' table
-            const { data , error } = await supabase
-                .from('bookingData')
-                .select('bookings');
-
-            if (error) {
-                throw error;
-            }
-
-            setData(data);
-        } catch (error) {
-            console.error('Error checking conflicts:', error.message);
-            // Handle error, maybe set conflict state to true or show an error message to the user
-            //setConflict(true);
-        }
-    };
-
-    checkConflicts();
-
     return (
         <div id="review-booking-page">
             <h3 style={{ margin: '7rem 0 0 0' }}>Review Bookings</h3>
@@ -190,8 +167,8 @@ const ReviewBooking = () => {
                             <p>&#8377; {total}</p>
                         </div>
                         <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
-                            <p>Taxes & Fees</p>
-                            <p>18%</p>
+                            <p>Taxes & Fees (18%)</p>
+                            <p>&#8377; {total * 0.18}</p>
                         </div>
                         <p style={{ margin: 0, color: '#cecece' }}>---------------------------------</p>
                         <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
@@ -204,18 +181,6 @@ const ReviewBooking = () => {
                 </div>
 
             )}
-            {data.map((item) => (
-                    <div key={item.id}>
-                        <p>Server</p>
-                        <p>{item.bookings.check_in}</p>
-                        <p>{item.bookings.check_out}</p>
-                        <p>Local</p>
-                        <p>{formatDateStr(bookingCart[0].checkIn)}</p>
-                        <p>{formatDateStr(bookingCart[0].checkOut)}</p>
-                        <p>{item.bookings.check_in <= formatDateStr(bookingCart[0].checkIn) ? "Yes" : "No"}</p>
-                        <p>{item.bookings.check_out <= formatDateStr(bookingCart[0].checkOut) ? "Yes" : "No"}</p>
-                        </div>
-                ))}
             <Footer />
         </div>
     );
