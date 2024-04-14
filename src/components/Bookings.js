@@ -3,6 +3,7 @@ import Footer from './Footer';
 import useStore from './store'
 import gal from '../images/gallery/gal1.jpeg'
 import { Link } from 'react-router-dom'
+import { supabase } from './supabase'
 
 const Bookings = () => {
 
@@ -43,6 +44,7 @@ const Bookings = () => {
     const [inputValue3, setInputValue3] = useState('');
     const [isValid3, setIsValid3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    const [data, setData] = useState([]);
 
     const handleAddRoom = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
@@ -106,7 +108,7 @@ const Bookings = () => {
         return formattedDate;
     }
 
-    const formateDateStr = (dateString) => {
+    const formatDateStr = (dateString) => {
         const year = parseInt(dateString.slice(0, 4));
         const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
         const day = parseInt(dateString.slice(8, 10));
@@ -174,8 +176,46 @@ const Bookings = () => {
         setIsChecked(event.target.checked);
     };
 
+    const fetchBookingsFromServer = async () => {
+
+        try {
+            // Fetch bookings from the 'bookingData' table
+            const { data, error } = await supabase
+                .from('bookingData')
+                .select('bookings');
+
+            if (error) {
+                throw error;
+            }
+
+            setData(data);
+        } catch (error) {
+            console.error('Error fetching booking data:', error.message);
+        }
+    };
+
     const handleConfirmBooking = () => {
-        //simple function just to store the name, email and phone number values to be taken to review booking page
+        // check for date conflicts with existing bookings
+        fetchBookingsFromServer(); //fetching booking data from supabase
+        let flag = 0;
+        for (let i = 0; i < data.length; i++) {
+            if (flag === 0) {
+                for (let j = 0; j < bookingCart.length; j++) {
+                    if (formatDateStr(bookingCart[j].checkIn) < data[i].bookings.check_out && formatDateStr(bookingCart[j].checkOut) > data[i].bookings.check_in) {
+                        //dates are conflicting
+                        console.log(bookingCart[j].checkIn + 'and ' + bookingCart[j].checkOut + ' - ' + bookingCart[j].room_name + ' is already booked for these dates!');
+                        console.log("conflicting with " + data[i].bookings.check_in + " and " + data[i].bookings.check_out + " of type " + data[i].bookings.room_name)
+                        flag = 1;
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+        //no conflicting dates
+        console.log("No conflicting dates!")
+
+        //store the name, email and phone number values to be taken to review booking page
         setGuestName(inputValue1)
         setGuestEmail(inputValue2)
         setGuestPhone(inputValue3)
@@ -286,8 +326,8 @@ const Bookings = () => {
                                 <p style={{ fontStyle: 'italic' }}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</p>
                                 <br></br>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
-                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formateDateStr(item.checkIn)}</p>
-                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formateDateStr(item.checkOut)}</p>
+                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formatDateStr(item.checkIn)}</p>
+                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formatDateStr(item.checkOut)}</p>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
                                 <br></br>
                                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
