@@ -12,24 +12,10 @@ const ReviewBooking = () => {
     const windowHeight = window.innerHeight;
     let total = 0;
 
-    const formatDateStr = (dateString) => {
-        const year = parseInt(dateString.slice(0, 4));
-        const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
-        const day = parseInt(dateString.slice(8, 10));
-
-        // Check if date is valid (optional)
-        if (year > 0 && month >= 0 && month < 12 && day > 0 && day <= 31) {
-            const formattedDate = day.toString().padStart(2, '0') + '-' + (month + 1).toString().padStart(2, '0') + '-' + year;
-            return formattedDate; // Output: 19-11-2023
-        } else {
-            alert("Invalid date format provided");
-        }
-    };
-
     function nightsBetween(startDate, endDate) {
         // Ensure valid Date objects
-        startDate = new Date(startDate);
-        endDate = new Date(endDate);
+        //startDate = new Date(startDate);
+        //endDate = new Date(endDate);
 
         // Check if start date is after end date (invalid scenario)
         if (startDate > endDate) {
@@ -38,7 +24,7 @@ const ReviewBooking = () => {
         }
 
         // Get the time difference in milliseconds
-        const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+        const timeDiff = Math.abs(endDate - startDate);
 
         // Convert to days and round up to include the last night
         const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
@@ -91,8 +77,8 @@ const ReviewBooking = () => {
                     "guest_phone": guestPhone,
                     "room_name": item.room_name,
                     "room_price": item.room_price,
-                    "check_in": formatDateStr(item.checkIn),
-                    "check_out": formatDateStr(item.checkOut),
+                    "check_in": item.checkIn,
+                    "check_out": item.checkOut,
                     "nights": nightsBetween(item.checkIn, item.checkOut),
                     "extras": item.isBreakfast ? "Breakfast Included" : "Breakfast Not Included",
                     created_at: createdNow
@@ -150,8 +136,8 @@ const ReviewBooking = () => {
                                     <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights, \u20B9" + item.room_price + " per night" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night, \u20B9" + item.room_price + " per night"}</p>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <p style={{ margin: '1rem 1rem 1rem 3.1rem' }} >{"Check-in: " + formatDateStr(item.checkIn)}</p>
-                                    <p>{"Check-out: " + formatDateStr(item.checkOut)}</p>
+                                    <p style={{ margin: '1rem 1rem 1rem 3.1rem' }} >{"Check-in: " + String(item.checkIn)}</p>
+                                    <p>{"Check-out: " + String(item.checkOut)}</p>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', margin: '0 3.1rem 1rem 3.1rem' }}>
                                     <p>{item.isBreakfast ? "Extras: Breakfast Included" : "Extras: N/A"}</p>

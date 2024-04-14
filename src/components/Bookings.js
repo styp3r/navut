@@ -11,7 +11,6 @@ const Bookings = () => {
         bookingCart,
         updateCheckIn,
         updateCheckOut,
-        updateConflictStatus,
         editIndex,
         setEditIndex,
         addRoom,
@@ -76,7 +75,6 @@ const Bookings = () => {
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "flex";
         document.getElementById('add-room-btn').style.display = "none";
-        updateConflictStatus(index, false)
         setEditIndex(index);
     };
 
@@ -101,29 +99,6 @@ const Bookings = () => {
         setEditIndex(null);
     }
 
-    const formatDate = (date) => {
-        const dd = String(date.getDate()).padStart(2, '0'); // Day with leading zero
-        const mm = String(date.getMonth() + 1).padStart(2, '0'); // Month with leading zero (January is 0!)
-        const yyyy = date.getFullYear();
-        let formattedDate = String(yyyy + '-' + mm + '-' + dd)
-
-        return formattedDate;
-    }
-
-    const formatDateStr = (dateString) => {
-        const year = parseInt(dateString.slice(0, 4));
-        const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
-        const day = parseInt(dateString.slice(8, 10));
-
-        // Check if date is valid (optional)
-        if (year > 0 && month >= 0 && month < 12 && day > 0 && day <= 31) {
-            const formattedDate = day.toString().padStart(2, '0') + '-' + (month + 1).toString().padStart(2, '0') + '-' + year;
-            return formattedDate; // Output: 19-11-2023
-        } else {
-            alert("Invalid date format provided");
-        }
-    }
-
     const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, isBreakfastVal, type) => {
 
         const newDate = new Date();
@@ -139,9 +114,11 @@ const Bookings = () => {
             isBreakfast: isBreakfastVal,
             isConflict: false,
             type: type,
-            checkIn: formatDate(new Date()),
-            checkOut: formatDate(newDate),
+            checkIn: new Date(),
+            checkOut: newDate,
         }
+
+        console.log(newBooking)
 
         if (type === 'd') {
             decDC();
@@ -195,18 +172,18 @@ const Bookings = () => {
             for (let i = 0; i < data.length; i++) {
                 if (flag === 0) {
                     for (let j = 0; j < bookingCart.length; j++) {
-                        if (formatDateStr(bookingCart[j].checkIn) < data[i].bookings.check_out && formatDateStr(bookingCart[j].checkOut) > data[i].bookings.check_in) {
+                        console.log('Local Dates - ' + bookingCart[j].checkIn , bookingCart[j].checkOut)
+                        console.log('Supab Dates - '+ data[i].bookings.check_in, data[i].bookings.check_out)
+                        if (bookingCart[j].checkIn < data[i].bookings.check_out && bookingCart[j].checkOut > data[i].bookings.check_in) {
                             //dates are conflicting
-                            updateConflictStatus(bookingCart[j].id, true);
-                            console.log(bookingCart[j].checkIn + 'and ' + bookingCart[j].checkOut + ' - ' + bookingCart[j].room_name + ' is already booked for these dates!');
+                            alert(bookingCart[j].checkIn + '\n' + bookingCart[j].checkOut + '\nRoom Type - ' + bookingCart[j].room_name + '\nNo rooms available for these dates!');
                             console.log("conflicting with " + data[i].bookings.check_in + " and " + data[i].bookings.check_out + " of type " + data[i].bookings.room_name)
                             flag = 1;
                         }
                     }
-                } else {
-                    break;
                 }
             }
+            console.log(bookingCart.length)
             //no conflicting dates
             if (flag === 0) {
                 console.log("No conflicting dates!")
@@ -232,8 +209,8 @@ const Bookings = () => {
 
     function nightsBetween(startDate, endDate) {
         // Ensure valid Date objects
-        startDate = new Date(startDate);
-        endDate = new Date(endDate);
+        //startDate = new Date(startDate);
+        //endDate = new Date(endDate);
 
         // Check if start date is after end date (invalid scenario)
         if (startDate > endDate) {
@@ -242,7 +219,7 @@ const Bookings = () => {
         }
 
         // Get the time difference in milliseconds
-        const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+        const timeDiff = Math.abs(endDate - startDate);
 
         // Convert to days and round up to include the last night
         const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
@@ -330,14 +307,14 @@ const Bookings = () => {
                     ) :
                         bookingCart.map((item, index) => (
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
-                                {item.isConflict ? <p style={{ color: '#ed5e68', fontWeight: 'bold' }}>These dates are already booked!</p> : null}
+                                <p>{item.id} {index}</p>
                                 <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
                                 {item.isBreakfast ? <p>Breakfast Included</p> : <p>Room Only</p>}
                                 <p style={{ fontStyle: 'italic' }}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</p>
                                 <br></br>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
-                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formatDateStr(item.checkIn)}</p>
-                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formatDateStr(item.checkOut)}</p>
+                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {String(item.checkIn)}</p>
+                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {String(item.checkOut)}</p>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
                                 <br></br>
                                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
@@ -365,7 +342,7 @@ const Bookings = () => {
                                     <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id, item.type)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
                                     <div id="edit-booking-btn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0', fontSize: '1rem' }}>edit_square</span>Edit</div>
                                 </div>
-                                <button id="save-changes-btn" className="classicBtn" onClick={() => handleSaveChanges(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Edits</button>
+                                <button id="save-changes-btn" className="classicBtn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Edits</button>
                             </div>
                         ))
                     }

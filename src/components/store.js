@@ -12,10 +12,10 @@ const useStore = create((set) => ({
     decFamilyIdArrayCount: () => set((state) => ({ familyIdArrayCount: state.familyIdArrayCount - 1 })),
 
     availableRoomCategory: [
-        { id: 0, room_name: 'Deluxe Room ', type: 'd', room_price: 1000, isBreakfast: false },
-        { id: 1, room_name: 'Deluxe Room ', type: 'd', room_price: 1500, isBreakfast: true },
-        { id: 11, room_name: 'Family Room ', type: 'f', room_price: 2000, isBreakfast: false },
-        { id: 12, room_name: 'Family Room ', type: 'f', room_price: 2500, isBreakfast: true },
+        { id: 0, room_name: 'Deluxe Room', type: 'd', room_price: 1000, isBreakfast: false },
+        { id: 1, room_name: 'Deluxe Room', type: 'd', room_price: 1500, isBreakfast: true },
+        { id: 4, room_name: 'Family Room', type: 'f', room_price: 2000, isBreakfast: false },
+        { id: 5, room_name: 'Family Room', type: 'f', room_price: 2500, isBreakfast: true },
     ],
 
     deluxeCount: 4,
@@ -47,12 +47,6 @@ const useStore = create((set) => ({
     updateCheckOut: (roomId, newCheckOutDate) => set((state) => ({
         bookingCart: state.bookingCart.map((room) =>
             room.id === roomId ? { ...room, checkOut: newCheckOutDate } : room
-        ),
-    })),
-
-    updateConflictStatus: (roomId, conflictStatus) => set((state) => ({
-        bookingCart: state.bookingCart.map((room) =>
-            room.id === roomId ? { ...room, isConflict: conflictStatus } : room
         ),
     })),
 
