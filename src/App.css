@@ -625,10 +625,20 @@ html {
   position: absolute;
   justify-content: center;
   align-items: center;
+  background-color: #30be64;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
   top: 11rem;
   right: 7rem;
   width: 21rem;
   height: 2.3rem;
+}
+
+#save-changes-btn:hover{
+  background-color: #25D366;
+  cursor: pointer;
 }
 
 .default {
@@ -918,6 +928,10 @@ html {
   border: solid 1px #ed5e68;
   justify-content: center;
   align-items: center;
+}
+
+#conflict-message{
+  display: none;
 }
 
 /*Responsive Design Code */

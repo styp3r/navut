@@ -77,6 +77,7 @@ const ReviewBooking = () => {
                     "guest_phone": guestPhone,
                     "room_name": item.room_name,
                     "room_price": item.room_price,
+                    "isConflict": item.isConflict,
                     "check_in": item.checkIn,
                     "check_out": item.checkOut,
                     "nights": nightsBetween(item.checkIn, item.checkOut),

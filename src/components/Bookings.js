@@ -100,6 +100,7 @@ const Bookings = () => {
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "flex";
         document.getElementById('add-room-btn').style.display = "none";
+        document.getElementById('conflict-message').style.display = 'none';
         setEditIndex(index);
     };
 
@@ -108,6 +109,7 @@ const Bookings = () => {
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "none";
         document.getElementById('add-room-btn').style.display = "flex";
+        document.getElementById('conflict-message').style.display = 'none';
 
 
         if (type === 'd') {
@@ -201,6 +203,8 @@ const Bookings = () => {
                 if (obj1.bookings.check_in < obj2.checkOut && obj1.bookings.check_out > obj2.checkIn) {
                     // Conflict found, return true
                     console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
+                    document.getElementById('conflict-message').style.display = 'inline-block';
+                    document.getElementById('conflict-message').textContent = '' + obj2.room_name + ' is already booked for the selected dates!';
                     flag = 1;
                 }
             }
@@ -310,6 +314,7 @@ const Bookings = () => {
 
                 <div id="room-selection-cart" style={{ overflowY: bookingCart.length > 1 ? 'scroll' : 'hidden', borderRadius: bookingCart.length > 1 ? '0.5rem 0 0 0.5rem' : '0.5rem' }}>  {/* Right Dashboard*/}
                     <h3>Your Bookings ({bookingCart.length})</h3>
+                    <p id = "conflict-message" style = {{color: '#ed5e68', fontWeight: 'bold', border: 'solid 1px #ed5e68', borderRadius: '0.5rem', padding: '0.5rem'}}></p>
                     {bookingCart.length === 0 ? (
                         <div style={{ margin: '3rem 0 0 0' }}>
                             <span style={{ fontSize: '2rem', color: '#996132' }} className="material-symbols-outlined">more_horiz</span>
@@ -318,7 +323,6 @@ const Bookings = () => {
                     ) :
                         bookingCart.map((item, index) => (
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
-                                <p>{item.id} {index}</p>
                                 <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
                                 {item.isBreakfast ? <p>Breakfast Included</p> : <p>Room Only</p>}
                                 <p style={{ fontStyle: 'italic' }}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</p>
@@ -353,7 +357,7 @@ const Bookings = () => {
                                     <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id, item.type)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
                                     <div id="edit-booking-btn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0', fontSize: '1rem' }}>edit_square</span>Edit</div>
                                 </div>
-                                <button id="save-changes-btn" className="classicBtn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Edits</button>
+                                <button id="save-changes-btn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Edits</button>
                             </div>
                         ))
                     }
