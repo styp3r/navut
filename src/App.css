@@ -934,6 +934,17 @@ html {
   display: none;
 }
 
+#done-btn{
+  position: absolute;
+  top: 10rem;
+  right: 32.5rem;
+  width: 7rem;
+  height: 2.5rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
 /*Responsive Design Code */
 @media only screen and (max-width: 1024px) {
   #navbar {

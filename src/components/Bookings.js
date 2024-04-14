@@ -75,6 +75,7 @@ const Bookings = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
         document.getElementById('guest-details-input-container').style.display = "none";
         document.getElementById('save-changes-btn').style.display = "none";
+        document.getElementById('done-btn').style.display = 'flex';
         setEditIndex(null);
     }
 
@@ -101,6 +102,7 @@ const Bookings = () => {
         document.getElementById('save-changes-btn').style.display = "flex";
         document.getElementById('add-room-btn').style.display = "none";
         document.getElementById('conflict-message').style.display = 'none';
+        document.getElementById('done-btn').style.display = "none";
         setEditIndex(index);
     };
 
@@ -110,6 +112,7 @@ const Bookings = () => {
         document.getElementById('save-changes-btn').style.display = "none";
         document.getElementById('add-room-btn').style.display = "flex";
         document.getElementById('conflict-message').style.display = 'none';
+        document.getElementById('done-btn').style.display = "none";
 
 
         if (type === 'd') {
@@ -167,8 +170,17 @@ const Bookings = () => {
         window.scrollTo(0, 0);
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
+        document.getElementById('done-btn').style.display = "none";
         setEditIndex(null);
         addRoom(newBooking);
+    }
+
+    const handleDoneClick = () => {
+        window.scrollTo(0, 0);
+        document.getElementById('room-selection-list-container').style.display = "none";
+        document.getElementById('guest-details-input-container').style.display = "flex";
+        document.getElementById('done-btn').style.display = "none";
+        setEditIndex(null);
     }
 
     const handleChange1 = (event) => {
@@ -215,6 +227,7 @@ const Bookings = () => {
             setGuestName(inputValue1)
             setGuestEmail(inputValue2)
             setGuestPhone(inputValue3)
+            navigate("/review-booking")
             return true;
         } else {
             return false;
@@ -246,6 +259,7 @@ const Bookings = () => {
     return (
         <div id="bookingsPage">
             <p id="select-room-title">Book Your Stay</p>
+            <button id = "done-btn" className = "classicBtn" onClick = {() => handleDoneClick()}><span style= {{margin: '0 0.5rem 0 0'}} className="material-symbols-outlined">done</span>Done</button>
             <div id="bookingDashboard">
                 <div id="dashboard-main">
                     <div id="room-selection-list-container" style={{ display: bookingCart.length === 0 ? "flex" : "none" }}> {/* Left Dashboard - Main - 1 - default*/}
@@ -314,7 +328,7 @@ const Bookings = () => {
 
                 <div id="room-selection-cart" style={{ overflowY: bookingCart.length > 1 ? 'scroll' : 'hidden', borderRadius: bookingCart.length > 1 ? '0.5rem 0 0 0.5rem' : '0.5rem' }}>  {/* Right Dashboard*/}
                     <h3>Your Bookings ({bookingCart.length})</h3>
-                    <p id = "conflict-message" style = {{color: '#ed5e68', fontWeight: 'bold', border: 'solid 1px #ed5e68', borderRadius: '0.5rem', padding: '0.5rem'}}></p>
+                    <p id="conflict-message" style={{ color: '#ed5e68', fontWeight: 'bold', border: 'solid 1px #ed5e68', borderRadius: '0.5rem', padding: '0.5rem' }}></p>
                     {bookingCart.length === 0 ? (
                         <div style={{ margin: '3rem 0 0 0' }}>
                             <span style={{ fontSize: '2rem', color: '#996132' }} className="material-symbols-outlined">more_horiz</span>
