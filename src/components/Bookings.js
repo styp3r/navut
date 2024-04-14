@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import useStore from './store'
 import gal from '../images/gallery/gal1.jpeg'
@@ -45,6 +45,31 @@ const Bookings = () => {
     const [inputValue3, setInputValue3] = useState('');
     const [isValid3, setIsValid3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    const [data, setData] = useState([]);
+
+
+    //Fetch all bookings to later compare with selected dates from bookingCart
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { data: fetchedData, error } = await supabase
+                    .from('bookingData')
+                    .select('bookings');
+
+                if (error) {
+                    throw error;
+                }
+
+                // Update state with fetched data
+                setData(fetchedData);
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
+        };
+
+        // Call fetchData function when component mounts
+        fetchData();
+    }, []);
 
     const handleAddRoom = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
@@ -101,8 +126,17 @@ const Bookings = () => {
 
     const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, isBreakfastVal, type) => {
 
-        const newDate = new Date();
-        newDate.setDate(newDate.getDate() + 1);
+        const getFormattedDate = () => {
+            const newDate = new Date();
+
+            const year = newDate.getUTCFullYear();
+            const month = String(newDate.getUTCMonth() + 1).padStart(2, '0'); // Pad month with leading zero (if necessary)
+            const day = String(newDate.getUTCDate()).padStart(2, '0');
+
+            const formattedDate = year + '-' + month + '-' + day;
+
+            return formattedDate;
+        }
 
         //const newBooking = { id: 0, room_name: 'Deluxe Room', room_price: '1000', isBreakfast: true, type: 'd', checkIn: '2024-04-08', checkOut: '2024-04-09' };
 
@@ -114,11 +148,9 @@ const Bookings = () => {
             isBreakfast: isBreakfastVal,
             isConflict: false,
             type: type,
-            checkIn: new Date(),
-            checkOut: newDate,
+            checkIn: getFormattedDate(),
+            checkOut: getFormattedDate(),
         }
-
-        console.log(newBooking)
 
         if (type === 'd') {
             decDC();
@@ -156,55 +188,34 @@ const Bookings = () => {
         setIsChecked(event.target.checked);
     };
 
-    const fetchBookingsFromServer = async () => {
+    const handleConfirmBooking = () => {
 
-        try {
-            // Fetch bookings from the 'bookingData' table
-            const { data, error } = await supabase
-                .from('bookingData')
-                .select('bookings');
+        console.log(data) //data[0].bookings.check_in
+        console.log(bookingCart) //bookingCart[0].checkIn
 
-            if (error) {
-                throw error;
-            }
-
-            let flag = 0;
-            for (let i = 0; i < data.length; i++) {
-                if (flag === 0) {
-                    for (let j = 0; j < bookingCart.length; j++) {
-                        console.log('Local Dates - ' + bookingCart[j].checkIn , bookingCart[j].checkOut)
-                        console.log('Supab Dates - '+ data[i].bookings.check_in, data[i].bookings.check_out)
-                        if (bookingCart[j].checkIn < data[i].bookings.check_out && bookingCart[j].checkOut > data[i].bookings.check_in) {
-                            //dates are conflicting
-                            alert(bookingCart[j].checkIn + '\n' + bookingCart[j].checkOut + '\nRoom Type - ' + bookingCart[j].room_name + '\nNo rooms available for these dates!');
-                            console.log("conflicting with " + data[i].bookings.check_in + " and " + data[i].bookings.check_out + " of type " + data[i].bookings.room_name)
-                            flag = 1;
-                        }
-                    }
+        let flag = 0;
+        for (const obj1 of data) {
+            // Iterate over each object in array2
+            for (const obj2 of bookingCart) {
+                // Check for conflict between dates of obj1 and obj2
+                if (obj1.bookings.check_in < obj2.checkOut && obj1.bookings.check_out > obj2.checkIn) {
+                    // Conflict found, return true
+                    console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
+                    flag = 1;
                 }
             }
-            console.log(bookingCart.length)
-            //no conflicting dates
-            if (flag === 0) {
-                console.log("No conflicting dates!")
-                //store the name, email and phone number values to be taken to review booking page
-                setGuestName(inputValue1)
-                setGuestEmail(inputValue2)
-                setGuestPhone(inputValue3)
-
-                navigate("/review-booking")
-            } else {
-                console.log("Cannot Redirect.")
-            }
-
-        } catch (error) {
-            console.error('Error fetching booking data:', error.message);
         }
-    };
+        if (flag === 0) {
+            console.log('No conflicts detected!')
+            //store the name, email and phone number values to be taken to review booking page
+            setGuestName(inputValue1)
+            setGuestEmail(inputValue2)
+            setGuestPhone(inputValue3)
+            return true;
+        } else {
+            return false;
+        }
 
-    const handleConfirmBooking = () => {
-        // check for date conflicts with existing bookings
-        fetchBookingsFromServer(); //fetching booking data from supabase
     }
 
     function nightsBetween(startDate, endDate) {
