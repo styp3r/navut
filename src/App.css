@@ -52,7 +52,7 @@ html {
   animation-timing-function: linear;
 }
 
-#checkBookingDatesBtn:hover{
+#checkBookingDatesBtn:hover {
   color: #f3e4d8;
   background-color: #996132;
 }
@@ -641,7 +641,7 @@ html {
   height: 2.3rem;
 }
 
-#save-changes-btn:hover{
+#save-changes-btn:hover {
   background-color: #25D366;
   cursor: pointer;
 }
@@ -848,14 +848,14 @@ html {
   align-items: center;
 }
 
-#review-booking-page{
+#review-booking-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#display-final-booking-container{
+#display-final-booking-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -863,7 +863,7 @@ html {
   margin: 2rem 7rem 7rem 7rem;
 }
 
-#display-booking-details-container{
+#display-booking-details-container {
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -871,7 +871,7 @@ html {
   align-items: center;
 }
 
-#display-guest-details{
+#display-guest-details {
   width: 100%;
   background-color: #ffffff;
   border: solid 1px #cecece;
@@ -881,7 +881,7 @@ html {
   flex-direction: row;
 }
 
-#display-booking-details{
+#display-booking-details {
   width: 100%;
   background-color: #ffffff;
   border: solid 1px #cecece;
@@ -889,7 +889,7 @@ html {
   border-radius: 0.5rem;
 }
 
-#display-payment-details-container{
+#display-payment-details-container {
   width: 30%;
   height: 25rem;
   background-color: #ffffff;
@@ -902,7 +902,7 @@ html {
   align-items: center;
 }
 
-#pay-now-btn{
+#pay-now-btn {
   width: 80%;
   height: 2.5rem;
   background-color: #30be64;
@@ -918,12 +918,12 @@ html {
   margin: 3rem 0 0 0;
 }
 
-#pay-now-btn:hover{
+#pay-now-btn:hover {
   cursor: pointer;
   background-color: #25D366;
 }
 
-#error-booking-upload{
+#error-booking-upload {
   width: 30rem;
   color: #ed5e68;
   font-weight: bold;
@@ -935,11 +935,11 @@ html {
   align-items: center;
 }
 
-#conflict-message{
+#conflict-message {
   display: none;
 }
 
-#done-btn{
+#done-btn {
   position: absolute;
   top: 10rem;
   right: 32.5rem;
@@ -950,23 +950,32 @@ html {
   align-items: center;
 }
 
-#bookingsPageLanding{
+#bookingsPageLanding {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
 }
 
-#bookings-landing-container{
+#bookings-landing-container {
   width: 35rem;
   height: 20rem;
-  margin: 10rem 0 10rem 0;
+  margin: 7rem 0 20rem 0;
   text-align: left;
 }
 
-#bookings-manage-choice{
-  margin: 5rem 0 0 0;
+#bookings-manage-choice {
+  margin: 3rem 0 3rem 0;
+}
+
+.not-found-content {
+  margin: 12rem 0 0 0;
+}
+
+#go-home-btn {
+  width: 10rem;
+  height: 2rem;
 }
 
 /*Responsive Design Code */

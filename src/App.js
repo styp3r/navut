@@ -10,6 +10,7 @@ import Contact from './components/Contact'
 import ReviewBooking from './components/ReviewBooking';
 import BookingsPageLanding from './components/BookingsPageLanding';
 import ManageBooking from './components/ManageBooking'
+import NotFound from './components/NotFound'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/review-booking" element={<ReviewBooking />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>
@@ -36,3 +38,8 @@ function App() {
 }
 
 export default App;
+
+/*
+<h1>Uh oh! Looks like we've lost our way.</h1>
+<p>The page you requested seems to be hiding. Maybe it went on an adventure? ️  No worries, you can try going back to the homepage or searching for what you need.</p>
+<a href="/">Go to Homepage</a> */
