@@ -7,6 +7,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 const BookingsPageLanding = () => {
 
+    window.scrollTo(0, 0);
+
     var settings = {
         dots: true,
         infinite: true,
