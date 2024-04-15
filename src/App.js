@@ -8,6 +8,8 @@ import Bookings from './components/Bookings'
 import About from './components/About'
 import Contact from './components/Contact'
 import ReviewBooking from './components/ReviewBooking';
+import BookingsPageLanding from './components/BookingsPageLanding';
+import ManageBooking from './components/ManageBooking'
 
 function App() {
 
@@ -20,7 +22,9 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/bookings-landing" element={<BookingsPageLanding />} />
             <Route path="/bookings" element={<Bookings />} />
+            <Route path="/manage-bookings" element={<ManageBooking />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/review-booking" element={<ReviewBooking />} />

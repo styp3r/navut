@@ -10,7 +10,7 @@ const Hero = () => {
             <img id="heroImg" alt="heroImage" src={HeroImg}></img>
             <h3 id="heroText1">Find Your Bliss</h3>
             <h3 id="heroText2">In The Coorg Hills</h3>
-            <Link to = "/bookings" style = {{textDecoration: 'none', color: '#ffffff'}}><div id="checkBookingDatesBtn">Book Your Stay Now</div></Link>
+            <Link to = "/bookings-landing" style = {{textDecoration: 'none', color: '#ffffff'}}><div id="checkBookingDatesBtn">Book Your Stay Now</div></Link>
             
         </div>
     );

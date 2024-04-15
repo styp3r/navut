@@ -38,7 +38,7 @@ const Footer = () => {
                 <div className="usefulLinks">
                     <p style={{ color: '#996132' }}>Useful Links</p>
                     <Link style={{ textDecoration: 'none', color: '#000000', display: 'inline-block', margin: '0 0.5rem 0 0.5rem'}} to="/"><p >Home</p></Link>
-                    <Link style={{ textDecoration: 'none', color: '#000000', display: 'inline-block', margin: '0 0.5rem 0 0.5rem' }} to="/bookings"><p >Bookings</p></Link>
+                    <Link style={{ textDecoration: 'none', color: '#000000', display: 'inline-block', margin: '0 0.5rem 0 0.5rem' }} to="/bookings-landing"><p >Bookings</p></Link>
                     <Link style={{ textDecoration: 'none', color: '#000000', display: 'inline-block', margin: '0 0.5rem 0 0.5rem' }} to="/about"><p >About Us</p></Link>
                     <Link style={{ textDecoration: 'none', color: '#000000', display: 'inline-block', margin: '0 0.5rem 0 0.5rem' }} to="/contact"><p >Contact Us</p></Link>
                 </div>

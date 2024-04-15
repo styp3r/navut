@@ -52,6 +52,11 @@ html {
   animation-timing-function: linear;
 }
 
+#checkBookingDatesBtn:hover{
+  color: #f3e4d8;
+  background-color: #996132;
+}
+
 #heroText1 {
   text-align: left;
   width: 25rem;
@@ -690,19 +695,19 @@ html {
 }
 
 .classicBtn {
-  background-color: #d49c6e;
-  color: #ffffff;
-  border: none;
+  background-color: #ffffff;
+  color: #996132;
+  border: solid 1px #996132;
   outline: none;
   border-radius: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
 
 .classicBtn:hover {
   cursor: pointer;
-}
-
-.classicBtn:active {
   background-color: #996132;
+  color: #ffffff;
 }
 
 .classicBtn:disabled {
@@ -943,6 +948,25 @@ html {
   display: none;
   justify-content: center;
   align-items: center;
+}
+
+#bookingsPageLanding{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+#bookings-landing-container{
+  width: 35rem;
+  height: 20rem;
+  margin: 10rem 0 10rem 0;
+  text-align: left;
+}
+
+#bookings-manage-choice{
+  margin: 5rem 0 0 0;
 }
 
 /*Responsive Design Code */
