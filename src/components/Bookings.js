@@ -3,7 +3,7 @@ import Footer from './Footer';
 import useStore from './store'
 import gal from '../images/gallery/gal1.jpeg'
 import { Link, useNavigate } from 'react-router-dom'
-import { supabase } from './supabase'
+import supabase from './supabase'
 
 const Bookings = () => {
 
@@ -148,6 +148,7 @@ const Bookings = () => {
         let newBooking = {
             id: type === 'd' ? deluxeIdArrayCount : type === 'f' ? familyIdArrayCount : newRoomId, // here is the cat
             booking_id: null,
+            unique_id: null,
             room_name: newRoomName,
             room_price: newRoomPrice,
             isBreakfast: isBreakfastVal,

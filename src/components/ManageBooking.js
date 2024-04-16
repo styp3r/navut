@@ -1,22 +1,47 @@
 import Footer from './Footer'
 import React, { useState } from 'react'
-import { supabase } from './supabase'
+import supabase from './supabase'
 
 const ManageBooking = () => {
 
     const [bookingId, setBookingId] = useState();
     const [data, setData] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [roomNameDelete, setRoomNameDelete] = useState();
     const [uniqueId, setUniqueId] = useState();
 
-    const handleOpenModal = (unique) => {
+    const handleOpenModal = (roomName, unique) => {
+        setRoomNameDelete(roomName)
         setUniqueId(unique)
         setShowModal(true);
     };
 
-    const handleDelete = () => {
-        alert('Booking deleted.'); // Replace with your delete logic
+    const handleDelete = async () => {
+        alert('Booking deleted.' + uniqueId); // Replace with your delete logic
         setShowModal(false); // Close the modal after delete
+
+        //delete booking with the unique id selected from server
+
+        try {
+            const { error } = await supabase
+                .from('bookingData')
+                .delete()
+                .eq('bookings->>unique_id', uniqueId); // Filter by 'bookings.unique_id' property
+
+            if (!error) {
+                window.location.reload();
+                console.log('Rows with unique_id:', uniqueId, 'deleted successfully!');
+                // Update your UI to reflect the deletion
+            } else {
+                console.error('Error deleting rows:', error);
+                // Handle errors appropriately (e.g., display an error message to the user)
+            }
+        } catch (error) {
+            console.error('Unexpected error:', error);
+            // Handle unexpected errors
+        }
+
+
     };
 
     const handleCancel = () => {
@@ -60,10 +85,10 @@ const ManageBooking = () => {
                                 <div style={{ margin: '2rem', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                     <span style={{ margin: '0 0.5rem 0.1rem 0', color: '#ed5e68', fontSize: '3rem' }} className="material-symbols-outlined">warning</span>
                                 </div>
-                                <p>Are you sure you want to delete {uniqueId}?</p>
+                                <p>Are you sure you want to delete {roomNameDelete}?</p>
                                 <p>This action cannot be reversed.</p>
                                 <div className="buttons">
-                                    <button id="delete-btn-choice" onClick={handleDelete}>Delete</button>
+                                    <button id="delete-btn-choice" onClick={() => handleDelete()}>Delete</button>
                                     <button id="cancel-btn-choice" style={{ width: '5rem', height: '2rem', margin: '1rem 5rem 1rem 1rem', backgroundColor: '#cecece', outline: 'none', border: 'none', color: '#5b5b5b', borderRadius: '0.5rem' }} onClick={handleCancel}>Cancel</button>
                                 </div>
                             </div>
@@ -98,7 +123,7 @@ const ManageBooking = () => {
                                                 <p>&#8377; {item.bookings.room_price}</p>
                                             </div>
                                         </div>
-                                        <div id="manage-delete-btn" onClick={() => handleOpenModal(item.bookings.room_name)}>
+                                        <div id="manage-delete-btn" onClick={() => handleOpenModal(item.bookings.room_name, item.bookings.unique_id)}>
                                             <span style={{ color: '#ffffff' }} className="material-symbols-outlined">delete</span>
                                         </div>
                                     </div>

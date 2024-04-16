@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import useStore from './store';
 import { Link } from 'react-router-dom';
-import { supabase } from './supabase'
+import supabase from './supabase'
 import RazorpayIcon from '../images/decoration/razorpay-icon.png'
 
 const ReviewBooking = () => {
 
     const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
-    const [bookingID, setBookingID] = useState('')
+    const [bookingID, setBookingID] = useState('');
     const windowHeight = window.innerHeight;
     let total = 0;
 
@@ -58,6 +58,26 @@ const ReviewBooking = () => {
         setBookingID(bookingId);
     }
 
+    function generateUniqueId(length) {
+        // Define the character set for alphanumeric characters
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        // Create an empty string to store the unique ID
+        let uniqueId = "";
+
+        // Loop for the desired length of the unique ID
+        for (let i = 0; i < length; i++) {
+            // Get a random index from the character set
+            const randomIndex = Math.floor(Math.random() * chars.length);
+
+            // Extract the character at the random index and append it to the unique ID
+            uniqueId += chars.charAt(randomIndex);
+        }
+
+        // Return the generated unique ID
+        return uniqueId;
+    }
+
     useEffect(() => {
         // Your side effect logic here
         generateBookingId(10);
@@ -71,6 +91,7 @@ const ReviewBooking = () => {
 
             for (const item of bookingCart) {
                 const bookingObject = {
+                    "unique_id": generateUniqueId(5),
                     "booking_id": bookingID,
                     "guest_name": guestName,
                     "guest_email": guestEmail,
@@ -108,7 +129,7 @@ const ReviewBooking = () => {
 
     return (
         <div id="review-booking-page">
-            <h3 style={{ margin: '7rem 0 0 0' }}>Review Bookings</h3>
+            <h3 style={{ margin: '12rem 0 0 0' }}>Review Bookings</h3>
             <p id="error-booking-upload"><span className="material-symbols-outlined">warning</span>Internal Server Error. Please Try Again Later.</p>
             {bookingCart.length === 0 ? (
                 <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
