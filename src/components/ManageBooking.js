@@ -1,12 +1,11 @@
 import Footer from './Footer'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { supabase } from './supabase'
 
 const ManageBooking = () => {
 
     const [bookingId, setBookingId] = useState();
     const [data, setData] = useState([]);
-    const [notFoundMessage, setNotFoundMessage] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [uniqueId, setUniqueId] = useState();
 
@@ -25,7 +24,6 @@ const ManageBooking = () => {
     };
 
     const handleSearchBooking = async () => {
-        setNotFoundMessage(true)
         try {
             const { data: fetchedData, error } = await supabase
                 .from('bookingData')
@@ -42,12 +40,7 @@ const ManageBooking = () => {
         }
     };
 
-    useEffect(() => {
-        // Call setNotFoundMessageFalse only if data exists and booking data is rendered
-        if (data && bookingId && data.length > 0 && data[0].bookings.booking_id === bookingId) {
-            setNotFoundMessage(false);
-        }
-    }, [data, bookingId]);
+
 
     return (
         <div id="manageBookingPage">
@@ -64,11 +57,14 @@ const ManageBooking = () => {
                     {showModal && ( // Conditionally render modal when showModal is true
                         <div className="modal">
                             <div className="modal-content">
+                                <div style={{ margin: '2rem', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                    <span style={{ margin: '0 0.5rem 0.1rem 0', color: '#ed5e68', fontSize: '3rem' }} className="material-symbols-outlined">warning</span>
+                                </div>
                                 <p>Are you sure you want to delete {uniqueId}?</p>
                                 <p>This action cannot be reversed.</p>
                                 <div className="buttons">
-                                    <button id = "delete-btn-choice" style = {{width: '5rem', height: '2rem', margin: '1rem 1rem 1rem 5rem', backgroundColor: '#ed5e68', outline: 'none', border: 'none', color: '#ffffff', borderRadius: '0.5rem'}} onClick={handleDelete}>Delete</button>
-                                    <button id = "cancel-btn-choice" style = {{width: '5rem', height: '2rem', margin: '1rem 5rem 1rem 1rem', backgroundColor: '#cecece', outline: 'none', border: 'none', color: '#5b5b5b', borderRadius: '0.5rem'}} onClick={handleCancel}>Cancel</button>
+                                    <button id="delete-btn-choice" onClick={handleDelete}>Delete</button>
+                                    <button id="cancel-btn-choice" style={{ width: '5rem', height: '2rem', margin: '1rem 5rem 1rem 1rem', backgroundColor: '#cecece', outline: 'none', border: 'none', color: '#5b5b5b', borderRadius: '0.5rem' }} onClick={handleCancel}>Cancel</button>
                                 </div>
                             </div>
                         </div>

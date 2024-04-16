@@ -1086,7 +1086,24 @@ html {
   margin-top: 10px;
 }
 
-#delete-btn-choice:hover, #cancel-btn-choice:hover{
+#delete-btn-choice{
+  width: 5rem; 
+  height: 2rem; 
+  margin: 1rem 1rem 1rem 5rem; 
+  background-color: #ffffff; 
+  outline: none; 
+  border: solid 1px #ed5e68; 
+  color: #ed5e68; 
+  border-radius: 0.5rem;
+}
+
+#delete-btn-choice:hover{
+  cursor: pointer;
+  background-color: #ed5e68;
+  color: #ffffff;
+}
+
+#cancel-btn-choice:hover{
   cursor: pointer;
 }
 
