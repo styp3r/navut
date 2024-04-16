@@ -1,13 +1,16 @@
 import Footer from './Footer'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { supabase } from './supabase'
 
 const ManageBooking = () => {
 
     const [bookingId, setBookingId] = useState();
     const [data, setData] = useState([]);
+    const [notFoundMessage, setNotFoundMessage] = useState(false);
 
     const handleSearchBooking = async () => {
+        setNotFoundMessage(true)
+        console.log('catch')
         try {
             const { data: fetchedData, error } = await supabase
                 .from('bookingData')
@@ -24,11 +27,18 @@ const ManageBooking = () => {
         }
     };
 
+    useEffect(() => {
+        // Call setNotFoundMessageFalse only if data exists and booking data is rendered
+        if (data && bookingId && data.length > 0 && data[0].bookings.booking_id === bookingId) {
+            setNotFoundMessage(false);
+        }
+    }, [data, bookingId]);
+
     return (
         <div id="manageBookingPage">
             <div className="manage-booking-content">
                 <h2 style={{ color: '#996132' }}>Manage Your Bookings</h2>
-                <p>Please enter your Booking ID</p>
+                <p>Please enter the Booking ID received at the time of booking.</p>
                 <div id="input-search-booking-container">
                     <input id="search-booking-input" onChange={(event) => setBookingId(event.target.value)} type="text" placeholder="Booking ID"></input>
                     <button id="search-booking-btn" onClick={() => handleSearchBooking()} className="classicBtn">Search</button>
@@ -36,7 +46,7 @@ const ManageBooking = () => {
 
                 <div>
                     {data ? (
-                        data.length > 0 ? (
+                        (bookingId && data.length > 0 && data[0].bookings.booking_id === bookingId) ? (
                             // Render booking data
                             <div>
                                 <p>Booking ID: {data[0].bookings.booking_id}</p>
@@ -56,9 +66,10 @@ const ManageBooking = () => {
                             </div>
                         ) : (
                             // No bookings found
-                            <p>No bookings available with the entered booking ID</p>
+                            notFoundMessage ? (bookingId ? <p style={{ color: '#ed5e68', fontWeight: 'bold' }}>Invalid Booking ID!</p> : null) : null
                         )
-                    ) : null}
+                    ) :
+                        null}
                 </div>
 
             </div>
