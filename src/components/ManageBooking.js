@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import supabase from './supabase'
 
 const ManageBooking = () => {
+    window.scrollTo(0, 0);
 
     const [bookingId, setBookingId] = useState();
     const [data, setData] = useState([]);
@@ -65,7 +66,18 @@ const ManageBooking = () => {
         }
     };
 
-
+    const formateDateStr = (dateString) => {
+        const year = parseInt(dateString.slice(0, 4));
+        const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
+        const day = parseInt(dateString.slice(8, 10));
+        // Check if date is valid (optional)
+        if (year > 0 && month >= 0 && month < 12 && day > 0 && day <= 31) {
+            const formattedDate = day.toString().padStart(2, '0') + '-' + (month + 1).toString().padStart(2, '0') + '-' + year;
+            return formattedDate; // Output: 19-11-2023
+        } else {
+            alert("Invalid date format provided");
+        }
+    }
 
     return (
         <div id="manageBookingPage">
@@ -116,8 +128,8 @@ const ManageBooking = () => {
                                         <div style={{ padding: '2rem', width: '90%' }}>
                                             <p style={{ fontWeight: 'bold' }}>{item.bookings.room_name}</p>
                                             <p>{item.bookings.nights}</p>
-                                            <p>Check-in: {item.bookings.check_in}</p>
-                                            <p>Check-out: {item.bookings.check_out}</p>
+                                            <p>Check-in: {formateDateStr(String(item.bookings.check_in))}</p>
+                                            <p>Check-out: {formateDateStr(String(item.bookings.check_out))}</p>
                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                 <p>Extras: {item.bookings.extras}</p>
                                                 <p>&#8377; {item.bookings.room_price}</p>

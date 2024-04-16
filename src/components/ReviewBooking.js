@@ -17,12 +17,6 @@ const ReviewBooking = () => {
         startDate = new Date(startDate);
         endDate = new Date(endDate);
 
-        // Check if start date is after end date (invalid scenario)
-        if (startDate > endDate) {
-            //alert("Invalid: Start date cannot be after end date");
-            return (startDate);
-        }
-
         // Get the time difference in milliseconds
         const timeDiff = Math.abs(endDate - startDate);
 
@@ -81,7 +75,7 @@ const ReviewBooking = () => {
     useEffect(() => {
         // Your side effect logic here
         generateBookingId(10);
-      }, []);
+    }, []);
 
     const handleUploadData = async () => {
         try {
@@ -127,6 +121,19 @@ const ReviewBooking = () => {
         }
     };
 
+    const formateDateStr = (dateString) => {
+        const year = parseInt(dateString.slice(0, 4));
+        const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
+        const day = parseInt(dateString.slice(8, 10));
+        // Check if date is valid (optional)
+        if (year > 0 && month >= 0 && month < 12 && day > 0 && day <= 31) {
+            const formattedDate = day.toString().padStart(2, '0') + '-' + (month + 1).toString().padStart(2, '0') + '-' + year;
+            return formattedDate; // Output: 19-11-2023
+        } else {
+            alert("Invalid date format provided");
+        }
+    }
+
     return (
         <div id="review-booking-page">
             <h3 style={{ margin: '12rem 0 0 0' }}>Review Bookings</h3>
@@ -158,8 +165,8 @@ const ReviewBooking = () => {
                                     <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights, \u20B9" + item.room_price + " per night" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night, \u20B9" + item.room_price + " per night"}</p>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <p style={{ margin: '1rem 1rem 1rem 3.1rem' }} >{"Check-in: " + String(item.checkIn)}</p>
-                                    <p>{"Check-out: " + String(item.checkOut)}</p>
+                                    <p style={{ margin: '1rem 1rem 1rem 3.1rem' }} >{"Check-in: " + formateDateStr(String(item.checkIn))}</p>
+                                    <p>{"Check-out: " + formateDateStr(String(item.checkOut))}</p>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', margin: '0 3.1rem 1rem 3.1rem' }}>
                                     <p>{item.isBreakfast ? "Extras: Breakfast Included" : "Extras: N/A"}</p>
