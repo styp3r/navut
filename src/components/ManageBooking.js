@@ -7,6 +7,22 @@ const ManageBooking = () => {
     const [bookingId, setBookingId] = useState();
     const [data, setData] = useState([]);
     const [notFoundMessage, setNotFoundMessage] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [uniqueId, setUniqueId] = useState();
+
+    const handleOpenModal = (unique) => {
+        setUniqueId(unique)
+        setShowModal(true);
+    };
+
+    const handleDelete = () => {
+        alert('Booking deleted.'); // Replace with your delete logic
+        setShowModal(false); // Close the modal after delete
+    };
+
+    const handleCancel = () => {
+        setShowModal(false);
+    };
 
     const handleSearchBooking = async () => {
         setNotFoundMessage(true)
@@ -45,6 +61,18 @@ const ManageBooking = () => {
                 </div>
 
                 <div>
+                    {showModal && ( // Conditionally render modal when showModal is true
+                        <div className="modal">
+                            <div className="modal-content">
+                                <p>Are you sure you want to delete {uniqueId}?</p>
+                                <p>This action cannot be reversed.</p>
+                                <div className="buttons">
+                                    <button id = "delete-btn-choice" style = {{width: '5rem', height: '2rem', margin: '1rem 1rem 1rem 5rem', backgroundColor: '#ed5e68', outline: 'none', border: 'none', color: '#ffffff', borderRadius: '0.5rem'}} onClick={handleDelete}>Delete</button>
+                                    <button id = "cancel-btn-choice" style = {{width: '5rem', height: '2rem', margin: '1rem 5rem 1rem 1rem', backgroundColor: '#cecece', outline: 'none', border: 'none', color: '#5b5b5b', borderRadius: '0.5rem'}} onClick={handleCancel}>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     {data ? (
                         (bookingId && data.length > 0 && data[0].bookings.booking_id === bookingId) ? (
                             // Render booking data
@@ -74,8 +102,8 @@ const ManageBooking = () => {
                                                 <p>&#8377; {item.bookings.room_price}</p>
                                             </div>
                                         </div>
-                                        <div id = "manage-delete-btn">
-                                            <span style = {{color: '#ffffff'}} className="material-symbols-outlined">delete</span>
+                                        <div id="manage-delete-btn" onClick={() => handleOpenModal(item.bookings.room_name)}>
+                                            <span style={{ color: '#ffffff' }} className="material-symbols-outlined">delete</span>
                                         </div>
                                     </div>
                                 ))}
