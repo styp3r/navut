@@ -14,12 +14,12 @@ const ReviewBooking = () => {
 
     function nightsBetween(startDate, endDate) {
         // Ensure valid Date objects
-        //startDate = new Date(startDate);
-        //endDate = new Date(endDate);
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
 
         // Check if start date is after end date (invalid scenario)
         if (startDate > endDate) {
-            alert("Invalid: Start date cannot be after end date");
+            //alert("Invalid: Start date cannot be after end date");
             return (startDate);
         }
 
@@ -183,7 +183,7 @@ const ReviewBooking = () => {
                             <h3>Grand Total</h3>
                             <h3>&#8377; {total + (total * 0.18)}</h3>
                         </div>
-                        <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
+                        <button id="pay-now-btn" disabled onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
                         <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
                     </div>
                 </div>

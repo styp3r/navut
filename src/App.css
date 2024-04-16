@@ -599,6 +599,9 @@ html {
   flex-direction: column;
   overflow-x: hidden;
 }
+.focused{
+  outline: solid 1px red;
+}
 
 #checkInDateInput-cart {
   position: absolute;
@@ -813,7 +816,7 @@ html {
 
 #edit-booking-btn {
   margin: 1rem;
-  width: 4.5rem;
+  width: 6.5rem;
   height: 1.5rem;
   display: flex;
   font-size: 0.8rem;

@@ -42,11 +42,6 @@ const Footer = () => {
                     <Link style={{ textDecoration: 'none', color: '#000000', display: 'inline-block', margin: 0 }} to="/about"><p style = {{margin: '0.2rem 0 0.2rem 0'}}>About Us</p></Link>
                     <Link style={{ textDecoration: 'none', color: '#000000', display: 'inline-block', margin: 0}} to="/contact"><p style = {{margin: '0.2rem 0 0.2rem 0'}}>Contact Us</p></Link>
                 </div>
-                <div className="newsletter">
-                    <p style={{ color: '#996132' }}>Join Our Newsletter</p>
-                    <input id="newsletterEmailInput" placeholder="Email"></input>
-                    <button className="joinNewsletterBtn">Join</button>
-                </div>
             </div>
             <p style={{ color: '#996132', margin: '5rem 0 0 0' }}>Copyright &copy; {year} Xyka Hotels India Private Limited - All Rights Reserved</p>
         </div>

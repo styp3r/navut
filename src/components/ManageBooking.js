@@ -17,7 +17,7 @@ const ManageBooking = () => {
     };
 
     const handleDelete = async () => {
-        alert('Booking deleted.' + uniqueId); // Replace with your delete logic
+        //alert('Booking deleted.' + uniqueId); // Replace with your delete logic
         setShowModal(false); // Close the modal after delete
 
         //delete booking with the unique id selected from server
