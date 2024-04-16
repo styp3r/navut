@@ -28,7 +28,7 @@ html {
 #heroImg {
   left: 0;
   width: 100%;
-  height: 42rem;
+  height: 48rem;
   z-index: 0;
   object-fit: cover;
 }
@@ -572,7 +572,7 @@ html {
 #bookingDashboard {
   width: 90%;
   display: flex;
-  margin: 12rem 3rem 3rem 3rem;
+  margin: 20rem 3rem 3rem 3rem;
 }
 
 #dashboard-main {
@@ -582,7 +582,7 @@ html {
 
 #select-room-title {
   position: absolute;
-  top: 8.5rem;
+  top: 16rem;
   left: 7.5rem;
   font-size: 2rem;
   color: #996132;
@@ -602,7 +602,7 @@ html {
 
 #checkInDateInput-cart {
   position: absolute;
-  top: 7rem;
+  top: 14rem;
   right: 18rem;
   border: solid 1px #d49c6e;
   font-family: 'Montserrat', sans-serif;
@@ -612,14 +612,14 @@ html {
 
 #checkInDateInput-cart-label {
   position: absolute;
-  top: 5rem;
+  top: 12rem;
   right: 21rem;
 }
 
 #checkOutDateInput-cart {
   position: absolute;
   font-family: 'Montserrat', sans-serif;
-  top: 7rem;
+  top: 14rem;
   right: 7rem;
   border: solid 1px #d49c6e;
   padding: 1rem;
@@ -628,7 +628,7 @@ html {
 
 #checkOutDateInput-cart-label {
   position: absolute;
-  top: 5rem;
+  top: 12rem;
   right: 9.4rem;
 }
 
@@ -642,7 +642,7 @@ html {
   border: none;
   outline: none;
   border-radius: 0.5rem;
-  top: 11rem;
+  top: 18rem;
   right: 7rem;
   width: 21rem;
   height: 2.3rem;
@@ -948,7 +948,7 @@ html {
 
 #done-btn {
   position: absolute;
-  top: 10rem;
+  top: 18rem;
   right: 32.5rem;
   width: 7rem;
   height: 2.5rem;
@@ -968,7 +968,7 @@ html {
 #bookings-landing-container {
   width: 35rem;
   height: 20rem;
-  margin: 7rem 0 20rem 0;
+  margin: 12rem 0 20rem 0;
   text-align: left;
 }
 
@@ -1002,7 +1002,7 @@ html {
 
 .manage-booking-content {
   width: 45rem;
-  margin: 10rem 0 25rem 0;
+  margin: 14rem 0 25rem 0;
   text-align: left;
 }
 

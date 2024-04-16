@@ -7,7 +7,7 @@ const Contact = () => {
 
     return (
         <div id="contactUsPage">
-            <p style={{ color: '#996132', fontSize: "1.5rem", fontFamily: "'Montserrat', sans-serif", fontWeight: 'bold', margin: '8rem 0 0 0' }}>Contact Us</p>
+            <p style={{ color: '#996132', fontSize: "1.5rem", fontFamily: "'Montserrat', sans-serif", fontWeight: 'bold', margin: '12rem 0 0 0' }}>Contact Us</p>
 
             <div className="contactCardsContainer">
                 <div className="callUsCard">

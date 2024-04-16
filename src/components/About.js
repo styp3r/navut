@@ -7,7 +7,7 @@ const About = () => {
 
     return (
         <div id="aboutUsPage">
-            <p style={{ color: '#996132', fontSize: "1.5rem", fontFamily: "'Montserrat', sans-serif", fontWeight: 'bold', margin: '8rem 0 0 0' }}>About Us</p>
+            <p style={{ color: '#996132', fontSize: "1.5rem", fontFamily: "'Montserrat', sans-serif", fontWeight: 'bold', margin: '12rem 0 0 0' }}>About Us</p>
             <div className="aboutUsSection">
                 <img style={{ borderRadius: '1rem' }} src={aboutUsHeroImg} width="350" height="350" alt="homestay"></img>
                 <div className="aboutUsContent-container">
