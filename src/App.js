@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <Router scrollRestoration="auto">
         <div id='landingPage'>
-          <img id="squareLogo" width="130" height="130" alt="logo" src={SquareLogo}></img>
+          <img id="squareLogo" alt="logo" src={SquareLogo}></img>
           <Navbar />
 
           <Routes>

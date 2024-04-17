@@ -255,9 +255,6 @@ const Bookings = () => {
 
     const handleConfirmBooking = () => {
 
-        console.log(data) //data[0].bookings.check_in
-        console.log(bookingCart) //bookingCart[0].checkIn
-
         let flag = 0;
         for (const obj1 of data) {
             // Iterate over each object in array2
@@ -365,7 +362,7 @@ const Bookings = () => {
 
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
                         <h3>Guest Details</h3>
-                        <p style={{ margin: 0 }}>* Required Fields</p>
+                        <p style={{ margin: 0, fontSize: '0.8rem' }}>* Required Fields</p>
                         <div className="guest-details-input-form">
                             <input className="guest-input-item1" type="text" placeholder="Full Name *" value={inputValue1} onChange={handleChange1}></input>
                             <input className="guest-input-item-email" type="text" placeholder="Email Address *" value={inputValue2} onChange={handleChange2}></input>
@@ -373,13 +370,13 @@ const Bookings = () => {
                             <input className="guest-input-item1" type="text" placeholder="Phone Number *" value={inputValue3} onChange={handleChange3}></input>
                             <textarea className="spReqInput" type="text" placeholder="Special Requests and Preferences"></textarea>
                             <div style={{ display: 'flex' }}>
-                                <input style={{ display: 'inline-block' }} type="checkbox" checked={isChecked} onChange={handleChange4}></input>
+                                <input style={{ display: 'inline-block', margin: '0 0.5rem 0 0.5rem' }} type="checkbox" checked={isChecked} onChange={handleChange4}></input>
                                 <p style={{ display: 'inline-block', margin: 0 }}>I confirm that all information provided is accurate</p>
                             </div>
-                            <p style={{ margin: 0 }}>& I agree with the booking conditions.</p>
+                            <p style={{ margin: 0 }}>& I agree with the booking conditions. *</p>
                         </div>
                         {/* This button tag below had <Link></Link> tags wrapping it redirecting it to review booking page*/}
-                        {isValid1 && isValid2 && isValid3 && inputValue2.includes("@") && isChecked && isDateCorrect && <button id="confirm-booking-btn" onClick={() => handleConfirmBooking()} className="classicBtn">Confirm Booking</button>}
+                        {isValid1 && isValid2 && isValid3 && inputValue2.includes("@") && isChecked && isDateCorrect && <button id="confirm-booking-btn" onClick={() => handleConfirmBooking()} className="classicBtn">Confirm Your Stay</button>}
                     </div>
 
                 </div>
@@ -396,7 +393,7 @@ const Bookings = () => {
                         bookingCart.map((item, index) => (
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
                                 <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
-                                {item.isBreakfast ? <p>Breakfast Included</p> : <p>Room Only</p>}
+                                {item.isBreakfast ? <p>- Breakfast Included -</p> : <p>- Room Only -</p>}
                                 <p style={{ fontStyle: 'italic' }}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</p>
                                 <br></br>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>

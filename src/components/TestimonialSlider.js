@@ -28,6 +28,7 @@ const TestimonialSlider = () => {
     return (
         <div className="testimonial-slider">
             <p style = {{color: '#996132', fontSize: "2.5rem",fontFamily: "'Caveat', cursive"}}>Testimonials</p>
+            <p style = {{fontWeight: 'bold', margin: 0}}>~ Discover why others love staying here ~</p>
             <img alt = "quote symbol" className = "quoteSymbol" src = {QuoteSymbol}></img>
             <div className = "testimonialCard">
                 <div className={`testimonial ${hideTestimonial ? 'hidden' : ''}`}>

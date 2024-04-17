@@ -7,11 +7,8 @@ const Contact = () => {
 
     return (
         <div id="contactUsPage">
-            <p style={{ color: '#996132', fontSize: "1.5rem", fontFamily: "'Montserrat', sans-serif", fontWeight: 'bold', margin: '12rem 0 0 0' }}>Contact Us</p>
-
             <div className="contactCardsContainer">
                 <div className="callUsCard">
-                    <div style={{ width: '100%', height: '0.5rem', backgroundColor: '#dfb899', borderRadius: '1rem 1rem 0 0' }}></div>
                     <h3 style={{ fontWeight: 'bold' }}>Connect With Us</h3>
                     <div style={{ margin: '3rem 0 0 0', padding: '1rem' }}>
                         <p className="contactItem"><span className="material-symbols-outlined">call</span>+91 63644 01444</p>
@@ -20,8 +17,7 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className="help-supportCard">
-                    <div style={{ width: '100%', height: '0.5rem', backgroundColor: '#bb8456', borderRadius: '1rem 1rem 0 0' }}></div>
-                    <h3 style={{ fontWeight: 'bold' }}>Help & Support</h3>
+                    <h3 style={{ fontWeight: 'bold', color: '#996132' }}>Help & Support</h3>
                     <div style={{ margin: '5rem 0 0 0', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <p style={{ width: '15rem', margin: '0 0 2rem 0' }}>We've Got Your Back! Count on us for supportive assistance whenever you need it</p>
                         <a href = "https://wa.me/message/C3TZD5GHNKRHE1"><button id="whatsappUsBtn">WhatsApp Us Now</button></a>
@@ -29,7 +25,6 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className="reachUsCard">
-                    <div style={{ width: '100%', height: '0.5rem', backgroundColor: '#dfb899', borderRadius: '1rem 1rem 0 0' }}></div>
                     <h3 style={{ fontWeight: 'bold'}}>Registered Office</h3>
                     <div style={{ margin: '3rem 0 0 0', padding: '1rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <span className="material-symbols-outlined">home_pin</span>

@@ -4,6 +4,7 @@ const PropertyInfo = () => {
     return (
         <div>
             <p style = {{color: '#996132', fontSize: "2.5rem",fontFamily: "'Caveat', cursive"}}>Amenities</p>
+            <p style = {{fontWeight: 'bold', margin: '0 0 2rem 0'}}>~ Where comfort meets convenience ~ </p>
             <div id="propertyInfo">
                 <div className="amenList">
                     <div className="amenBlocks">

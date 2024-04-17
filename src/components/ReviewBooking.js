@@ -49,7 +49,7 @@ const ReviewBooking = () => {
         }
 
         // Return the generated booking ID
-        setBookingID(bookingId);
+        setBookingID(bookingId.toUpperCase());
     }
 
     function generateUniqueId(length) {
@@ -80,8 +80,6 @@ const ReviewBooking = () => {
     const handleUploadData = async () => {
         try {
             let createdNow = String(new Date());
-
-            console.log(bookingCart);
 
             for (const item of bookingCart) {
                 const bookingObject = {
