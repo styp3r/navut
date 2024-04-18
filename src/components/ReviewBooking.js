@@ -7,7 +7,7 @@ import RazorpayIcon from '../images/decoration/razorpay-icon.png'
 
 const ReviewBooking = () => {
 
-    const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
+    const { bookingCart, guestName, guestEmail, guestPhone, deluxeCount, familyCount } = useStore();
     const [bookingID, setBookingID] = useState('');
     const windowHeight = window.innerHeight;
     let total = 0;
@@ -78,6 +78,7 @@ const ReviewBooking = () => {
     }, []);
 
     const handleUploadData = async () => {
+
         try {
             let createdNow = String(new Date());
 
@@ -109,6 +110,18 @@ const ReviewBooking = () => {
                 if (error) {
                     throw error;
                 }
+            }
+
+            //update room count
+            const { error } = await supabase
+                .from('roomCount')
+                .update({ numDeluxe: deluxeCount, numFamily: familyCount })
+                .eq('id', 0); // Assuming the id of the row you want to update is 1
+
+            if (error) {
+                console.error('Error updating room count:', error.message);
+            } else {
+                console.log('Room count updated successfully');
             }
 
             console.log('Booking Data uploaded successfully');
@@ -188,7 +201,7 @@ const ReviewBooking = () => {
                             <h3>Grand Total</h3>
                             <h3>&#8377; {total + (total * 0.18)}</h3>
                         </div>
-                        <button id="pay-now-btn" disabled onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
+                        <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
                         <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
                     </div>
                 </div>

@@ -19,9 +19,11 @@ const Bookings = () => {
         setGuestEmail,
         setGuestPhone,
         deluxeCount,
+        setDeluxeCount,
         incDC,
         decDC,
         familyCount,
+        setFamilyCount,
         incFC,
         decFC,
         deluxeIdArrayCount,
@@ -45,8 +47,8 @@ const Bookings = () => {
     const [inputValue3, setInputValue3] = useState('');
     const [isValid3, setIsValid3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
-    const [isDateCorrect, setIsDateCorrect] = useState(false);
-    const [data, setData] = useState([]);
+    const [isDateCorrect, setIsDateCorrect] = useState(true);
+    const [data, setData] = useState([]); // variable to store booking data from server
 
 
     //Fetch all bookings to later compare with selected dates from bookingCart
@@ -63,6 +65,27 @@ const Bookings = () => {
 
                 // Update state with fetched data
                 setData(fetchedData);
+
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
+        };
+
+        const fetchRoomCountData = async () => {
+            try {
+                const { data: fetchedData, error } = await supabase
+                    .from('roomCount')
+                    .select('numDeluxe, numFamily')
+                    .single();
+
+                if (error) {
+                    throw error;
+                }
+
+                // Update zustand state with fetched data
+                setDeluxeCount(fetchedData.numDeluxe)
+                setFamilyCount(fetchedData.numFamily)
+
             } catch (error) {
                 console.error('Error fetching data:', error.message);
             }
@@ -70,7 +93,8 @@ const Bookings = () => {
 
         // Call fetchData function when component mounts
         fetchData();
-    }, []);
+        fetchRoomCountData();
+    }, [setDeluxeCount, setFamilyCount]);
 
     const handleAddRoom = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
@@ -262,10 +286,12 @@ const Bookings = () => {
                 // Check for conflict between dates of obj1 and obj2
                 if (obj1.bookings.check_in < obj2.checkOut && obj1.bookings.check_out > obj2.checkIn) {
                     // Conflict found, return true
-                    console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
-                    document.getElementById('conflict-message').style.display = 'inline-block';
-                    document.getElementById('conflict-message').textContent = '' + obj2.room_name + ' is already booked for the selected dates!';
-                    flag = 1;
+                    
+                        console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
+                        document.getElementById('conflict-message').style.display = 'inline-block';
+                        document.getElementById('conflict-message').textContent = '' + obj2.room_name + ' is already booked for the selected dates!';
+                        flag = 1;
+                    
                 }
             }
         }

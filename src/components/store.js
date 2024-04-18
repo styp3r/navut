@@ -18,8 +18,10 @@ const useStore = create((set) => ({
         { id: 5, room_name: 'Family Room', type: 'f', room_price: 2500, isBreakfast: true },
     ],
 
-    deluxeCount: 4,
-    familyCount: 2,
+    deluxeCount: 0,
+    setDeluxeCount: (count) => set({ deluxeCount: count }),
+    familyCount: 0,
+    setFamilyCount: (count) => set({ familyCount: count }),
     incDC: () => set((state) => ({ deluxeCount: state.deluxeCount + 1 })),
     decDC: () => set((state) => ({ deluxeCount: state.deluxeCount - 1 })),
     incFC: () => set((state) => ({ familyCount: state.familyCount + 1 })),
