@@ -49,6 +49,7 @@ const Bookings = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [isDateCorrect, setIsDateCorrect] = useState(true);
     const [data, setData] = useState([]); // variable to store booking data from server
+    const [serverRoomCount, setServerRoomCount] = useState([]);
 
 
     //Fetch all bookings to later compare with selected dates from bookingCart
@@ -85,6 +86,7 @@ const Bookings = () => {
                 // Update zustand state with fetched data
                 setDeluxeCount(fetchedData.numDeluxe)
                 setFamilyCount(fetchedData.numFamily)
+                setServerRoomCount(fetchedData)
 
             } catch (error) {
                 console.error('Error fetching data:', error.message);
@@ -286,12 +288,19 @@ const Bookings = () => {
                 // Check for conflict between dates of obj1 and obj2
                 if (obj1.bookings.check_in < obj2.checkOut && obj1.bookings.check_out > obj2.checkIn) {
                     // Conflict found, return true
-                    
+                    if (obj2.room_name === 'Deluxe Room' && serverRoomCount.numDeluxe === 0) {
                         console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
                         document.getElementById('conflict-message').style.display = 'inline-block';
-                        document.getElementById('conflict-message').textContent = '' + obj2.room_name + ' is already booked for the selected dates!';
+                        document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
                         flag = 1;
-                    
+                    }
+
+                    if (obj2.room_name === 'Family Room' && serverRoomCount.numFamily === 0) {
+                        console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
+                        document.getElementById('conflict-message').style.display = 'inline-block';
+                        document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
+                        flag = 1;
+                    }
                 }
             }
         }

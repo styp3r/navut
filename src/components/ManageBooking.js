@@ -153,40 +153,48 @@ const ManageBooking = () => {
                         </div>
                     )}
                     {data ? (
-                        (bookingId && data.length > 0 && data[0].bookings.booking_id === bookingId) ? (
-                            // Render booking data
-                            <div className="manage-booking-details-container">
-                                <hr style={{ width: '7rem', border: 'solid 1px #cecece' }}></hr>
-                                <p style={{ fontSize: '2rem', color: '#996132' }}>Hello, {((data[0].bookings.guest_name).split(' '))[0]}! We look forward to your stay with us.</p>
-                                <div className="booking-details-header">
-                                    <div className="booking-details-header1">
-                                        <p>Booking ID: {data[0].bookings.booking_id}</p>
-                                        <p>Guest Email: {data[0].bookings.guest_email}</p>
-                                    </div>
-                                    <div className="booking-details-header2">
-                                        <p>Guest Name: {data[0].bookings.guest_name}</p>
-                                        <p>Guest Phone: {data[0].bookings.guest_phone}</p>
-                                    </div>
-                                </div>
-
-                                {data.map((item, index) => (
-                                    <div key={index} className="booking-details-list">
-                                        <div style={{ padding: '2rem', width: '90%' }}>
-                                            <p style={{ fontWeight: 'bold' }}>{item.bookings.room_name}</p>
-                                            <p>{item.bookings.nights}</p>
-                                            <p>Check-in: {formateDateStr(String(item.bookings.check_in))}</p>
-                                            <p>Check-out: {formateDateStr(String(item.bookings.check_out))}</p>
-                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                <p>Extras: {item.bookings.extras}</p>
-                                                <p>&#8377; {item.bookings.room_price}</p>
+                        (bookingId && data.length > 0) ? (
+                            // Render booking data for the inputted booking ID
+                            data.map((item, index) => {
+                                if (item.bookings.booking_id === bookingId) {
+                                    return (
+                                        <div key={index} className="manage-booking-details-container">
+                                            <hr style={{ width: '7rem', border: 'solid 1px #cecece' }}></hr>
+                                            <p style={{ fontSize: '2rem', color: '#996132' }}>Hello, {((data[0].bookings.guest_name).split(' '))[0]}! We look forward to your stay with us.</p>
+                                            {/* Rendering booking details */}
+                                            <div className="booking-details-header">
+                                                <div className="booking-details-header1">
+                                                    <p>Booking ID: {data[0].bookings.booking_id}</p>
+                                                    <p>Guest Email: {data[0].bookings.guest_email}</p>
+                                                </div>
+                                                <div className="booking-details-header2">
+                                                    <p>Guest Name: {data[0].bookings.guest_name}</p>
+                                                    <p>Guest Phone: {data[0].bookings.guest_phone}</p>
+                                                </div>
                                             </div>
+
+                                            <div key={index} className="booking-details-list">
+                                                <div style={{ padding: '2rem', width: '90%' }}>
+                                                    <p style={{ fontWeight: 'bold' }}>{item.bookings.room_name}</p>
+                                                    <p>{item.bookings.nights}</p>
+                                                    <p>Check-in: {formateDateStr(String(item.bookings.check_in))}</p>
+                                                    <p>Check-out: {formateDateStr(String(item.bookings.check_out))}</p>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <p>Extras: {item.bookings.extras}</p>
+                                                        <p>&#8377; {item.bookings.room_price}</p>
+                                                    </div>
+                                                </div>
+                                                <div id="manage-delete-btn" onClick={() => handleOpenModal(item.bookings.room_name, item.bookings.unique_id)}>
+                                                    <span style={{ color: '#ffffff' }} className="material-symbols-outlined">delete</span>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                        <div id="manage-delete-btn" onClick={() => handleOpenModal(item.bookings.room_name, item.bookings.unique_id)}>
-                                            <span style={{ color: '#ffffff' }} className="material-symbols-outlined">delete</span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                                    );
+                                } else {
+                                    return null; // Skip rendering if the booking ID doesn't match
+                                }
+                            })
                         ) : (
                             // No bookings found
                             <p style={{ color: '#ed5e68', fontWeight: 'bold' }}>Please enter a valid Booking ID</p>
@@ -201,17 +209,5 @@ const ManageBooking = () => {
     );
 }
 
-export default ManageBooking;
 
-/*
-<div>
-                                <p>{item.bookings.guest_name}</p>
-                                <p>{item.bookings.guest_email}</p>
-                                <p>{item.bookings.guest_phone}</p>
-                                <p>{item.bookings.room_name}</p>
-                                <p>{item.bookings.room_price}</p>
-                                <p>{item.bookings.nights}</p>
-                                <p>{item.bookings.extras}</p>
-                                <p>{item.bookings.check_in}</p>
-                                <p>{item.bookings.check_out}</p>
-                            </div>*/
+export default ManageBooking;
