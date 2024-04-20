@@ -23,7 +23,7 @@ const BookingConfirmed = () => {
     return (
         <div id="booking-confirmed-page">
             <div style={{ padding: '15rem 0 0 0' }}>
-                <h3>Your Booking Is Confirmed!</h3>
+                <h3 className = "booking-confirmed-title">Your Booking Is Confirmed! <span style = {{color: '#25D366'}} className="material-symbols-outlined">verified</span></h3>
                 <h1>Redirecting in {count}...</h1>
                 <p>Do not close or refresh page</p>
             </div>
