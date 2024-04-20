@@ -127,7 +127,7 @@ const ReviewBooking = () => {
 
             console.log('Booking Data uploaded successfully');
             document.getElementById('error-booking-upload').style.display = 'none';
-            navigate("/bookings-landing")
+            navigate("/booking-confirmed")
             window.location.reload();
         } catch (error) {
             document.getElementById('error-booking-upload').style.display = 'flex';
