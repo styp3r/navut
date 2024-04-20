@@ -48,7 +48,6 @@ const ManageBooking = () => {
                 .eq('bookings->>unique_id', uniqueId); // Filter by 'bookings.unique_id' property
 
             if (!error) {
-                window.location.reload();
                 console.log('Rows with unique_id:', uniqueId, 'deleted successfully!');
                 // Update your UI to reflect the deletion
             } else {
@@ -87,8 +86,6 @@ const ManageBooking = () => {
             }
         }
 
-
-
     };
 
     const handleCancel = () => {
@@ -112,7 +109,7 @@ const ManageBooking = () => {
         }
     };
 
-    const formateDateStr = (dateString) => {
+    const formatDateStr = (dateString) => {
         const year = parseInt(dateString.slice(0, 4));
         const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
         const day = parseInt(dateString.slice(8, 10));
@@ -154,49 +151,46 @@ const ManageBooking = () => {
                     )}
                     {data ? (
                         (bookingId && data.length > 0) ? (
-                            // Render booking data for the inputted booking ID
-                            data.map((item, index) => {
-                                if (item.bookings.booking_id === bookingId) {
-                                    return (
-                                        <div key={index} className="manage-booking-details-container">
-                                            <hr style={{ width: '7rem', border: 'solid 1px #cecece' }}></hr>
-                                            <p style={{ fontSize: '2rem', color: '#996132' }}>Hello, {((data[0].bookings.guest_name).split(' '))[0]}! We look forward to your stay with us.</p>
-                                            {/* Rendering booking details */}
-                                            <div className="booking-details-header">
-                                                <div className="booking-details-header1">
-                                                    <p>Booking ID: {data[0].bookings.booking_id}</p>
-                                                    <p>Guest Email: {data[0].bookings.guest_email}</p>
-                                                </div>
-                                                <div className="booking-details-header2">
-                                                    <p>Guest Name: {data[0].bookings.guest_name}</p>
-                                                    <p>Guest Phone: {data[0].bookings.guest_phone}</p>
-                                                </div>
-                                            </div>
-
-                                            <div key={index} className="booking-details-list">
-                                                <div style={{ padding: '2rem', width: '90%' }}>
-                                                    <p style={{ fontWeight: 'bold' }}>{item.bookings.room_name}</p>
-                                                    <p>{item.bookings.nights}</p>
-                                                    <p>Check-in: {formateDateStr(String(item.bookings.check_in))}</p>
-                                                    <p>Check-out: {formateDateStr(String(item.bookings.check_out))}</p>
-                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                        <p>Extras: {item.bookings.extras}</p>
-                                                        <p>&#8377; {item.bookings.room_price}</p>
+                            <div>
+                                {data.filter(item => item.bookings.booking_id === bookingId).map((filteredItem, index) => (
+                                    <div key={index}>
+                                        {index === 0 && (
+                                            <div className="manage-booking-details-container">
+                                                <hr style={{ width: '7rem', border: 'solid 1px #cecece' }}></hr>
+                                                <p style={{ fontSize: '2rem', color: '#996132' }}>Hello, {filteredItem.bookings.guest_name.split(' ')[0]}! We look forward to your stay with us.</p>
+                                                <div className="booking-details-header">
+                                                    <div className="booking-details-header1">
+                                                        <p>Booking ID: {filteredItem.bookings.booking_id}</p>
+                                                        <p>Guest Email: {filteredItem.bookings.guest_email}</p>
+                                                    </div>
+                                                    <div className="booking-details-header2">
+                                                        <p>Guest Name: {filteredItem.bookings.guest_name}</p>
+                                                        <p>Guest Phone: {filteredItem.bookings.guest_phone}</p>
                                                     </div>
                                                 </div>
-                                                <div id="manage-delete-btn" onClick={() => handleOpenModal(item.bookings.room_name, item.bookings.unique_id)}>
+                                            </div>
+                                        )}
+                                        <div className="manage-booking-details-container">
+                                            <div className="booking-details-list">
+                                                <div style={{ padding: '2rem', width: '90%' }}>
+                                                    <p style={{ fontWeight: 'bold' }}>{filteredItem.bookings.room_name}</p>
+                                                    <p>{filteredItem.bookings.nights}</p>
+                                                    <p>Check-in: {formatDateStr(String(filteredItem.bookings.check_in))}</p>
+                                                    <p>Check-out: {formatDateStr(String(filteredItem.bookings.check_out))}</p>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <p>Extras: {filteredItem.bookings.extras}</p>
+                                                        <p>&#8377; {filteredItem.bookings.room_price}</p>
+                                                    </div>
+                                                </div>
+                                                <div id="manage-delete-btn" onClick={() => handleOpenModal(filteredItem.bookings.room_name, filteredItem.bookings.unique_id)}>
                                                     <span style={{ color: '#ffffff' }} className="material-symbols-outlined">delete</span>
                                                 </div>
                                             </div>
-
                                         </div>
-                                    );
-                                } else {
-                                    return null; // Skip rendering if the booking ID doesn't match
-                                }
-                            })
+                                    </div>
+                                ))}
+                            </div>
                         ) : (
-                            // No bookings found
                             <p style={{ color: '#ed5e68', fontWeight: 'bold' }}>Please enter a valid Booking ID</p>
                         )
                     ) :

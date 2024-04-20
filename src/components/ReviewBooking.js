@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import useStore from './store';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import supabase from './supabase'
 import RazorpayIcon from '../images/decoration/razorpay-icon.png'
 
@@ -9,6 +9,7 @@ const ReviewBooking = () => {
 
     const { bookingCart, guestName, guestEmail, guestPhone, deluxeCount, familyCount } = useStore();
     const [bookingID, setBookingID] = useState('');
+    const navigate = useNavigate();
     const windowHeight = window.innerHeight;
     let total = 0;
 
@@ -126,6 +127,8 @@ const ReviewBooking = () => {
 
             console.log('Booking Data uploaded successfully');
             document.getElementById('error-booking-upload').style.display = 'none';
+            navigate("/bookings-landing")
+            window.location.reload();
         } catch (error) {
             document.getElementById('error-booking-upload').style.display = 'flex';
             console.error('Error uploading data:', error.message);

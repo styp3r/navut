@@ -7,6 +7,7 @@ import supabase from './supabase'
 
 const Bookings = () => {
 
+
     const { availableRoomCategory,
         bookingCart,
         updateCheckIn,
@@ -51,12 +52,11 @@ const Bookings = () => {
     const [data, setData] = useState([]); // variable to store booking data from server
     const [serverRoomCount, setServerRoomCount] = useState([]);
 
-
-    //Fetch all bookings to later compare with selected dates from bookingCart
     useEffect(() => {
+
         const fetchData = async () => {
             try {
-                const { data: fetchedData, error } = await supabase
+                const { data: fetchedBookings, error } = await supabase
                     .from('bookingData')
                     .select('bookings');
 
@@ -64,17 +64,16 @@ const Bookings = () => {
                     throw error;
                 }
 
-                // Update state with fetched data
-                setData(fetchedData);
-
+                return fetchedBookings;
             } catch (error) {
-                console.error('Error fetching data:', error.message);
+                console.error('Error fetching bookings:', error.message);
+                // Handle errors (display message, retry logic)
             }
         };
 
         const fetchRoomCountData = async () => {
             try {
-                const { data: fetchedData, error } = await supabase
+                const { data: fetchedRoomCount, error } = await supabase
                     .from('roomCount')
                     .select('numDeluxe, numFamily')
                     .single();
@@ -83,20 +82,29 @@ const Bookings = () => {
                     throw error;
                 }
 
-                // Update zustand state with fetched data
-                setDeluxeCount(fetchedData.numDeluxe)
-                setFamilyCount(fetchedData.numFamily)
-                setServerRoomCount(fetchedData)
-
+                return fetchedRoomCount;
             } catch (error) {
-                console.error('Error fetching data:', error.message);
+                console.error('Error fetching room count:', error.message);
+                // Handle errors (display message, retry logic)
             }
         };
 
-        // Call fetchData function when component mounts
-        fetchData();
-        fetchRoomCountData();
+        const updateState = async () => {
+            const bookings = await fetchData();
+            const roomCountData = await fetchRoomCountData();
+
+            if (bookings && roomCountData) {
+                setData(bookings);
+                setDeluxeCount(roomCountData.numDeluxe);
+                setFamilyCount(roomCountData.numFamily);
+                setServerRoomCount(roomCountData)
+                // Update other state if needed using roomCountData
+            }
+        };
+
+        updateState();
     }, [setDeluxeCount, setFamilyCount]);
+
 
     const handleAddRoom = () => {
         document.getElementById('room-selection-list-container').style.display = "flex";
