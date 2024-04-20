@@ -11,6 +11,7 @@ import ReviewBooking from './components/ReviewBooking';
 import BookingsPageLanding from './components/BookingsPageLanding';
 import ManageBooking from './components/ManageBooking'
 import BookingConfirmed from './components/BookingConfirmed';
+import UpcomingBookings from './components/UpcomingBookings'
 import NotFound from './components/NotFound'
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/review-booking" element={<ReviewBooking />} />
             <Route path="/booking-confirmed" element={<BookingConfirmed />} />
+            <Route path="/upcoming" element={<UpcomingBookings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

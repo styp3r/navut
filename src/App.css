@@ -1049,12 +1049,48 @@ html {
   width: 100%;
 }
 
+
+.manage-booking-details-container-upcoming {
+  margin: 3rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking-details-header-upcoming{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  background-color: #f3e4d8;
+  border-radius: 0.5rem;
+}
+
+.booking-details-header1{
+  text-align: left;
+}
+
 .booking-details-list {
   width: 100%;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 0.5rem;
   margin: 2rem 2rem 2rem 0;
   display: flex;
+}
+
+.paid-icon{
+  width: 7rem;
+  height: 2rem;
+  background-color: #b8f6cf;
+  color: #30be64;
+  font-weight: bold;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 #manage-delete-btn {
@@ -1121,6 +1157,17 @@ html {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+}
+
+#upcoming-bookings-page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.upcoming-bookings-list{
+  width: 50%;
 }
 
 /*Responsive Design Code */
