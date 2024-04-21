@@ -1,5 +1,5 @@
 import Footer from './Footer'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import supabase from './supabase'
 
 const ManageBooking = () => {
@@ -10,30 +10,12 @@ const ManageBooking = () => {
     const [showModal, setShowModal] = useState(false);
     const [roomNameDelete, setRoomNameDelete] = useState();
     const [uniqueId, setUniqueId] = useState();
-    const [roomCount, setRoomCount] = useState([]);
 
     const handleOpenModal = (roomName, unique) => {
         setRoomNameDelete(roomName)
         setUniqueId(unique)
         setShowModal(true);
     };
-
-    useEffect(() => {
-        async function fetchRoomCount() {
-            const { data, error } = await supabase
-                .from('roomCount')
-                .select('numDeluxe, numFamily')
-                .single();
-
-            if (error) {
-                console.error('Error fetching room count:', error.message);
-            } else {
-                setRoomCount(data);
-            }
-        }
-
-        fetchRoomCount();
-    }, []);
 
     const handleDelete = async () => {
         //alert('Booking deleted.' + uniqueId); // Replace with your delete logic
@@ -57,33 +39,6 @@ const ManageBooking = () => {
         } catch (error) {
             console.error('Unexpected error:', error);
             // Handle unexpected errors
-        }
-
-        //update room count
-        if (roomNameDelete === 'Deluxe Room') {
-            const { error } = await supabase
-                .from('roomCount')
-                .update({ numDeluxe: (roomCount.numDeluxe + 1) })
-                .eq('id', 0); // Assuming the id of the row you want to update is 1
-
-            if (error) {
-                console.error('Error updating deluxe room count:', error.message);
-            } else {
-                console.log('Deluxe Room count updated successfully');
-            }
-        }
-
-        if (roomNameDelete === 'Family Room') {
-            const { error } = await supabase
-                .from('roomCount')
-                .update({ numFamily: (roomCount.numFamily + 1) })
-                .eq('id', 0); // Assuming the id of the row you want to update is 1
-
-            if (error) {
-                console.error('Error updating family room count:', error.message);
-            } else {
-                console.log('Family Room count updated successfully');
-            }
         }
 
     };

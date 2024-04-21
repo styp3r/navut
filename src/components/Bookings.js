@@ -19,14 +19,6 @@ const Bookings = () => {
         setGuestName,
         setGuestEmail,
         setGuestPhone,
-        deluxeCount,
-        setDeluxeCount,
-        incDC,
-        decDC,
-        familyCount,
-        setFamilyCount,
-        incFC,
-        decFC,
         deluxeIdArrayCount,
         familyIdArrayCount,
         incDeluxeIdArrayCount,
@@ -50,7 +42,6 @@ const Bookings = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [isDateCorrect, setIsDateCorrect] = useState(true);
     const [data, setData] = useState([]); // variable to store booking data from server
-    const [serverRoomCount, setServerRoomCount] = useState([]);
 
     useEffect(() => {
 
@@ -71,39 +62,16 @@ const Bookings = () => {
             }
         };
 
-        const fetchRoomCountData = async () => {
-            try {
-                const { data: fetchedRoomCount, error } = await supabase
-                    .from('roomCount')
-                    .select('numDeluxe, numFamily')
-                    .single();
-
-                if (error) {
-                    throw error;
-                }
-
-                return fetchedRoomCount;
-            } catch (error) {
-                console.error('Error fetching room count:', error.message);
-                // Handle errors (display message, retry logic)
-            }
-        };
-
         const updateState = async () => {
             const bookings = await fetchData();
-            const roomCountData = await fetchRoomCountData();
 
-            if (bookings && roomCountData) {
+            if (bookings) {
                 setData(bookings);
-                setDeluxeCount(roomCountData.numDeluxe);
-                setFamilyCount(roomCountData.numFamily);
-                setServerRoomCount(roomCountData)
-                // Update other state if needed using roomCountData
             }
         };
 
         updateState();
-    }, [setDeluxeCount, setFamilyCount]);
+    }, []);
 
 
     const handleAddRoom = () => {
@@ -187,12 +155,10 @@ const Bookings = () => {
 
 
         if (type === 'd') {
-            incDC();
             decDeluxeIdArrayCount();
         }
 
         if (type === 'f') {
-            incFC();
             decFamilyIdArrayCount();
         }
 
@@ -243,12 +209,10 @@ const Bookings = () => {
         }
 
         if (type === 'd') {
-            decDC();
             incDeluxeIdArrayCount();
         }
 
         if (type === 'f') {
-            decFC();
             incFamilyIdArrayCount();
         }
 
@@ -296,19 +260,10 @@ const Bookings = () => {
                 // Check for conflict between dates of obj1 and obj2
                 if (obj1.bookings.check_in < obj2.checkOut && obj1.bookings.check_out > obj2.checkIn) {
                     // Conflict found, return true
-                    if (obj2.room_name === 'Deluxe Room' && serverRoomCount.numDeluxe === 0) {
-                        console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
-                        document.getElementById('conflict-message').style.display = 'inline-block';
-                        document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
-                        flag = 1;
-                    }
-
-                    if (obj2.room_name === 'Family Room' && serverRoomCount.numFamily === 0) {
-                        console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
-                        document.getElementById('conflict-message').style.display = 'inline-block';
-                        document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
-                        flag = 1;
-                    }
+                    console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
+                    document.getElementById('conflict-message').style.display = 'inline-block';
+                    document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
+                    flag = 1;
                 }
             }
         }
@@ -394,10 +349,7 @@ const Bookings = () => {
                                         <p style={{ fontWeight: 'bold', fontSize: '1.5rem', margin: '2rem 5rem 0 0' }}>&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
                                         <span style={{ margin: '0 5rem 0 0', color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Excluding Taxes & Fees)</span>
                                     </div>
-                                    <button id="book-room-btn" disabled=
-                                        {
-                                            ar.type === 'd' ? (deluxeCount > 0 ? false : true) :
-                                                ar.type === 'f' ? (familyCount > 0 ? false : true) : false} onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room</button>
+                                    <button id="book-room-btn" onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room</button>
                                 </div>
                             </div>
                         ))}

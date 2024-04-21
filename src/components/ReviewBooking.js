@@ -7,7 +7,7 @@ import RazorpayIcon from '../images/decoration/razorpay-icon.png'
 
 const ReviewBooking = () => {
 
-    const { bookingCart, guestName, guestEmail, guestPhone, deluxeCount, familyCount } = useStore();
+    const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
     const [bookingID, setBookingID] = useState('');
     const navigate = useNavigate();
     const windowHeight = window.innerHeight;
@@ -111,18 +111,6 @@ const ReviewBooking = () => {
                 if (error) {
                     throw error;
                 }
-            }
-
-            //update room count
-            const { error } = await supabase
-                .from('roomCount')
-                .update({ numDeluxe: deluxeCount, numFamily: familyCount })
-                .eq('id', 0); // Assuming the id of the row you want to update is 1
-
-            if (error) {
-                console.error('Error updating room count:', error.message);
-            } else {
-                console.log('Room count updated successfully');
             }
 
             console.log('Booking Data uploaded successfully');
