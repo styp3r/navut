@@ -78,6 +78,54 @@ const ReviewBooking = () => {
         generateBookingId(10);
     }, []);
 
+    const updateRCM = async (roomType, checkIn, checkOut) => {
+        try {
+            const { data: fetchedrcm, error } = await supabase
+                .from('rcm')
+                .select('*');
+
+            // Iterate over fetchedrcm array to check if any row matches the given criteria
+            let found = false;
+            for (const row of fetchedrcm) {
+                if (row.room_type === roomType && row.check_in === checkIn && row.check_out === checkOut) {
+                    found = true;
+                    const { error } = await supabase
+                        .from('rcm')
+                        .update({ count: row.count + 1 })
+                        .eq('id', row.id);
+
+                    if (error) {
+                        throw error;
+                    }
+                    break; // Exit the loop once a matching row is found and updated
+                }
+            }
+
+            // If no matching row is found, insert a new row
+            if (!found) {
+                const { error } = await supabase
+                    .from('rcm')
+                    .insert({ room_type: roomType, check_in: checkIn, check_out: checkOut, count: 1 });
+
+                if (error) {
+                    throw error;
+                }
+            }
+
+            // Handle any error occurred during the operations
+            if (error) {
+                throw error;
+            }
+
+            return fetchedrcm;
+        } catch (error) {
+            console.error('Error fetching bookings:', error.message);
+            // Handle errors (display message, retry logic)
+        }
+    };
+
+
+
     const handleUploadData = async () => {
 
         try {
@@ -115,11 +163,16 @@ const ReviewBooking = () => {
 
             console.log('Booking Data uploaded successfully');
             document.getElementById('error-booking-upload').style.display = 'none';
-            navigate("/booking-confirmed")
-            window.location.reload();
+            //navigate("/booking-confirmed")
+            // window.location.reload();
         } catch (error) {
             document.getElementById('error-booking-upload').style.display = 'flex';
             console.error('Error uploading data:', error.message);
+        }
+
+        // Update rcm
+        for (const item of bookingCart) {
+            updateRCM(item.room_name, item.checkIn, item.checkOut);
         }
     };
 

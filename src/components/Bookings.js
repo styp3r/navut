@@ -42,6 +42,7 @@ const Bookings = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [isDateCorrect, setIsDateCorrect] = useState(true);
     const [data, setData] = useState([]); // variable to store booking data from server
+    const [rcmData, setRcmData] = useState({});
 
     useEffect(() => {
 
@@ -62,11 +63,30 @@ const Bookings = () => {
             }
         };
 
+        const fetchRCMData = async () => {
+            try {
+                const { data: fetchedrcm, error } = await supabase
+                    .from('rcm')
+                    .select('*');
+
+                if (error) {
+                    throw error;
+                }
+
+                return fetchedrcm;
+            } catch (error) {
+                console.error('Error fetching rcm data:', error.message);
+                // Handle errors (display message, retry logic)
+            }
+        };
+
         const updateState = async () => {
             const bookings = await fetchData();
+            const rcm = await fetchRCMData();
 
-            if (bookings) {
+            if (bookings && rcmData) {
                 setData(bookings);
+                setRcmData(rcm);
             }
         };
 
@@ -254,16 +274,24 @@ const Bookings = () => {
     const handleConfirmBooking = () => {
 
         let flag = 0;
-        for (const obj1 of data) {
+        for (const obj1 of rcmData) {
             // Iterate over each object in array2
             for (const obj2 of bookingCart) {
                 // Check for conflict between dates of obj1 and obj2
-                if (obj1.bookings.check_in < obj2.checkOut && obj1.bookings.check_out > obj2.checkIn) {
+                if (obj1.room_type === 'Deluxe Room' && obj2.room_name === 'Deluxe Room' && obj1.check_in === obj2.checkIn && obj1.check_out === obj2.checkOut && obj1.count === 4) {
                     // Conflict found, return true
                     console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
                     document.getElementById('conflict-message').style.display = 'inline-block';
                     document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
-                    flag = 1;
+                    flag = 1; //change to 1
+                }
+
+                if (obj1.room_type === 'Family Room' && obj2.room_name === 'Family Room' && obj1.check_in === obj2.checkIn && obj1.check_out === obj2.checkOut && obj1.count === 2) {
+                    // Conflict found, return true
+                    console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
+                    document.getElementById('conflict-message').style.display = 'inline-block';
+                    document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
+                    flag = 1; //change to 1
                 }
             }
         }
