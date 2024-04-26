@@ -1,10 +1,12 @@
 html {
   overflow-x: hidden;
+  width: 100%;
 }
 
 .App {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
+  width: 100%;
 }
 
 #navbar {
@@ -17,6 +19,18 @@ html {
 
 #squareLogo {
   position: absolute;
+  display: flex;
+  left: 5rem;
+  top: 2rem;
+  z-index: 1;
+  width: 5rem;
+  height: 5rem;
+  z-index: 5001;
+}
+
+#circleLogo {
+  position: absolute;
+  display: none;
   left: 5rem;
   top: 2rem;
   z-index: 1;
@@ -78,17 +92,18 @@ html {
   color: #ffffff;
   left: 6.5rem;
   top: 16rem;
+  display: flex;
   font-size: 3.5rem;
   font-family: 'Caveat', cursive;
 }
 
-.navbarItems_container {
-  display: flex;
-}
-
 .navbarItems {
   display: inline-block;
-  transform: translate(25rem, 25%);
+  margin: 1rem 0 0 30rem;
+}
+
+.navbarItems_container {
+  display: flex;
 }
 
 .navbarLink {
@@ -97,6 +112,37 @@ html {
   padding: 0;
   color: #c08252;
   font-weight: bold;
+}
+
+.navbarLink-mobile {
+  padding: 0;
+  margin: 2rem;
+  cursor: pointer;
+  color: #f3e4d8;
+  font-weight: bold;
+}
+
+.navbarItems-mobile {
+  display: none;
+}
+
+.navbarItems_mobile_container {
+  display: none;
+}
+
+#burger-menu-icon {
+  position: absolute;
+  backdrop-filter: blur(0.8rem);
+  left: 1rem;
+  top: 1.7rem;
+  border: none;
+  outline: none;
+  color: #c08252;
+  border-radius: 0.2rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
 @keyframes flash {
@@ -218,6 +264,21 @@ html {
 .amenContent {
   width: 45rem;
   margin: 0 0 0 5rem;
+}
+
+.amen-content1 {
+  margin: 3.5rem 10rem 2rem 0;
+  text-align: left;
+}
+
+.amen-content2 {
+  margin: 0 10rem 0 0;
+  text-align: left;
+}
+
+.amen-content3 {
+  margin: 2rem 10rem 2rem 0;
+  text-align: left;
 }
 
 .leaf3Img {
@@ -362,6 +423,11 @@ html {
   background-color: #f3e4d8;
 }
 
+#copyright {
+  color: #996132;
+  margin: 5rem 0 0 0;
+}
+
 .partnerLogoItem {
   margin: 1rem;
 }
@@ -369,6 +435,12 @@ html {
 .footerDivider {
   width: 80%;
   border: 1px solid #e9ba93;
+}
+
+#amenitites-title {
+  color: #996132;
+  font-size: 2.5rem;
+  font-family: 'Caveat', cursive;
 }
 
 .leavesDecor {
@@ -477,6 +549,10 @@ html {
   color: #996132;
 }
 
+.booking-choice1{
+  margin: 0 2rem 0 0;
+}
+
 #aboutUsPage {
   display: flex;
   flex-direction: column;
@@ -571,7 +647,7 @@ html {
 /*Booking Functionality Styling*/
 
 #bookingDashboard {
-  width: 90%;
+  width: 95%;
   display: flex;
   margin: 15rem 3rem 3rem 3rem;
 }
@@ -600,7 +676,8 @@ html {
   flex-direction: column;
   overflow-x: hidden;
 }
-.focused{
+
+.focused {
   outline: solid 1px red;
 }
 
@@ -981,7 +1058,7 @@ html {
   margin: 3rem 0 3rem 0;
 }
 
-#not-found{
+#not-found {
   width: 100%;
   height: 30rem;
 }
@@ -1058,7 +1135,7 @@ html {
   align-items: center;
 }
 
-.booking-details-header-upcoming{
+.booking-details-header-upcoming {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -1067,7 +1144,7 @@ html {
   border-radius: 0.5rem;
 }
 
-.booking-details-header1{
+.booking-details-header1 {
   text-align: left;
 }
 
@@ -1079,7 +1156,7 @@ html {
   display: flex;
 }
 
-.paid-icon{
+.paid-icon {
   width: 7rem;
   height: 2rem;
   background-color: #b8f6cf;
@@ -1102,7 +1179,7 @@ html {
   align-items: center;
 }
 
-#manage-delete-btn:hover{
+#manage-delete-btn:hover {
   cursor: pointer;
   background-color: #ed5e68;
 }
@@ -1131,53 +1208,1676 @@ html {
   margin-top: 10px;
 }
 
-#delete-btn-choice{
-  width: 5rem; 
-  height: 2rem; 
-  margin: 1rem 1rem 1rem 5rem; 
-  background-color: #ffffff; 
-  outline: none; 
-  border: solid 1px #ed5e68; 
-  color: #ed5e68; 
+#delete-btn-choice {
+  width: 5rem;
+  height: 2rem;
+  margin: 1rem 1rem 1rem 5rem;
+  background-color: #ffffff;
+  outline: none;
+  border: solid 1px #ed5e68;
+  color: #ed5e68;
   border-radius: 0.5rem;
 }
 
-#delete-btn-choice:hover{
+#delete-btn-choice:hover {
   cursor: pointer;
   background-color: #ed5e68;
   color: #ffffff;
 }
 
-#cancel-btn-choice:hover{
+#cancel-btn-choice:hover {
   cursor: pointer;
 }
 
-.booking-confirmed-title{
+.booking-confirmed-title {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 }
 
-#upcoming-bookings-page{
+#upcoming-bookings-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.upcoming-bookings-list{
+.upcoming-bookings-list {
   width: 50%;
 }
 
-/*Responsive Design Code */
-@media only screen and (min-width: 1024px) {
-  #navbar{
-    width: 100%;
-    position: fixed;
-  }
+.price-details-container {
+  display: block;
+  text-align: right;
 }
 
-@media only screen and (min-width: 768px) {}
+.price-amount {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 2rem 5rem 0 0;
+}
 
-@media only screen and (min-width: 480px) {}
+.tax-disclaimer {
+  margin: 0 5rem 0 0;
+  color: #996132;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.guest-details-title {
+  margin: 1rem 44.1rem 0 0;
+  font-weight: bold;
+}
+
+.your-stay-title {
+  margin: 2rem 46rem 1rem 0;
+  font-weight: bold;
+}
+
+.guest-phone-container {
+  width: 50%;
+  text-align: left;
+  margin: 1rem 1rem 1rem 3.1rem;
+}
+
+.guest-name-container {
+  width: 50%;
+  text-align: left;
+  margin: 1rem 1rem 1rem 3.1rem;
+}
+
+#your-bookings-title-mobile {
+  display: none;
+}
+
+#review-dates {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 1rem 1rem 2rem;
+}
+
+#review-checkin-date {
+  margin: 1rem;
+}
+
+#close-cart-dropdown {
+  position: absolute;
+  display: none;
+  top: 0.5rem;
+  right: 1rem;
+}
+
+#cart-title-mobile1{ /*MAKE THESE TWO INVISIBLE ON EDIT CLICK AND VISIBLE AGAIN ON SAVE CLICK */
+  position: absolute;
+  display: none;
+  top: 4rem;
+  left: 1.2rem;
+  color:#c49b78;
+  font-weight: 500;
+}
+
+#cart-title-mobile2{
+  position: absolute;
+  display: none;
+  top: 5.5rem;
+  left: 1.2rem;
+  color:#c49b78; 
+  font-weight: 500;
+}
+
+/*Responsive Design Code */
+@media only screen and (max-width: 1024px) {
+
+  #navbar {
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+    backdrop-filter: blur(0.8rem);
+    z-index: 5000;
+  }
+
+  #burger-menu-icon {
+    position: absolute;
+    backdrop-filter: blur(0.8rem);
+    left: 1rem;
+    top: 1.7rem;
+    border: none;
+    outline: none;
+    color: #c08252;
+    border-radius: 0.2rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .navbarItems {
+    display: inline-block;
+    margin: 1rem 0 0 30rem;
+  }
+
+  .galleryGrid {
+    display: flex;
+    width: 100%;
+    height: 55%;
+  }
+
+  #propertyInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .amenList {
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .amenBlocks {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+  }
+
+  .amenContent {
+    width: 45rem;
+    margin: 0 0 0 0;
+  }
+
+  .quoteSymbol {
+    position: absolute;
+    opacity: 0.3;
+    width: 10rem;
+    left: 4rem;
+    margin: 8rem 0 12rem 0;
+  }
+
+  #copyright {
+    color: #996132;
+    margin: 1.5rem 0 0 0;
+  }
+
+  .smallLogo {
+    position: absolute;
+    left: 4rem;
+    margin: 15rem 0 0 0;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  #dashboard-main {
+    width: 100%;
+    margin: 2rem 0 2rem 2rem;
+  }
+
+  #select-room-title {
+    position: absolute;
+    top: 12rem;
+    left: 6rem;
+    font-size: 2rem;
+    color: #996132;
+  }
+
+  #room-selection-cart {
+    width: 50%;
+    height: 40rem;
+    border: solid 1px #f2f2f2;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  .price-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-amount {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .tax-disclaimer {
+    margin: 0;
+    color: #996132;
+    font-weight: 300;
+    font-size: 1rem;
+  }
+
+  #room-details-container {
+    width: 90%;
+    height: 48rem;
+    border-radius: 0.5rem;
+    background-color: #f3e4d8;
+    color: #996132;
+    margin: 0 0 2rem 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .room-details-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .room-amenities {
+    margin: 2rem 0 0 0;
+  }
+
+  #book-room-btn {
+    width: 10rem;
+    height: 3rem;
+    margin: 1rem 0 0 0;
+  }
+
+  .booking-content {
+    width: 40rem;
+    text-align: left;
+    margin: 0 0 5rem 0;
+  }
+
+  #done-btn {
+    position: absolute;
+    top: 14rem;
+    right: 25.1rem;
+    width: 7rem;
+    height: 2.5rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #checkInDateInput-cart {
+    position: absolute;
+    top: 10rem;
+    right: 13.7rem;
+    border: solid 1px #d49c6e;
+    font-family: 'Montserrat', sans-serif;
+    padding: 1rem 0.3rem 1rem 0.3rem;
+    border-radius: 0.5rem;
+  }
+
+  #checkInDateInput-cart-label {
+    position: absolute;
+    top: 8.5rem;
+    right: 15.7rem;
+  }
+
+  #checkOutDateInput-cart {
+    position: absolute;
+    font-family: 'Montserrat', sans-serif;
+    top: 10rem;
+    right: 4.8rem;
+    border: solid 1px #d49c6e;
+    padding: 1rem 0.3rem 1rem 0.3rem;
+    border-radius: 0.5rem;
+  }
+
+  #checkOutDateInput-cart-label {
+    position: absolute;
+    top: 8.5rem;
+    right: 6.2rem;
+  }
+
+  #close-cart-dropdown {
+    position: absolute;
+    display: none;
+    top: 0.5rem;
+    right: 1rem;
+  }
+
+  #save-changes-btn {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    background-color: #30be64;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    top: 14rem;
+    right: 4.5rem;
+    width: 18rem;
+    height: 2.3rem;
+  }
+
+  #display-final-booking-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin: 2rem 7rem 7rem 7rem;
+  }
+
+  #display-booking-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .guest-details-title {
+    width: 10rem;
+    margin: 1rem 23rem 0 0;
+    font-weight: bold;
+  }
+
+
+  .your-stay-title {
+    width: 10rem;
+    margin: 2rem 24.5rem 1rem 0;
+    font-weight: bold;
+  }
+
+  #display-guest-details {
+    width: 100%;
+    background-color: #ffffff;
+    border: solid 1px #cecece;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .guest-phone-container {
+    width: 50%;
+    text-align: left;
+    margin: 0 0 0 3.1rem;
+  }
+
+  #cart-title-mobile1{ /*MAKE THESE TWO INVISIBLE ON EDIT CLICK AND VISIBLE AGAIN ON SAVE CLICK */
+    position: absolute;
+    display: none;
+    top: 4rem;
+    left: 1.2rem;
+    color:#c49b78;
+    font-weight: 500;
+  }
+
+  #cart-title-mobile2{
+    position: absolute;
+    display: none;
+    top: 5.5rem;
+    left: 1.2rem;
+    color:#c49b78; 
+    font-weight: 500;
+  }
+
+  .aboutUsSection {
+    width: 55rem;
+    text-align: left;
+    margin: 3rem 15rem 8rem 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contactCardsContainer {
+    width: 60rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 12rem 3rem 3rem 3rem;
+  }
+
+  #mapContact {
+    width: 80%;
+    height: 30rem;
+    border-radius: 2rem;
+  }
+
+  #your-bookings-title-mobile {
+    position: absolute;
+    top: 13rem;
+    right: 0.5rem;
+    width: 15rem;
+    height: 2.5rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  #navbar {
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+    backdrop-filter: blur(0.8rem);
+    z-index: 5000;
+  }
+
+  .navbarItems {
+    display: inline-block;
+    margin: 1rem 0 0 18rem;
+  }
+
+  #burger-menu-icon {
+    position: absolute;
+    backdrop-filter: blur(0.8rem);
+    left: 1rem;
+    top: 1.7rem;
+    border: none;
+    outline: none;
+    color: #c08252;
+    border-radius: 0.2rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .galleryGrid {
+    display: flex;
+    width: 100%;
+    height: 45%;
+  }
+
+  #propertyInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .amenList {
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .amenBlocks {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+  }
+
+  .amenContent {
+    width: 35rem;
+    margin: 0 0 0 0;
+  }
+
+  .testimonialCard {
+    font-size: 1.5rem;
+    width: 40rem;
+    height: 15rem;
+    background-color: #f3e4d8;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #996132;
+    margin: 5rem 0 0 0;
+  }
+
+  .quoteSymbol {
+    position: absolute;
+    opacity: 0.3;
+    width: 10rem;
+    left: 1rem;
+    margin: 6rem 0 12rem 0;
+  }
+
+  .bookNowText {
+    width: 30rem;
+    margin: 2rem 0 0 0;
+    z-index: 1;
+    font-size: 1.7rem;
+    color: #996132;
+    font-family: 'Caveat', cursive;
+  }
+
+  #copyright {
+    color: #996132;
+    margin: 1.5rem 0 0 0;
+  }
+
+  .smallLogo {
+    position: absolute;
+    left: 4rem;
+    margin: 15rem 0 0 0;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  #dashboard-main {
+    width: 95%;
+    margin: 2rem 0 2rem 2rem;
+  }
+
+  #select-room-title {
+    position: absolute;
+    top: 12rem;
+    left: 4rem;
+    font-size: 2rem;
+    color: #996132;
+  }
+
+  #room-selection-cart {
+    width: 50%;
+    height: 40rem;
+    border: solid 1px #f2f2f2;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    display: none;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: absolute;
+    right: -0.5rem;
+    padding: 4rem 1rem 1rem 1rem;
+    background-color: #ffffff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  #your-bookings-title {
+    display: none;
+  }
+
+  .price-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-amount {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .tax-disclaimer {
+    margin: 0;
+    color: #996132;
+    font-weight: 300;
+    font-size: 1rem;
+  }
+
+  #room-details-container {
+    width: 90%;
+    height: 48rem;
+    border-radius: 0.5rem;
+    background-color: #f3e4d8;
+    color: #996132;
+    margin: 0 0 2rem 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .room-details-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .room-amenities {
+    margin: 2rem 0 0 0;
+  }
+
+  #book-room-btn {
+    width: 10rem;
+    height: 3rem;
+    margin: 1rem 0 0 0;
+  }
+
+  .booking-content {
+    width: 40rem;
+    text-align: left;
+    margin: 0 0 5rem 0;
+  }
+
+  #done-btn {
+    position: absolute;
+    top: 14rem;
+    right: 15rem;
+    width: 7rem;
+    height: 2.5rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #your-bookings-title-mobile {
+    position: absolute;
+    top: 13rem;
+    right: 0.5rem;
+    width: 15rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #your-bookings-title-mobile:hover {
+    cursor: pointer;
+  }
+
+  #close-cart-dropdown {
+    position: absolute;
+    display: flex;
+    top: 0.5rem;
+    right: 1rem;
+  }
+
+  #close-cart-dropdown:hover {
+    cursor: pointer;
+  }
+
+  #checkInDateInput-cart {
+    position: absolute;
+    top: 0.5rem;
+    right: 15.3rem;
+    border: solid 1px #d49c6e;
+    font-family: 'Montserrat', sans-serif;
+    padding: 1rem 0.1rem 1rem 0.1rem;
+    border-radius: 0.5rem;
+  }
+
+  #checkInDateInput-cart-label {
+    position: absolute;
+    top: 8.5rem;
+    display: none;
+    right: 15.7rem;
+  }
+
+  #checkOutDateInput-cart {
+    position: absolute;
+    font-family: 'Montserrat', sans-serif;
+    top: 0.5rem;
+    right: 6.5rem;
+    border: solid 1px #d49c6e;
+    padding: 1rem 0.1rem 1rem 0.1rem;
+    border-radius: 0.5rem;
+  }
+
+  #checkOutDateInput-cart-label {
+    position: absolute;
+    top: 8.5rem;
+    display: none;
+    right: 6.2rem;
+  }
+
+  #save-changes-btn {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    background-color: #30be64;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    top: 0.5rem;
+    right: 1rem;
+    width: 5rem;
+    height: 3.2rem;
+  }
+
+  #display-final-booking-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin: 1rem;
+  }
+
+  #display-payment-details-container {
+    width: 40%;
+    height: 25rem;
+    background-color: #ffffff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 3.1rem 0rem 2rem 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #display-booking-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .guest-details-title {
+    width: 10rem;
+    margin: 1rem 15rem 0 0;
+    font-weight: bold;
+  }
+
+
+  .your-stay-title {
+    width: 10rem;
+    margin: 2rem 17rem 1rem 0;
+    font-weight: bold;
+  }
+
+  #display-guest-details {
+    width: 100%;
+    background-color: #ffffff;
+    border: solid 1px #cecece;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .guest-phone-container {
+    width: 80%;
+    text-align: left;
+    margin: 0 0 0 3.1rem;
+  }
+
+  .guest-name-container {
+    width: 80%;
+    text-align: left;
+    margin: 0 0 0 3.1rem;
+  }
+
+  #cart-title-mobile1{ /*MAKE THESE TWO INVISIBLE ON EDIT CLICK AND VISIBLE AGAIN ON SAVE CLICK */
+    position: absolute;
+    display: none;
+    top: 4rem;
+    left: 1.2rem;
+    color:#c49b78;
+    font-weight: 500;
+  }
+
+  #cart-title-mobile2{
+    position: absolute;
+    display: none;
+    top: 5.5rem;
+    left: 1.2rem;
+    color:#c49b78; 
+    font-weight: 500;
+  }
+
+  #review-dates {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 1rem 1rem 2rem;
+  }
+
+  #review-checkin-date {
+    margin: 1rem;
+  }
+
+  .aboutUsSection {
+    width: 40rem;
+    text-align: left;
+    margin: 3rem 15rem 8rem 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contactCardsContainer {
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mapContact {
+    width: 80%;
+    height: 30rem;
+    border-radius: 2rem;
+  }
+
+  .manage-booking-content {
+    width: 35rem;
+    margin: 10rem 0 25rem 0;
+    text-align: left;
+  }
+
+}
+
+@media only screen and (max-width: 480px) {
+
+  #navbar {
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+    backdrop-filter: blur(0.8rem);
+    z-index: 5000;
+  }
+
+  #burger-menu-icon {
+    position: absolute;
+    backdrop-filter: blur(0.8rem);
+    left: 1rem;
+    top: 1.7rem;
+    border: none;
+    outline: none;
+    color: #c08252;
+    border-radius: 0.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  #burger-menu-icon:hover {
+    cursor: pointer;
+  }
+
+  #squareLogo {
+    position: absolute;
+    display: none;
+    left: 5rem;
+    top: 2rem;
+    z-index: 1;
+    width: 5rem;
+    height: 5rem;
+    z-index: 5001;
+  }
+
+  #circleLogo {
+    position: absolute;
+    display: flex;
+    left: 5rem;
+    top: 2rem;
+    z-index: 1;
+    width: 5rem;
+    height: 5rem;
+    z-index: 5001;
+  }
+
+  .navbarItems {
+    display: none;
+    margin: 1rem 0 0 30rem;
+  }
+
+  .navbarItems_container {
+    display: none;
+  }
+
+  #navbarItems-mobile {
+    display: flex;
+    z-index: 5002;
+  }
+
+  .navbarItems_mobile_container {
+    display: flex;
+    flex-direction: column;
+    background-color: #996132;
+    color: #ffffff;
+    position: absolute;
+    left: -30rem;
+    top: 0;
+    width: 20rem;
+    height: 200rem;
+    padding: 3rem 0 0 0;
+    z-index: 5000;
+    font-size: 1.3rem;
+  }
+
+  #close-menu {
+    margin: 0 0 0 15rem;
+  }
+
+  #close-menu:hover {
+    cursor: pointer;
+  }
+
+  .fade-in {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      position: absolute;
+      left: -30rem;
+      top: 0;
+    }
+
+    100% {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+
+  .fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeOut {
+    0% {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    100% {
+      position: absolute;
+      left: -30rem;
+      top: 0;
+    }
+  }
+
+  #heroImg {
+    left: 0;
+    width: 100%;
+    height: 25rem;
+    z-index: 0;
+    object-fit: cover;
+  }
+
+  #heroText1 {
+    text-align: left;
+    width: 25rem;
+    position: absolute;
+    color: #ffffff;
+    left: 3rem;
+    top: 9rem;
+    font-size: 2rem;
+    font-family: 'Caveat', cursive;
+  }
+
+  #heroText2 {
+    text-align: left;
+    width: 25rem;
+    position: absolute;
+    color: #ffffff;
+    left: 4rem;
+    top: 12rem;
+    display: flex;
+    font-size: 2rem;
+    font-family: 'Caveat', cursive;
+  }
+
+  #checkBookingDatesBtn {
+    position: absolute;
+    left: 3rem;
+    top: 18rem;
+    width: 12rem;
+    height: 3rem;
+    background-color: #f3e4d8;
+    border: none;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    color: #996132;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: 3s linear .1s flash;
+    animation-duration: 0.4s;
+    animation-iteration-count: 2;
+    animation-delay: 2s;
+    animation-timing-function: linear;
+  }
+
+  #checkBookingDatesBtn:hover {
+    color: #f3e4d8;
+    background-color: #996132;
+  }
+
+  .galleryGrid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 45%;
+  }
+
+  .heroGridImg {
+    width: 90%;
+    height: 100%;
+    margin: 20rem 0 0 0;
+  }
+
+  .sideGridImgs {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    margin: 3rem 0 0 0;
+  }
+
+  #propertyInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .amenList {
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .amenBlocks {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+  }
+
+  .amenContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 25rem;
+  }
+
+  .amen-content1 {
+    text-align: center;
+    margin: 2rem;
+  }
+
+  .amen-content2 {
+    text-align: center;
+    margin: 2rem;
+  }
+
+  .amen-content3 {
+    text-align: center;
+    margin: 2rem;
+  }
+
+  .testimonial-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 5rem 2rem 10rem 2rem;
+  }
+
+  .testimonialCard {
+    font-size: 1.5rem;
+    width: 20rem;
+    height: 20rem;
+    background-color: #f3e4d8;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #996132;
+    margin: 8rem 0 0 0;
+  }
+
+  .quoteSymbol {
+    position: absolute;
+    opacity: 0.3;
+    width: 10rem;
+    left: 1rem;
+    margin: 1rem 0 12rem 0;
+  }
+
+  #bookNowSection {
+    display: none;
+  }
+
+  #footer {
+    width: 100%;
+    height: 50rem;
+    padding: 1rem;
+    background-color: #f3e4d8;
+  }
+
+  .partnerLogos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #copyright {
+    color: #996132;
+    margin: 3rem 0 0 0;
+  }
+
+  .smallLogo {
+    position: absolute;
+    left: 4rem;
+    margin: 28rem 0 0 0;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .footerContent {
+    display: flex;
+    width: 70rem;
+    height: 11rem;
+    margin: 2rem 0 0 12rem;
+  }
+
+  #bookings-landing-container {
+    width: 18rem;
+    height: 25rem;
+    margin: 12rem 0 20rem 0;
+    text-align: left;
+  }
+
+  #bookings-manage-choice{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .booking-choice1{
+    margin: 0 0 1rem 0;
+  }
+
+  #select-room-title {
+    position: absolute;
+    top: 8rem;
+    left: 3rem;
+    font-size: 2rem;
+    color: #996132;
+  }
+
+  #room-selection-cart {
+    width: 75%;
+    height: 40rem;
+    border: solid 1px #f2f2f2;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    display: none;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: absolute;
+    padding: 10rem 1rem 1rem 1rem;
+    background-color: #ffffff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  .appear_fadein{
+    animation-name: appear;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+  }
+
+  .appear_fadeout{
+    animation-name: disappear;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes appear {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  @keyframes disappear {
+    from {opacity: 1;}
+    to {opacity: 0;}
+  }
+
+  #cart-title-mobile1{ /*MAKE THESE TWO INVISIBLE ON EDIT CLICK AND VISIBLE AGAIN ON SAVE CLICK */
+    position: absolute;
+    display: flex;
+    top: 4rem;
+    left: 1.2rem;
+    color:#c49b78;
+    font-weight: 500;
+  }
+
+  #cart-title-mobile2{
+    position: absolute;
+    display: flex;
+    top: 5.5rem;
+    left: 1.2rem;
+    color:#c49b78; 
+    font-weight: 500;
+  }
+
+  .guest-input-item1 {
+    width: 60%;
+    height: 2.5rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+  
+  .guest-input-item-email {
+    width: 60%;
+    height: 2.5rem;
+    margin: 1rem 1rem 0.3rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+  
+  .spReqInput {
+    width: 60%;
+    height: 3rem;
+    resize: none;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.5rem;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .acknowledgement-checkbox{
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+  #your-bookings-title {
+    display: none;
+  }
+
+  .price-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-amount {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .tax-disclaimer {
+    margin: 0;
+    color: #996132;
+    font-weight: 300;
+    font-size: 1rem;
+  }
+
+  #bookingDashboard {
+    width: 95%;
+    display: flex;
+    margin: 15rem 3rem 3rem 0;
+  }
+  
+  #dashboard-main {
+    width: 90%;
+    margin: 2rem 0 2rem 0;
+  }
+
+  #room-details-container {
+    width: 90%;
+    height: 50rem;
+    border-radius: 0.5rem;
+    background-color: #f3e4d8;
+    color: #996132;
+    margin: 0 2rem 2rem 1.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .room-details-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #guest-details-input-container {
+    display: inline-block;
+    width: 100%;
+    height: 45rem;
+    display: none;
+    margin: 0 0 0 2rem;
+    color: #996132;
+    background-color: #f3e4d8;
+    border-radius: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .room-amenities {
+    margin: 2rem 0 0 0;
+  }
+
+  #book-room-btn {
+    width: 10rem;
+    height: 3rem;
+    margin: 1rem 0 0 0;
+  }
+
+  .booking-content {
+    width: 20rem;
+    text-align: left;
+    margin: 0 0 5rem 0;
+  }
+
+  #done-btn {
+    position: absolute;
+    top: 14rem;
+    right: 15rem;
+    width: 7rem;
+    height: 2.5rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #your-bookings-title-mobile {
+    position: absolute;
+    top: 13rem;
+    right: 0.5rem;
+    width: 15rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #your-bookings-title-mobile:hover {
+    cursor: pointer;
+  }
+
+  #close-cart-dropdown {
+    position: absolute;
+    display: flex;
+    top: 0.5rem;
+    right: 1rem;
+  }
+
+  #close-cart-dropdown:hover {
+    cursor: pointer;
+  }
+
+  #checkInDateInput-cart {
+    position: absolute;
+    top: 1rem;
+    right: 10rem;
+    border: solid 1px #d49c6e;
+    font-family: 'Montserrat', sans-serif;
+    padding: 1rem 0.3rem 1rem 0.3rem;
+    border-radius: 0.5rem;
+  }
+
+  #checkInDateInput-cart-label {
+    position: absolute;
+    top: 8.5rem;
+    display: none;
+    right: 15.7rem;
+  }
+
+  #checkOutDateInput-cart {
+    position: absolute;
+    font-family: 'Montserrat', sans-serif;
+    top: 1rem;
+    right: 1rem;
+    border: solid 1px #d49c6e;
+    padding: 1rem 0.3rem 1rem 0.3rem;
+    border-radius: 0.5rem;
+  }
+
+  #checkOutDateInput-cart-label {
+    position: absolute;
+    top: 8.5rem;
+    display: none;
+    right: 6.2rem;
+  }
+
+  #save-changes-btn {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    background-color: #30be64;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    top: 5rem;
+    right: 1rem;
+    width: 8.5rem;
+    height: 3.2rem;
+  }
+
+  #display-final-booking-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 1rem;
+  }
+
+  #display-payment-details-container {
+    width: 80%;
+    height: 25rem;
+    background-color: #ffffff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 2rem 0rem 5rem 0;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #display-booking-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .guest-details-title {
+    width: 10rem;
+    margin: 1rem 12rem 0 0;
+    font-weight: bold;
+  }
+
+
+  .your-stay-title {
+    width: 10rem;
+    margin: 2rem 14rem 1rem 0;
+    font-weight: bold;
+  }
+
+  #display-guest-details {
+    width: 100%;
+    background-color: #ffffff;
+    border: solid 1px #cecece;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .guest-phone-container {
+    width: 80%;
+    text-align: left;
+    margin: 0 0 0 3.1rem;
+  }
+
+  .guest-name-container {
+    width: 80%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 3.1rem;
+    overflow-wrap: break-word;
+  }
+
+  #review-dates {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 1rem 1rem 2rem;
+  }
+
+  #review-checkin-date {
+    margin: 1rem;
+  }
+
+  .aboutUsSection {
+    width: 20rem;
+    text-align: left;
+    margin: 3rem 15rem 8rem 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .aboutUsContent-container {
+    width: 20rem;
+    float: right;
+  }
+
+  .contactCardsContainer {
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .callUsCard,
+.reachUsCard {
+  width: 20rem;
+  height: 25rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: #ffffff;
+  margin: 2rem;
+  border-radius: 0.5rem;
+}
+
+.help-supportCard {
+  width: 20rem;
+  height: 30rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+}
+
+#map {
+  width: 100%;
+  height: 30rem;
+}
+
+  #mapContact {
+    width: 80%;
+    height: 30rem;
+    border-radius: 2rem;
+  }
+
+  .manage-booking-content {
+    width: 20rem;
+    margin: 10rem 0 25rem 0;
+    text-align: left;
+  }
+
+  #input-search-booking-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+  }
+
+  #search-booking-btn {
+    width: 10rem;
+    height: 3rem;
+    margin: 2rem 0 0 1rem;
+  }
+
+  .booking-details-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  #manage-delete-btn {
+    width: 90%;
+    background-color: #dc878c;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+  }
+
+  #manage-delete-btn:hover {
+    cursor: pointer;
+    background-color: #ed5e68;
+  }
+
+  .booking-details-list {
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 0.5rem;
+    margin: 2rem 2rem 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .extras-roomprice-container{
+    display: flex;
+    flex-direction: column; 
+  }
+
+  .modal-content {
+    width: 20rem;
+    height: 18rem;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+}

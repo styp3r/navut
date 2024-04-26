@@ -163,8 +163,8 @@ const ReviewBooking = () => {
 
             console.log('Booking Data uploaded successfully');
             document.getElementById('error-booking-upload').style.display = 'none';
-            //navigate("/booking-confirmed")
-            // window.location.reload();
+            navigate("/booking-confirmed")
+            window.location.reload();
         } catch (error) {
             document.getElementById('error-booking-upload').style.display = 'flex';
             console.error('Error uploading data:', error.message);
@@ -202,25 +202,25 @@ const ReviewBooking = () => {
             ) : (
                 <div id="display-final-booking-container">
                     <div id="display-booking-details-container">
-                        <p style={{ margin: '1rem 44.1rem 0 0', fontWeight: 'bold' }}>Guest Details</p>
+                        <p className = "guest-details-title">Guest Details</p>
                         <div id="display-guest-details">
-                            <div style={{ width: '50%', textAlign: 'left', margin: '0 0 0 3.1rem' }}>
+                            <div className = "guest-name-container">
                                 <p>Guest Name: {guestName}</p>
                                 <p>Email Address: {guestEmail}</p>
                             </div>
-                            <div style={{ width: '50%', textAlign: 'left' }}>
+                            <div className = "guest-phone-container">
                                 <p>Phone: {guestPhone}</p>
                             </div>
                         </div>
-                        <p style={{ margin: '2rem 46rem 1rem 0', fontWeight: 'bold' }}>Your Stay</p>
+                        <p className = "your-stay-title">Your Stay</p>
                         {bookingCart.map((item) => (
                             <div id="display-booking-details" key={item.id}>
                                 <div style={{ width: '20rem', margin: '1rem 40rem 0 3.1rem', textAlign: 'left' }}>
                                     <p style={{ fontWeight: 'bold', fontSize: '1.3rem', color: '#996132' }}>{item.room_name}</p>
                                     <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights, \u20B9" + item.room_price + " per night" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night, \u20B9" + item.room_price + " per night"}</p>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <p style={{ margin: '1rem 1rem 1rem 3.1rem' }} >{"Check-in: " + formateDateStr(String(item.checkIn))}</p>
+                                <div id = "review-dates">
+                                    <p id = "review-checkin-date">{"Check-in: " + formateDateStr(String(item.checkIn))}</p>
                                     <p>{"Check-out: " + formateDateStr(String(item.checkOut))}</p>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', margin: '0 3.1rem 1rem 3.1rem' }}>

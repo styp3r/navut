@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import SquareLogo from './images/navut_logo_square.jpg'
+import CircleLogo from './images/navut_logo_circle.png'
 import Home from './components/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from "./components/Navbar";
@@ -21,6 +22,7 @@ function App() {
       <Router scrollRestoration="auto">
         <div id='landingPage'>
           <img id="squareLogo" alt="logo" src={SquareLogo}></img>
+          <img id="circleLogo" alt="logo" src={CircleLogo}></img>
           <Navbar />
 
           <Routes>

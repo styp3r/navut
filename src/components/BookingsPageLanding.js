@@ -25,7 +25,7 @@ const BookingsPageLanding = () => {
                 <h2 style={{ color: '#996132' }}>Bookings</h2>
                 <p>Ready to embrace the wild side? Book your forest escape now or manage your existing bookings.</p>
                 <div id="bookings-manage-choice">
-                    <Link to="/bookings" style={{ margin: '0 2rem 0 0' }}><button className='classicBtn' style={{ width: '10rem', height: '3rem' }}>New Booking</button></Link>
+                    <Link to="/bookings" className = "booking-choice1"><button className='classicBtn' style={{ width: '10rem', height: '3rem' }}>New Booking</button></Link>
                     <Link to="/manage-bookings"><button className='classicBtn' style={{ width: '10rem', height: '3rem' }}>Manage Booking</button></Link>
                 </div>
                 <br></br>

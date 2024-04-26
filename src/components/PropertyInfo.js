@@ -3,8 +3,8 @@ import Leaf3 from '../images/decoration/leaf3.png'
 const PropertyInfo = () => {
     return (
         <div>
-            <p style = {{color: '#996132', fontSize: "2.5rem",fontFamily: "'Caveat', cursive"}}>Amenities</p>
-            <p style = {{fontWeight: 'bold', margin: '0 0 2rem 0'}}>~ Where comfort meets convenience ~ </p>
+            <p style={{ color: '#996132', fontSize: "2.5rem", fontFamily: "'Caveat', cursive" }}>Amenities</p>
+            <p style={{ fontWeight: 'bold', margin: '0 0 2rem 0' }}>~ Where comfort meets convenience ~ </p>
             <div id="propertyInfo">
                 <div className="amenList">
                     <div className="amenBlocks">
@@ -30,10 +30,10 @@ const PropertyInfo = () => {
                 </div>
 
                 <div className="amenContent">
-                    <img alt = "leaf decoration" className="leaf3Img" src={Leaf3}></img>
-                    <p style={{ margin: '3.5rem 10rem 2rem 0', textAlign: 'left' }}>Immerse yourself in nature's embrace as you gaze upon the breathtaking forest and valley views from the comfort of your room. Nestled amidst lush greenery and rolling hills, our location offers a symphony of sights that redefine tranquility and serenity.</p>
-                    <p style={{ margin: '0 10rem 0 0', textAlign: 'left' }}>Explore the city with ease using our concierge services, which provide insider knowledge and assistance in planning your excursions and experiences.</p>
-                    <p style={{ margin: '2rem 10rem 2rem 0', textAlign: 'left' }}>At Navut, our commitment to your comfort and satisfaction is unwavering. Elevate your stay with our array of amenities, meticulously curated to cater to your every need.</p>
+                    <img alt="leaf decoration" className="leaf3Img" src={Leaf3}></img>
+                    <p className = "amen-content1">Immerse yourself in nature's embrace as you gaze upon the breathtaking forest and valley views from the comfort of your room. Nestled amidst lush greenery and rolling hills, our location offers a symphony of sights that redefine tranquility and serenity.</p>
+                    <p className = "amen-content2">Explore the city with ease using our concierge services, which provide insider knowledge and assistance in planning your excursions and experiences.</p>
+                    <p className = "amen-content3">At Navut, our commitment to your comfort and satisfaction is unwavering. Elevate your stay with our array of amenities, meticulously curated to cater to your every need.</p>
                 </div>
             </div>
         </div>

@@ -43,7 +43,7 @@ const Footer = () => {
                     <Link style={{ textDecoration: 'none', color: '#000000', display: 'inline-block', margin: 0}} to="/contact"><p style = {{margin: '0.2rem 0 0.2rem 0'}}>Contact Us</p></Link>
                 </div>
             </div>
-            <p style={{ color: '#996132', margin: '5rem 0 0 0' }}>Copyright &copy; {year} Xyka Hotels India Private Limited - All Rights Reserved</p>
+            <p id = "copyright">Copyright &copy; {year} Xyka Hotels India Private Limited - All Rights Reserved</p>
         </div>
     );
 }

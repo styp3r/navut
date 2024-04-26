@@ -95,6 +95,11 @@ const Bookings = () => {
 
 
     const handleAddRoom = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Optional smooth scrolling behavior
+        });
+        document.getElementById('room-selection-cart').style.display = "none"
         document.getElementById('room-selection-list-container').style.display = "flex";
         document.getElementById('guest-details-input-container').style.display = "none";
         document.getElementById('save-changes-btn').style.display = "none";
@@ -108,6 +113,9 @@ const Bookings = () => {
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "none";
         document.getElementById('add-room-btn').style.display = "flex";
+        document.getElementById('close-cart-dropdown').style.display = "flex";
+        document.getElementById('cart-title-mobile1').style.display = "flex";
+        document.getElementById('cart-title-mobile2').style.display = "flex";
         setEditIndex(null);
     }
 
@@ -155,13 +163,23 @@ const Bookings = () => {
     };
 
     const handleEditClick = (index) => {
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Optional smooth scrolling behavior
+        });
+
+        // Then scroll the div into view
+        var myDiv = document.getElementById("room-selection-cart");
+        myDiv.scrollTop = 0;
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "flex";
         document.getElementById('add-room-btn').style.display = "none";
         document.getElementById('conflict-message').style.display = 'none';
         document.getElementById('done-btn').style.display = "none";
+        document.getElementById('close-cart-dropdown').style.display = "none";
+        document.getElementById('cart-title-mobile1').style.display = "none";
+        document.getElementById('cart-title-mobile2').style.display = "none";
         setEditIndex(index);
     };
 
@@ -337,10 +355,23 @@ const Bookings = () => {
         }
     }
 
+    const handleCartDropdownOpen = () => {
+        document.getElementById('room-selection-cart').classList.add("appear_fadein")
+        document.getElementById('room-selection-cart').classList.remove("appear_fadeout")
+        document.getElementById('room-selection-cart').style.display = "flex"
+    }
+
+    const handleCartDropdownClose = () => {
+        document.getElementById('room-selection-cart').classList.add("appear_fadeout")
+        document.getElementById('room-selection-cart').classList.remove("appear_fadein")
+        document.getElementById('room-selection-cart').style.display = "none"
+    }
+
     return (
         <div id="bookingsPage">
             <p id="select-room-title">Book Your Stay</p>
             <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">done</span>Done</button>
+            <h3 id="your-bookings-title-mobile" onClick={() => handleCartDropdownOpen()}>Your Bookings ({bookingCart.length}) <span className="material-symbols-outlined">expand_more</span></h3>
             <div id="bookingDashboard">
                 <div id="dashboard-main">
                     <div id="room-selection-list-container" style={{ display: bookingCart.length === 0 ? "flex" : "none" }}> {/* Left Dashboard - Main - 1 - default*/}
@@ -373,9 +404,9 @@ const Bookings = () => {
                                         </div>
 
                                     </div>
-                                    <div style={{ display: 'block', textAlign: 'right' }}>
-                                        <p style={{ fontWeight: 'bold', fontSize: '1.5rem', margin: '2rem 5rem 0 0' }}>&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
-                                        <span style={{ margin: '0 5rem 0 0', color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Excluding Taxes & Fees)</span>
+                                    <div className="price-details-container">
+                                        <p className="price-amount">&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
+                                        <span className="tax-disclaimer">(Excluding Taxes & Fees)</span>
                                     </div>
                                     <button id="book-room-btn" onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room</button>
                                 </div>
@@ -392,7 +423,7 @@ const Bookings = () => {
                             <p style={{ margin: 0, fontSize: '0.8rem' }}>Your booking details will be sent to this Email ID.</p>
                             <input className="guest-input-item1" type="text" placeholder="Phone Number *" value={inputValue3} onChange={handleChange3}></input>
                             <textarea className="spReqInput" type="text" placeholder="Special Requests and Preferences"></textarea>
-                            <div style={{ display: 'flex' }}>
+                            <div className="acknowledgment-checkbox">
                                 <input style={{ display: 'inline-block', margin: '0 0.5rem 0 0.5rem' }} type="checkbox" checked={isChecked} onChange={handleChange4}></input>
                                 <p style={{ display: 'inline-block', margin: 0 }}>I confirm that all information provided is accurate</p>
                             </div>
@@ -405,7 +436,10 @@ const Bookings = () => {
                 </div>
 
                 <div id="room-selection-cart" style={{ overflowY: bookingCart.length > 1 ? 'scroll' : 'hidden', borderRadius: bookingCart.length > 1 ? '0.5rem 0 0 0.5rem' : '0.5rem' }}>  {/* Right Dashboard*/}
-                    <h3>Your Bookings ({bookingCart.length})</h3>
+                    <h3 id="your-bookings-title">Your Bookings ({bookingCart.length})</h3>
+                    <h4 id="cart-title-mobile1">Need to change your plans?</h4>
+                    <h4 id="cart-title-mobile2">Update or Remove Bookings Below</h4>
+                    <span id="close-cart-dropdown" onClick={() => handleCartDropdownClose()} className="material-symbols-outlined">close</span>
                     <p id="conflict-message" style={{ color: '#ed5e68', fontWeight: 'bold', border: 'solid 1px #ed5e68', borderRadius: '0.5rem', padding: '0.5rem' }}></p>
                     {bookingCart.length === 0 ? (
                         <div style={{ margin: '3rem 0 0 0' }}>
@@ -449,7 +483,7 @@ const Bookings = () => {
                                     <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id, item.type)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
                                     <div id="edit-booking-btn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0', fontSize: '1rem' }}>edit_square</span>Edit Dates</div>
                                 </div>
-                                <button id="save-changes-btn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Edits</button>
+                                <button id="save-changes-btn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save</button>
                             </div>
                         ))
                     }
