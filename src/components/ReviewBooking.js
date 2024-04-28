@@ -145,6 +145,8 @@ const ReviewBooking = () => {
                     "isConflict": item.isConflict,
                     "check_in": item.checkIn,
                     "check_out": item.checkOut,
+                    "adult_count": item.adultCount,
+                    "child_count": item.childCount,
                     "nights": nightsBetween(item.checkIn, item.checkOut),
                     "extras": item.isBreakfast ? "Breakfast Included" : "Breakfast Not Included",
                     created_at: createdNow
@@ -219,6 +221,8 @@ const ReviewBooking = () => {
                                     <p style={{ fontWeight: 'bold', fontSize: '1.3rem', color: '#996132' }}>{item.room_name}</p>
                                     <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights, \u20B9" + item.room_price + " per night" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night, \u20B9" + item.room_price + " per night"}</p>
                                 </div>
+                                <p>Adults: {item.adultCount}</p>
+                                <p>Children: {item.childCount}</p>
                                 <div id="review-dates">
                                     <p id="review-checkin-date">{"Check-in: "}<strong>{formatDateStr(String(item.checkIn))}</strong></p>
                                     <p>{"Check-out: "}<strong>{formatDateStr(String(item.checkOut))}</strong></p>

@@ -12,6 +12,8 @@ const Bookings = () => {
         bookingCart,
         updateCheckIn,
         updateCheckOut,
+        updateAdult,
+        updateChildren,
         editIndex,
         setEditIndex,
         addRoom,
@@ -139,6 +141,14 @@ const Bookings = () => {
         updateCheckIn(roomId, newCheckInDate);
     };
 
+    const handleChildCountChange = (roomId, newChildCount) => {
+        updateChildren(roomId, newChildCount);
+    }
+
+    const handleAdultCountChange = (roomId, newAdultCount) => {
+        updateAdult(roomId, newAdultCount);
+    }
+
     const handleCheckOutChange = (roomId, newCheckOutDate) => {
         const startDate = new Date(document.getElementById("checkInDateInput-cart").value);
         const endDate = new Date(document.getElementById("checkOutDateInput-cart").value);
@@ -241,6 +251,8 @@ const Bookings = () => {
             isBreakfast: isBreakfastVal,
             isConflict: false,
             type: type,
+            adultCount: "2",
+            childCount: "0",
             checkIn: getFormattedDate(),
             checkOut: getFormattedDateCheckout(),
         }
@@ -457,6 +469,8 @@ const Bookings = () => {
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formateDateStr(String(item.checkOut))}</p>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
                                 <br></br>
+                                <p>Adults: {item.adultCount}</p>
+                                <p>Children: {item.childCount}</p>
                                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                     <p style={{ margin: '0 0 0 3rem' }}>Total</p>
                                     <p style={{ fontWeight: 'bold', margin: '0 3rem 0 0' }}>&#8377; {item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
@@ -477,6 +491,21 @@ const Bookings = () => {
                                             value={item.checkOut}
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
+                                        <label for="adult-count">Adults:</label>
+
+                                        <select id="adult" value = {item.adultCount} onChange={(event) => handleAdultCountChange(item.id, event.target.value)}>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+
+                                        <label for="child-count">Children:</label>
+
+                                        <select id="children" value = {item.childCount} onChange={(event) => handleChildCountChange(item.id, event.target.value)}>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
                                     </div> : null}
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id, item.type)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>

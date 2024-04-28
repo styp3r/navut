@@ -43,6 +43,18 @@ const useStore = create((set) => ({
         ),
     })),
 
+    updateAdult: (roomId, newAdultCount) => set((state) => ({ //here
+        bookingCart: state.bookingCart.map((room) =>
+            room.id === roomId ? { ...room, adultCount: newAdultCount } : room
+        ),
+    })),
+
+    updateChildren: (roomId, newChildCount) => set((state) => ({
+        bookingCart: state.bookingCart.map((room) =>
+            room.id === roomId ? { ...room, childCount: newChildCount } : room
+        ),
+    })), //to here
+
     editIndex: null,
     setEditIndex: (index) => set({ editIndex: index }),
 
