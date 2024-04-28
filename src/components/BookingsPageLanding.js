@@ -22,17 +22,19 @@ const BookingsPageLanding = () => {
     return (
         <div id="bookingsPageLanding">
             <div id="bookings-landing-container">
-                <h2 style={{ color: '#996132' }}>Bookings</h2>
-                <p>Ready to embrace the wild side? Book your forest escape now or manage your existing bookings.</p>
-                <div id="bookings-manage-choice">
-                    <Link to="/bookings" className = "booking-choice1"><button className='classicBtn' style={{ width: '10rem', height: '3rem' }}>New Booking</button></Link>
-                    <Link to="/manage-bookings"><button className='classicBtn' style={{ width: '10rem', height: '3rem' }}>Manage Booking</button></Link>
-                </div>
-                <br></br>
-                <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <span style={{ color: '#4dffb8' }} className="material-symbols-outlined">grass</span>
+                <div id="bookings-landing-choice-container">
+                    <h2 style={{ color: '#996132' }}>Bookings</h2>
+                    <p>Ready to embrace the wild side? Book your forest escape now or manage your existing bookings.</p>
+                    <div id="bookings-manage-choice">
+                        <Link to="/bookings"><button className='booking-choice1 classicBtn'>New Booking</button></Link>
+                        <Link to="/manage-bookings"><button className="booking-choice2 classicBtn">Manage Booking</button></Link>
+                    </div>
+                    <br></br>
                 </div>
                 <div id="booking-landing-content">
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <span style={{ color: '#4dffb8' }} className="material-symbols-outlined">grass</span>
+                    </div>
                     <Slider {...settings}>
                         <div>
                             <p>The monsoon season transforms Coorg's forests into a wonderland of cascading waterfalls.  Abbey Falls, nestled amidst coffee estates, is a popular destination. But for the adventurous, exploring hidden gems like Iruppu Falls or Kakkabe Falls, shrouded in dense foliage, offers a refreshing escape.</p>

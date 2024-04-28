@@ -117,7 +117,9 @@ const ReviewBooking = () => {
                 throw error;
             }
 
-            return fetchedrcm;
+            navigate("/booking-confirmed")
+            window.location.reload();
+            //return fetchedrcm;
         } catch (error) {
             console.error('Error fetching bookings:', error.message);
             // Handle errors (display message, retry logic)
@@ -163,8 +165,6 @@ const ReviewBooking = () => {
 
             console.log('Booking Data uploaded successfully');
             document.getElementById('error-booking-upload').style.display = 'none';
-            navigate("/booking-confirmed")
-            window.location.reload();
         } catch (error) {
             document.getElementById('error-booking-upload').style.display = 'flex';
             console.error('Error uploading data:', error.message);
@@ -176,7 +176,7 @@ const ReviewBooking = () => {
         }
     };
 
-    const formateDateStr = (dateString) => {
+    const formatDateStr = (dateString) => {
         const year = parseInt(dateString.slice(0, 4));
         const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
         const day = parseInt(dateString.slice(8, 10));
@@ -191,7 +191,7 @@ const ReviewBooking = () => {
 
     return (
         <div id="review-booking-page">
-            <h3 style={{ margin: '12rem 0 0 0' }}>Review Bookings</h3>
+            <p style={{ margin: '12rem 0 2rem 0', fontSize: '2rem', color: '#996132' }}>Review Booking</p>
             <p id="error-booking-upload"><span className="material-symbols-outlined">warning</span>Internal Server Error. Please Try Again Later.</p>
             {bookingCart.length === 0 ? (
                 <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
@@ -202,31 +202,30 @@ const ReviewBooking = () => {
             ) : (
                 <div id="display-final-booking-container">
                     <div id="display-booking-details-container">
-                        <p className = "guest-details-title">Guest Details</p>
+                        <p className="guest-details-title">Guest Details</p>
                         <div id="display-guest-details">
-                            <div className = "guest-name-container">
+                            <div className="guest-name-container">
                                 <p>Guest Name: {guestName}</p>
                                 <p>Email Address: {guestEmail}</p>
                             </div>
-                            <div className = "guest-phone-container">
+                            <div className="guest-phone-container">
                                 <p>Phone: {guestPhone}</p>
                             </div>
                         </div>
-                        <p className = "your-stay-title">Your Stay</p>
+                        <p className="your-stay-title">Your Stay</p>
                         {bookingCart.map((item) => (
                             <div id="display-booking-details" key={item.id}>
                                 <div style={{ width: '20rem', margin: '1rem 40rem 0 3.1rem', textAlign: 'left' }}>
                                     <p style={{ fontWeight: 'bold', fontSize: '1.3rem', color: '#996132' }}>{item.room_name}</p>
                                     <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights, \u20B9" + item.room_price + " per night" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night, \u20B9" + item.room_price + " per night"}</p>
                                 </div>
-                                <div id = "review-dates">
-                                    <p id = "review-checkin-date">{"Check-in: " + formateDateStr(String(item.checkIn))}</p>
-                                    <p>{"Check-out: " + formateDateStr(String(item.checkOut))}</p>
+                                <div id="review-dates">
+                                    <p id="review-checkin-date">{"Check-in: "}<strong>{formatDateStr(String(item.checkIn))}</strong></p>
+                                    <p>{"Check-out: "}<strong>{formatDateStr(String(item.checkOut))}</strong></p>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', margin: '0 3.1rem 1rem 3.1rem' }}>
                                     <p>{item.isBreakfast ? "Extras: Breakfast Included" : "Extras: N/A"}</p>
                                     <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{"\u20B9 " + item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
-                                </div>
+                                
                             </div>
                         ))}
                     </div>

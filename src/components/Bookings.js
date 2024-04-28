@@ -99,7 +99,6 @@ const Bookings = () => {
             top: 0,
             behavior: 'smooth' // Optional smooth scrolling behavior
         });
-        document.getElementById('room-selection-cart').style.display = "none"
         document.getElementById('room-selection-list-container').style.display = "flex";
         document.getElementById('guest-details-input-container').style.display = "none";
         document.getElementById('save-changes-btn').style.display = "none";
@@ -114,8 +113,8 @@ const Bookings = () => {
         document.getElementById('save-changes-btn').style.display = "none";
         document.getElementById('add-room-btn').style.display = "flex";
         document.getElementById('close-cart-dropdown').style.display = "flex";
-        document.getElementById('cart-title-mobile1').style.display = "flex";
-        document.getElementById('cart-title-mobile2').style.display = "flex";
+        document.getElementById('cart-title-mobile1').style.opacity = "1";
+        document.getElementById('cart-title-mobile2').style.opacity = "1";
         setEditIndex(null);
     }
 
@@ -178,8 +177,8 @@ const Bookings = () => {
         document.getElementById('conflict-message').style.display = 'none';
         document.getElementById('done-btn').style.display = "none";
         document.getElementById('close-cart-dropdown').style.display = "none";
-        document.getElementById('cart-title-mobile1').style.display = "none";
-        document.getElementById('cart-title-mobile2').style.display = "none";
+        document.getElementById('cart-title-mobile1').style.opacity = "0";
+        document.getElementById('cart-title-mobile2').style.opacity = "0";
         setEditIndex(index);
     };
 
@@ -387,7 +386,7 @@ const Bookings = () => {
 
                                             <div style={{ display: 'flex', textAlign: 'left', margin: '2rem' }}>
                                                 <div style={{ margin: 0 }}>
-                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">fit_Screen</span> Room Size: xyz sq. ft.</p>
+                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">fit_Screen</span> xyz sqft</p>
                                                     <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">bed</span> Queen Bed</p>
                                                     <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">bathtub</span> Bathtub</p>
                                                     <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">groups</span> 3 pax maximum</p>
@@ -420,7 +419,7 @@ const Bookings = () => {
                         <div className="guest-details-input-form">
                             <input className="guest-input-item1" type="text" placeholder="Full Name *" value={inputValue1} onChange={handleChange1}></input>
                             <input className="guest-input-item-email" type="text" placeholder="Email Address *" value={inputValue2} onChange={handleChange2}></input>
-                            <p style={{ margin: 0, fontSize: '0.8rem' }}>Your booking details will be sent to this Email ID.</p>
+                            <p style={{ margin: 0, fontSize: '0.8rem' }}>Booking details will be sent to this Email ID.</p>
                             <input className="guest-input-item1" type="text" placeholder="Phone Number *" value={inputValue3} onChange={handleChange3}></input>
                             <textarea className="spReqInput" type="text" placeholder="Special Requests and Preferences"></textarea>
                             <div className="acknowledgment-checkbox">

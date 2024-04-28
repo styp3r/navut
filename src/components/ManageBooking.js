@@ -9,10 +9,14 @@ const ManageBooking = () => {
     const [data, setData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [roomNameDelete, setRoomNameDelete] = useState();
+    const [checkIn, setCheckIn] = useState();
+    const [checkOut, setCheckOut] = useState();
     const [uniqueId, setUniqueId] = useState();
 
-    const handleOpenModal = (roomName, unique) => {
+    const handleOpenModal = (roomName, unique, checkin, checkout) => {
         setRoomNameDelete(roomName)
+        setCheckIn(checkin)
+        setCheckOut(checkout)
         setUniqueId(unique)
         setShowModal(true);
     };
@@ -39,6 +43,54 @@ const ManageBooking = () => {
         } catch (error) {
             console.error('Unexpected error:', error);
             // Handle unexpected errors
+        }
+
+        //update rcm
+        try {
+            const { data: fetchedrcm, error } = await supabase
+                .from('rcm')
+                .select('*');
+
+            // Iterate over fetchedrcm array to check if any row matches the given criteria
+            let found = false;
+            for (const row of fetchedrcm) {
+                if (row.room_type === roomNameDelete && row.check_in === checkIn && row.check_out === checkOut) {
+                    found = true;
+                    if (row.count > 1) {
+                        const { error } = await supabase
+                            .from('rcm')
+                            .update({ count: row.count - 1 })
+                            .eq('id', row.id);
+
+                        if (error) {
+                            throw error;
+                        }
+                        break; // Exit the loop once a matching row is found and updated
+                    } else {
+                        const { error } = await supabase
+                            .from('rcm')
+                            .delete()
+                            .eq('id', row.id);
+
+                        if (error) {
+                            throw error;
+                        }
+                        break; // Exit the loop once a matching row is found and updated
+                    }
+
+
+                }
+            }
+
+            // Handle any error occurred during the operations
+            if (error) {
+                throw error;
+            }
+
+            //return fetchedrcm;
+        } catch (error) {
+            console.error('Error fetching RCM data:', error.message);
+            // Handle errors (display message, retry logic)
         }
 
     };
@@ -132,12 +184,12 @@ const ManageBooking = () => {
                                                     <p>{filteredItem.bookings.nights > 1 ? filteredItem.bookings.nights + " Nights" : filteredItem.bookings.nights + " Night"}</p>
                                                     <p>Check-in: {formatDateStr(String(filteredItem.bookings.check_in))}</p>
                                                     <p>Check-out: {formatDateStr(String(filteredItem.bookings.check_out))}</p>
-                                                    <div className = "extras-roomprice-container">
+                                                    <div className="extras-roomprice-container">
                                                         <p>Extras: {filteredItem.bookings.extras}</p>
                                                         <p>&#8377; {filteredItem.bookings.room_price}</p>
                                                     </div>
                                                 </div>
-                                                <div id="manage-delete-btn" onClick={() => handleOpenModal(filteredItem.bookings.room_name, filteredItem.bookings.unique_id)}>
+                                                <div id="manage-delete-btn" onClick={() => handleOpenModal(filteredItem.bookings.room_name, filteredItem.bookings.unique_id, filteredItem.bookings.check_in, filteredItem.bookings.check_out)}>
                                                     <span style={{ color: '#ffffff' }} className="material-symbols-outlined">delete</span>
                                                 </div>
                                             </div>
@@ -146,7 +198,7 @@ const ManageBooking = () => {
                                 ))}
                             </div>
                         ) : (
-                            <p style={{ color: '#ed5e68', fontWeight: 'bold' }}>Please enter a valid Booking ID</p>
+                            <p style={{ color: '#ed5e68', fontWeight: 'bold', margin: '2rem 0 0 0' }}>Please enter a valid Booking ID</p>
                         )
                     ) :
                         null}

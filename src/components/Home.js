@@ -51,6 +51,53 @@ const Home = () => {
                                 console.error('Unexpected error:', error);
                                 // Handle unexpected errors
                             }
+
+                            //update rcm
+                            try {
+                                const { data: fetchedrcm, error } = await supabase
+                                    .from('rcm')
+                                    .select('*');
+
+                                // Iterate over fetchedrcm array to check if any row matches the given criteria
+                                let found = false;
+                                for (const row of fetchedrcm) {
+                                    if (row.room_type === fetchedBookings[i].bookings.room_name && row.check_in === fetchedBookings[i].bookings.check_in && row.check_out === fetchedBookings[i].bookings.check_out) {
+                                        found = true;
+                                        if (row.count > 1) {
+                                            const { error } = await supabase
+                                                .from('rcm')
+                                                .update({ count: row.count - 1 })
+                                                .eq('id', row.id);
+
+                                            if (error) {
+                                                throw error;
+                                            }
+                                            break; // Exit the loop once a matching row is found and updated
+                                        } else {
+                                            const { error } = await supabase
+                                                .from('rcm')
+                                                .delete()
+                                                .eq('id', row.id);
+
+                                            if (error) {
+                                                throw error;
+                                            }
+                                            break; // Exit the loop once a matching row is found and updated
+                                        }
+                                    }
+                                }
+
+                                // Handle any error occurred during the operations
+                                if (error) {
+                                    throw error;
+                                }
+
+                                //return fetchedrcm;
+                            } catch (error) {
+                                console.error('Error fetching RCM data:', error.message);
+                                // Handle errors (display message, retry logic)
+                            }
+
                         } else {
                             try {
                                 const { error } = await supabase
@@ -68,6 +115,54 @@ const Home = () => {
                             } catch (error) {
                                 console.error('Unexpected error:', error);
                                 // Handle unexpected errors
+                            }
+
+                            //update rcm
+                            try {
+                                const { data: fetchedrcm, error } = await supabase
+                                    .from('rcm')
+                                    .select('*');
+
+                                // Iterate over fetchedrcm array to check if any row matches the given criteria
+                                let found = false;
+                                for (const row of fetchedrcm) {
+                                    if (row.room_type === fetchedBookings[i].bookings.room_name && row.check_in === fetchedBookings[i].bookings.check_in && row.check_out === fetchedBookings[i].bookings.check_out) {
+                                        found = true;
+                                        if (row.count > 1) {
+                                            const { error } = await supabase
+                                                .from('rcm')
+                                                .update({ count: row.count - 1 })
+                                                .eq('id', row.id);
+
+                                            if (error) {
+                                                throw error;
+                                            }
+                                            break; // Exit the loop once a matching row is found and updated
+                                        } else {
+                                            const { error } = await supabase
+                                                .from('rcm')
+                                                .delete()
+                                                .eq('id', row.id);
+
+                                            if (error) {
+                                                throw error;
+                                            }
+                                            break; // Exit the loop once a matching row is found and updated
+                                        }
+
+
+                                    }
+                                }
+
+                                // Handle any error occurred during the operations
+                                if (error) {
+                                    throw error;
+                                }
+
+                                //return fetchedrcm;
+                            } catch (error) {
+                                console.error('Error fetching RCM data:', error.message);
+                                // Handle errors (display message, retry logic)
                             }
                         }
                     }
