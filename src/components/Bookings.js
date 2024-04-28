@@ -93,7 +93,7 @@ const Bookings = () => {
         };
 
         updateState();
-    }, []);
+    }, [rcmData]);
 
 
     const handleAddRoom = () => {
@@ -109,7 +109,7 @@ const Bookings = () => {
     }
 
     const handleSaveChanges = () => {
-
+        document.getElementById('edit-modal').style.display = "none";
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "none";
@@ -176,10 +176,7 @@ const Bookings = () => {
             top: 0,
             behavior: 'smooth' // Optional smooth scrolling behavior
         });
-
-        // Then scroll the div into view
-        var myDiv = document.getElementById("room-selection-cart");
-        myDiv.scrollTop = 0;
+        document.getElementById('edit-modal').style.display = "flex";
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "flex";
@@ -380,6 +377,9 @@ const Bookings = () => {
 
     return (
         <div id="bookingsPage">
+            <div id = "edit-modal">
+                <h3 id = 'edit-booking-modal-title'>Edit Your Booking</h3>
+            </div>
             <p id="select-room-title">Book Your Stay</p>
             <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">done</span>Done</button>
             <h3 id="your-bookings-title-mobile" onClick={() => handleCartDropdownOpen()}>Your Bookings ({bookingCart.length}) <span className="material-symbols-outlined">expand_more</span></h3>
@@ -468,9 +468,8 @@ const Bookings = () => {
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formateDateStr(String(item.checkIn))}</p>
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formateDateStr(String(item.checkOut))}</p>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
+                                <p>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) > 1 ? item.childCount + " Children" : item.childCount + " Child" }</p>
                                 <br></br>
-                                <p>Adults: {item.adultCount}</p>
-                                <p>Children: {item.childCount}</p>
                                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                     <p style={{ margin: '0 0 0 3rem' }}>Total</p>
                                     <p style={{ fontWeight: 'bold', margin: '0 3rem 0 0' }}>&#8377; {item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
@@ -491,7 +490,7 @@ const Bookings = () => {
                                             value={item.checkOut}
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
-                                        <label for="adult-count">Adults:</label>
+                                        <label id="adult-count">Adults:</label>
 
                                         <select id="adult" value = {item.adultCount} onChange={(event) => handleAdultCountChange(item.id, event.target.value)}>
                                             <option value="1">1</option>
@@ -499,9 +498,10 @@ const Bookings = () => {
                                             <option value="3">3</option>
                                         </select>
 
-                                        <label for="child-count">Children:</label>
+                                        <label id="child-count">Children:</label>
 
                                         <select id="children" value = {item.childCount} onChange={(event) => handleChildCountChange(item.id, event.target.value)}>
+                                            <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -509,7 +509,7 @@ const Bookings = () => {
                                     </div> : null}
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id, item.type)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
-                                    <div id="edit-booking-btn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0', fontSize: '1rem' }}>edit_square</span>Edit Dates</div>
+                                    <div id="edit-booking-btn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0', fontSize: '1rem' }}>edit_square</span>Edit</div>
                                 </div>
                                 <button id="save-changes-btn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save</button>
                             </div>

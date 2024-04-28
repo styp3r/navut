@@ -688,6 +688,13 @@ html {
   color: #996132;
 }
 
+#edit-booking-modal-title {
+  margin: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #996132;
+}
+
 #room-selection-cart {
   width: 30%;
   height: 40rem;
@@ -704,36 +711,86 @@ html {
   outline: solid 1px red;
 }
 
-#checkInDateInput-cart {
+#edit-modal{
+  display: none;
+  width: 40rem;
+  height: 25rem;
+  background-color: #ffffff;
   position: absolute;
   top: 10rem;
-  right: 18rem;
+  border-radius: 0.5rem;
+  border: solid 1px #996132;
+  z-index: 6000;
+}
+
+#checkInDateInput-cart {
+  position: absolute;
+  top: 18rem;
+  left: 35rem;
   border: solid 1px #d49c6e;
   font-family: 'Montserrat', sans-serif;
   padding: 1rem;
   border-radius: 0.5rem;
+  z-index: 6001;
 }
 
 #checkInDateInput-cart-label {
   position: absolute;
-  top: 8.5rem;
-  right: 21rem;
+  top: 16rem;
+  left: 35.5rem;
+  z-index: 6001;
 }
 
 #checkOutDateInput-cart {
   position: absolute;
   font-family: 'Montserrat', sans-serif;
-  top: 10rem;
-  right: 7rem;
+  top: 18rem;
+  right: 35rem;
   border: solid 1px #d49c6e;
   padding: 1rem;
   border-radius: 0.5rem;
+  z-index: 6001;
 }
 
 #checkOutDateInput-cart-label {
   position: absolute;
-  top: 8.5rem;
-  right: 9.4rem;
+  top: 16rem;
+  right: 39.5rem;
+  z-index: 6001;
+}
+
+#adult{
+  position: absolute;
+  top: 22rem;
+  left: 42rem;
+  z-index: 6001;
+  border: solid 1px #d49c6e;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+#adult-count{
+  position: absolute;
+  top: 22.5rem;
+  left: 35rem;
+  z-index: 6001;
+}
+
+#child-count{
+  position: absolute;
+  top: 22.5rem;
+  right: 40.5rem;
+  z-index: 6001;
+}
+
+#children{
+  position: absolute;
+  top: 22rem;
+  right: 35rem;
+  z-index: 6001;
+  border: solid 1px #d49c6e;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 #save-changes-btn {
@@ -747,10 +804,11 @@ html {
   border: none;
   outline: none;
   border-radius: 0.5rem;
-  top: 14rem;
-  right: 7rem;
-  width: 21rem;
-  height: 2.3rem;
+  top: 30rem;
+  left: 35rem;
+  width: 25rem;
+  height: 3rem;
+  z-index: 6001;
 }
 
 #save-changes-btn:hover {
@@ -919,7 +977,7 @@ html {
 #edit-booking-btn {
   margin: 1rem;
   width: 6.5rem;
-  height: 1.5rem;
+  height: 2rem;
   display: flex;
   font-size: 0.8rem;
   justify-content: center;
