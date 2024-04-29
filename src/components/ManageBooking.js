@@ -130,13 +130,13 @@ const ManageBooking = () => {
     }
 
     return (
-        <div id="manageBookingPage">
+        <div id="manage-booking-page">
             <div className="manage-booking-content">
                 <div className="manage-booking-search-container">
-                    <h2 style={{ color: '#996132' }}>Manage Your Bookings</h2>
+                    <h2 style={{ color: '#996132', fontWeight: '500' }}>Manage Your Bookings</h2>
                     <div id="input-search-booking-container">
                         <input id="search-booking-input" onChange={(event) => setBookingId(event.target.value)} type="text" placeholder="Booking ID"></input>
-                        <button id="search-booking-btn" onClick={() => handleSearchBooking()} className="classicBtn">Search</button>
+                        <button id="search-booking-btn" onClick={() => handleSearchBooking()} className="classicBtn"><span className="material-symbols-outlined">search</span></button>
                     </div>
                 </div>
 
@@ -198,7 +198,7 @@ const ManageBooking = () => {
                                 ))}
                             </div>
                         ) : (
-                            <p style={{ color: '#ed5e68', fontWeight: 'bold', margin: '2rem 0 0 0' }}>Please enter a valid Booking ID</p>
+                            <p style={{ color: '#ed5e68', fontWeight: '400', margin: '2rem 0 0 0' }}>Please enter a valid Booking ID</p>
                         )
                     ) :
                         null}

@@ -374,41 +374,40 @@ const Bookings = () => {
     }
 
     return (
-        <div id="bookingsPage">
+        <div id="bookings-page">
             <p id="select-room-title">Book Your Stay</p>
             <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">done</span>Done</button>
             <h3 id="your-bookings-title-mobile" onClick={() => handleCartDropdownOpen()}>Your Bookings ({bookingCart.length}) <span className="material-symbols-outlined">expand_more</span></h3>
-            <div id="bookingDashboard">
+            <div id="booking-dashboard">
                 <div id="dashboard-main">
                     <div id="room-selection-list-container" style={{ display: bookingCart.length === 0 ? "flex" : "none" }}> {/* Left Dashboard - Main - 1 - default*/}
                         {availableRoomCategory.map((ar) => (
                             <div key={ar.id} id="room-selection-list">
                                 <div id="room-details-container">
                                     <div className="room-details-content">
-                                        <img alt='bedroom shot' src={gal} width='280' height='200' style={{ borderRadius: '0.5rem', objectFit: 'cover' }}></img>
                                         <div className="room-amenities">
-                                            <div style={{ display: 'flex', margin: '0 0 0 2rem', textAlign: 'left' }}>
-                                                <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold' }}>{ar.room_name} {ar.isBreakfast ? <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room with Breakfast)</span> : <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room Only)</span>}</p>
+                                            <div className="room-amenities-title">
+                                                <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: '500' }}>{ar.room_name} {ar.isBreakfast ? <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room with Breakfast)</span> : <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room Only)</span>}</p>
                                             </div>
 
-                                            <div style={{ display: 'flex', textAlign: 'left', margin: '2rem' }}>
-                                                <div style={{ margin: 0 }}>
-                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">fit_Screen</span> xyz sqft</p>
-                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">bed</span> Queen Bed</p>
-                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">bathtub</span> Bathtub</p>
-                                                    <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">groups</span> 3 pax maximum</p>
-                                                    {ar.isBreakfast ? <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">dinner_dining</span> Breakfast Included</p> : <p className='amenItem'><span style={{ margin: '8px 8px 8px 0' }} className="material-symbols-outlined">no_meals</span> Breakfast Not Included</p>}
+                                            <div className="room-amenities-factuals">
+                                                <div className="room-amenities-factuals-left">
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">fit_Screen</span> xyz sqft</p>
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bed</span> Queen Bed</p>
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bathtub</span> Bathroom</p>
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">tv</span> TV</p>
+                                                    {ar.isBreakfast ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">dinner_dining</span> Breakfast Included</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">no_meals</span> Breakfast Excluded</p>}
                                                 </div>
-                                                <div style={{ margin: '0 0 0 1rem' }}>
-                                                    <p className='amenItem'><span className="material-symbols-outlined">wifi</span> Free WiFi</p>
-                                                    <p className='amenItem'><span className="material-symbols-outlined">chair</span> Pull-out Bed/Sofa</p>
-                                                    <p className='amenItem'><span className="material-symbols-outlined">balcony</span> Private Balcony</p>
-                                                    <p className='amenItem'><span className="material-symbols-outlined">self_care</span> Towels & Essentials</p>
-                                                    <p className='amenItem'><span className="material-symbols-outlined">table_lamp</span> Personal Workspace</p>
+                                                <div className="room-amenities-factuals-right">
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">wifi</span> WiFi</p>
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">chair</span> Pull-out Bed / Sofa</p>
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">balcony</span> Private Balcony</p>
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">self_care</span> Towels & Essentials</p>
+                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">table_lamp</span> Workspace</p>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <img alt='bedroom shot' src={gal} width='280' height='200' style={{ borderRadius: '0.5rem', objectFit: 'cover' }}></img>
                                     </div>
                                     <div className="price-details-container">
                                         <p className="price-amount">&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
@@ -516,33 +515,35 @@ const Bookings = () => {
             </div>
 
             <div className="booking-content">
-                <h2 style={{ color: '#d49c6e', margin: '2rem 0 3rem 0' }}>Terms & Conditions</h2>
-                <h3>Check-In and Check-Out Timings</h3>
-                <p>
-                    Check-in time is from <span style={{ fontWeight: 'bold' }}>3:00 PM</span> onwards, and check-out time is until <span style={{ fontWeight: 'bold' }}>11:00 AM</span>. If you require an early check-in or late check-out, please contact us in advance, and we will do our best to accommodate your request.
-                </p>
+                <div className="booking-content-container">
+                    <h2 style={{ color: '#996132', margin: '2rem 0 3rem 0', fontWeight: '500' }}>Terms & Conditions</h2>
+                    <h3>Check-In and Check-Out Timings</h3>
+                    <p>
+                        Check-in time is from <span style={{ fontWeight: 'bold' }}>3:00 PM</span> onwards, and check-out time is until <span style={{ fontWeight: 'bold' }}>11:00 AM</span>. If you require an early check-in or late check-out, please contact us in advance, and we will do our best to accommodate your request.
+                    </p>
 
-                <h3>General Rules</h3>
-                <ul>
-                    <li>Please be considerate of other guests and maintain a quiet atmosphere in common areas.</li>
-                    <li>Smoking is allowed inside the rooms but not in the common areas.</li>
-                    <li>Pets are permitted in our homestay. Guests are solely responsible for their pets.</li>
-                    <li>Kindly respect the property and its surroundings.</li>
-                </ul>
+                    <h3>General Rules</h3>
+                    <ul>
+                        <li>Please be considerate of other guests and maintain a quiet atmosphere in common areas.</li>
+                        <li>Smoking is allowed inside the rooms but not in the common areas.</li>
+                        <li>Pets are permitted in our homestay. Guests are solely responsible for their pets.</li>
+                        <li>Kindly respect the property and its surroundings.</li>
+                    </ul>
 
-                <h3>Cancellation Policy</h3>
-                <p>
-                    We understand that plans can change. If you need to cancel your reservation, please do so at least 48 hours before your scheduled check-in time.
-                </p>
+                    <h3>Cancellation Policy</h3>
+                    <p>
+                        We understand that plans can change. If you need to cancel your reservation, please do so at least 48 hours before your scheduled check-in time.
+                    </p>
 
-                <h3>Contact Information</h3>
-                <p>
-                    If you have any questions, concerns, or special requests, feel free to reach out to our <Link to="/contact" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>team</Link>. We are here to make your stay memorable and enjoyable.
-                </p>
+                    <h3>Contact Information</h3>
+                    <p>
+                        If you have any questions, concerns, or special requests, feel free to reach out to our <Link to="/contact" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>team</Link>. We are here to make your stay memorable and enjoyable.
+                    </p>
 
-                <p>
-                    We look forward to hosting you at our homestay and wish you a wonderful stay!
-                </p>
+                    <p>
+                        We look forward to hosting you at our homestay and wish you a wonderful stay!
+                    </p>
+                </div>
             </div>
             <Footer />
         </div>

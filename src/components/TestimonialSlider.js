@@ -27,18 +27,18 @@ const TestimonialSlider = () => {
 
     return (
         <div className="testimonial-slider">
-            <p style = {{color: '#996132', fontSize: "2.5rem",fontFamily: "'Caveat', cursive"}}>Testimonials</p>
-            <p style = {{fontWeight: 'bold', margin: 0}}>~ Discover why others love staying here ~</p>
-            <img alt = "quote symbol" className = "quoteSymbol" src = {QuoteSymbol}></img>
-            <div className = "testimonialCard">
+            <p className = "testimonial-slider-title">Testimonials</p>
+            <p className = "testimonial-slider-title">Hear From Happy Guests</p>
+            <div className = "testimonial-card">
+            <img alt = "quote symbol" className = "quote-symbol" src = {QuoteSymbol}></img>
                 <div className={`testimonial ${hideTestimonial ? 'hidden' : ''}`}>
                     <p className="testimonial-text">{Reviews[currentSlide].text}</p>
-                    <p style = {{fontStyle: 'italic', fontSize: '1.2rem'}} className="testimonial-name">- {Reviews[currentSlide].name}</p>
+                    <p style = {{fontStyle: 'italic', fontSize: '1.2rem'}} className="testimonial-name">{Reviews[currentSlide].name}</p>
                 </div>
             </div>
-            <div className="slideBtns">
-                <button className="prevBtn" onClick={prevSlide}><span className="material-symbols-outlined">chevron_left</span></button>
-                <button className="nextBtn" onClick={nextSlide}><span className="material-symbols-outlined">chevron_right</span></button>
+            <div className="slide-btns">
+                <button className="prev-btn" onClick={prevSlide}><span className="material-symbols-outlined">chevron_left</span></button>
+                <button className="next-btn" onClick={nextSlide}><span className="material-symbols-outlined">chevron_right</span></button>
             </div>
         </div>
     );

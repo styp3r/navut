@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import BookNowSection from './BookNowSection'
 import Map from './MapComponent'
 import Footer from './Footer'
@@ -9,8 +9,6 @@ import TestimonialSlider from './TestimonialSlider'
 import supabase from './supabase'
 
 const Home = () => {
-
-    const [data, setData] = useState([]); // variable to store booking data from server
 
     useEffect(() => {
         // Delete all bookings where stay is completed
@@ -59,10 +57,10 @@ const Home = () => {
                                     .select('*');
 
                                 // Iterate over fetchedrcm array to check if any row matches the given criteria
-                                let found = false;
+
                                 for (const row of fetchedrcm) {
                                     if (row.room_type === fetchedBookings[i].bookings.room_name && row.check_in === fetchedBookings[i].bookings.check_in && row.check_out === fetchedBookings[i].bookings.check_out) {
-                                        found = true;
+
                                         if (row.count > 1) {
                                             const { error } = await supabase
                                                 .from('rcm')
@@ -124,10 +122,10 @@ const Home = () => {
                                     .select('*');
 
                                 // Iterate over fetchedrcm array to check if any row matches the given criteria
-                                let found = false;
+
                                 for (const row of fetchedrcm) {
                                     if (row.room_type === fetchedBookings[i].bookings.room_name && row.check_in === fetchedBookings[i].bookings.check_in && row.check_out === fetchedBookings[i].bookings.check_out) {
-                                        found = true;
+
                                         if (row.count > 1) {
                                             const { error } = await supabase
                                                 .from('rcm')
@@ -174,10 +172,11 @@ const Home = () => {
         };
 
         const updateState = async () => {
-            const bookings = await fetchData();
-
-            if (bookings) {
-                setData(bookings);
+            try {
+                const booking = await fetchData();
+                return booking;
+            } catch (error) {
+                console.error("Error fetching data:", error);
             }
         };
 
@@ -192,7 +191,15 @@ const Home = () => {
             <PropertyInfo />
             <TestimonialSlider />
             <BookNowSection />
-            <Map />
+            <div id="map-section">
+                <div className="map-information">
+                    <p>Nestled amidst the verdant hills of Coorg, </p>
+                    <p>Kodagu's captivating landscape, lies our homestay in Kedamalluru.</p>
+                    <p> Just beyond the bustle of Virajpet, Kedamalluru unfolds, a tranquil haven where you'll find our home waiting to welcome you.</p>
+                    <a target = "_blank" rel="noreferrer" href = "https://maps.app.goo.gl/iKeZKYX7rrkuHwKA8"><button className="take-me-there-btn">Take Me There</button></a>
+                </div>
+                <Map />
+            </div>
             <Footer />
         </div>
     );
