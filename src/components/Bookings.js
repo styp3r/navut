@@ -109,7 +109,6 @@ const Bookings = () => {
     }
 
     const handleSaveChanges = () => {
-        document.getElementById('edit-modal').style.display = "none";
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "none";
@@ -176,7 +175,6 @@ const Bookings = () => {
             top: 0,
             behavior: 'smooth' // Optional smooth scrolling behavior
         });
-        document.getElementById('edit-modal').style.display = "flex";
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "flex";
@@ -377,9 +375,6 @@ const Bookings = () => {
 
     return (
         <div id="bookingsPage">
-            <div id = "edit-modal">
-                <h3 id = 'edit-booking-modal-title'>Edit Your Booking</h3>
-            </div>
             <p id="select-room-title">Book Your Stay</p>
             <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">done</span>Done</button>
             <h3 id="your-bookings-title-mobile" onClick={() => handleCartDropdownOpen()}>Your Bookings ({bookingCart.length}) <span className="material-symbols-outlined">expand_more</span></h3>
@@ -468,7 +463,7 @@ const Bookings = () => {
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formateDateStr(String(item.checkIn))}</p>
                                 <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formateDateStr(String(item.checkOut))}</p>
                                 <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
-                                <p>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) > 1 ? item.childCount + " Children" : item.childCount + " Child" }</p>
+                                <p>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) > 1 ? item.childCount + " Children" : item.childCount + " Child"}</p>
                                 <br></br>
                                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                     <p style={{ margin: '0 0 0 3rem' }}>Total</p>
@@ -492,7 +487,7 @@ const Bookings = () => {
                                         />
                                         <label id="adult-count">Adults:</label>
 
-                                        <select id="adult" value = {item.adultCount} onChange={(event) => handleAdultCountChange(item.id, event.target.value)}>
+                                        <select id="adult" value={item.adultCount} onChange={(event) => handleAdultCountChange(item.id, event.target.value)}>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -500,7 +495,7 @@ const Bookings = () => {
 
                                         <label id="child-count">Children:</label>
 
-                                        <select id="children" value = {item.childCount} onChange={(event) => handleChildCountChange(item.id, event.target.value)}>
+                                        <select id="children" value={item.childCount} onChange={(event) => handleChildCountChange(item.id, event.target.value)}>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
