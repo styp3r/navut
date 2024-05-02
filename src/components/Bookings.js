@@ -362,22 +362,24 @@ const Bookings = () => {
     }
 
     const handleCartDropdownOpen = () => {
-        document.getElementById('room-selection-cart').classList.add("appear_fadein")
-        document.getElementById('room-selection-cart').classList.remove("appear_fadeout")
-        document.getElementById('room-selection-cart').style.display = "flex"
+        document.getElementById('room-selection-cart').style.display = 'flex'
+        document.getElementById('room-selection-cart').classList.add('fade-in-animation')
+        document.getElementById('room-selection-cart').classList.remove('fade-out-animation')
     }
 
     const handleCartDropdownClose = () => {
-        document.getElementById('room-selection-cart').classList.add("appear_fadeout")
-        document.getElementById('room-selection-cart').classList.remove("appear_fadein")
-        document.getElementById('room-selection-cart').style.display = "none"
+        document.getElementById('room-selection-cart').classList.add('fade-out-animation')
+        document.getElementById('room-selection-cart').classList.remove('fade-in-animation')
     }
 
     return (
         <div id="bookings-page">
-            <p id="select-room-title">Book Your Stay</p>
+            <div id="modal-bg"></div>
+            <div id="booking-headers">
+                <p style={{ color: '#996132', fontSize: '2rem', fontWeight: '400' }}>Book Your Stay</p>
+                <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings({bookingCart.length})<span className="material-symbols-outlined">expand_more</span></p>
+            </div>
             <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">done</span>Done</button>
-            <h3 id="your-bookings-title-mobile" onClick={() => handleCartDropdownOpen()}>Your Bookings ({bookingCart.length}) <span className="material-symbols-outlined">expand_more</span></h3>
             <div id="booking-dashboard">
                 <div id="dashboard-main">
                     <div id="room-selection-list-container" style={{ display: bookingCart.length === 0 ? "flex" : "none" }}> {/* Left Dashboard - Main - 1 - default*/}
@@ -390,30 +392,33 @@ const Bookings = () => {
                                                 <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: '500' }}>{ar.room_name} {ar.isBreakfast ? <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room with Breakfast)</span> : <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>(Room Only)</span>}</p>
                                             </div>
 
-                                            <div className="room-amenities-factuals">
-                                                <div className="room-amenities-factuals-left">
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">fit_Screen</span> xyz sqft</p>
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bed</span> Queen Bed</p>
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bathtub</span> Bathroom</p>
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">tv</span> TV</p>
-                                                    {ar.isBreakfast ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">dinner_dining</span> Breakfast Included</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">no_meals</span> Breakfast Excluded</p>}
+                                            <div className="room-details-content-top">
+                                                <div className="room-amenities-factuals">
+                                                    <div className="room-amenities-factuals-left">
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">fit_Screen</span> xyz sqft</p>
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bed</span> Queen Bed</p>
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bathtub</span> Bathroom</p>
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">tv</span> TV</p>
+                                                        {ar.isBreakfast ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">dinner_dining</span> Breakfast Included</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">no_meals</span> Breakfast Excluded</p>}
+                                                    </div>
+                                                    <div className="room-amenities-factuals-right">
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">wifi</span> WiFi</p>
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">chair</span> Pull-out Bed / Sofa</p>
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">balcony</span> Private Balcony</p>
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">self_care</span> Towels & Essentials</p>
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">table_lamp</span> Workspace</p>
+                                                    </div>
                                                 </div>
-                                                <div className="room-amenities-factuals-right">
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">wifi</span> WiFi</p>
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">chair</span> Pull-out Bed / Sofa</p>
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">balcony</span> Private Balcony</p>
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">self_care</span> Towels & Essentials</p>
-                                                    <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">table_lamp</span> Workspace</p>
-                                                </div>
+                                                <img alt='bedroom shot' src={gal} style={{ width: '40%', height: '20rem', borderRadius: '0.5rem', objectFit: 'cover' }}></img>
                                             </div>
                                         </div>
-                                        <img alt='bedroom shot' src={gal} width='280' height='200' style={{ borderRadius: '0.5rem', objectFit: 'cover' }}></img>
                                     </div>
-                                    <div className="price-details-container">
-                                        <p className="price-amount">&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
-                                        <span className="tax-disclaimer">(Excluding Taxes & Fees)</span>
+                                    <div className="room-details-content-bottom">
+                                        <div className="price-details-container">
+                                            <p className="price-amount">&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
+                                        </div>
+                                        <button id="book-room-btn" onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room</button>
                                     </div>
-                                    <button id="book-room-btn" onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room</button>
                                 </div>
                             </div>
                         ))}
@@ -441,7 +446,6 @@ const Bookings = () => {
                 </div>
 
                 <div id="room-selection-cart" style={{ overflowY: bookingCart.length > 1 ? 'scroll' : 'hidden', borderRadius: bookingCart.length > 1 ? '0.5rem 0 0 0.5rem' : '0.5rem' }}>  {/* Right Dashboard*/}
-                    <h3 id="your-bookings-title">Your Bookings ({bookingCart.length})</h3>
                     <h4 id="cart-title-mobile1">Need to change your plans?</h4>
                     <h4 id="cart-title-mobile2">Update or Remove Bookings Below</h4>
                     <span id="close-cart-dropdown" onClick={() => handleCartDropdownClose()} className="material-symbols-outlined">close</span>
@@ -453,21 +457,31 @@ const Bookings = () => {
                         </div>
                     ) :
                         bookingCart.map((item, index) => (
+
+
+
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
-                                <p style={{ fontWeight: 'bold' }}>{item.room_name}</p>
-                                {item.isBreakfast ? <p>- Breakfast Included -</p> : <p>- Room Only -</p>}
-                                <p style={{ fontStyle: 'italic' }}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</p>
-                                <br></br>
-                                <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
-                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2.7rem 0 0' }}>Check-in</span> {formateDateStr(String(item.checkIn))}</p>
-                                <p><span style={{ color: '#996132', fontWeight: 'bold', margin: '0 2rem 0 0' }}>Check-out</span> {formateDateStr(String(item.checkOut))}</p>
-                                <hr style={{ width: '3rem', border: 'solid 1px #ececec' }}></hr>
-                                <p>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) > 1 ? item.childCount + " Children" : item.childCount + " Child"}</p>
+                                <p style={{ fontWeight: '550', margin: '1rem', fontSize: '1.3rem' }}>{item.room_name} <span style = {{fontSize: '0.8rem', fontWeight: '400'}}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</span></p>
+                                {item.isBreakfast ? <p style={{ margin: '1rem' }}>Breakfast Included</p> : <p style={{ margin: '1rem' }}>Room Only</p>}
+                                <p style={{ margin: '1rem' }}>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) !== 1 ? item.childCount + " Children" : item.childCount + " Child"}</p>
+                                <p style={{ fontStyle: 'italic' }}></p>
+                                <div className="date-display-cart">
+                                    <div className="checkin-display-cart">
+                                        <p className="date-display-cart-item">Check-in</p>
+                                        <p className="date-display-cart-item">{formateDateStr(String(item.checkIn))}</p>
+                                    </div>
+                                    <div className="checkout-display-cart">
+                                        <p className="date-display-cart-item">Check-out</p>
+                                        <p className="date-display-cart-item">{formateDateStr(String(item.checkOut))}</p>
+                                    </div>
+                                </div>
                                 <br></br>
                                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                     <p style={{ margin: '0 0 0 3rem' }}>Total</p>
-                                    <p style={{ fontWeight: 'bold', margin: '0 3rem 0 0' }}>&#8377; {item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
+                                    <p style={{ fontWeight: '500', margin: '0 3rem 0 0' }}>&#8377; {item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
                                 </div>
+
+
 
                                 {editIndex === index ?
                                     <div>
@@ -503,7 +517,7 @@ const Bookings = () => {
                                     </div> : null}
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id, item.type)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
-                                    <div id="edit-booking-btn" onClick={() => handleEditClick(index)}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0', fontSize: '1rem' }}>edit_square</span>Edit</div>
+                                    <div id="edit-booking-btn" onClick={() => handleEditClick(index)}>Edit</div>
                                 </div>
                                 <button id="save-changes-btn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save</button>
                             </div>

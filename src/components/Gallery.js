@@ -3,24 +3,47 @@ import Two from '../images/gallery/gal2.jpeg'
 import Three from '../images/gallery/gal3.jpeg'
 import Four from '../images/gallery/gal4.jpg'
 import Five from '../images/gallery/gal5.jpg'
- 
+import Slider from 'react-slick';
+
+
 const Gallery = () => {
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        speed: 500,
+        fade: true,
+        waitForAnimate: false
+    };
 
     return (
         <div id="gallery-section">
-            <p style = {{margin: 0}} >Gallery</p>
-            <div className="gallery-grid">
-                <div className="hero-grid-img"><img alt = "hero" className = "gallery-img-hero" src = {One}/></div>
-                <div className="side-grid-imgs">
-                    <div className = "side-grid-left">
-                        <div className="side-grid-image"><img alt = "yo" className = "gallery-img-1" src = {Two}/></div>
-                        <div className="side-grid-image"><img  alt = "yo" className = "gallery-img-2" src = {Three}/></div>
+            <div className="carousel-container">
+                <Slider {...settings}>
+                    <div className="carousel-item">
+                        <img src={One} />
                     </div>
-                    <div className = "side-grid-right">
-                        <div className="side-grid-image"><img alt = "yo" className = "gallery-img-3" src = {Four}/></div>
-                        <div className="side-grid-image"><img alt = "yo" className = "gallery-img-4" src = {Five}/></div>
+                    <div className="carousel-item">
+                        <img src={Two} />
                     </div>
-                </div>
+                    <div className="carousel-item">
+                        <img src={Three} />
+                    </div>
+                    <div className="carousel-item">
+                        <img src={Four} />
+                    </div>
+                    <div className="carousel-item">
+                        <img src={Five} />
+                    </div>
+                </Slider>
+            </div>
+            <div className = "gallery-content">
+                <p className = "gallery-content-title">Unwind in Spacious Rooms</p>
+                <p className = "gallery-content-right">Step into a world of tranquility and discover the charm of Navut. Immerse yourself in our luxurious accommodations, featuring spacious rooms, modern amenities, and breathtaking views. Unwind by our coffee plantation, indulge in delectable local cuisine at our on-site restaurant, and explore the endless possibilities that await you beyond our doors. Whether you seek a romantic getaway, a fun-filled family vacation, or a rejuvenating solo retreat, Navut provides the perfect setting to create lasting memories.</p>
             </div>
         </div>
     );

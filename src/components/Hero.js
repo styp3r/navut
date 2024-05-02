@@ -1,5 +1,5 @@
 import React from "react";
-import HeroImg from '../images/heroImg.jpg'
+import HeroImg from '../images/madikeri.jpg'
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router-dom'
 

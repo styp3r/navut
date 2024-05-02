@@ -192,13 +192,13 @@ const Home = () => {
             <TestimonialSlider />
             <BookNowSection />
             <div id="map-section">
-                <div className="map-information">
-                    <p>Nestled amidst the verdant hills of Coorg, </p>
-                    <p>Kodagu's captivating landscape, lies our homestay in Kedamalluru.</p>
-                    <p> Just beyond the bustle of Virajpet, Kedamalluru unfolds, a tranquil haven where you'll find our home waiting to welcome you.</p>
-                    <a target = "_blank" rel="noreferrer" href = "https://maps.app.goo.gl/iKeZKYX7rrkuHwKA8"><button className="take-me-there-btn">Take Me There</button></a>
-                </div>
                 <Map />
+                <div className="map-information">
+                    <p className = "map-information-title">Your Roadmap to Relaxation</p>
+                    <p>Nestled amidst the verdant hills of Coorg, Kodagu's captivating landscape, lies our homestay in Kedamalluru.</p>
+                    <p> Just beyond the bustle of Virajpet, Kedamalluru unfolds, a tranquil haven where you'll find our home waiting to welcome you.</p>
+                    <a target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/iKeZKYX7rrkuHwKA8"><button className="take-me-there-btn">Take Me There</button></a>
+                </div>
             </div>
             <Footer />
         </div>
