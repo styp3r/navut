@@ -114,8 +114,6 @@ const Bookings = () => {
         document.getElementById('save-changes-btn').style.display = "none";
         document.getElementById('add-room-btn').style.display = "flex";
         document.getElementById('close-cart-dropdown').style.display = "flex";
-        document.getElementById('cart-title-mobile1').style.opacity = "1";
-        document.getElementById('cart-title-mobile2').style.opacity = "1";
         setEditIndex(null);
     }
 
@@ -182,8 +180,6 @@ const Bookings = () => {
         document.getElementById('conflict-message').style.display = 'none';
         document.getElementById('done-btn').style.display = "none";
         document.getElementById('close-cart-dropdown').style.display = "none";
-        document.getElementById('cart-title-mobile1').style.opacity = "0";
-        document.getElementById('cart-title-mobile2').style.opacity = "0";
         setEditIndex(index);
     };
 
@@ -297,39 +293,7 @@ const Bookings = () => {
 
     const handleConfirmBooking = () => {
 
-        let flag = 0;
-        for (const obj1 of rcmData) {
-            // Iterate over each object in array2
-            for (const obj2 of bookingCart) {
-                // Check for conflict between dates of obj1 and obj2
-                if (obj1.room_type === 'Deluxe Room' && obj2.room_name === 'Deluxe Room' && obj1.check_in === obj2.checkIn && obj1.check_out === obj2.checkOut && obj1.count === 4) {
-                    // Conflict found, return true
-                    console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
-                    document.getElementById('conflict-message').style.display = 'inline-block';
-                    document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
-                    flag = 1; //change to 1
-                }
-
-                if (obj1.room_type === 'Family Room' && obj2.room_name === 'Family Room' && obj1.check_in === obj2.checkIn && obj1.check_out === obj2.checkOut && obj1.count === 2) {
-                    // Conflict found, return true
-                    console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
-                    document.getElementById('conflict-message').style.display = 'inline-block';
-                    document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
-                    flag = 1; //change to 1
-                }
-            }
-        }
-        if (flag === 0) {
-            console.log('No conflicts detected!')
-            //store the name, email and phone number values to be taken to review booking page
-            setGuestName(inputValue1)
-            setGuestEmail(inputValue2)
-            setGuestPhone(inputValue3)
-            navigate("/review-booking")
-            return true;
-        } else {
-            return false;
-        }
+        
 
     }
 
@@ -364,12 +328,10 @@ const Bookings = () => {
     const handleCartDropdownOpen = () => {
         document.getElementById('room-selection-cart').style.display = 'flex'
         document.getElementById('room-selection-cart').classList.add('fade-in-animation')
-        document.getElementById('room-selection-cart').classList.remove('fade-out-animation')
     }
 
     const handleCartDropdownClose = () => {
-        document.getElementById('room-selection-cart').classList.add('fade-out-animation')
-        document.getElementById('room-selection-cart').classList.remove('fade-in-animation')
+        document.getElementById('room-selection-cart').style.display = 'none'
     }
 
     return (
@@ -377,7 +339,7 @@ const Bookings = () => {
             <div id="modal-bg"></div>
             <div id="booking-headers">
                 <p style={{ color: '#996132', fontSize: '2rem', fontWeight: '400' }}>Book Your Stay</p>
-                <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings({bookingCart.length})<span className="material-symbols-outlined">expand_more</span></p>
+                <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings ({bookingCart.length})<span className="material-symbols-outlined">expand_more</span></p>
             </div>
             <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">done</span>Done</button>
             <div id="booking-dashboard">
@@ -446,9 +408,9 @@ const Bookings = () => {
                 </div>
 
                 <div id="room-selection-cart" style={{ overflowY: bookingCart.length > 1 ? 'scroll' : 'hidden', borderRadius: bookingCart.length > 1 ? '0.5rem 0 0 0.5rem' : '0.5rem' }}>  {/* Right Dashboard*/}
-                    <h4 id="cart-title-mobile1">Need to change your plans?</h4>
-                    <h4 id="cart-title-mobile2">Update or Remove Bookings Below</h4>
-                    <span id="close-cart-dropdown" onClick={() => handleCartDropdownClose()} className="material-symbols-outlined">close</span>
+                    <div className="cart-top">
+                        <span id="close-cart-dropdown" onClick={() => handleCartDropdownClose()} className="material-symbols-outlined">close</span>
+                    </div>
                     <p id="conflict-message" style={{ color: '#ed5e68', fontWeight: 'bold', border: 'solid 1px #ed5e68', borderRadius: '0.5rem', padding: '0.5rem' }}></p>
                     {bookingCart.length === 0 ? (
                         <div style={{ margin: '3rem 0 0 0' }}>
@@ -461,9 +423,9 @@ const Bookings = () => {
 
 
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
-                                <p style={{ fontWeight: '550', margin: '1rem', fontSize: '1.3rem' }}>{item.room_name} <span style = {{fontSize: '0.8rem', fontWeight: '400'}}>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</span></p>
-                                {item.isBreakfast ? <p style={{ margin: '1rem' }}>Breakfast Included</p> : <p style={{ margin: '1rem' }}>Room Only</p>}
-                                <p style={{ margin: '1rem' }}>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) !== 1 ? item.childCount + " Children" : item.childCount + " Child"}</p>
+                                <p style={{ fontWeight: '550', margin: '1rem', fontSize: '1.3rem' }}>{item.room_name} <span style={{ fontSize: '0.8rem', fontWeight: '300' }}> {String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</span></p>
+                                {item.isBreakfast ? <p style={{ margin: '1rem', display: 'flex', justifyContent: 'left', alignItems: 'center' }}><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">king_bed</span> Breakfast Included</p> : <p style={{ margin: '1rem', display: 'flex', justifyContent: 'left', alignItems: 'center' }}><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">king_bed</span> Room Only</p>}
+                                <p style={{ margin: '1rem', display: 'flex', justifyContent: 'left', alignItems: 'center' }}><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">group</span>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) !== 1 ? item.childCount + " Children" : item.childCount + " Child"}</p>
                                 <p style={{ fontStyle: 'italic' }}></p>
                                 <div className="date-display-cart">
                                     <div className="checkin-display-cart">
@@ -565,3 +527,49 @@ const Bookings = () => {
 };
 
 export default Bookings;
+
+/*
+
+    const handleConfirmBooking = () => {
+
+        let flag = 0;
+
+        
+
+        for (const obj1 of rcmData) {
+            // Iterate over each object in array2
+            for (const obj2 of bookingCart) {
+                // Check for conflict between dates of obj1 and obj2
+                if (obj1.room_type === 'Deluxe Room' && obj2.room_name === 'Deluxe Room' && obj1.check_in === obj2.checkIn && obj1.check_out === obj2.checkOut && obj1.count === 4) {
+                    // Conflict found, return true
+                    console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
+                    document.getElementById('conflict-message').style.display = 'inline-block';
+                    document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
+                    flag = 1; //change to 1
+                }
+
+                if (obj1.room_type === 'Family Room' && obj2.room_name === 'Family Room' && obj1.check_in === obj2.checkIn && obj1.check_out === obj2.checkOut && obj1.count === 2) {
+                    // Conflict found, return true
+                    console.log('Conflict found with ' + obj2.checkIn + ' and ' + obj2.checkOut + " - " + obj2.room_name)
+                    document.getElementById('conflict-message').style.display = 'inline-block';
+                    document.getElementById('conflict-message').textContent = obj2.room_name + ' is not available for these dates!';
+                    flag = 1; //change to 1
+                }
+            }
+        }
+
+        if (flag === 0) {
+            console.log('No conflicts detected!')
+            //store the name, email and phone number values to be taken to review booking page
+            setGuestName(inputValue1)
+            setGuestEmail(inputValue2)
+            setGuestPhone(inputValue3)
+            navigate("/review-booking")
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    */

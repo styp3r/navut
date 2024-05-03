@@ -3,7 +3,7 @@ import Confetti from 'react-confetti';
 import { useNavigate } from 'react-router-dom';
 
 const BookingConfirmed = () => {
-    const [count, setCount] = useState(5);
+    const [count, setCount] = useState(10);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,9 +25,10 @@ const BookingConfirmed = () => {
     return (
         <div id="booking-confirmed-page">
             <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={500} recycle = {false}/>
-            <div style={{ padding: '15rem 0 0 0' }}>
-                <h3 className="booking-confirmed-title">Your Booking Is Confirmed! <span style={{ color: '#25D366' }} className="material-symbols-outlined">verified</span></h3>
-                <h1>Redirecting in {count}...</h1>
+            <div style={{ padding: '10rem 0 0 0' }}>
+                <h2 className="booking-confirmed-title-1">Your Booking Is Confirmed! <span style={{ color: '#25D366', margin: '0 0 0 0.5rem' }} className="material-symbols-outlined">verified</span></h2>
+                <h3 className="booking-confirmed-title-2">Booking Details Will Be Sent To Your Email Shortly.</h3>
+                <h4>Redirecting in {count}...</h4>
                 <p>Do not close or refresh page</p>
             </div>
         </div>

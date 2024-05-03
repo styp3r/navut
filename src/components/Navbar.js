@@ -9,12 +9,10 @@ const Navbar = () => {
     const handleOpenMenu = () =>{
         document.getElementById('navbar-items-container').style.display = 'flex'
         document.getElementById('navbar-items-container').classList.add('fade-in-animation')
-        document.getElementById('navbar-items-container').classList.remove('fade-out-animation')
     }
 
     const handleCloseMenu = () =>{
-        document.getElementById('navbar-items-container').classList.add('fade-out-animation')
-        document.getElementById('navbar-items-container').classList.remove('fade-in-animation')
+        document.getElementById('navbar-items-container').style.display = 'none'
     }
 
 

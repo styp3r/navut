@@ -7,6 +7,11 @@ import RazorpayIcon from '../images/decoration/razorpay-icon.png'
 
 const ReviewBooking = () => {
 
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Optional smooth scrolling behavior
+    });
+
     const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
     const [bookingID, setBookingID] = useState('');
     const navigate = useNavigate();
@@ -193,7 +198,11 @@ const ReviewBooking = () => {
 
     return (
         <div id="review-booking-page">
-            <p style={{ margin: '12rem 0 2rem 0', fontSize: '2rem', color: '#996132' }}>Review Booking</p>
+            <div className = "go-back-btn-container">
+                <Link to="/bookings"><span className="material-symbols-outlined go-back-btn">arrow_circle_left</span></Link>
+                <p style = {{margin: '0 0 0 0.5rem', color: '#996132', fontWeight: '500'}}>Go Back</p>
+            </div>
+            <p className="review-booking-page-title">Review Booking</p>
             <p id="error-booking-upload"><span className="material-symbols-outlined">warning</span>Internal Server Error. Please Try Again Later.</p>
             {bookingCart.length === 0 ? (
                 <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
@@ -203,54 +212,54 @@ const ReviewBooking = () => {
                 </div>
             ) : (
                 <div id="display-final-booking-container">
-                    <div id="display-booking-details-container">
-                        <p className="guest-details-title">Guest Details</p>
-                        <div id="display-guest-details">
-                            <div className="guest-name-container">
-                                <p>Guest Name: {guestName}</p>
-                                <p>Email Address: {guestEmail}</p>
-                            </div>
-                            <div className="guest-phone-container">
-                                <p>Phone: {guestPhone}</p>
-                            </div>
-                        </div>
+
+                    <div className="review-booking-left">
                         <p className="your-stay-title">Your Stay</p>
                         {bookingCart.map((item) => (
                             <div id="display-booking-details" key={item.id}>
-                                <div style={{ width: '20rem', margin: '1rem 40rem 0 3.1rem', textAlign: 'left' }}>
-                                    <p style={{ fontWeight: 'bold', fontSize: '1.3rem', color: '#996132' }}>{item.room_name}</p>
+                                <div style={{ width: '100%', textAlign: 'left', margin: '0 0 0 2rem' }}>
+                                    <p style={{ fontWeight: '500', fontSize: '1.3rem', color: '#996132' }}>{item.room_name}</p>
                                     <p>{String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights, \u20B9" + item.room_price + " per night" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night, \u20B9" + item.room_price + " per night"}</p>
                                 </div>
-                                <p>Adults: {item.adultCount}</p>
-                                <p>Children: {item.childCount}</p>
+                                <p style={{ width: '100%', display: 'flex', margin: '0 0 0 2rem' }}>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) !== 1 ? item.childCount + " Children" : item.childCount + " Child"}</p>
                                 <div id="review-dates">
                                     <p id="review-checkin-date">{"Check-in: "}<strong>{formatDateStr(String(item.checkIn))}</strong></p>
                                     <p>{"Check-out: "}<strong>{formatDateStr(String(item.checkOut))}</strong></p>
                                 </div>
-                                    <p>{item.isBreakfast ? "Extras: Breakfast Included" : "Extras: N/A"}</p>
-                                    <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{"\u20B9 " + item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
-                                
+                                <div className="display-booking-details-bottom">
+                                    <p style={{ margin: '2rem' }}>{item.isBreakfast ? "Extras: Breakfast Included" : "Extras: N/A"}</p>
+                                    <p style={{ fontWeight: '600', fontSize: '1.1rem', margin: '2rem' }}>{"\u20B9 " + item.room_price * nightsBetween(item.checkIn, item.checkOut)}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
-                    <div id="display-payment-details-container">
-                        <p style={{ fontWeight: 'bold', margin: '1rem 1rem 2rem 1rem' }}>Payment Summary</p>
-                        <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
-                            <p>Total</p>
-                            <p>&#8377; {total}</p>
+
+                    <div className="review-booking-right">
+                        <p className="guest-details-title">Guest Details</p>
+                        <div id="display-guest-details">
+                            <p className="display-guest-details-item"><span style={{ fontWeight: '500', color: '#996132' }}>Guest Name:</span> {guestName}</p>
+                            <p className="display-guest-details-item"><span style={{ fontWeight: '500', color: '#996132' }}>Email Address:</span> {guestEmail}</p>
+                            <p className="display-guest-details-item"><span style={{ fontWeight: '500', color: '#996132' }}>Phone:</span> {guestPhone}</p>
                         </div>
-                        <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
-                            <p>Taxes & Fees (18%)</p>
-                            <p>&#8377; {total * 0.18}</p>
+                        <div id="display-payment-details-container">
+                            <p style={{ fontWeight: '500', margin: '1rem 1rem 2rem 1rem' }}>Payment Summary</p>
+                            <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
+                                <p>Total</p>
+                                <p>&#8377; {total}</p>
+                            </div>
+                            <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
+                                <p>Taxes & Fees - 18%</p>
+                                <p>&#8377; {total * 0.18}</p>
+                            </div>
+                            <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between', borderTop: '1px dashed #000000', margin: '2rem 0 0 0', fontSize: '1.5rem', fontWeight: '500' }}>
+                                <p>Grand Total</p>
+                                <p>&#8377; {total + (total * 0.18)}</p>
+                            </div>
+                            <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
+                            <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
                         </div>
-                        <p style={{ margin: 0, color: '#cecece' }}>---------------------------------</p>
-                        <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
-                            <h3>Grand Total</h3>
-                            <h3>&#8377; {total + (total * 0.18)}</h3>
-                        </div>
-                        <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
-                        <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
                     </div>
+
                 </div>
 
             )}

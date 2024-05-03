@@ -21,7 +21,7 @@ html {
   z-index: 5000;
 }
 
-#toggleMenu{
+#toggleMenu {
   width: 2.5rem;
   height: 2.5rem;
   border: none;
@@ -33,11 +33,11 @@ html {
   align-items: center;
 }
 
-#toggleMenu:hover{
+#toggleMenu:hover {
   cursor: pointer;
 }
 
-#toggleMenu-close{
+#toggleMenu-close {
   width: 2.5rem;
   height: 2.5rem;
   background-color: #f3e4d8;
@@ -50,7 +50,7 @@ html {
   align-items: center;
 }
 
-#toggleMenu-close:hover{
+#toggleMenu-close:hover {
   cursor: pointer;
   background-color: #996132;
   color: #f3e4d8;
@@ -87,7 +87,7 @@ html {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.fade-in-animation{
+.fade-in-animation {
   animation-name: fade-in;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
@@ -96,30 +96,10 @@ html {
 @keyframes fade-in {
   from {
     opacity: 0;
-    display: none;
   }
 
-  to{
+  to {
     opacity: 1;
-    display: flex;
-  }
-}
-
-.fade-out-animation{
-  animation-name: fade-out;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-    display: flex;
-  }
-
-  to{
-    opacity: 0;
-    display: none;
   }
 }
 
@@ -227,24 +207,30 @@ html {
 }
 
 .carousel-container {
-  width: 70%; /* Adjust width as needed */
-  margin: 0 auto; /* Center the carousel horizontally */
+  width: 70%;
+  /* Adjust width as needed */
+  margin: 0 auto;
+  /* Center the carousel horizontally */
 }
 
 .carousel-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 35rem; /* Adjust height as needed */
+  height: 35rem;
+  /* Adjust height as needed */
 }
 
 .carousel-item img {
-  width: 100%; /* Ensures images fill the slide container */
-  height: 40rem; /* Maintains image aspect ratio */
-  object-fit: cover; /* Crops images to fit the container */
+  width: 100%;
+  /* Ensures images fill the slide container */
+  height: 40rem;
+  /* Maintains image aspect ratio */
+  object-fit: cover;
+  /* Crops images to fit the container */
 }
 
-.gallery-content{
+.gallery-content {
   width: 80%;
   height: 30rem;
   display: flex;
@@ -252,18 +238,19 @@ html {
   align-items: center;
 }
 
-.gallery-content-right{
+.gallery-content-right {
   width: 50%;
   text-align: left;
 }
 
-.gallery-content-title{
+.gallery-content-title {
   width: 50%;
   font-size: 3rem;
   text-align: left;
   color: #996132;
   font-weight: 400;
 }
+
 /* Gallery Section End */
 
 /* Amenities Section Start */
@@ -344,13 +331,13 @@ html {
   height: 40rem;
 }
 
-.testimonial-content{
+.testimonial-content {
   width: 40%;
   height: 100%;
   text-align: left;
 }
 
-.testimonial-content-container{
+.testimonial-content-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -363,13 +350,13 @@ html {
   transition: opacity 0.3s ease-in-out;
 }
 
-.testimonial-slider-title{
+.testimonial-slider-title {
   font-size: 3rem;
   font-weight: 400;
   color: #996132;
 }
 
-.testimonial-section{
+.testimonial-section {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -424,7 +411,7 @@ html {
 .quote-symbol {
   position: absolute;
   opacity: 0.3;
-  width: 3rem;
+  width: 2rem;
   left: 0;
   top: 0;
   margin: 1rem;
@@ -494,7 +481,7 @@ html {
   height: 50rem;
 }
 
-.map-information-title{
+.map-information-title {
   color: #996132;
   font-weight: 400;
   font-size: 3rem;
@@ -727,7 +714,7 @@ html {
   width: 100%;
 }
 
-#booking-headers{
+#booking-headers {
   width: 85%;
   height: 7rem;
   margin: 12rem 0 0 0;
@@ -737,13 +724,13 @@ html {
   align-items: center;
 }
 
-.your-bookings-cart-dropdown-btn{
+.your-bookings-cart-dropdown-btn {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.your-bookings-cart-dropdown-btn:hover{
+.your-bookings-cart-dropdown-btn:hover {
   cursor: pointer;
 }
 
@@ -779,11 +766,11 @@ html {
   padding: 3rem;
 }
 
-.room-details-content-top{
+.room-details-content-top {
   display: flex;
 }
 
-.room-details-content-bottom{
+.room-details-content-bottom {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -791,31 +778,32 @@ html {
   padding: 0 3rem 0 3rem;
 }
 
-.room-amenities{
+.room-amenities {
   width: 100%;
 }
 
-.room-amenities-title{
+.room-amenities-title {
   display: flex;
 }
 
-.room-amenities-factuals{
+.room-amenities-factuals {
   display: flex;
   width: 60%;
 }
 
-.room-amenities-factuals-left, .room-amenities-factuals-right{
+.room-amenities-factuals-left,
+.room-amenities-factuals-right {
   width: 50%;
 }
 
-.factual-item{
+.factual-item {
   margin: 2rem 2rem 2rem 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.factual-item-icon-spacing{
+.factual-item-icon-spacing {
   margin: 0 0.5rem 0 0;
 }
 
@@ -829,20 +817,26 @@ html {
   border: solid 1px #f2f2f2;
   border-radius: 0.5rem;
   margin: 2rem;
-  padding: 1rem; 
+  padding: 1rem;
   display: none;
   flex-direction: column;
   overflow-x: hidden;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.date-display-cart{
+.cart-top {
+  width: 100%;
+  height: 5rem;
+}
+
+.date-display-cart {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.checkin-display-cart, .checkout-display-cart{
+.checkin-display-cart,
+.checkout-display-cart {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -850,11 +844,11 @@ html {
   margin: 0 2rem 0 2rem;
 }
 
-.date-display-cart-item{
+.date-display-cart-item {
   margin: 0.5rem 0 0.5rem 0;
 }
 
-#modal-bg{
+#modal-bg {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -988,15 +982,17 @@ html {
   margin: 1rem;
   width: 2rem;
   height: 2rem;
-  color: #b9b9b9;
+  color: #a1a1a1;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0.3rem;
 }
 
 #delete-booking-btn:hover {
   cursor: pointer;
-  color: #ed5e68;
+  background-color: #ed5e68;
+  color: #ffffff;
 }
 
 #delete-booking-btn:active {
@@ -1082,11 +1078,12 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem 1rem 0 1rem;
-  background-color: #d49c6e;
+  background-color: #996132;
   color: #ffffff;
   border: none;
   outline: none;
+  width: 100%;
+  margin: 1rem 0 1rem 0;
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
@@ -1146,6 +1143,7 @@ html {
 
 #conflict-message {
   display: none;
+  margin: 1rem 0 1rem 0;
 }
 
 #done-btn {
@@ -1184,8 +1182,8 @@ html {
 }
 
 #close-cart-dropdown {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1193,28 +1191,10 @@ html {
   margin: 1rem 0 1rem 0;
 }
 
-#close-cart-dropdown:hover{
+#close-cart-dropdown:hover {
   cursor: pointer;
   background-color: #000000;
   color: #ffffff;
-}
-
-#cart-title-mobile1 {
-  position: absolute;
-  display: none;
-  top: 4rem;
-  left: 1.2rem;
-  color: #c49b78;
-  font-weight: 500;
-}
-
-#cart-title-mobile2 {
-  position: absolute;
-  display: none;
-  top: 5.5rem;
-  left: 1.2rem;
-  color: #c49b78;
-  font-weight: 500;
 }
 
 /* Booking Functionality Styling End */
@@ -1228,46 +1208,61 @@ html {
   align-items: center;
 }
 
-#display-final-booking-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 2rem 7rem 7rem 7rem;
+.review-booking-page-title {
+  font-size: 2rem;
+  color: #996132;
+  font-weight: 500;
+  margin: 0 0 1rem 0;
 }
 
-#display-booking-details-container {
+
+#display-final-booking-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 0 5rem 0;
+}
+
+.review-booking-left {
+  width: 60%;
   display: flex;
   flex-direction: column;
-  width: 70%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
-#display-guest-details {
-  width: 100%;
-  background-color: #ffffff;
-  border: solid 1px #cecece;
-  margin: 1rem;
-  border-radius: 0.5rem;
+.review-booking-right {
+  width: 40%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+}
+
+#display-guest-details {
+  width: 90%;
+  background-color: #f3e4d8;
+  border-radius: 0.5rem;
+  text-align: left;
+}
+
+.display-guest-details-item {
+  margin: 1rem;
 }
 
 #display-booking-details {
-  width: 100%;
+  width: 90%;
   background-color: #ffffff;
-  border: solid 1px #cecece;
-  margin: 0 2rem 2rem 2rem;
   border-radius: 0.5rem;
+  margin: 0 0 2rem 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 #display-payment-details-container {
-  width: 30%;
-  height: 25rem;
+  width: 90%;
   background-color: #ffffff;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  margin: 3.1rem 2rem 2rem 2rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin: 5rem 0 0 0;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -1276,8 +1271,8 @@ html {
 }
 
 #pay-now-btn {
-  width: 80%;
-  height: 2.5rem;
+  width: 60%;
+  height: 3rem;
   background-color: #30be64;
   border: none;
   color: #ffffff;
@@ -1309,35 +1304,46 @@ html {
 }
 
 .guest-details-title {
-  margin: 1rem 44.1rem 0 0;
-  font-weight: bold;
+  display: flex;
+  width: 90%;
+  margin: 1rem 0 1rem 1rem;
+  font-weight: 500;
 }
 
 .your-stay-title {
-  margin: 2rem 46rem 1rem 0;
-  font-weight: bold;
-}
-
-.guest-phone-container {
-  width: 50%;
-  text-align: left;
-  margin: 1rem 1rem 1rem 3.1rem;
-}
-
-.guest-name-container {
-  width: 50%;
-  text-align: left;
-  margin: 1rem 1rem 1rem 3.1rem;
+  display: flex;
+  width: 90%;
+  margin: 1rem 0 1rem 1rem;
+  font-weight: 500;
 }
 
 #review-dates {
   display: flex;
   flex-direction: row;
-  margin: 1rem 1rem 1rem 2rem;
+  margin: 0 0 0 2rem; 
 }
 
 #review-checkin-date {
-  margin: 1rem;
+  margin: 1rem 1rem 1rem 0;
+}
+
+.display-booking-details-bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.go-back-btn-container{
+  width: 100%;
+  margin: 12rem 0 2rem 5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.go-back-btn{
+  font-size: 2.5rem;
+  color: #996132;
 }
 
 /* Review Booking Page Section End */
@@ -1358,7 +1364,7 @@ html {
   text-align: left;
 }
 
-#bookings-landing-choice-container{
+#bookings-landing-choice-container {
   background-color: #f3e4d8;
   border-radius: 0.5rem;
   padding: 2rem;
@@ -1375,13 +1381,13 @@ html {
     opacity: 0;
   }
 
-  to{
+  to {
     margin: 0 0 3rem 0;
     opacity: 1;
   }
 }
 
-.bookings-landing-choice-container-title{
+.bookings-landing-choice-container-title {
   color: #996132;
   font-weight: 400;
   font-size: 1.5rem;
@@ -1397,7 +1403,7 @@ html {
   margin: 0 2rem 0 0;
 }
 
-.booking-choice1:hover{
+.booking-choice1:hover {
   cursor: pointer;
 }
 
@@ -1608,12 +1614,28 @@ html {
 
 /* Booking Confirmed Page Section Start */
 
+#booking-confirmed-page{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-.booking-confirmed-title {
+.booking-confirmed-title-1 {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  font-weight: 500;
+}
+
+.booking-confirmed-title-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-weight: 400;
 }
 
 /* Booking Confirmed Page Section End */

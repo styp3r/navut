@@ -86,7 +86,7 @@ const ManageBooking = () => {
             if (error) {
                 throw error;
             }
-
+            window.location.reload();
             //return fetchedrcm;
         } catch (error) {
             console.error('Error fetching RCM data:', error.message);
