@@ -373,7 +373,7 @@ const Bookings = () => {
                                 isSoldOut = 1;
                                 console.log("Rooms are sold out! :(")
                                 //conflict toast
-                                toast.error('There are no vacancies for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
+                                toast.error('Only '+ obj2.count +' vacancies for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
                                     position: "top-right",
                                     autoClose: 5000,
                                     hideProgressBar: false,
