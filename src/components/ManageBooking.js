@@ -1,6 +1,8 @@
 import Footer from './Footer'
 import React, { useState } from 'react'
 import supabase from './supabase'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ManageBooking = () => {
     window.scrollTo(0, 0);
@@ -20,6 +22,121 @@ const ManageBooking = () => {
         setUniqueId(unique)
         setShowModal(true);
     };
+
+    const handleUpdateRCM = () => {
+
+        function generateDates(checkin, checkout) {
+            let startDate = new Date(checkin);
+            let endDate = new Date(checkout);
+            let datesBetween = [];
+
+            while (startDate <= endDate) {
+                datesBetween.push(startDate.toISOString().split('T')[0]);
+                startDate.setDate(startDate.getDate() + 1);
+            }
+
+            return datesBetween;
+        }
+
+        let dates = [];
+        let dateArr = [];
+        dates = generateDates(checkIn, checkOut);
+
+        for (let i = 0; i < dates.length; i++) {
+            if ((i + 1) < dates.length) {
+                let upload = { today: dates[i], tomorrow: dates[i + 1], roomName: roomNameDelete }
+                dateArr.push(upload)
+            }
+        }
+
+        const duplicatesArray = [];
+
+        dateArr.forEach(obj => {
+            const foundIndex = duplicatesArray.findIndex(item =>
+                item.roomName === obj.roomName &&
+                item.today === obj.today &&
+                item.tomorrow === obj.tomorrow
+            );
+
+            if (foundIndex !== -1) {
+                // If duplicate found, increment count
+                duplicatesArray[foundIndex].count++;
+            } else {
+                // If no duplicate found, add with count 1
+                duplicatesArray.push({ ...obj, count: 1 });
+            }
+        });
+
+        console.log(duplicatesArray)
+
+        //compare dateArr with rcm
+        const fetchRCMData = async () => {
+            try {
+                const { data: fetchedrcm, error } = await supabase
+                    .from('rcm')
+                    .select('*');
+
+                for (const obj1 of duplicatesArray) {
+                    for (const obj2 of fetchedrcm) {
+                        if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
+                            console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
+                            if (obj2.count > 1 && (obj2.count - obj1.count) >= 1) {
+                                console.log("Reduce count");
+                                const { error } = await supabase
+                                    .from('rcm')
+                                    .update({
+                                        count: obj2.count - obj1.count,
+                                    })
+                                    .eq('id', obj2.id);
+
+                                if (error) {
+                                    throw error
+                                }
+                            } else {
+                                //delete entire row as count is 0
+                                const { error } = await supabase
+                                    .from('rcm')
+                                    .delete()
+                                    .eq('id', obj2.id);
+
+                                if (!error) {
+                                    console.log('Row with :', obj2.id, ' deleted successfully!');
+                                } else {
+                                    console.error('Error deleting rows:', error);
+                                    // Handle errors appropriately (e.g., display an error message to the user)
+                                }
+                            }
+                        }
+                    }
+                }
+                toast.success('Booking Deleted Successfully!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored"
+                });
+                function myFunction() {
+                    window.location.reload();
+                }
+
+                // Call the function after a set time interval (e.g., 5 seconds)
+                const timeInterval = 5000; // Time interval in milliseconds (5 seconds in this example)
+                setTimeout(myFunction, timeInterval);
+
+                if (error) {
+                    throw error;
+                }
+            } catch {
+                console.log("Unable to retrieve RCM data");
+            }
+        }
+
+        fetchRCMData();
+    }
 
     const handleDelete = async () => {
         //alert('Booking deleted.' + uniqueId); // Replace with your delete logic
@@ -45,54 +162,8 @@ const ManageBooking = () => {
             // Handle unexpected errors
         }
 
-        //update rcm
-        try {
-            const { data: fetchedrcm, error } = await supabase
-                .from('rcm')
-                .select('*');
-
-            // Iterate over fetchedrcm array to check if any row matches the given criteria
-            let found = false;
-            for (const row of fetchedrcm) {
-                if (row.room_type === roomNameDelete && checkIn < row.check_out && checkOut > row.check_in) {
-                    found = true;
-                    if (row.isConflictCount > 1) {
-                        const { error } = await supabase
-                            .from('rcm')
-                            .update({ isConflictCount: row.isConflictCount - 1 })
-                            .eq('id', row.id);
-
-                        if (error) {
-                            throw error;
-                        }
-                        //break; // Exit the loop once a matching row is found and updated
-                    } else {
-                        const { error } = await supabase
-                            .from('rcm')
-                            .delete()
-                            .eq('id', row.id);
-
-                        if (error) {
-                            throw error;
-                        }
-                        //break; // Exit the loop once a matching row is found and updated
-                    }
-
-
-                }
-            }
-
-            // Handle any error occurred during the operations
-            if (error) {
-                throw error;
-            }
-            window.location.reload();
-            //return fetchedrcm;
-        } catch (error) {
-            console.error('Error fetching RCM data:', error.message);
-            // Handle errors (display message, retry logic)
-        }
-
+        //update RCM
+        handleUpdateRCM();
     };
 
     const handleCancel = () => {
@@ -131,6 +202,17 @@ const ManageBooking = () => {
 
     return (
         <div id="manage-booking-page">
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+                theme="colored"
+            />
             <div className="manage-booking-content">
                 <div className="manage-booking-search-container">
                     <h2 style={{ color: '#996132', fontWeight: '500' }}>Manage Your Bookings</h2>

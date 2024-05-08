@@ -204,7 +204,7 @@ const ReviewBooking = () => {
                 }
 
                 if (flag === 0 && isSoldOut === 0) {
-                    //navigate("/review-booking")
+                    navigate("/review-booking")
                     return true;
                 } else {
                     return null;

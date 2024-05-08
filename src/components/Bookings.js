@@ -4,6 +4,8 @@ import useStore from './store'
 import gal from '../images/gallery/gal1.jpeg'
 import { Link, useNavigate } from 'react-router-dom'
 import supabase from './supabase'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Bookings = () => {
 
@@ -177,7 +179,6 @@ const Bookings = () => {
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "flex";
         document.getElementById('add-room-btn').style.display = "none";
-        document.getElementById('conflict-message').style.display = 'none';
         document.getElementById('done-btn').style.display = "none";
         document.getElementById('close-cart-dropdown').style.display = "none";
         setEditIndex(index);
@@ -188,7 +189,6 @@ const Bookings = () => {
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "none";
         document.getElementById('add-room-btn').style.display = "flex";
-        document.getElementById('conflict-message').style.display = 'none';
         document.getElementById('done-btn').style.display = "none";
 
 
@@ -205,6 +205,18 @@ const Bookings = () => {
     }
 
     const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, isBreakfastVal, type) => {
+
+        toast('Room added to Your Bookings', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+        });
+
 
         const getFormattedDate = () => {
             const newDate = new Date();
@@ -290,7 +302,7 @@ const Bookings = () => {
         setIsChecked(event.target.checked);
     };
 
-    const handleConfirmBooking = () => { // BUG
+    const handleConfirmBooking = () => {
 
         function generateDates(checkin, checkout) {
             let startDate = new Date(checkin);
@@ -360,8 +372,17 @@ const Bookings = () => {
                                 flag = 1;
                                 isSoldOut = 1;
                                 console.log("Rooms are sold out! :(")
-                                document.getElementById("conflict-message").style.display = "flex";
-                                document.getElementById("conflict-message").textContent = "There are no vacancies for " + obj1.roomName + " for the following dates: " + formatDateStr(String(obj1.today)) + " and " + formatDateStr(String(obj1.tomorrow));
+                                //conflict toast
+                                toast.error('There are no vacancies for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
+                                    position: "top-right",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "colored",
+                                });
                                 break;
                             }
                         } else {
@@ -432,6 +453,18 @@ const Bookings = () => {
 
     return (
         <div id="bookings-page">
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored" />
+
             <div id="modal-bg"></div>
             <div id="booking-headers">
                 <p style={{ color: '#996132', fontSize: '2rem', fontWeight: '400' }}>Book Your Stay</p>
@@ -483,7 +516,6 @@ const Bookings = () => {
                     </div>
 
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
-                        <p id="conflict-message" style={{ backgroundColor: '#ed5e68', color: '#ffffff', fontWeight: '500', border: 'solid 1px #ed5e68', borderRadius: '0.3rem', padding: '0.5rem', margin: '1rem' }}></p>
                         <h3>Guest Details</h3>
                         <p style={{ margin: 0, fontSize: '0.8rem' }}>* Required Fields</p>
                         <div className="guest-details-input-form">
