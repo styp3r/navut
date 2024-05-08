@@ -26,9 +26,9 @@ const Navbar = () => {
                 <div id="navbar-items-container">
                     <button id = "toggleMenu-close" onClick = {() => handleCloseMenu()}><span className="material-symbols-outlined">close</span></button>
                     <Link onClick = {() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="/"><p className="navbar-link">Home</p></Link>
-                    <Link onClick = {() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="bookings-landing"><p className="navbar-link">Bookings</p></Link>
-                    <Link onClick = {() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="about"><p className="navbar-link">About Us</p></Link>
-                    <Link onClick = {() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="contact"><p className="navbar-link">Contact Us</p></Link>
+                    <Link onClick = {() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="/bookings-landing"><p className="navbar-link">Bookings</p></Link>
+                    <Link onClick = {() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="/about"><p className="navbar-link">About Us</p></Link>
+                    <Link onClick = {() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="/contact"><p className="navbar-link">Contact Us</p></Link>
                     <hr style = {{width: '70%', borderTop: 'solid 1px #996132'}}></hr>
                 </div>
                 <button id="toggleMenu" onClick = {() => handleOpenMenu()}><span className="material-symbols-outlined">menu</span></button>

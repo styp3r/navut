@@ -951,10 +951,9 @@ html {
   position: absolute;
   top: 8rem;
   right: 53%;
-  background-color: #f3e4d8;
   color: #996132;
   z-index: 10001;
-  font-weight: 500;
+  font-weight: 400;
   border-radius: 0.3rem;
   padding: 0 0.5rem 0 0.5rem
 }
@@ -975,8 +974,7 @@ html {
   top: 8rem;
   left: 53%;
   color: #996132;
-  font-weight: 500;
-  background-color: #f3e4d8;
+  font-weight: 400;
   z-index: 10001;
   border-radius: 0.3rem;
   padding: 0 0.5rem 0 0.5rem
@@ -997,10 +995,9 @@ html {
   position: absolute;
   top: 15rem;
   right: 53%;
-  background-color: #f3e4d8;
   color: #996132;
   border-radius: 0.2rem;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0 0.5rem 0 0.5rem;
   z-index: 10001;
 }
@@ -1009,10 +1006,9 @@ html {
   position: absolute;
   top: 15rem;
   left: 53%;
-  background-color: #f3e4d8;
   color: #996132;
   border-radius: 0.2rem;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0 0.5rem 0 0.5rem;
   z-index: 10001;
 }
@@ -1057,7 +1053,7 @@ html {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #f3e4d8;
+  background-color: #fffaf5;
   display: none;
   z-index: 10000;
 }
@@ -1099,7 +1095,8 @@ html {
 }
 
 #delete-booking-btn:active {
-  color: #ed5e68;
+  color: #ffffff;
+  background-color: #ed5e68;
 }
 
 .classicBtn {
