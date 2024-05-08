@@ -80,7 +80,7 @@ html {
   top: 0;
   width: 25rem;
   height: 100rem;
-  text-align: right;
+  text-align: left;
   display: none;
   flex-direction: column;
   background-color: #f3e4d8;
@@ -107,7 +107,7 @@ html {
   cursor: pointer;
   color: #996132;
   font-weight: 500;
-  margin: 0;
+  margin: 0 0 0 2rem;
 }
 
 /* Navigation Bar End */
@@ -791,10 +791,27 @@ html {
   align-items: center;
 }
 
-.your-bookings-cart-dropdown-btn {
+.booking-headers-right{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.booking-headers-right-description-container{
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  margin: 0;
+}
+
+.your-bookings-cart-dropdown-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #996132;
+  font-weight: 500;
+  margin: 0;
 }
 
 .your-bookings-cart-dropdown-btn:hover {
@@ -915,62 +932,62 @@ html {
   margin: 0.5rem 0 0.5rem 0;
 }
 
-#modal-bg {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: #000000;
-  opacity: 0.5;
-  display: none;
-  z-index: 10000;
-}
-
 .focused {
-  outline: solid 1px red;
+  outline: solid 2px red;
 }
 
 #checkInDateInput-cart {
   position: absolute;
-  top: 20rem;
-  right: 12%;
+  top: 10rem;
+  right: 53%;
   border: solid 1px #d49c6e;
   font-family: 'Montserrat', sans-serif;
   padding: 1rem;
   border-radius: 0.5rem;
-  z-index: 6001;
+  z-index: 10001;
 }
 
 #checkInDateInput-cart-label {
   position: absolute;
-  top: 16rem;
-  right: 12%;
-  z-index: 6001;
+  top: 8rem;
+  right: 53%;
+  background-color: #f3e4d8;
+  color: #996132;
+  z-index: 10001;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  padding: 0 0.5rem 0 0.5rem
 }
 
 #checkOutDateInput-cart {
   position: absolute;
   font-family: 'Montserrat', sans-serif;
-  top: 23.5rem;
-  right: 12%;
+  top: 10rem;
+  left: 53%;
   border: solid 1px #d49c6e;
   padding: 1rem;
   border-radius: 0.5rem;
-  z-index: 6001;
+  z-index: 10001;
 }
 
 #checkOutDateInput-cart-label {
   position: absolute;
-  top: 16rem;
-  right: 12%;
-  z-index: 6001;
+  top: 8rem;
+  left: 53%;
+  color: #996132;
+  font-weight: 500;
+  background-color: #f3e4d8;
+  z-index: 10001;
+  border-radius: 0.3rem;
+  padding: 0 0.5rem 0 0.5rem
 }
 
 #adult {
   position: absolute;
-  top: 22rem;
-  left: 50%;
+  top: 17rem;
+  left: 53%;
   transform: translate(-170%, 0);
-  z-index: 6001;
+  z-index: 10001;
   border: solid 1px #d49c6e;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -978,26 +995,33 @@ html {
 
 #adult-count {
   position: absolute;
-  top: 22.5rem;
-  left: 50%;
-  transform: translate(-350%, 0);
-  z-index: 6001;
+  top: 15rem;
+  right: 53%;
+  background-color: #f3e4d8;
+  color: #996132;
+  border-radius: 0.2rem;
+  font-weight: 500;
+  padding: 0 0.5rem 0 0.5rem;
+  z-index: 10001;
 }
 
 #child-count {
   position: absolute;
-  top: 22.5rem;
-  right: 50%;
-  transform: translate(150%, 0);
-  z-index: 6001;
+  top: 15rem;
+  left: 53%;
+  background-color: #f3e4d8;
+  color: #996132;
+  border-radius: 0.2rem;
+  font-weight: 500;
+  padding: 0 0.5rem 0 0.5rem;
+  z-index: 10001;
 }
 
 #children {
   position: absolute;
-  top: 22rem;
-  right: 50%;
-  transform: translate(400%, 0);
-  z-index: 6001;
+  top: 17rem;
+  left: 53%;
+  z-index: 10001;
   border: solid 1px #d49c6e;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -1014,16 +1038,28 @@ html {
   border: none;
   outline: none;
   border-radius: 0.5rem;
-  top: 27rem;
-  right: 12%;
-  width: 10rem;
+  top: 22rem;
+  right: 50%;
+  transform: translateX(50%);
+  width: 15rem;
   height: 3rem;
-  z-index: 6001;
+  z-index: 10001;
 }
 
 #save-changes-btn:hover {
   background-color: #25D366;
   cursor: pointer;
+}
+
+#modal-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #f3e4d8;
+  display: none;
+  z-index: 10000;
 }
 
 .default {
@@ -1214,11 +1250,9 @@ html {
 }
 
 #done-btn {
-  position: absolute;
-  top: 14rem;
-  right: 32.5rem;
-  width: 7rem;
+  width: 15rem;
   height: 2.5rem;
+  margin: 0 3rem 0 0;
   display: none;
   justify-content: center;
   align-items: center;

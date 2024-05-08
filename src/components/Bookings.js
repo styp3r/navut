@@ -115,7 +115,9 @@ const Bookings = () => {
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "none";
         document.getElementById('add-room-btn').style.display = "flex";
+        document.getElementById('modal-bg').style.display = "none"
         document.getElementById('close-cart-dropdown').style.display = "flex";
+        document.getElementById("room-selection-cart").style.overflowY = "auto"
         setEditIndex(null);
     }
 
@@ -123,6 +125,7 @@ const Bookings = () => {
         const startDate = new Date(document.getElementById("checkInDateInput-cart").value);
         const endDate = new Date(document.getElementById("checkOutDateInput-cart").value);
         if (startDate >= endDate) {
+            document.getElementById("save-changes-btn").style.display = "none";
             // Add visual indication of error (e.g., change border color)
             document.getElementById("checkInDateInput-cart").style.borderColor = "red";
             document.getElementById("checkInDateInput-cart").classList.add("focused");
@@ -131,6 +134,7 @@ const Bookings = () => {
             setIsDateCorrect(false)
         } else {
             // Remove visual indication of error (if implemented)
+            document.getElementById("save-changes-btn").style.display = "flex";
             document.getElementById("checkInDateInput-cart").style.borderColor = "";
             document.getElementById("checkInDateInput-cart").classList.remove("focused");
             document.getElementById("checkOutDateInput-cart").style.borderColor = "";
@@ -154,6 +158,7 @@ const Bookings = () => {
 
         if (startDate >= endDate) {
             // Add visual indication of error (e.g., change border color)
+            document.getElementById("save-changes-btn").style.display = "none";
             document.getElementById("checkInDateInput-cart").style.borderColor = "red";
             document.getElementById("checkInDateInput-cart").classList.add("focused");
             document.getElementById("checkOutDateInput-cart").style.borderColor = "red"; // Reset end date border if previously marked
@@ -161,6 +166,7 @@ const Bookings = () => {
             setIsDateCorrect(false)
         } else {
             // Remove visual indication of error (if implemented)
+            document.getElementById("save-changes-btn").style.display = "flex";
             document.getElementById("checkInDateInput-cart").style.borderColor = "";
             document.getElementById("checkInDateInput-cart").classList.remove("focused");
             document.getElementById("checkOutDateInput-cart").style.borderColor = "";
@@ -175,11 +181,17 @@ const Bookings = () => {
             top: 0,
             behavior: 'smooth' // Optional smooth scrolling behavior
         });
+        let scrollableDiv = document.getElementById("room-selection-cart");
+        // Set scrollTop to 0 to scroll to the top
+        scrollableDiv.scrollTop = 0;
+
+        document.getElementById("room-selection-cart").style.overflowY = "hidden"
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('save-changes-btn').style.display = "flex";
         document.getElementById('add-room-btn').style.display = "none";
         document.getElementById('done-btn').style.display = "none";
+        document.getElementById('modal-bg').style.display = "flex"
         document.getElementById('close-cart-dropdown').style.display = "none";
         setEditIndex(index);
     };
@@ -206,9 +218,9 @@ const Bookings = () => {
 
     const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, isBreakfastVal, type) => {
 
-        toast(newRoomName + ' added to Your Bookings', {
+        toast(newRoomName + ' added to Your Bookings Cart', {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 7000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -267,7 +279,10 @@ const Bookings = () => {
             incFamilyIdArrayCount();
         }
 
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Optional smooth scrolling behavior
+        });
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('done-btn').style.display = "none";
@@ -276,7 +291,10 @@ const Bookings = () => {
     }
 
     const handleDoneClick = () => {
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Optional smooth scrolling behavior
+        });
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('done-btn').style.display = "none";
@@ -373,9 +391,9 @@ const Bookings = () => {
                                 isSoldOut = 1;
                                 console.log("Rooms are sold out! :(")
                                 //conflict toast
-                                toast.error('Only '+ obj2.count +' vacancies for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
+                                toast.error((obj2.limit - obj2.count) > 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : 'Only ' + (obj2.limit - obj2.count) + ' vacancy available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
                                     position: "top-right",
-                                    autoClose: 5000,
+                                    autoClose: 7000,
                                     hideProgressBar: false,
                                     closeOnClick: true,
                                     pauseOnHover: true,
@@ -455,7 +473,7 @@ const Bookings = () => {
         <div id="bookings-page">
             <ToastContainer
                 position="top-right"
-                autoClose={5000}
+                autoClose={7000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -465,12 +483,16 @@ const Bookings = () => {
                 pauseOnHover
                 theme="colored" />
 
-            <div id="modal-bg"></div>
             <div id="booking-headers">
                 <p style={{ color: '#996132', fontSize: '2rem', fontWeight: '400' }}>Book Your Stay</p>
-                <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings ({bookingCart.length})<span className="material-symbols-outlined">expand_more</span></p>
+                <div className="booking-headers-right">
+                    <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">cancel</span>Cancel Add Room</button>
+                    <div className="booking-headers-right-description-container">
+                        <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings ( {bookingCart.length} )<span className="material-symbols-outlined">expand_more</span></p>
+                        <p style={{ fontSize: '0.8rem' }}>Add/Modify Rooms from Your Bookings Cart</p>
+                    </div>
+                </div>
             </div>
-            <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">done</span>Done</button>
             <div id="booking-dashboard">
                 <div id="dashboard-main">
                     <div id="room-selection-list-container" style={{ display: bookingCart.length === 0 ? "flex" : "none" }}> {/* Left Dashboard - Main - 1 - default*/}
@@ -516,7 +538,8 @@ const Bookings = () => {
                     </div>
 
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
-                        <h3>Guest Details</h3>
+                        <p style={{ fontSize: '1.5rem' }}>Finish Your Booking</p>
+                        <h4>Guest Details</h4>
                         <p style={{ margin: 0, fontSize: '0.8rem' }}>* Required Fields</p>
                         <div className="guest-details-input-form">
                             <input className="guest-input-item1" type="text" placeholder="Full Name *" value={inputValue1} onChange={handleChange1}></input>
@@ -537,6 +560,7 @@ const Bookings = () => {
                 </div>
 
                 <div id="room-selection-cart" style={{ overflowY: bookingCart.length > 1 ? 'scroll' : 'hidden', borderRadius: bookingCart.length > 1 ? '0.5rem 0 0 0.5rem' : '0.5rem' }}>  {/* Right Dashboard*/}
+                    <div id="modal-bg"></div>
                     <div className="cart-top">
                         <span id="close-cart-dropdown" onClick={() => handleCartDropdownClose()} className="material-symbols-outlined">close</span>
                     </div>
@@ -588,7 +612,7 @@ const Bookings = () => {
                                             value={item.checkOut}
                                             onChange={(event) => handleCheckOutChange(item.id, event.target.value)}
                                         />
-                                        <label id="adult-count">Adults:</label>
+                                        <label id="adult-count">No. of Adults</label>
 
                                         <select id="adult" value={item.adultCount} onChange={(event) => handleAdultCountChange(item.id, event.target.value)}>
                                             <option value="1">1</option>
@@ -596,7 +620,7 @@ const Bookings = () => {
                                             <option value="3">3</option>
                                         </select>
 
-                                        <label id="child-count">Children:</label>
+                                        <label id="child-count">No. of Children</label>
 
                                         <select id="children" value={item.childCount} onChange={(event) => handleChildCountChange(item.id, event.target.value)}>
                                             <option value="0">0</option>
@@ -609,7 +633,7 @@ const Bookings = () => {
                                     <div id="delete-booking-btn" onClick={() => handleDeleteClick(item.id, item.type)}><span className="material-symbols-outlined" style={{ margin: '0 0 0 0' }}>delete</span></div>
                                     <div id="edit-booking-btn" onClick={() => handleEditClick(index)}>Edit</div>
                                 </div>
-                                <button id="save-changes-btn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save</button>
+                                <button id="save-changes-btn" onClick={() => handleSaveChanges()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>done</span>Save Changes</button>
                             </div>
                         ))
                     }
