@@ -1,5 +1,5 @@
 import ReactPlayer from 'react-player';
-import Video from '../images/coorg_video.mp4'
+import Video from '../images/coorg_video_final.mp4'
 
 const PropertyVideo = () => {
     return (

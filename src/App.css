@@ -539,6 +539,13 @@ html {
   flex-direction: column;
 }
 
+.navbar-link-footer {
+  cursor: pointer;
+  color: #996132;
+  font-weight: 300;
+  margin: 0;
+}
+
 #copyright {
   color: #996132;
   margin: 0 5rem 0 0;
@@ -557,39 +564,27 @@ html {
   height: 15rem;
 }
 
+.useful-links{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 2rem 0 0 4rem;
+}
+
+.our-location{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 2rem 0 0 4rem;
+}
+
 .logo-copyright-bottom {
   width: 100%;
   height: 15rem;
   display: flex;
-  margin: 8rem 0 0 0;
+  margin: 3rem 0 0 0;
   justify-content: space-between;
   align-items: center;
-}
-
-.useful-links {
-  width: 12rem;
-  height: 15rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: left;
-  text-align: left;
-  padding: 1rem 0 0 2rem;
-  background-color: #e7c9b1;
-  border-radius: 2rem;
-  margin: 5rem 0 0 5rem;
-}
-
-.useful-link-item {
-  height: 1.5rem;
-  margin: 0.5rem 0 0.5rem 0;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  font-weight: 400;
-  font-size: 0.8rem;
-  text-decoration: none;
-  color: #996132;
 }
 
 /* Footer Section End */

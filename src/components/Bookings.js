@@ -206,7 +206,7 @@ const Bookings = () => {
 
     const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, isBreakfastVal, type) => {
 
-        toast('Room added to Your Bookings', {
+        toast(newRoomName + ' added to Your Bookings', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -506,7 +506,7 @@ const Bookings = () => {
                                     </div>
                                     <div className="room-details-content-bottom">
                                         <div className="price-details-container">
-                                            <p className="price-amount">&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night</span></p>
+                                            <p className="price-amount">&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night (Exclusive of Taxes)</span></p>
                                         </div>
                                         <button id="book-room-btn" onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room</button>
                                     </div>
