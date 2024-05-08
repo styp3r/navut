@@ -42,7 +42,7 @@ const Gallery = () => {
                 </Slider>
             </div>
             <div className = "gallery-content">
-                <p className = "gallery-content-title">Unwind in Spacious Rooms</p>
+                <p className = "gallery-content-title"><span className="material-symbols-outlined">psychiatry</span> Unwind in Spacious Rooms</p>
                 <p className = "gallery-content-right">Step into a world of tranquility and discover the charm of Navut. Immerse yourself in our luxurious accommodations, featuring spacious rooms, modern amenities, and breathtaking views. Unwind by our coffee plantation, indulge in delectable local cuisine at our on-site restaurant, and explore the endless possibilities that await you beyond our doors. Whether you seek a romantic getaway, a fun-filled family vacation, or a rejuvenating solo retreat, Navut provides the perfect setting to create lasting memories.</p>
             </div>
         </div>

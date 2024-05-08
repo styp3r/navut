@@ -701,7 +701,79 @@ html {
 
 /* Contact Us Page Section End */
 
+/* Property Video Section Start */
 
+.video-content-title {
+  width: 100%;
+  font-size: 3rem;
+  text-align: left;
+  color: #996132;
+  font-weight: 400;
+}
+
+.video-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-content-title-container {
+  width: 40%;
+  height: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#property-video {
+  width: 100%;
+  height: 40rem;
+  display: flex;
+  margin: 10rem 0 5rem 0;
+}
+
+/* Property Video Section End */
+
+/* Loading Screen Start */
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #996132;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading Screen End */
 
 /*Booking Functionality Styling*/
 
@@ -1023,7 +1095,7 @@ html {
 #guest-details-input-container {
   display: inline-block;
   width: 100%;
-  height: 35rem;
+  height: 40rem;
   display: none;
   color: #996132;
   background-color: #f3e4d8;
@@ -1320,20 +1392,20 @@ html {
 #review-dates {
   display: flex;
   flex-direction: row;
-  margin: 0 0 0 2rem; 
+  margin: 0 0 0 2rem;
 }
 
 #review-checkin-date {
   margin: 1rem 1rem 1rem 0;
 }
 
-.display-booking-details-bottom{
+.display-booking-details-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.go-back-btn-container{
+.go-back-btn-container {
   width: 100%;
   margin: 12rem 0 2rem 5rem;
   display: flex;
@@ -1341,7 +1413,7 @@ html {
   align-items: center;
 }
 
-.go-back-btn{
+.go-back-btn {
   font-size: 2.5rem;
   color: #996132;
 }
@@ -1614,7 +1686,7 @@ html {
 
 /* Booking Confirmed Page Section Start */
 
-#booking-confirmed-page{
+#booking-confirmed-page {
   width: 100%;
   display: flex;
   flex-direction: column;

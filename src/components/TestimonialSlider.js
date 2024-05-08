@@ -29,7 +29,7 @@ const TestimonialSlider = () => {
         <div className="testimonial-section">
             <div className = "testimonial-content-container">
             <div className="testimonial-content">
-                <p className="testimonial-slider-title">Hear From Happy Guests</p>
+                <p className="testimonial-slider-title"><span className="material-symbols-outlined">psychiatry</span> Hear From Happy Guests</p>
                 <p>Discover What Others Are Saying! Dive into our testimonials section and explore firsthand experiences from delighted customers. From glowing reviews to heartfelt stories, let our satisfied clients paint a vivid picture of their journey with us. Join the chorus of voices celebrating exceptional service, quality, and results. Your satisfaction is our greatest achievement!</p>
             </div>
             <div className="testimonial-slider">

@@ -1,16 +1,43 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import BookNowSection from './BookNowSection'
 import Map from './MapComponent'
 import Footer from './Footer'
 import Hero from './Hero'
 import Gallery from './Gallery'
+import PropertyVideo from './PropertyVideo'
 import PropertyInfo from './PropertyInfo'
 import TestimonialSlider from './TestimonialSlider'
-import supabase from './supabase'
 
 const Home = () => {
 
-    useEffect(() => {
+    window.scrollTo(0, 0);
+    return (
+        <div>
+            <Hero />
+            <Gallery />
+            <PropertyInfo />
+            <PropertyVideo />
+            <TestimonialSlider />
+            <BookNowSection />
+            <div id="map-section">
+                <Map />
+                <div className="map-information">
+                    <p className="map-information-title"><span className="material-symbols-outlined">psychiatry</span> Your Roadmap to Relaxation</p>
+                    <p>Nestled amidst the verdant hills of Coorg, Kodagu's captivating landscape, lies our homestay in Kedamalluru.</p>
+                    <p> Just beyond the bustle of Virajpet, Kedamalluru unfolds, a tranquil haven where you'll find our home waiting to welcome you.</p>
+                    <a target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/iKeZKYX7rrkuHwKA8"><button className="take-me-there-btn">Take Me There</button></a>
+                </div>
+            </div>
+            <Footer />
+        </div>
+    );
+}
+
+export default Home;
+
+/*
+
+useEffect(() => {
         // Delete all bookings where stay is completed
         const fetchData = async () => {
             try {
@@ -183,26 +210,4 @@ const Home = () => {
         updateState();
     }, []);
 
-    window.scrollTo(0, 0);
-    return (
-        <div>
-            <Hero />
-            <Gallery />
-            <PropertyInfo />
-            <TestimonialSlider />
-            <BookNowSection />
-            <div id="map-section">
-                <Map />
-                <div className="map-information">
-                    <p className = "map-information-title">Your Roadmap to Relaxation</p>
-                    <p>Nestled amidst the verdant hills of Coorg, Kodagu's captivating landscape, lies our homestay in Kedamalluru.</p>
-                    <p> Just beyond the bustle of Virajpet, Kedamalluru unfolds, a tranquil haven where you'll find our home waiting to welcome you.</p>
-                    <a target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/iKeZKYX7rrkuHwKA8"><button className="take-me-there-btn">Take Me There</button></a>
-                </div>
-            </div>
-            <Footer />
-        </div>
-    );
-}
-
-export default Home;
+    */

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Footer from './Footer';
 import useStore from './store'
 import gal from '../images/gallery/gal1.jpeg'
@@ -43,10 +43,10 @@ const Bookings = () => {
     const [isValid3, setIsValid3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [isDateCorrect, setIsDateCorrect] = useState(true);
-    const [data, setData] = useState([]); // variable to store booking data from server
-    const [rcmData, setRcmData] = useState({});
+    //const [data, setData] = useState([]); // variable to store booking data from server
+    //const [rcmData, setRcmData] = useState();
 
-    useEffect(() => {
+    /*useEffect(() => {
 
         const fetchData = async () => {
             try {
@@ -93,7 +93,7 @@ const Bookings = () => {
         };
 
         updateState();
-    }, [rcmData]);
+    }, [rcmData]); */
 
 
     const handleAddRoom = () => {
@@ -240,7 +240,6 @@ const Bookings = () => {
             room_name: newRoomName,
             room_price: newRoomPrice,
             isBreakfast: isBreakfastVal,
-            isConflict: false,
             type: type,
             adultCount: "2",
             childCount: "0",
@@ -291,9 +290,106 @@ const Bookings = () => {
         setIsChecked(event.target.checked);
     };
 
-    const handleConfirmBooking = () => {
+    const handleConfirmBooking = () => { // BUG
 
-        
+        function generateDates(checkin, checkout) {
+            let startDate = new Date(checkin);
+            let endDate = new Date(checkout);
+            let datesBetween = [];
+
+            while (startDate <= endDate) {
+                datesBetween.push(startDate.toISOString().split('T')[0]);
+                startDate.setDate(startDate.getDate() + 1);
+            }
+
+            return datesBetween;
+        }
+
+        let dates = [];
+        let dateArr = [];
+
+        bookingCart.forEach(booking => {
+            dates = generateDates(booking.checkIn, booking.checkOut);
+
+            for (let i = 0; i < dates.length; i++) {
+                if ((i + 1) < dates.length) {
+                    let upload = { today: dates[i], tomorrow: dates[i + 1], roomName: booking.room_name }
+                    dateArr.push(upload)
+                }
+            }
+        });
+
+        const duplicatesArray = [];
+
+        dateArr.forEach(obj => {
+            const foundIndex = duplicatesArray.findIndex(item =>
+                item.roomName === obj.roomName &&
+                item.today === obj.today &&
+                item.tomorrow === obj.tomorrow
+            );
+
+            if (foundIndex !== -1) {
+                // If duplicate found, increment count
+                duplicatesArray[foundIndex].count++;
+            } else {
+                // If no duplicate found, add with count 1
+                duplicatesArray.push({ ...obj, count: 1 });
+            }
+        });
+
+        //compare uploadDateArr with rcm
+        const fetchRCMData = async () => {
+            try {
+                const { data: fetchedrcm, error } = await supabase
+                    .from('rcm')
+                    .select('*');
+
+                if (error) {
+                    throw error;
+                }
+
+                let flag = 0;
+                let isSoldOut = 0;
+                for (const obj1 of duplicatesArray) {
+                    for (const obj2 of fetchedrcm) {
+                        if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
+                            console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
+                            if (obj2.count < obj2.limit && (obj1.count + obj2.count) <= obj2.limit) {
+                                console.log("Rooms are available!");
+                            } else {
+                                flag = 1;
+                                isSoldOut = 1;
+                                console.log("Rooms are sold out! :(")
+                                document.getElementById("conflict-message").style.display = "flex";
+                                document.getElementById("conflict-message").textContent = "There are no vacancies for " + obj1.roomName + " for the following dates: " + formatDateStr(String(obj1.today)) + " and " + formatDateStr(String(obj1.tomorrow));
+                                break;
+                            }
+                        } else {
+                            //console.log("Create a new booking for - " + obj1.today + " and "+ obj1.tomorrow)
+                            flag = 0;
+                        }
+                    }
+                }
+
+                if (flag === 0 && isSoldOut === 0) {
+                    console.log('No conflicts detected! Go to review booking page')
+                    //store the name, email and phone number values to be taken to review booking page
+                    setGuestName(inputValue1)
+                    setGuestEmail(inputValue2)
+                    setGuestPhone(inputValue3)
+                    navigate("/review-booking")
+                    return true;
+                } else {
+                    return null;
+                }
+
+            } catch (error) {
+                console.error('Error fetching rcm data:', error.message);
+                // Handle errors (display message, retry logic)
+            }
+        };
+
+        fetchRCMData();
 
     }
 
@@ -312,7 +408,7 @@ const Bookings = () => {
         return days;
     }
 
-    const formateDateStr = (dateString) => {
+    const formatDateStr = (dateString) => {
         const year = parseInt(dateString.slice(0, 4));
         const month = parseInt(dateString.slice(5, 7)) - 1; // Months are zero-indexed
         const day = parseInt(dateString.slice(8, 10));
@@ -387,6 +483,7 @@ const Bookings = () => {
                     </div>
 
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
+                        <p id="conflict-message" style={{ backgroundColor: '#ed5e68', color: '#ffffff', fontWeight: '500', border: 'solid 1px #ed5e68', borderRadius: '0.3rem', padding: '0.5rem', margin: '1rem' }}></p>
                         <h3>Guest Details</h3>
                         <p style={{ margin: 0, fontSize: '0.8rem' }}>* Required Fields</p>
                         <div className="guest-details-input-form">
@@ -411,7 +508,6 @@ const Bookings = () => {
                     <div className="cart-top">
                         <span id="close-cart-dropdown" onClick={() => handleCartDropdownClose()} className="material-symbols-outlined">close</span>
                     </div>
-                    <p id="conflict-message" style={{ color: '#ed5e68', fontWeight: 'bold', border: 'solid 1px #ed5e68', borderRadius: '0.5rem', padding: '0.5rem' }}></p>
                     {bookingCart.length === 0 ? (
                         <div style={{ margin: '3rem 0 0 0' }}>
                             <span style={{ fontSize: '2rem', color: '#996132' }} className="material-symbols-outlined">more_horiz</span>
@@ -430,11 +526,11 @@ const Bookings = () => {
                                 <div className="date-display-cart">
                                     <div className="checkin-display-cart">
                                         <p className="date-display-cart-item">Check-in</p>
-                                        <p className="date-display-cart-item">{formateDateStr(String(item.checkIn))}</p>
+                                        <p className="date-display-cart-item">{formatDateStr(String(item.checkIn))}</p>
                                     </div>
                                     <div className="checkout-display-cart">
                                         <p className="date-display-cart-item">Check-out</p>
-                                        <p className="date-display-cart-item">{formateDateStr(String(item.checkOut))}</p>
+                                        <p className="date-display-cart-item">{formatDateStr(String(item.checkOut))}</p>
                                     </div>
                                 </div>
                                 <br></br>

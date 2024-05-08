@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from './components/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from "./components/Navbar";
@@ -12,10 +12,39 @@ import ManageBooking from './components/ManageBooking'
 import BookingConfirmed from './components/BookingConfirmed';
 import UpcomingBookings from './components/UpcomingBookings'
 import NotFound from './components/NotFound'
+import LoadingScreen from './components/LoadingScreen'
 
 function App() {
 
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const handleLoad = () => {
+      setIsLoading(false);
+    };
+
+    window.addEventListener('load', handleLoad);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
+
+
+
+  /*useEffect(() => {
+    // Simulate a delay to mimic loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+  
+  */
+
+  return (isLoading ? <LoadingScreen /> :
     <div className="App">
       <Router scrollRestoration="auto">
         <div id='landingPage'>

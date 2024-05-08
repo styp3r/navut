@@ -54,18 +54,18 @@ const ManageBooking = () => {
             // Iterate over fetchedrcm array to check if any row matches the given criteria
             let found = false;
             for (const row of fetchedrcm) {
-                if (row.room_type === roomNameDelete && row.check_in === checkIn && row.check_out === checkOut) {
+                if (row.room_type === roomNameDelete && checkIn < row.check_out && checkOut > row.check_in) {
                     found = true;
-                    if (row.count > 1) {
+                    if (row.isConflictCount > 1) {
                         const { error } = await supabase
                             .from('rcm')
-                            .update({ count: row.count - 1 })
+                            .update({ isConflictCount: row.isConflictCount - 1 })
                             .eq('id', row.id);
 
                         if (error) {
                             throw error;
                         }
-                        break; // Exit the loop once a matching row is found and updated
+                        //break; // Exit the loop once a matching row is found and updated
                     } else {
                         const { error } = await supabase
                             .from('rcm')
@@ -75,7 +75,7 @@ const ManageBooking = () => {
                         if (error) {
                             throw error;
                         }
-                        break; // Exit the loop once a matching row is found and updated
+                        //break; // Exit the loop once a matching row is found and updated
                     }
 
 

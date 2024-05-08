@@ -83,54 +83,142 @@ const ReviewBooking = () => {
         generateBookingId(10);
     }, []);
 
-    const updateRCM = async (roomType, checkIn, checkOut) => {
-        try {
-            const { data: fetchedrcm, error } = await supabase
-                .from('rcm')
-                .select('*');
 
-            // Iterate over fetchedrcm array to check if any row matches the given criteria
-            let found = false;
-            for (const row of fetchedrcm) {
-                if (row.room_type === roomType && row.check_in === checkIn && row.check_out === checkOut) {
-                    found = true;
-                    const { error } = await supabase
-                        .from('rcm')
-                        .update({ count: row.count + 1 })
-                        .eq('id', row.id);
+    const handleUpdateRCM = () => { // BUG
 
-                    if (error) {
-                        throw error;
-                    }
-                    break; // Exit the loop once a matching row is found and updated
-                }
+        function generateDates(checkin, checkout) {
+            let startDate = new Date(checkin);
+            let endDate = new Date(checkout);
+            let datesBetween = [];
+
+            while (startDate <= endDate) {
+                datesBetween.push(startDate.toISOString().split('T')[0]);
+                startDate.setDate(startDate.getDate() + 1);
             }
 
-            // If no matching row is found, insert a new row
-            if (!found) {
-                const { error } = await supabase
+            return datesBetween;
+        }
+
+        let dates = [];
+        let dateArr = [];
+
+        bookingCart.forEach(booking => {
+            dates = generateDates(booking.checkIn, booking.checkOut);
+
+            for (let i = 0; i < dates.length; i++) {
+                if ((i + 1) < dates.length) {
+                    let upload = { today: dates[i], tomorrow: dates[i + 1], roomName: booking.room_name }
+                    dateArr.push(upload)
+                }
+            }
+        });
+
+        const duplicatesArray = [];
+
+        dateArr.forEach(obj => {
+            const foundIndex = duplicatesArray.findIndex(item =>
+                item.roomName === obj.roomName &&
+                item.today === obj.today &&
+                item.tomorrow === obj.tomorrow
+            );
+
+            if (foundIndex !== -1) {
+                // If duplicate found, increment count
+                duplicatesArray[foundIndex].count++;
+            } else {
+                // If no duplicate found, add with count 1
+                duplicatesArray.push({ ...obj, count: 1 });
+            }
+        });
+
+        console.log(duplicatesArray)
+
+        //compare dateArr with rcm
+        const fetchRCMData = async () => {
+            try {
+                const { data: fetchedrcm, error } = await supabase
                     .from('rcm')
-                    .insert({ room_type: roomType, check_in: checkIn, check_out: checkOut, count: 1 });
+                    .select('*');
 
                 if (error) {
                     throw error;
                 }
+
+                let flag = 0;
+                let isSoldOut = 0;
+
+                if (fetchedrcm.length === 0) {
+                    console.log("Database empty. Insert duplicatesArray entirely.") // database empty
+                    flag = 0;
+                    isSoldOut = 0;
+                    for (const obj of duplicatesArray) {
+                        const { error1 } = await supabase
+                            .from('rcm')
+                            .insert({ room_type: obj.roomName, check_in: obj.today, check_out: obj.tomorrow, count: obj.count, limit: obj.roomName === "Deluxe Room" ? 4 : 2 });
+
+                        if (error1) {
+                            throw error1;
+                        }
+                    }
+
+                    console.log("Successful Booking. Go to booking confirmed page.")
+                } else {
+
+                    //database is not empty
+                    for (const obj1 of duplicatesArray) {
+                        let conditionSatisfied = false; // Flag to check if any matching condition is satisfied
+                        for (const obj2 of fetchedrcm) {
+                            if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
+                                console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
+                                if (obj2.count < obj2.limit && (obj1.count + obj2.count) <= obj2.limit) {
+                                    console.log("Rooms are available! Update count");
+                                    conditionSatisfied = true; // Set flag to true if condition satisfied
+                                    const { error } = await supabase
+                                        .from('rcm')
+                                        .update({
+                                            count: obj2.count + obj1.count,
+                                        })
+                                        .eq('id', obj2.id);
+
+                                    if (error) {
+                                        throw error
+                                    }
+                                }
+                            }
+                        }
+
+                        if (!conditionSatisfied) {
+                            // If no matching condition is satisfied, insert a new row
+                            console.log("No existing booking found. Insert new row.");
+                            // Your insertion code here
+                            const { error1 } = await supabase
+                                .from('rcm')
+                                .insert({ room_type: obj1.roomName, check_in: obj1.today, check_out: obj1.tomorrow, count: 1, limit: obj1.roomName === 'Deluxe Room' ? 4 : 2 });
+
+                            if (error1) {
+                                throw error1;
+                            }
+                        }
+                    }
+
+                }
+
+                if (flag === 0 && isSoldOut === 0) {
+                    //navigate("/review-booking")
+                    return true;
+                } else {
+                    return null;
+                }
+
+            } catch (error) {
+                console.error('Error fetching rcm data:', error.message);
+                // Handle errors (display message, retry logic)
             }
+        };
 
-            // Handle any error occurred during the operations
-            if (error) {
-                throw error;
-            }
+        fetchRCMData();
 
-            navigate("/booking-confirmed")
-            window.location.reload();
-            //return fetchedrcm;
-        } catch (error) {
-            console.error('Error fetching bookings:', error.message);
-            // Handle errors (display message, retry logic)
-        }
-    };
-
+    }
 
 
     const handleUploadData = async () => {
@@ -162,6 +250,9 @@ const ReviewBooking = () => {
                     .from('bookingData')
                     .insert({
                         created_at: String(new Date()),
+                        room_type: item.room_name,
+                        checkin_date: item.checkIn,
+                        checkout_date: item.checkOut,
                         bookings: bookingObject,
                     });
 
@@ -170,16 +261,13 @@ const ReviewBooking = () => {
                 }
             }
 
+            // Update rcm
+            handleUpdateRCM();
             console.log('Booking Data uploaded successfully');
             document.getElementById('error-booking-upload').style.display = 'none';
         } catch (error) {
             document.getElementById('error-booking-upload').style.display = 'flex';
             console.error('Error uploading data:', error.message);
-        }
-
-        // Update rcm
-        for (const item of bookingCart) {
-            updateRCM(item.room_name, item.checkIn, item.checkOut);
         }
     };
 
@@ -198,9 +286,9 @@ const ReviewBooking = () => {
 
     return (
         <div id="review-booking-page">
-            <div className = "go-back-btn-container">
+            <div className="go-back-btn-container">
                 <Link to="/bookings"><span className="material-symbols-outlined go-back-btn">arrow_circle_left</span></Link>
-                <p style = {{margin: '0 0 0 0.5rem', color: '#996132', fontWeight: '500'}}>Go Back</p>
+                <p style={{ margin: '0 0 0 0.5rem', color: '#996132', fontWeight: '500' }}>Go Back</p>
             </div>
             <p className="review-booking-page-title">Review Booking</p>
             <p id="error-booking-upload"><span className="material-symbols-outlined">warning</span>Internal Server Error. Please Try Again Later.</p>
@@ -269,3 +357,118 @@ const ReviewBooking = () => {
 };
 
 export default ReviewBooking;
+
+/* 
+
+for (const obj1 of dateArr) {
+                    for (const obj2 of fetchedrcm) {
+                        if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
+                            console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
+                            if (obj2.count < obj2.limit) {
+                                console.log("Rooms are available!");
+                            } else {
+                                flag = 1;
+                                console.log("Rooms are sold out! :(")
+                                document.getElementById("conflict-message").style.display = "flex";
+                                document.getElementById("conflict-message").textContent = "There are no vacancies for " + obj1.roomName + " for the following dates: " + formatDateStr(String(obj1.today)) + " and " + formatDateStr(String(obj1.tomorrow));
+                                break;
+                            }
+                        } else if (obj1.roomName === obj2.room_type) {
+                            console.log("There are no existing bookings for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow + ". Create a new booking.")
+                        }
+                    }
+                }
+
+                */
+
+/* Old Code
+
+ 
+const updateRCM = async (roomType, checkIn, checkOut) => {
+
+function generateDates(checkin, checkout) {
+let startDate = new Date(checkin);
+let endDate = new Date(checkout);
+let datesBetween = [];
+
+while (startDate <= endDate) {
+datesBetween.push(startDate.toISOString().split('T')[0]);
+startDate.setDate(startDate.getDate() + 1);
+}
+
+return datesBetween;
+}
+
+let dates = [];
+let dateArr = [];
+
+bookingCart.forEach(booking => {
+dates = generateDates(booking.checkIn, booking.checkOut);
+
+for (let i = 0; i < dates.length; i++) {
+if ((i + 1) < dates.length) {
+    let upload = { today: dates[i], tomorrow: dates[i + 1], roomName: booking.room_name }
+    dateArr.push(upload)
+}
+}
+});
+
+
+//updating rcm
+try {
+const { data: fetchedrcm, error } = await supabase
+.from('rcm')
+.select('*');
+
+// Iterate over fetchedrcm array to check if any row matches the given criteria
+let found = false;
+for (const row of fetchedrcm) {
+if (row.room_type === roomType && checkIn < row.check_out && checkOut > row.check_in) {
+    found = true;
+        const { error } = await supabase
+            .from('rcm')
+            .update({ isConflictCount: row.isConflictCount + 1 })
+            .eq('id', row.id);
+
+        const { error1 } = await supabase
+            .from('rcm')
+            .insert({ room_type: roomType, check_in: checkIn, check_out: checkOut, isConflictCount: row.isConflictCount + 1 });
+
+        if (error1) {
+            throw error1;
+        }
+
+
+        if (error) {
+            throw error;
+        }
+        //break; // Exit the loop once a matching row is found and updated
+}
+}
+
+// If no matching row is found, insert a new row
+if (!found) {
+const { error } = await supabase
+    .from('rcm')
+    .insert({ room_type: roomType, check_in: checkIn, check_out: checkOut, isConflictCount: 1 });
+
+if (error) {
+    throw error;
+}
+}
+
+// Handle any error occurred during the operations
+if (error) {
+throw error;
+}
+
+navigate("/booking-confirmed")
+window.location.reload();
+//return fetchedrcm;
+} catch (error) {
+console.error('Error fetching bookings:', error.message);
+// Handle errors (display message, retry logic)
+}
+};
+
+*/
