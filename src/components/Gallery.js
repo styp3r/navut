@@ -25,19 +25,19 @@ const Gallery = () => {
             <div className="carousel-container">
                 <Slider {...settings}>
                     <div className="carousel-item">
-                        <img src={One} />
+                        <img alt = "" src={One} />
                     </div>
                     <div className="carousel-item">
-                        <img src={Two} />
+                        <img alt = "" src={Two} />
                     </div>
                     <div className="carousel-item">
-                        <img src={Three} />
+                        <img alt = "" src={Three} />
                     </div>
                     <div className="carousel-item">
-                        <img src={Four} />
+                        <img alt = "" src={Four} />
                     </div>
                     <div className="carousel-item">
-                        <img src={Five} />
+                        <img alt = "" src={Five} />
                     </div>
                 </Slider>
             </div>

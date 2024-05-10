@@ -18,7 +18,7 @@ const Footer = () => {
                 </div>
                 <div className="our-location">
                     <p style={{ margin: '1rem 5rem 1rem 1rem', fontWeight: '600', color: '#996132' }}>Our Locations</p>
-                    <a style={{ textDecoration: 'none', color: '#996132' }} target = "_blank" href="https://www.google.com/maps/search/12.189052,+75.748366?entry=tts"><p style = {{margin: '1rem 5rem 1rem 1rem'}}>Navut Homestay - Coorg</p></a>
+                    <a style={{ textDecoration: 'none', color: '#996132' }} target = "_blank" rel="noreferrer" href="https://www.google.com/maps/search/12.189052,+75.748366?entry=tts"><p style = {{margin: '1rem 5rem 1rem 1rem'}}>Navut Homestay - Coorg</p></a>
                 </div>
             </div>
             <div className="logo-copyright-bottom">

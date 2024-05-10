@@ -1707,6 +1707,55 @@ html {
   width: 50%;
 }
 
+#onsite-staff-login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container{
+  margin: 10rem 0 0 0;
+  width: 15rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3e4d8;
+  border-radius: 0.5rem;
+}
+
+.loginid-input,.loginpass-input{
+  width: 85%;
+  height: 2rem;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0 0 0 0.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.login-btn{
+  width: 50%;
+  height: 2rem;
+  border: none;
+  background-color: #f3e4d8;
+  color: #996132;
+  border: solid 1px #996132;
+  border-radius: 0.3rem;
+}
+
+.login-btn:hover{
+  cursor: pointer;
+  background-color: #996132;
+  color: #ffffff;
+  border: solid 1px #996132;
+}
+
+.login-btn:active{
+  background-color: #4b2f18;
+}
+
 
 /* Upcoming Booking Page Section End */
 
