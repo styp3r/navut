@@ -130,10 +130,7 @@ const UpcomingBookings = () => {
                                             <p>{filteredItem.bookings.nights > 1 ? filteredItem.bookings.nights + " Nights" : filteredItem.bookings.nights + " Night"}</p>
                                             <p>Check-in: {formatDateStr(String(filteredItem.bookings.check_in))}</p>
                                             <p>Check-out: {formatDateStr(String(filteredItem.bookings.check_out))}</p>
-                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                <p>Extras: {filteredItem.bookings.extras}</p>
-                                                <p>&#8377; {filteredItem.bookings.room_price}</p>
-                                            </div>
+                                            <p>Extras: {filteredItem.bookings.extras}</p>
                                         </div>
                                     </div>
                                 </div>
