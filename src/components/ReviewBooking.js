@@ -131,7 +131,7 @@ const ReviewBooking = () => {
             }
         });
 
-        console.log(duplicatesArray)
+        //console.log(duplicatesArray)
 
         //compare dateArr with rcm
         const fetchRCMData = async () => {
@@ -148,7 +148,7 @@ const ReviewBooking = () => {
                 let isSoldOut = 0;
 
                 if (fetchedrcm.length === 0) {
-                    console.log("Database empty. Insert duplicatesArray entirely.") // database empty
+                    //console.log("Database empty. Insert duplicatesArray entirely.") // database empty
                     flag = 0;
                     isSoldOut = 0;
                     for (const obj of duplicatesArray) {
@@ -161,7 +161,7 @@ const ReviewBooking = () => {
                         }
                     }
 
-                    console.log("Successful Booking. Go to booking confirmed page.")
+                    //console.log("Successful Booking. Go to booking confirmed page.")
                 } else {
 
                     //database is not empty
@@ -169,9 +169,9 @@ const ReviewBooking = () => {
                         let conditionSatisfied = false; // Flag to check if any matching condition is satisfied
                         for (const obj2 of fetchedrcm) {
                             if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
-                                console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
+                                //console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
                                 if (obj2.count < obj2.limit && (obj1.count + obj2.count) <= obj2.limit) {
-                                    console.log("Rooms are available! Update count");
+                                    //console.log("Rooms are available! Update count");
                                     conditionSatisfied = true; // Set flag to true if condition satisfied
                                     const { error } = await supabase
                                         .from('rcm')
@@ -189,7 +189,7 @@ const ReviewBooking = () => {
 
                         if (!conditionSatisfied) {
                             // If no matching condition is satisfied, insert a new row
-                            console.log("No existing booking found. Insert new row.");
+                            //console.log("No existing booking found. Insert new row.");
                             // Your insertion code here
                             const { error1 } = await supabase
                                 .from('rcm')
@@ -263,7 +263,7 @@ const ReviewBooking = () => {
 
             // Update rcm
             handleUpdateRCM();
-            console.log('Booking Data uploaded successfully');
+            //console.log('Booking Data uploaded successfully');
             document.getElementById('error-booking-upload').style.display = 'none';
         } catch (error) {
             document.getElementById('error-booking-upload').style.display = 'flex';

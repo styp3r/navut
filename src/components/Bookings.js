@@ -384,13 +384,13 @@ const Bookings = () => {
                 for (const obj1 of duplicatesArray) {
                     for (const obj2 of fetchedrcm) {
                         if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
-                            console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
+                            //console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
                             if (obj2.count < obj2.limit && (obj1.count + obj2.count) <= obj2.limit) {
-                                console.log("Rooms are available!");
+                                //console.log("Rooms are available!");
                             } else {
                                 flag = 1;
                                 isSoldOut = 1;
-                                console.log("Rooms are sold out! :(")
+                                //console.log("Rooms are sold out! :(")
                                 //conflict toast
                                 toast.error((obj2.limit - obj2.count) > 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : (obj2.limit - obj2.count) === 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancy available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : 'No vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
                                     position: "top-right",
@@ -412,7 +412,7 @@ const Bookings = () => {
                 }
 
                 if (flag === 0 && isSoldOut === 0) {
-                    console.log('No conflicts detected! Go to review booking page')
+                    //console.log('No conflicts detected! Go to review booking page')
                     //store the name, email and phone number values to be taken to review booking page
                     setGuestName(inputValue1)
                     setGuestEmail(inputValue2)

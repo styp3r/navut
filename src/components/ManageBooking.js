@@ -67,7 +67,7 @@ const ManageBooking = () => {
             }
         });
 
-        console.log(duplicatesArray)
+        //console.log(duplicatesArray)
 
         //compare dateArr with rcm
         const fetchRCMData = async () => {
@@ -79,9 +79,9 @@ const ManageBooking = () => {
                 for (const obj1 of duplicatesArray) {
                     for (const obj2 of fetchedrcm) {
                         if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
-                            console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
+                            //console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
                             if (obj2.count > 1 && (obj2.count - obj1.count) >= 1) {
-                                console.log("Reduce count");
+                                //console.log("Reduce count");
                                 const { error } = await supabase
                                     .from('rcm')
                                     .update({
@@ -100,7 +100,7 @@ const ManageBooking = () => {
                                     .eq('id', obj2.id);
 
                                 if (!error) {
-                                    console.log('Row with :', obj2.id, ' deleted successfully!');
+                                    //console.log('Row with :', obj2.id, ' deleted successfully!');
                                 } else {
                                     console.error('Error deleting rows:', error);
                                     // Handle errors appropriately (e.g., display an error message to the user)
@@ -151,7 +151,7 @@ const ManageBooking = () => {
                 .eq('bookings->>unique_id', uniqueId); // Filter by 'bookings.unique_id' property
 
             if (!error) {
-                console.log('Rows with unique_id:', uniqueId, 'deleted successfully!');
+                //console.log('Rows with unique_id:', uniqueId, 'deleted successfully!');
                 // Update your UI to reflect the deletion
             } else {
                 console.error('Error deleting rows:', error);
