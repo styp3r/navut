@@ -12,8 +12,8 @@ const Hero = () => {
             <img id="hero-img-mobile" alt="village in coorg" src={HeroImgMobile}></img>
             <h3 id="hero-text-1">Find Your Bliss,</h3>
             <h3 id="hero-text-2">In The Coorg Hills</h3>
-            <Link to = "/bookings-landing" style = {{textDecoration: 'none', color: '#ffffff'}}><div id="go-to-booking-landing-btn">Book Your Stay Now</div></Link>
-            
+            <Link to="/bookings-landing" style={{ textDecoration: 'none', color: '#ffffff' }}><div id="go-to-booking-landing-btn">Book Your Stay Now</div></Link>
+
         </div>
     );
 }
