@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import aboutUsHeroImg from '../images/aboutUsHeroImg.jpg'
+import aboutUsHeroImg from '../images/property/aboutUsHeroImg2.jpg'
 
 const About = () => {
 
@@ -9,7 +9,7 @@ const About = () => {
         <div id="aboutUsPage">
             <p style={{ color: '#996132', fontSize: "1.5rem", fontFamily: "'Montserrat', sans-serif", fontWeight: 'bold', margin: '12rem 0 0 0' }}>About Us</p>
             <div className="aboutUsSection">
-                <img style={{ borderRadius: '1rem' }} src={aboutUsHeroImg} width="350" height="350" alt="homestay"></img>
+                <img style={{ objectFit: 'contain' }} src={aboutUsHeroImg} width="370" height="350" alt="homestay"></img>
                 <div className="aboutUsContent-container">
                     <p className="aboutUsContent">Welcome to our tranquil retreat nestled in the heart of Coorg's lush forests, where the melody of nature intertwines with the aroma of freshly brewed coffee. Established in March 2024, our homestay in Kedamallur, Karnataka, invites you to escape the hustle and bustle of city life and immerse yourself in the serenity of nature.</p>
 

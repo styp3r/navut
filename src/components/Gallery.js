@@ -1,8 +1,11 @@
-import One from '../images/gallery/gal1.jpeg'
-import Two from '../images/gallery/gal2.jpeg'
-import Three from '../images/gallery/gal3.jpeg'
-import Four from '../images/gallery/gal4.jpg'
-import Five from '../images/gallery/gal5.jpg'
+import One from '../images/property/gal1.jpg'
+import Two from '../images/property/gal2.jpg'
+import Three from '../images/property/gal3.jpg'
+import Four from '../images/property/gal4.jpg'
+import Five from '../images/property/gal5.jpg'
+import Six from '../images/property/gal6.jpg'
+import Seven from '../images/property/gal7.jpg'
+import Eight from '../images/property/gal8.jpg'
 import Slider from 'react-slick';
 
 
@@ -25,19 +28,28 @@ const Gallery = () => {
             <div className="carousel-container">
                 <Slider {...settings}>
                     <div className="carousel-item">
-                        <img alt = "" src={One} />
+                        <img style = {{objectFit: 'contain'}} alt = "" src={One} />
                     </div>
                     <div className="carousel-item">
-                        <img alt = "" src={Two} />
+                        <img style = {{objectFit: 'contain'}} alt = "" src={Two} />
                     </div>
                     <div className="carousel-item">
-                        <img alt = "" src={Three} />
+                        <img style = {{objectFit: 'contain'}} alt = "" src={Three} />
                     </div>
                     <div className="carousel-item">
-                        <img alt = "" src={Four} />
+                        <img style = {{objectFit: 'contain'}} alt = "" src={Four} />
                     </div>
                     <div className="carousel-item">
-                        <img alt = "" src={Five} />
+                        <img style = {{objectFit: 'contain'}} alt = "" src={Five} />
+                    </div>
+                    <div className="carousel-item">
+                        <img style = {{objectFit: 'contain'}} alt = "" src={Six} />
+                    </div>
+                    <div className="carousel-item">
+                        <img style = {{objectFit: 'contain'}} alt = "" src={Seven} />
+                    </div>
+                    <div className="carousel-item">
+                        <img style = {{objectFit: 'contain'}} alt = "" src={Eight} />
                     </div>
                 </Slider>
             </div>

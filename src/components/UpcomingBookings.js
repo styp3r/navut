@@ -57,8 +57,6 @@ const UpcomingBookings = () => {
     }
 
     const handleAuthCheck = () => {
-        console.log(username, heroname);
-        console.log(pass, secret);
         if (username === heroname && pass === secret) {
             setIsAuth(true);
             toast.success('Login Successful!', {
@@ -72,6 +70,7 @@ const UpcomingBookings = () => {
                 theme: "colored",
             });
         } else {
+            setIsAuth(false);
             toast.error(('Username or Password Incorrect!'), {
                 position: "top-right",
                 autoClose: 7000,
@@ -160,8 +159,8 @@ const UpcomingBookings = () => {
                     theme="colored" />
                 <div className="login-container">
                     <p style={{ color: '#996132', fontWeight: '500' }}>Bookings Portal</p>
-                    <input type = "text" className="loginid-input" placeholder='Username' onChange={(event) => setUsername(event.target.value)}></input>
-                    <input type = "text" className="loginpass-input" placeholder='Password' onChange={(event) => setPass(event.target.value)}></input>
+                    <input type="text" className="loginid-input" placeholder='Username' onChange={(event) => setUsername(event.target.value)}></input>
+                    <input type="text" className="loginpass-input" placeholder='Password' onChange={(event) => setPass(event.target.value)}></input>
                     <button className="login-btn" onClick={() => handleAuthCheck()}>Login</button>
                 </div>
             </div>

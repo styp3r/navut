@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Footer from './Footer';
 import useStore from './store'
-import gal from '../images/gallery/gal1.jpeg'
+import DeluxeRoom from '../images/property/gal6.jpg'
+import FamilyRoom from '../images/property/gal9.jpg'
 import { Link, useNavigate } from 'react-router-dom'
 import supabase from './supabase'
 import { ToastContainer, toast } from 'react-toastify';
@@ -391,7 +392,7 @@ const Bookings = () => {
                                 isSoldOut = 1;
                                 console.log("Rooms are sold out! :(")
                                 //conflict toast
-                                toast.error((obj2.limit - obj2.count) > 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : 'Only ' + (obj2.limit - obj2.count) + ' vacancy available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
+                                toast.error((obj2.limit - obj2.count) > 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : (obj2.limit - obj2.count) === 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancy available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : 'No vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
                                     position: "top-right",
                                     autoClose: 7000,
                                     hideProgressBar: false,
@@ -484,7 +485,7 @@ const Bookings = () => {
                 theme="colored" />
 
             <div id="booking-headers">
-                <p style={{ color: '#996132', fontSize: '2rem', fontWeight: '400' }}>Book Your Stay</p>
+                <p className="book-your-stay-title">Book Your Stay</p>
                 <div className="booking-headers-right">
                     <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">cancel</span>Cancel Add Room</button>
                     <div className="booking-headers-right-description-container">
@@ -509,26 +510,30 @@ const Bookings = () => {
                                                 <div className="room-amenities-factuals">
                                                     <div className="room-amenities-factuals-left">
                                                         <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">fit_Screen</span> xyz sqft</p>
-                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bed</span> Queen Bed</p>
-                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bathtub</span> Bathroom</p>
-                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">tv</span> TV</p>
+                                                        {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bed</span>1 x Queen Bed</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bed</span> 6 x Single Beds</p>}
+                                                        {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bathtub</span> Bathroom</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bathtub</span>2 x Bathrooms</p>}
+                                                        {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">tv</span> TV</p> : null}
                                                         {ar.isBreakfast ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">dinner_dining</span> Breakfast Included</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">no_meals</span> Breakfast Excluded</p>}
                                                     </div>
                                                     <div className="room-amenities-factuals-right">
                                                         <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">wifi</span> WiFi</p>
-                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">chair</span> Pull-out Bed / Sofa</p>
+                                                        {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">chair</span> Pull-out Bed / Sofa</p> : null}
                                                         <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">balcony</span> Private Balcony</p>
                                                         <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">self_care</span> Towels & Essentials</p>
-                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">table_lamp</span> Workspace</p>
+                                                        {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">table_lamp</span> Workspace</p> : null}
                                                     </div>
                                                 </div>
-                                                <img alt='bedroom shot' src={gal} style={{ width: '40%', height: '20rem', borderRadius: '0.5rem', objectFit: 'cover' }}></img>
+                                                <img alt='bedroom shot' src={ar.room_name === "Deluxe Room" ? DeluxeRoom : FamilyRoom} style={{ objectFit: 'contain' }} className="bedroom-shot"></img>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="room-details-content-bottom">
                                         <div className="price-details-container">
                                             <p className="price-amount">&#8377; {ar.room_price} <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem' }}>Per Night (Exclusive of Taxes)</span></p>
+                                        </div>
+                                        <div className="price-details-container-mobile">
+                                            <p style={{ margin: '0.5rem' }} className="price-amount">&#8377; {ar.room_price}</p>
+                                            <span style={{ color: '#996132', fontWeight: '300', fontSize: '1rem', margin: '0 0 1rem 0' }}>Per Night (Exclusive of Taxes)</span>
                                         </div>
                                         <button id="book-room-btn" onClick={() => handleAddRoomToCart(ar.type === 'd' ? deluxeIddArray[deluxeIdArrayCount] : ar.type === 'f' ? familyIddArray[familyIdArrayCount] : ar.id, ar.room_name, ar.room_price, ar.isBreakfast, ar.type)} className="classicBtn" >Book Room</button>
                                     </div>

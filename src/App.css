@@ -68,6 +68,8 @@ html {
   width: 5rem;
   height: 5rem;
   margin: 5rem 0 0 5rem;
+  transition: width 0.5s ease;
+  transition: height 0.5s ease;
 }
 
 .navbar-items {
@@ -124,12 +126,20 @@ html {
   width: 100%;
   height: 50rem;
   object-fit: cover;
+  display: flex;
+}
+
+#hero-img-mobile {
+  width: 100%;
+  height: 50rem;
+  object-fit: cover;
+  display: none;
 }
 
 #go-to-booking-landing-btn {
   position: absolute;
   left: 5rem;
-  top: 30rem;
+  top: 25rem;
   width: 15rem;
   height: 3rem;
   background-color: #f3e4d8;
@@ -172,9 +182,9 @@ html {
 
 #hero-text-1 {
   text-align: left;
-  width: 25rem;
   position: absolute;
   color: #ffffff;
+  backdrop-filter: blur(0.2rem);
   left: 5rem;
   top: 10rem;
   font-size: 3.5rem;
@@ -183,11 +193,11 @@ html {
 
 #hero-text-2 {
   text-align: left;
-  width: 25rem;
   position: absolute;
   color: #ffffff;
+  backdrop-filter: blur(0.2rem);
   left: 5rem;
-  top: 15rem;
+  top: 14rem;
   display: flex;
   font-size: 3.5rem;
   font-family: 'Caveat', cursive;
@@ -207,7 +217,7 @@ html {
 }
 
 .carousel-container {
-  width: 70%;
+  width: 60%;
   /* Adjust width as needed */
   margin: 0 auto;
   /* Center the carousel horizontally */
@@ -564,14 +574,14 @@ html {
   height: 15rem;
 }
 
-.useful-links{
+.useful-links {
   display: flex;
   flex-direction: column;
   text-align: left;
   margin: 2rem 0 0 4rem;
 }
 
-.our-location{
+.our-location {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -649,7 +659,7 @@ html {
 }
 
 .contactCardsContainer {
-  width: 65rem;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -658,7 +668,7 @@ html {
 
 .callUsCard,
 .reachUsCard {
-  width: 30rem;
+  width: 30%;
   height: 25rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   background-color: #ffffff;
@@ -667,7 +677,7 @@ html {
 }
 
 .help-supportCard {
-  width: 30rem;
+  width: 30%;
   height: 30rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background-color: #ffffff;
@@ -731,6 +741,11 @@ html {
   margin: 10rem 0 5rem 0;
 }
 
+.property-video-container {
+  width: 100%;
+  display: flex;
+}
+
 /* Property Video Section End */
 
 /* Loading Screen Start */
@@ -791,13 +806,19 @@ html {
   align-items: center;
 }
 
-.booking-headers-right{
+.book-your-stay-title {
+  color: #996132;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.booking-headers-right {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.booking-headers-right-description-container{
+.booking-headers-right-description-container {
   width: 20rem;
   display: flex;
   flex-direction: column;
@@ -848,6 +869,13 @@ html {
   justify-content: center;
   align-items: center;
   padding: 3rem;
+}
+
+.bedroom-shot {
+  width: 40%;
+  height: 20rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
 }
 
 .room-details-content-top {
@@ -1571,9 +1599,9 @@ html {
 }
 
 #search-booking-btn {
-  width: 3rem;
+  width: 5rem;
   height: 3rem;
-  margin: 0 0 0 1rem;
+  margin: 1rem 0 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1704,20 +1732,20 @@ html {
 }
 
 .upcoming-bookings-list {
-  width: 50%;
+  width: 70%;
 }
 
-#onsite-staff-login{
+#onsite-staff-login {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.login-container{
-  margin: 10rem 0 0 0;
-  width: 15rem;
-  height: 20rem;
+.login-container {
+  margin: 10rem 0 10rem 0;
+  width: 25rem;
+  height: 25rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1726,18 +1754,19 @@ html {
   border-radius: 0.5rem;
 }
 
-.loginid-input,.loginpass-input{
+.loginid-input,
+.loginpass-input {
   width: 85%;
-  height: 2rem;
+  height: 3rem;
   border: none;
   border-radius: 0.3rem;
   padding: 0 0 0 0.5rem;
   margin: 0 0 1rem 0;
 }
 
-.login-btn{
+.login-btn {
   width: 50%;
-  height: 2rem;
+  height: 3rem;
   border: none;
   background-color: #f3e4d8;
   color: #996132;
@@ -1745,14 +1774,14 @@ html {
   border-radius: 0.3rem;
 }
 
-.login-btn:hover{
+.login-btn:hover {
   cursor: pointer;
   background-color: #996132;
   color: #ffffff;
   border: solid 1px #996132;
 }
 
-.login-btn:active{
+.login-btn:active {
   background-color: #4b2f18;
 }
 
@@ -1767,6 +1796,10 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.booking-confirmed-page-content {
+  padding: 10rem 0 0 0;
 }
 
 .booking-confirmed-title-1 {
@@ -1786,3 +1819,910 @@ html {
 }
 
 /* Booking Confirmed Page Section End */
+
+/* Responsive Design Styling Start */
+
+@media only screen and (max-width: 1024px) {
+  .carousel-container {
+    width: 95%;
+    /* Adjust width as needed */
+    margin: 0 auto;
+    /* Center the carousel horizontally */
+  }
+
+  .gallery-content {
+    width: 95%;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .testimonial-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+  }
+
+  .testimonial-card {
+    font-size: 1rem;
+    width: 80%;
+    height: 15rem;
+    background-color: #f3e4d8;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #996132;
+    margin: 5rem 0 0 0;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    position: relative;
+  }
+
+  #map-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: 50rem;
+  }
+
+  .map-information {
+    width: 50%;
+    text-align: left;
+    font-size: 1rem;
+    margin: 5rem 0 5rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .amen-list {
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0 3rem 0;
+  }
+
+  .amen-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem 2rem 5rem 3rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  #bookings-landing-container {
+    width: 80%;
+    margin: 15rem 0 20rem 0;
+    text-align: left;
+  }
+
+  #booking-dashboard {
+    width: 95%;
+    display: flex;
+  }
+
+  .room-details-content-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .room-amenities-factuals {
+    display: flex;
+    width: 95%;
+  }
+
+  #room-details-container {
+    width: 100%;
+    height: 70rem;
+    border-radius: 0.5rem;
+    background-color: #f3e4d8;
+    color: #996132;
+    margin: 0 0 5rem 0;
+  }
+
+  .bedroom-shot {
+    width: 100%;
+    height: 30rem;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+
+  #room-selection-cart {
+    position: absolute;
+    right: 0;
+    top: 15rem;
+    background-color: #ffffff;
+    width: 50%;
+    height: 40rem;
+    border: solid 1px #f2f2f2;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    padding: 1rem;
+    display: none;
+    flex-direction: column;
+    overflow-x: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  #booking-headers {
+    width: 95%;
+    height: 7rem;
+    margin: 12rem 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+  .book-your-stay-title {
+    color: #996132;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  #done-btn {
+    width: 12rem;
+    height: 2.5rem;
+    margin: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #display-final-booking-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0 5rem 0;
+  }
+
+  .review-booking-left {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .review-booking-right {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .booking-confirmed-page-content {
+    padding: 15rem 0 0 0;
+  }
+
+  .aboutUsSection {
+    width: 95%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .aboutUsContent-container {
+    width: 100%;
+  }
+
+  .manage-booking-content {
+    width: 80%;
+    margin: 15rem 0 20rem 0;
+    text-align: left;
+  }
+
+  .contactCardsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .callUsCard,
+  .reachUsCard {
+    width: 50%;
+    height: 25rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #ffffff;
+    margin: 2rem;
+    border-radius: 0.5rem;
+  }
+
+
+  .help-supportCard {
+    width: 50%;
+    height: 30rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+  }
+
+  .loginid-input,
+  .loginpass-input {
+    width: 85%;
+    height: 3rem;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0 0 0 0.5rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .login-container {
+    margin: 15rem 0 0 0;
+    width: 25rem;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3e4d8;
+    border-radius: 0.5rem;
+  }
+
+  .login-btn {
+    width: 50%;
+    height: 3rem;
+    border: none;
+    background-color: #f3e4d8;
+    color: #996132;
+    border: solid 1px #996132;
+    border-radius: 0.3rem;
+  }
+
+  .upcoming-bookings-list {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .carousel-container {
+    width: 95%;
+    /* Adjust width as needed */
+    margin: 5rem 0 auto;
+    /* Center the carousel horizontally */
+  }
+
+  #property-info {
+    width: 100%;
+    height: 80rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3e4d8;
+  }
+
+  .amen-content {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5rem 5rem 3rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  #property-video {
+    width: 100%;
+    height: 80rem;
+    display: flex;
+    margin: 10rem 0 0 0;
+  }
+
+  .property-video-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .video-container {
+    width: 20%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .video-content-title-container {
+    width: 80%;
+    height: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gallery-content {
+    width: 100%;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .testimonial-content-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .testimonial-content {
+    width: 80%;
+    height: 100%;
+    text-align: left;
+  }
+
+  .testimonial-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    height: 40rem;
+  }
+
+  .gallery-content-title {
+    width: 80%;
+    font-size: 3rem;
+    text-align: left;
+    color: #996132;
+    font-weight: 400;
+  }
+
+  .gallery-content-right {
+    width: 80%;
+    text-align: left;
+  }
+
+  #map-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90rem;
+  }
+
+  .map-information {
+    width: 80%;
+    text-align: left;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #map {
+    width: 80%;
+    height: 40rem;
+    border-radius: 0.5rem;
+    margin: 5rem;
+  }
+
+  .book-your-stay-title {
+    color: #996132;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .loginid-input,
+  .loginpass-input {
+    width: 85%;
+    height: 3rem;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0 0 0 0.5rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .login-container {
+    margin: 15rem 0 5rem 0;
+    width: 25rem;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3e4d8;
+    border-radius: 0.5rem;
+  }
+
+  .login-btn {
+    width: 50%;
+    height: 3rem;
+    border: none;
+    background-color: #f3e4d8;
+    color: #996132;
+    border: solid 1px #996132;
+    border-radius: 0.3rem;
+  }
+
+  .upcoming-bookings-list {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+
+  #navbar {
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+    backdrop-filter: blur(0.5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 5000;
+  }
+
+  #square-logo {
+    width: 7rem;
+    height: 7rem;
+    margin: 5rem 0 0 2rem;
+    display: none;
+  }
+
+  #circle-logo {
+    display: flex;
+    width: 6rem;
+    height: 6rem;
+    margin: 0 0 0 0;
+    transition: 0.5s ease;
+  }
+
+  .navbar-items {
+    margin: 0 2rem 0 0;
+  }
+
+  #hero-text-1 {
+    text-align: left;
+    width: 25rem;
+    position: absolute;
+    color: #ffffff;
+    backdrop-filter: blur(0);
+    left: 3rem;
+    top: 15rem;
+    font-size: 2.5rem;
+    font-family: 'Caveat', cursive;
+  }
+
+  #hero-text-2 {
+    text-align: left;
+    width: 25rem;
+    position: absolute;
+    color: #ffffff;
+    backdrop-filter: blur(0);
+    left: 3rem;
+    top: 18rem;
+    display: flex;
+    font-size: 2.5rem;
+    font-family: 'Caveat', cursive;
+  }
+
+  #go-to-booking-landing-btn {
+    position: absolute;
+    left: 3rem;
+    top: 40rem;
+    width: 15rem;
+    height: 3rem;
+    background-color: #f3e4d8;
+    border: none;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    color: #996132;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: 3s linear .1s flash;
+    animation-duration: 0.4s;
+    animation-iteration-count: 2;
+    animation-delay: 2s;
+    animation-timing-function: linear;
+  }
+
+  #hero-img {
+    width: 100%;
+    height: 50rem;
+    object-fit: cover;
+    display: none;
+  }
+
+  #hero-img-mobile {
+    width: 100%;
+    height: 50rem;
+    object-fit: cover;
+    display: flex;
+  }
+
+  .amen-item {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  .amen-list {
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5rem 0 3rem 0;
+  }
+
+  .amen-blocks {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #property-info {
+    width: 100%;
+    height: 120rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3e4d8;
+    margin: 5rem 0 0 0;
+  }
+
+  .amen-content {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5rem 5rem 3rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .video-container {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .testimonial-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    height: 30rem;
+  }
+
+  .book-now-text {
+    width: 80%;
+    z-index: 1;
+    font-size: 1.5rem;
+    color: #996132;
+    font-family: 'Caveat', cursive;
+  }
+
+  #footer {
+    width: 100%;
+    height: 40rem;
+    background-color: #f3e4d8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .useful-links {
+    display: flex;
+    width: 50%;
+    height: 20rem;
+    flex-direction: column;
+    text-align: left;
+    margin: 2rem 0 0 0;
+  }
+
+  .our-location {
+    display: flex;
+    width: 50%;
+    height: 20rem;
+    flex-direction: column;
+    text-align: left;
+    margin: 2rem 0 0 0;
+  }
+
+  .logo-copyright-bottom {
+    width: 90%;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .small-logo {
+    width: 5rem;
+    height: 5rem;
+    margin: 0;
+  }
+
+
+  #copyright {
+    color: #996132;
+    margin: 1rem 0 0 0;
+    font-weight: 200;
+  }
+
+  .booking-choice1 {
+    width: 100%;
+    height: 3rem;
+    margin: 0 2rem 0 0;
+  }
+
+  .booking-choice2 {
+    width: 100%;
+    height: 3rem;
+    margin: 1rem 0 0 0;
+  }
+
+  #input-search-booking-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+  }
+
+  #search-booking-input {
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: solid 1px #cecece;
+    outline: none;
+    padding: 0 0 0 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .book-your-stay-title {
+    color: #996132;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  #booking-headers {
+    width: 100%;
+    height: 15rem;
+    margin: 12rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .booking-headers-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #done-btn {
+    width: 15rem;
+    height: 2.5rem;
+    margin: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .booking-headers-right-description-container {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0 0 0;
+  }
+
+  #room-selection-cart {
+    position: absolute;
+    right: -1rem;
+    top: 15rem;
+    background-color: #ffffff;
+    width: 85%;
+    height: 40rem;
+    border: solid 1px #f2f2f2;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    padding: 1rem;
+    display: none;
+    flex-direction: column;
+    overflow-x: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  .room-amenities-factuals {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .room-amenities-factuals-left,
+  .room-amenities-factuals-right {
+    width: 100%;
+  }
+
+  .bedroom-shot {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+
+  .room-details-content-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+  .price-details-container {
+    display: none;
+    flex-direction: column;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-details-container-mobile {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #room-details-container {
+    width: 100%;
+    height: 75rem;
+    border-radius: 0.5rem;
+    background-color: #f3e4d8;
+    color: #996132;
+    margin: 0 0 5rem 0;
+  }
+
+  #guest-details-input-container {
+    display: inline-block;
+    width: 100%;
+    height: 45em;
+    display: none;
+    color: #996132;
+    background-color: #f3e4d8;
+    border-radius: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .booking-content {
+    width: 80%;
+    height: 50rem;
+    text-align: left;
+    margin: 10rem 0 5rem 0;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .guest-input-item1 {
+    width: 20rem;
+    height: 3rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+
+  .guest-input-item-email {
+    width: 20rem;
+    height: 3rem;
+    margin: 1rem 1rem 0.3rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+
+  #review-dates {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  #review-checkin-date {
+    margin: 1rem 0 1rem 0;
+  }
+
+  #pay-now-btn {
+    width: 90%;
+    height: 3rem;
+    background-color: #30be64;
+    border: none;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0 0 0;
+  }
+
+  #manage-delete-btn {
+    width: 20%;
+    background-color: #dc878c;
+    border-radius: 0 0.5rem 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .callUsCard,
+  .reachUsCard {
+    width: 80%;
+    height: 25rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #ffffff;
+    margin: 2rem;
+    border-radius: 0.5rem;
+  }
+
+
+  .help-supportCard {
+    width: 80%;
+    height: 30rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+  }
+
+  #mapContact {
+    width: 80%;
+    height: 30rem;
+    border-radius: 2rem;
+  }
+
+}
+
+/* Responsive Design Styling End */
