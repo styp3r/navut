@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import useStore from './store'
 import DeluxeRoom from '../images/property/gal3.jpg'
@@ -30,7 +30,14 @@ const Bookings = () => {
         decDeluxeIdArrayCount,
         decFamilyIdArrayCount,
         deluxeIddArray,
-        familyIddArray } = useStore();
+        familyIddArray,
+        fetchPCMData } = useStore();
+
+    //This useEffect is to retrieve the category prices from supabase table 'pcm' and set the availableRoomCategory prices in Zustand
+    useEffect(() => {
+        // Fetch data from Supabase when component mounts
+        fetchPCMData();
+    }, [fetchPCMData]);
 
     const isEmpty = bookingCart.length === 0;
     const navigate = useNavigate();
@@ -492,7 +499,7 @@ const Bookings = () => {
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
                         <p style={{ fontSize: '1.5rem' }}>Finish Your Booking</p>
                         <p style={{ margin: 0, fontSize: '0.8rem' }}>* Required Fields</p>
-                        <p style = {{fontWeight: '600'}}>Guest Details</p>
+                        <p style={{ fontWeight: '600' }}>Guest Details</p>
                         <div className="guest-details-input-form">
                             <input className="guest-input-item1" type="text" placeholder="Full Name *" value={inputValue1} onChange={handleChange1}></input>
                             <input className="guest-input-item-email" type="text" placeholder="Email Address *" value={inputValue2} onChange={handleChange2}></input>
@@ -612,7 +619,7 @@ const Bookings = () => {
 
                     <h3>Cancellation Policy</h3>
                     <p>
-                        We understand that plans can change. If you need to cancel your reservation, please do so at least 72 hours before your scheduled check-in time. Bookings can be managed at the 'Manage Booking' section from the <Link to="/bookings-landing" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link>.<Link style={{ textDecoration: 'none' }} to="/cancellation-policy"><p className="navbar-items-container-bottom-refund">Learn More</p></Link>
+                        We understand that plans can change. If you need to cancel your reservation, please do so at least 72 hours before your scheduled check-in time. Bookings can be managed at the 'Manage Booking' section from the <Link to="/bookings-landing" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link>.<Link style={{ textDecoration: 'none' }} to="/cancellation-policy"><span style = {{margin: '0 0 0 0.5rem'}} className="navbar-items-container-bottom-refund">Learn More</span></Link>
                     </p>
 
                     <h3>Contact Information</h3>

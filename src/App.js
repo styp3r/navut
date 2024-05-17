@@ -14,6 +14,7 @@ import UpcomingBookings from './components/UpcomingBookings'
 import NotFound from './components/NotFound'
 import Terms from './components/Terms'
 import Cancellation from './components/Cancellation'
+import PriceChangeManager from './components/PriceChangeManager';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/review-booking" element={<ReviewBooking />} />
           <Route path="/booking-confirmed" element={<BookingConfirmed />} />
           <Route path="/upcoming" element={<UpcomingBookings />} />
+          <Route path="/pcm" element={<PriceChangeManager />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

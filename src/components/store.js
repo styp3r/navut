@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import supabase from './supabase'
 
 const useStore = create((set) => ({
 
@@ -12,11 +13,46 @@ const useStore = create((set) => ({
     decFamilyIdArrayCount: () => set((state) => ({ familyIdArrayCount: state.familyIdArrayCount - 1 })),
 
     availableRoomCategory: [
-        { id: 0, room_name: 'Deluxe Room', type: 'd', room_price: 1000, isBreakfast: false },
-        { id: 1, room_name: 'Deluxe Room', type: 'd', room_price: 1500, isBreakfast: true },
-        { id: 4, room_name: 'Family Room', type: 'f', room_price: 2000, isBreakfast: false },
-        { id: 5, room_name: 'Family Room', type: 'f', room_price: 2500, isBreakfast: true },
+        { id: 0, room_name: 'Deluxe Room', type: 'd', room_price: 0, isBreakfast: false },
+        { id: 1, room_name: 'Deluxe Room', type: 'd', room_price: 0, isBreakfast: true },
+        { id: 4, room_name: 'Family Room', type: 'f', room_price: 0, isBreakfast: false },
+        { id: 5, room_name: 'Family Room', type: 'f', room_price: 0, isBreakfast: true },
     ],
+
+    //This funtion is to retrieve the category prices from supabase table 'pcm' and set the availableRoomCategory prices in Zustand
+    //Funtion is called in Booking.js - Line 37
+    fetchPCMData: async () => {
+        try {
+            // Fetch data from Supabase table
+            const { data, error } = await supabase.from('pcm').select('*');
+
+            if (error) {
+                throw error;
+            }
+
+            // Update store with fetched data
+            set((state) => ({
+                availableRoomCategory: state.availableRoomCategory.map((room, index) => {
+                    // Update room_price based on index and data from Supabase
+                    switch (index) {
+                        case 0: // deluxe_room_only
+                            return { ...room, room_price: data[0].deluxe_room_only };
+                        case 1: // deluxe_breakfast
+                            return { ...room, room_price: data[0].deluxe_breakfast };
+                        case 2: // deluxe_breakfast
+                            return { ...room, room_price: data[0].family_room_only };
+                        case 3: // deluxe_breakfast
+                            return { ...room, room_price: data[0].family_breakfast };
+                        // Add more cases if needed for other room categories
+                        default:
+                            return room;
+                    }
+                })
+            }));
+        } catch (error) {
+            console.error('Error fetching data:', error.message);
+        }
+    },
 
     startDate: new Date(),
     endDate: new Date(),

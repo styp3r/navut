@@ -2017,6 +2017,55 @@ body {
 
 /* Cancellation Policy Page End */
 
+/* Price Change Page Start */
+
+#price-change-manager-page{
+  width: 100%;
+  height: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-change-input-container{
+  width: 50%;
+  background-color: #f3e4d8;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-change-input{
+  width: 50%;
+  height: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+  padding: 0 0 0 0.5rem;
+}
+
+.price-change-submit-btn{
+  border: none;
+  width: 7rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  background-color: #996132;
+  color: #ffffff;
+}
+
+.price-change-submit-btn:hover{
+  cursor: pointer;
+}
+
+.price-change-submit-btn:active{
+  background-color: #4b2f18;
+}
+/* Price Change Page End */
+
 /* Responsive Design Styling Start */
 
 @media only screen and (max-width: 1024px) {
