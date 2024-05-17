@@ -828,6 +828,28 @@ body {
   margin: 0;
 }
 
+.booking-cart-length {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 100%;
+  background-color: #f3e4d8;
+  color: #996132;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.booking-cart-length-empty {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  background-color: #996132;
+  color: #f3e4d8;
+  display: none;
+}
+
 .your-bookings-cart-dropdown-btn {
   display: flex;
   justify-content: flex-end;
@@ -3020,6 +3042,47 @@ body {
     color: #996132;
     margin: 1rem 0 0 0;
     font-weight: 200;
+  }
+
+  #checkInDateInput-cart {
+    position: absolute;
+    top: 10rem;
+    right: 51%;
+    border: solid 1px #d49c6e;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    z-index: 10001;
+  }
+
+  #checkOutDateInput-cart {
+    position: absolute;
+    font-family: 'Montserrat', sans-serif;
+    top: 10rem;
+    left: 51%;
+    border: solid 1px #d49c6e;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    z-index: 10001;
+  }
+
+  #save-changes-btn {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    background-color: #30be64;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    top: 22rem;
+    right: 50%;
+    transform: translateX(50%);
+    width: 10rem;
+    height: 3rem;
+    z-index: 10001;
   }
 }
 

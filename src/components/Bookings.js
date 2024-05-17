@@ -46,58 +46,6 @@ const Bookings = () => {
     const [isValid3, setIsValid3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [isDateCorrect, setIsDateCorrect] = useState(true);
-    //const [data, setData] = useState([]); // variable to store booking data from server
-    //const [rcmData, setRcmData] = useState();
-
-    /*useEffect(() => {
-
-        const fetchData = async () => {
-            try {
-                const { data: fetchedBookings, error } = await supabase
-                    .from('bookingData')
-                    .select('bookings');
-
-                if (error) {
-                    throw error;
-                }
-
-                return fetchedBookings;
-            } catch (error) {
-                console.error('Error fetching bookings:', error.message);
-                // Handle errors (display message, retry logic)
-            }
-        };
-
-        const fetchRCMData = async () => {
-            try {
-                const { data: fetchedrcm, error } = await supabase
-                    .from('rcm')
-                    .select('*');
-
-                if (error) {
-                    throw error;
-                }
-
-                return fetchedrcm;
-            } catch (error) {
-                console.error('Error fetching rcm data:', error.message);
-                // Handle errors (display message, retry logic)
-            }
-        };
-
-        const updateState = async () => {
-            const bookings = await fetchData();
-            const rcm = await fetchRCMData();
-
-            if (bookings && rcmData) {
-                setData(bookings);
-                setRcmData(rcm);
-            }
-        };
-
-        updateState();
-    }, [rcmData]); */
-
 
     const handleAddRoom = () => {
         window.scrollTo({
@@ -489,7 +437,7 @@ const Bookings = () => {
                 <div className="booking-headers-right">
                     <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">cancel</span>Cancel Add Room</button>
                     <div className="booking-headers-right-description-container">
-                        <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings ( {bookingCart.length} )<span className="material-symbols-outlined">expand_more</span></p>
+                        <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings <span className = {bookingCart.length > 0 ? "booking-cart-length" : "booking-cart-length-empty"}>{bookingCart.length}</span><span className="material-symbols-outlined">expand_more</span></p>
                         <p style={{ fontSize: '0.8rem' }}>Add/Modify Rooms from Your Bookings Cart</p>
                     </div>
                 </div>
