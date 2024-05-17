@@ -36,8 +36,8 @@ const Navbar = () => {
     return (
         <div id="navbar">
             <div>
-                <img id="square-logo" alt="logo" src={SquareLogo}></img>
-                <img id="circle-logo" className={isScrollingDown ? 'scrolling-down' : 'scrolling-up'} alt="logo" style={{ width: isScrollingDown ? '4rem' : '6rem', height: isScrollingDown ? '4rem' : '6rem', margin: isScrollingDown ? '0 0 0 2rem' : '5rem 0 0 2rem' }} src={CircleLogo}></img>
+                <Link to="/"><img id="square-logo" alt="logo" src={SquareLogo}></img></Link>
+                <Link to="/"><img id="circle-logo" className={isScrollingDown ? 'scrolling-down' : 'scrolling-up'} alt="logo" style={{ width: isScrollingDown ? '4rem' : '6rem', height: isScrollingDown ? '4rem' : '6rem', margin: isScrollingDown ? '0 0 0 2rem' : '5rem 0 0 2rem' }} src={CircleLogo}></img></Link>
             </div>
             <div className="navbar-items">
                 <div id="navbar-items-container" style={{ height: currentWindowHeight }} >
@@ -47,8 +47,8 @@ const Navbar = () => {
                     <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="/about"><p className="navbar-link">About Us</p></Link>
                     <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="/contact"><p className="navbar-link">Contact Us</p></Link>
                     <div className="navbar-items-container-bottom">
-                        <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none'}} to = "/terms-and-conditions"><p className="navbar-items-container-bottom-terms">Terms & Conditions</p></Link>
-                        <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none'}} to = "/cancellation-policy"><p className="navbar-items-container-bottom-refund">Cancellation & Refund Policy</p></Link>
+                        <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none' }} to="/terms-and-conditions"><p className="navbar-items-container-bottom-terms">Terms & Conditions</p></Link>
+                        <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none' }} to="/cancellation-policy"><p className="navbar-items-container-bottom-refund">Cancellation & Refund Policy</p></Link>
                     </div>
                 </div>
                 <button id="toggleMenu" onClick={() => handleOpenMenu()}><span className="material-symbols-outlined">menu</span></button>

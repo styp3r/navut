@@ -1,6 +1,6 @@
 import One from '../images/property/gal1.jpg'
 import Two from '../images/property/gal2.jpg'
-import Three from '../images/property/gal3.jpg'
+import Three from '../images/property/gal6.jpg'
 import Four from '../images/property/gal4.jpg'
 import Five from '../images/property/gal5.jpg'
 import Six from '../images/property/gal6.jpg'

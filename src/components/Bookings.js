@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Footer from './Footer';
 import useStore from './store'
-import DeluxeRoom from '../images/property/gal6.jpg'
+import DeluxeRoom from '../images/property/gal3.jpg'
 import FamilyRoom from '../images/property/gal9.jpg'
 import { Link, useNavigate } from 'react-router-dom'
 import supabase from './supabase'
@@ -9,7 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Bookings = () => {
-
 
     const { availableRoomCategory,
         bookingCart,
@@ -167,6 +166,10 @@ const Bookings = () => {
 
     const handleAddRoomToCart = (newRoomId, newRoomName, newRoomPrice, isBreakfastVal, type) => {
 
+        window.scrollTo({
+            top: 0
+        });
+
         toast(newRoomName + ' added to Your Bookings Cart', {
             position: "top-right",
             autoClose: 7000,
@@ -228,10 +231,6 @@ const Bookings = () => {
             incFamilyIdArrayCount();
         }
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth' // Optional smooth scrolling behavior
-        });
         document.getElementById('room-selection-list-container').style.display = "none";
         document.getElementById('guest-details-input-container').style.display = "flex";
         document.getElementById('done-btn').style.display = "none";
@@ -437,7 +436,7 @@ const Bookings = () => {
                 <div className="booking-headers-right">
                     <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">cancel</span>Cancel Add Room</button>
                     <div className="booking-headers-right-description-container">
-                        <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings <span className = {bookingCart.length > 0 ? "booking-cart-length" : "booking-cart-length-empty"}>{bookingCart.length}</span><span className="material-symbols-outlined">expand_more</span></p>
+                        <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings <span className={bookingCart.length > 0 ? "booking-cart-length" : "booking-cart-length-empty"}>{bookingCart.length}</span><span className="material-symbols-outlined">expand_more</span></p>
                         <p style={{ fontSize: '0.8rem' }}>Add/Modify Rooms from Your Bookings Cart</p>
                     </div>
                 </div>
@@ -460,15 +459,15 @@ const Bookings = () => {
                                                         <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">fit_Screen</span> xyz sqft</p>
                                                         {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bed</span>1 x Queen Bed</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bed</span> 6 x Single Beds</p>}
                                                         {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bathtub</span> Bathroom</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">bathtub</span>2 x Bathrooms</p>}
-                                                        {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">tv</span> TV</p> : null}
-                                                        {ar.isBreakfast ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">dinner_dining</span> Breakfast Included</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">no_meals</span> Breakfast Excluded</p>}
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">electrical_services</span> TV, Iron, Kettle and AC</p>
+                                                        {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">table_lamp</span> Workspace</p> : null}
                                                     </div>
                                                     <div className="room-amenities-factuals-right">
-                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">wifi</span> WiFi</p>
+                                                        <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">wifi</span> Wi-Fi</p>
                                                         {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">chair</span> Pull-out Bed / Sofa</p> : null}
                                                         <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">balcony</span> Private Balcony</p>
                                                         <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">self_care</span> Towels & Essentials</p>
-                                                        {ar.room_name === "Deluxe Room" ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">table_lamp</span> Workspace</p> : null}
+                                                        {ar.isBreakfast ? <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">dinner_dining</span> Breakfast Included</p> : <p className='factual-item'><span className="material-symbols-outlined factual-item-icon-spacing">no_meals</span> Breakfast Excluded</p>}
                                                     </div>
                                                 </div>
                                                 <img alt='bedroom shot' src={ar.room_name === "Deluxe Room" ? DeluxeRoom : FamilyRoom} style={{ objectFit: 'contain' }} className="bedroom-shot"></img>
@@ -492,8 +491,8 @@ const Bookings = () => {
 
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
                         <p style={{ fontSize: '1.5rem' }}>Finish Your Booking</p>
-                        <h4>Guest Details</h4>
                         <p style={{ margin: 0, fontSize: '0.8rem' }}>* Required Fields</p>
+                        <p style = {{fontWeight: '600'}}>Guest Details</p>
                         <div className="guest-details-input-form">
                             <input className="guest-input-item1" type="text" placeholder="Full Name *" value={inputValue1} onChange={handleChange1}></input>
                             <input className="guest-input-item-email" type="text" placeholder="Email Address *" value={inputValue2} onChange={handleChange2}></input>
@@ -504,7 +503,7 @@ const Bookings = () => {
                                 <input style={{ display: 'inline-block', margin: '0 0.5rem 0 0.5rem' }} type="checkbox" checked={isChecked} onChange={handleChange4}></input>
                                 <p style={{ display: 'inline-block', margin: 0 }}>I confirm that all information provided is accurate</p>
                             </div>
-                            <p style={{ margin: 0 }}>& I agree with the booking conditions. *</p>
+                            <p style={{ margin: 0 }}>& I agree with the Reservation Terms. *</p>
                         </div>
                         {/* This button tag below had <Link></Link> tags wrapping it redirecting it to review booking page*/}
                         {isValid1 && isValid2 && isValid3 && inputValue2.includes("@") && isChecked && isDateCorrect && <button id="confirm-booking-btn" onClick={() => handleConfirmBooking()} className="classicBtn">Confirm Your Stay</button>}
@@ -600,7 +599,7 @@ const Bookings = () => {
                     <h2 style={{ color: '#996132', margin: '2rem 0 3rem 0', fontWeight: '500' }}>Reservation Terms</h2>
                     <h3>Check-In and Check-Out Timings</h3>
                     <p>
-                        Check-in time is from <span style={{ fontWeight: 'bold' }}>3:00 PM</span> onwards, and check-out time is until <span style={{ fontWeight: 'bold' }}>11:00 AM</span>. If you require an early check-in or late check-out, please contact us in advance, and we will do our best to accommodate your request.
+                        Check-in time is from <span style={{ fontWeight: 'bold' }}>12:00 PM</span> onwards, and check-out time is until <span style={{ fontWeight: 'bold' }}>11:00 AM</span>. If you require an early check-in or late check-out, please contact us in advance, and we will do our best to accommodate your request.
                     </p>
 
                     <h3>General Rules</h3>
@@ -613,7 +612,7 @@ const Bookings = () => {
 
                     <h3>Cancellation Policy</h3>
                     <p>
-                        We understand that plans can change. If you need to cancel your reservation, please do so at least 48 hours before your scheduled check-in time.
+                        We understand that plans can change. If you need to cancel your reservation, please do so at least 72 hours before your scheduled check-in time. Bookings can be managed at the 'Manage Booking' section from the <Link to="/bookings-landing" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link>.<Link style={{ textDecoration: 'none' }} to="/cancellation-policy"><p className="navbar-items-container-bottom-refund">Learn More</p></Link>
                     </p>
 
                     <h3>Contact Information</h3>
