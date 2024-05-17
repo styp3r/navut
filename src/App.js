@@ -12,6 +12,8 @@ import ManageBooking from './components/ManageBooking'
 import BookingConfirmed from './components/BookingConfirmed';
 import UpcomingBookings from './components/UpcomingBookings'
 import NotFound from './components/NotFound'
+import Terms from './components/Terms'
+import Cancellation from './components/Cancellation'
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/bookings-landing" element={<BookingsPageLanding />} />
           <Route path="/bookings" element={<Bookings />} />
+          <Route path="/terms-and-conditions" element={<Terms />} />
+          <Route path="/cancellation-policy" element={<Cancellation />} />
           <Route path="/manage-bookings" element={<ManageBooking />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

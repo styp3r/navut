@@ -597,7 +597,7 @@ const Bookings = () => {
 
             <div className="booking-content">
                 <div className="booking-content-container">
-                    <h2 style={{ color: '#996132', margin: '2rem 0 3rem 0', fontWeight: '500' }}>Terms & Conditions</h2>
+                    <h2 style={{ color: '#996132', margin: '2rem 0 3rem 0', fontWeight: '500' }}>Reservation Terms</h2>
                     <h3>Check-In and Check-Out Timings</h3>
                     <p>
                         Check-in time is from <span style={{ fontWeight: 'bold' }}>3:00 PM</span> onwards, and check-out time is until <span style={{ fontWeight: 'bold' }}>11:00 AM</span>. If you require an early check-in or late check-out, please contact us in advance, and we will do our best to accommodate your request.

@@ -246,7 +246,8 @@ const ManageBooking = () => {
                                         {index === 0 && (
                                             <div className="manage-booking-details-container">
                                                 <hr style={{ width: '7rem', border: 'solid 1px #cecece' }}></hr>
-                                                <p style={{ fontSize: '2rem', color: '#996132' }}>Hello, {filteredItem.bookings.guest_name.split(' ')[0]}! We look forward to your stay with us.</p>
+                                                <p style={{ fontSize: '2rem', color: '#996132', fontWeight: '500' }}>Hello, {filteredItem.bookings.guest_name.split(' ')[0]}!</p>
+                                                <p style={{ fontSize: '2rem', color: '#996132' }}>We look forward to your stay with us.</p>
                                                 <div className="booking-details-header">
                                                     <div className="booking-details-header1">
                                                         <p>Booking ID: {filteredItem.bookings.booking_id}</p>
@@ -268,11 +269,11 @@ const ManageBooking = () => {
                                                     <p>Check-out: {formatDateStr(String(filteredItem.bookings.check_out))}</p>
                                                     <div className="extras-roomprice-container">
                                                         <p>Extras: {filteredItem.bookings.extras}</p>
-                                                        <p>&#8377; {filteredItem.bookings.room_price}</p>
+                                                        <p className="paid-icon-manage-booking">PAID &#8377; {filteredItem.bookings.room_price} <span style={{ margin: '0 0.3rem 0 0.3rem' }} className="material-symbols-outlined">check_circle</span></p>
                                                     </div>
                                                 </div>
                                                 <div id="manage-delete-btn" onClick={() => handleOpenModal(filteredItem.bookings.room_name, filteredItem.bookings.unique_id, filteredItem.bookings.check_in, filteredItem.bookings.check_out)}>
-                                                    <span style={{ color: '#ffffff' }} className="material-symbols-outlined">delete</span>
+                                                    <span className="material-symbols-outlined">delete</span>
                                                 </div>
                                             </div>
                                         </div>

@@ -7,6 +7,7 @@ import Gallery from './Gallery'
 import PropertyVideo from './PropertyVideo'
 import PropertyInfo from './PropertyInfo'
 import TestimonialSlider from './TestimonialSlider'
+import FAQ from './FAQ'
 
 const Home = () => {
 
@@ -20,6 +21,7 @@ const Home = () => {
             <PropertyVideo />
             <TestimonialSlider />
             <BookNowSection />
+            <FAQ />
             <div id="map-section">
                 <Map />
                 <div className="map-information">

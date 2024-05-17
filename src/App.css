@@ -90,6 +90,26 @@ body {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.navbar-items-container-bottom {
+  position: absolute;
+  left: 3rem;
+  bottom: 2rem;
+  display: flex;
+}
+
+.navbar-items-container-bottom-terms,
+.navbar-items-container-bottom-refund {
+  font-size: 0.7rem;
+  text-decoration: underline;
+  margin: 0 0.5rem 0 0;
+  color: #767676;
+}
+
+.navbar-items-container-bottom-terms:hover,
+.navbar-items-container-bottom-refund:hover {
+  cursor: pointer;
+}
+
 .fade-in-animation {
   animation-name: fade-in;
   animation-duration: 0.3s;
@@ -482,6 +502,75 @@ body {
 }
 
 /* Book Now Section End */
+
+/* FAQ Section Start */
+#faq-section {
+  width: 100%;
+  height: auto;
+  margin: 5rem 0 5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.faq-title {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #996132;
+}
+
+.faq-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+}
+
+.faq-items-container {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.faq-item {
+  margin: 1rem;
+  height: 3rem; /* Initial height */
+  width: 80%;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow: hidden;
+  transition: height 0.5s ease;
+}
+
+.faq-item.open {
+  height: 7rem; /* Expanded height */
+}
+
+.faq-item:hover {
+  cursor: pointer;
+}
+
+.faq-displayed {
+  display: flex;
+  color: #996132;
+}
+
+.faq-hidden {
+  display: none;
+}
+
+.faq-item-q{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* FAQ Section End */
 
 /* Map Section Start */
 
@@ -1315,6 +1404,14 @@ body {
   align-items: center;
 }
 
+.price-details-container-mobile {
+  display: none;
+  flex-direction: column;
+  text-align: right;
+  justify-content: center;
+  align-items: center;
+}
+
 .price-amount {
   font-weight: 500;
   font-size: 2rem;
@@ -1568,7 +1665,14 @@ body {
 
 #not-found {
   width: 100%;
-  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-container {
+  width: 80%;
+  padding: 15rem 0 0 0;
 }
 
 #go-home-btn {
@@ -1604,8 +1708,6 @@ body {
 
 #input-search-booking-container {
   display: flex;
-  justify-content: left;
-  align-items: center;
 }
 
 #search-booking-input {
@@ -1664,7 +1766,8 @@ body {
 
 #manage-delete-btn {
   width: 10%;
-  background-color: #dc878c;
+  background-color: #ffffff;
+  color: #a4a4a4;
   border-radius: 0 0.5rem 0.5rem 0;
   display: flex;
   justify-content: center;
@@ -1673,7 +1776,13 @@ body {
 
 #manage-delete-btn:hover {
   cursor: pointer;
+  color: #ffffff;
   background-color: #ed5e68;
+}
+
+#manage-delete-btn:active {
+  cursor: pointer;
+  background-color: #9b393f;
 }
 
 .modal {
@@ -1721,6 +1830,26 @@ body {
   cursor: pointer;
 }
 
+.paid-icon-manage-booking {
+  width: 90%;
+  height: 1.5rem;
+  background-color: #ffffff;
+  color: #30be64;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.extras-roomprice-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Manage Booking Page Section End */
 
 /* Upcoming Booking Page Section Start */
@@ -1739,7 +1868,7 @@ body {
   height: 2rem;
   background-color: #b8f6cf;
   color: #30be64;
-  font-weight: bold;
+  font-weight: 500;
   padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   border-radius: 0.3rem;
   display: flex;
@@ -1843,6 +1972,50 @@ body {
 }
 
 /* Booking Confirmed Page Section End */
+
+/* Terms and Conditions Page Start */
+
+#terms-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.terms-container {
+  width: 80%;
+  padding: 10rem 0 0 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Terms and Conditions Page End */
+
+/* Cancellation Policy Page Start */
+
+#cancellation-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cancellation-container {
+  width: 80%;
+  padding: 10rem 0 0 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cancellation Policy Page End */
 
 /* Responsive Design Styling Start */
 
@@ -2113,6 +2286,42 @@ body {
   .upcoming-bookings-list {
     width: 80%;
   }
+
+  .paid-icon-manage-booking {
+    width: 90%;
+    height: 1.5rem;
+    background-color: #ffffff;
+    color: #30be64;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .extras-roomprice-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-details-container {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-details-container-mobile {
+    display: none;
+    flex-direction: column;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -2287,6 +2496,87 @@ body {
 
   .upcoming-bookings-list {
     width: 80%;
+  }
+
+  #manage-delete-btn {
+    width: 40%;
+    height: 3rem;
+    margin: 1rem;
+    background-color: #ed5e68;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #manage-delete-btn:hover {
+    cursor: pointer;
+  }
+
+  #manage-delete-btn:active {
+    cursor: pointer;
+    background-color: #9b393f;
+  }
+
+  .booking-details-list {
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 0.5rem;
+    margin: 2rem 2rem 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .paid-icon-manage-booking {
+    width: 90%;
+    height: 1.5rem;
+    background-color: #b8f6cf;
+    color: #30be64;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .extras-roomprice-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .booking-details-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .booking-details-header1 {
+    text-align: left;
+  }
+
+  .booking-details-header2 {
+    text-align: left;
+  }
+
+  .price-details-container {
+    display: none;
+    flex-direction: column;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-details-container-mobile {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -2712,12 +3002,24 @@ body {
   }
 
   #manage-delete-btn {
-    width: 20%;
-    background-color: #dc878c;
-    border-radius: 0 0.5rem 0.5rem 0;
+    width: 50%;
+    height: 3rem;
+    margin: 1rem;
+    background-color: #ed5e68;
+    color: #ffffff;
+    border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  #manage-delete-btn:hover {
+    cursor: pointer;
+  }
+
+  #manage-delete-btn:active {
+    cursor: pointer;
+    background-color: #9b393f;
   }
 
   .callUsCard,
@@ -2767,8 +3069,17 @@ body {
     border-radius: 0.5rem;
   }
 
+  .booking-details-header {
+    display: flex;
+    flex-direction: column;
+  }
+
   .booking-details-header1 {
-    text-align: center;
+    text-align: left;
+  }
+
+  .booking-details-header2 {
+    text-align: left;
   }
 
   .upcoming-bookings-list {
@@ -2971,8 +3282,17 @@ body {
     border-radius: 0.5rem;
   }
 
+  .booking-details-header {
+    display: flex;
+    flex-direction: column;
+  }
+
   .booking-details-header1 {
-    text-align: center;
+    text-align: left;
+  }
+
+  .booking-details-header2 {
+    text-align: left;
   }
 
   .upcoming-bookings-list {
@@ -3084,6 +3404,79 @@ body {
     height: 3rem;
     z-index: 10001;
   }
+
+  .booking-details-list {
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 0.5rem;
+    margin: 2rem 2rem 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #manage-delete-btn {
+    width: 50%;
+    height: 3rem;
+    margin: 1rem;
+    background-color: #ed5e68;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #manage-delete-btn:hover {
+    cursor: pointer;
+  }
+
+  #manage-delete-btn:active {
+    cursor: pointer;
+    background-color: #9b393f;
+  }
+
+  .navbar-items-container-bottom {
+    position: absolute;
+    left: 3rem;
+    bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar-items-container-bottom-terms,
+  .navbar-items-container-bottom-refund {
+    font-size: 0.7rem;
+    text-decoration: underline;
+    margin: 1rem 0.5rem 0 0;
+    color: #767676;
+  }
+
 }
 
 /* Responsive Design Styling End */
+
+/* 
+
+ .paid-icon-manage-booking {
+    width: 90%;
+    height: 1.5rem;
+    background-color: #b8f6cf;
+    color: #30be64;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .extras-roomprice-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  */

@@ -5,9 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.info("Designed and Developed By Navjyot Jaiswal.")
-console.info(" _   _     _ \n| \\ | |   | |\n|  \\| |_  | |\n| |\\  | |_| |\n|_| \\_|\\___/ ");
-console.log("For Xyka Hotels India Pvt. Ltd.")
+console.info("Designed and Developed By Navjyot Jaiswal (Director) For Xyka Hotels India Pvt. Ltd.")
 root.render(
     <App />
 );
