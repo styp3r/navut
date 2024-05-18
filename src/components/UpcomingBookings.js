@@ -156,8 +156,8 @@ const UpcomingBookings = () => {
                     theme="colored" />
                 <div className="login-container">
                     <p style={{ color: '#996132', fontWeight: '500' }}>Bookings Portal</p>
-                    <input type="text" className="loginid-input" placeholder='Username' onChange={(event) => setUsername(event.target.value)}></input>
-                    <input type="text" className="loginpass-input" placeholder='Password' onChange={(event) => setPass(event.target.value)}></input>
+                    <input type="text" value = {username} className="loginid-input" placeholder='Username' onChange={(event) => setUsername(event.target.value)}></input>
+                    <input type="password" value = {pass} className="loginpass-input" placeholder='Password' onChange={(event) => setPass(event.target.value)}></input>
                     <button className="login-btn" onClick={() => handleAuthCheck()}>Login</button>
                 </div>
             </div>

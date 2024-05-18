@@ -8,10 +8,10 @@ const PriceChangeManager = () => {
     const [isAuth, setIsAuth] = useState(false);
     const [username, setUsername] = useState('');
     const [pass, setPass] = useState('');
-    const [d1, setd1] = useState();
-    const [d2, setd2] = useState();
-    const [f1, setf1] = useState();
-    const [f2, setf2] = useState();
+    const [d1, setd1] = useState('');
+    const [d2, setd2] = useState('');
+    const [f1, setf1] = useState('');
+    const [f2, setf2] = useState('');
 
     const heroname = process.env.REACT_APP_PCM_HERONAME;
     const secret = process.env.REACT_APP_PCM_SECRET;
@@ -102,10 +102,10 @@ const PriceChangeManager = () => {
                 theme="colored" />
             <div className="price-change-input-container">
                 <p style={{ color: '#996132', fontWeight: '500' }}>Rate Change Manager</p>
-                <input className="price-change-input" onChange={(event) => setd1(event.target.value)} placeholder='Deluxe - Room Only - Per Night'></input>
-                <input className="price-change-input" onChange={(event) => setd2(event.target.value)} placeholder='Deluxe - With Breakfast - Per Night'></input>
-                <input className="price-change-input" onChange={(event) => setf1(event.target.value)} placeholder='Family - Room Only - Per Night'></input>
-                <input className="price-change-input" onChange={(event) => setf2(event.target.value)} placeholder='Family - With Breakfast - Per Night'></input>
+                <input className="price-change-input" value = {d1} onChange={(event) => setd1(event.target.value)} placeholder='Deluxe - Room Only - Per Night'></input>
+                <input className="price-change-input" value = {d2} onChange={(event) => setd2(event.target.value)} placeholder='Deluxe - With Breakfast - Per Night'></input>
+                <input className="price-change-input" value = {f1} onChange={(event) => setf1(event.target.value)} placeholder='Family - Room Only - Per Night'></input>
+                <input className="price-change-input" value = {f2} onChange={(event) => setf2(event.target.value)} placeholder='Family - With Breakfast - Per Night'></input>
                 <button onClick={() => handelPCMRateUpdate()} className="price-change-submit-btn">Update Rates</button>
             </div>
         </div>) :
@@ -124,7 +124,7 @@ const PriceChangeManager = () => {
                 <div className="login-container">
                     <p style={{ color: '#996132', fontWeight: '500' }}>Price Change Manager</p>
                     <input type="text" className="loginid-input" placeholder='Username' onChange={(event) => setUsername(event.target.value)}></input>
-                    <input type="text" className="loginpass-input" placeholder='Password' onChange={(event) => setPass(event.target.value)}></input>
+                    <input type="password" className="loginpass-input" placeholder='Password' onChange={(event) => setPass(event.target.value)}></input>
                     <button className="login-btn" onClick={() => handleAuthCheck()}>Login</button>
                 </div>
             </div>
