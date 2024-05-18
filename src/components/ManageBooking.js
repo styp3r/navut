@@ -200,6 +200,18 @@ const ManageBooking = () => {
         }
     }
 
+    const getFormattedDate = () => {
+        const newDate = new Date();
+
+        const year = newDate.getFullYear();
+        const month = String(newDate.getMonth() + 1).padStart(2, '0'); // Pad month with leading zero (if necessary)
+        const day = String(newDate.getDate()).padStart(2, '0');
+
+        const formattedDate = year + '-' + month + '-' + day;
+
+        return formattedDate;
+    }
+
     return (
         <div id="manage-booking-page">
             <ToastContainer
@@ -267,6 +279,7 @@ const ManageBooking = () => {
                                                     <p>{filteredItem.bookings.nights > 1 ? filteredItem.bookings.nights + " Nights" : filteredItem.bookings.nights + " Night"}</p>
                                                     <p>Check-in: {formatDateStr(String(filteredItem.bookings.check_in))}</p>
                                                     <p>Check-out: {formatDateStr(String(filteredItem.bookings.check_out))}</p>
+                                                    {(new Date(getFormattedDate()) > new Date(filteredItem.bookings.check_out)) ? <p style = {{color: '#ed5e68', fontWeight: '500', display: 'flex', justifyContent: 'left', alignItems: 'center'}}><span className="material-symbols-outlined" style = {{margin: '0 0.5rem 0 0'}}>fact_check</span> This booking has been closed</p>: null}
                                                     <div className="extras-roomprice-container">
                                                         <p>Extras: {filteredItem.bookings.extras}</p>
                                                         <p className="paid-icon-manage-booking">PAID &#8377; {filteredItem.bookings.room_price} <span style={{ margin: '0 0.3rem 0 0.3rem' }} className="material-symbols-outlined">check_circle</span></p>
