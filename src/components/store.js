@@ -51,6 +51,7 @@ const useStore = create((set) => ({
             }));
         } catch (error) {
             console.error('Error fetching data:', error.message);
+            alert('Error: Data Retrieval Unsuccessful - We apologize, but we are currently unable to retrieve the necessary data from our server. This may be due to temporary server issues or network problems. \n What You Can Do: \n > Please try refreshing the page. \n > If the problem persists, try again later.')
         }
     },
 

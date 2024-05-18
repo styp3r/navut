@@ -217,7 +217,7 @@ const ManageBooking = () => {
                 <div className="manage-booking-search-container">
                     <h2 style={{ color: '#996132', fontWeight: '500' }}>Manage Your Bookings</h2>
                     <div id="input-search-booking-container">
-                        <input id="search-booking-input" onChange={(event) => setBookingId(event.target.value)} type="text" placeholder="Booking ID"></input>
+                        <input id="search-booking-input1" onChange={(event) => setBookingId(event.target.value)} type="text" placeholder="Booking ID"></input>
                         <button id="search-booking-btn" onClick={() => handleSearchBooking()} className="classicBtn"><span className="material-symbols-outlined">search</span></button>
                     </div>
                 </div>

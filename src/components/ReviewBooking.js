@@ -224,7 +224,6 @@ const ReviewBooking = () => {
     const handleUploadData = async () => {
 
         try {
-            let createdNow = String(new Date());
 
             for (const item of bookingCart) {
                 const bookingObject = {
@@ -242,7 +241,6 @@ const ReviewBooking = () => {
                     "child_count": item.childCount,
                     "nights": nightsBetween(item.checkIn, item.checkOut),
                     "extras": item.isBreakfast ? "Breakfast Included" : "Breakfast Not Included",
-                    created_at: createdNow
                 };
 
                 // Insert each booking object individually
