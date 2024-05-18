@@ -58,6 +58,7 @@ const Bookings = () => {
             top: 0,
             behavior: 'smooth' // Optional smooth scrolling behavior
         });
+        document.getElementById('room-selection-cart').style.display = "none";
         document.getElementById('room-selection-list-container').style.display = "flex";
         document.getElementById('guest-details-input-container').style.display = "none";
         document.getElementById('save-changes-btn').style.display = "none";

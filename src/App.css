@@ -1597,6 +1597,16 @@ body {
   color: #996132;
 }
 
+.grand-total-container{
+ width: 80%;
+ display: flex;
+ justify-content: space-between;
+ border-top: 1px dashed #000000;
+ margin: 2rem 0 0 0;
+ font-size: 1.5rem;
+ font-weight: 500;
+}
+
 /* Review Booking Page Section End */
 
 /* Bookings Page Landing Section Start */
@@ -2395,6 +2405,10 @@ body {
     justify-content: center;
     align-items: center;
   }
+
+  .faq-item.open {
+    height: 10rem; /* Expanded height */
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -2650,6 +2664,10 @@ body {
     text-align: right;
     justify-content: center;
     align-items: center;
+  }
+
+  .faq-item.open {
+    height: 12rem; /* Expanded height */
   }
 }
 
@@ -3186,6 +3204,10 @@ body {
     justify-content: center;
     align-items: center;
   }
+
+  .faq-item.open {
+    height: 15rem; /* Expanded height */
+  }
 }
 
 @media only screen and (max-width: 360px) {
@@ -3400,6 +3422,13 @@ body {
     align-items: center;
   }
 
+  .display-booking-details-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   #footer {
     width: 100%;
     height: 40rem;
@@ -3535,6 +3564,20 @@ body {
     margin: 1rem 0.5rem 0 0;
     color: #767676;
   }
+
+  .faq-item.open {
+    height: 20rem; /* Expanded height */
+  }
+
+  .grand-total-container{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px dashed #000000;
+    margin: 2rem 0 0 0;
+    font-size: 1rem;
+    font-weight: 500;
+   }
 
 }
 

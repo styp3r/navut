@@ -335,11 +335,11 @@ const ReviewBooking = () => {
                             </div>
                             <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
                                 <p>Taxes & Fees - 18%</p>
-                                <p>&#8377; {total * 0.18}</p>
+                                <p>&#8377; {(total * 0.18).toFixed(2)}</p>
                             </div>
-                            <div style={{ width: '80%', display: 'flex', justifyContent: 'space-between', borderTop: '1px dashed #000000', margin: '2rem 0 0 0', fontSize: '1.5rem', fontWeight: '500' }}>
+                            <div className = "grand-total-container">
                                 <p>Grand Total</p>
-                                <p>&#8377; {total + (total * 0.18)}</p>
+                                <p>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
                             </div>
                             <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
                             <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
