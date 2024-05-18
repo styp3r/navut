@@ -278,114 +278,114 @@ const Bookings = () => {
 
     const handleConfirmBooking = () => {
 
-        function generateDates(checkin, checkout) {
-            let startDate = new Date(checkin);
-            let endDate = new Date(checkout);
-            let datesBetween = [];
+            function generateDates(checkin, checkout) {
+                let startDate = new Date(checkin);
+                let endDate = new Date(checkout);
+                let datesBetween = [];
 
-            while (startDate <= endDate) {
-                datesBetween.push(startDate.toISOString().split('T')[0]);
-                startDate.setDate(startDate.getDate() + 1);
-            }
-
-            return datesBetween;
-        }
-
-        let dates = [];
-        let dateArr = [];
-
-        bookingCart.forEach(booking => {
-            dates = generateDates(booking.checkIn, booking.checkOut);
-
-            for (let i = 0; i < dates.length; i++) {
-                if ((i + 1) < dates.length) {
-                    let upload = { today: dates[i], tomorrow: dates[i + 1], roomName: booking.room_name }
-                    dateArr.push(upload)
-                }
-            }
-        });
-
-        const duplicatesArray = [];
-
-        dateArr.forEach(obj => {
-            const foundIndex = duplicatesArray.findIndex(item =>
-                item.roomName === obj.roomName &&
-                item.today === obj.today &&
-                item.tomorrow === obj.tomorrow
-            );
-
-            if (foundIndex !== -1) {
-                // If duplicate found, increment count
-                duplicatesArray[foundIndex].count++;
-            } else {
-                // If no duplicate found, add with count 1
-                duplicatesArray.push({ ...obj, count: 1 });
-            }
-        });
-
-        //compare uploadDateArr with rcm
-        const fetchRCMData = async () => {
-            try {
-                const { data: fetchedrcm, error } = await supabase
-                    .from('rcm')
-                    .select('*');
-
-                if (error) {
-                    throw error;
+                while (startDate <= endDate) {
+                    datesBetween.push(startDate.toISOString().split('T')[0]);
+                    startDate.setDate(startDate.getDate() + 1);
                 }
 
-                let flag = 0;
-                let isSoldOut = 0;
-                for (const obj1 of duplicatesArray) {
-                    for (const obj2 of fetchedrcm) {
-                        if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
-                            //console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
-                            if (obj2.count < obj2.limit && (obj1.count + obj2.count) <= obj2.limit) {
-                                //console.log("Rooms are available!");
-                            } else {
-                                flag = 1;
-                                isSoldOut = 1;
-                                //console.log("Rooms are sold out! :(")
-                                //conflict toast
-                                toast.error((obj2.limit - obj2.count) > 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : (obj2.limit - obj2.count) === 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancy available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : 'No vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
-                                    position: "top-right",
-                                    autoClose: 7000,
-                                    hideProgressBar: false,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                    progress: undefined,
-                                    theme: "colored",
-                                });
-                                break;
-                            }
-                        } else {
-                            //console.log("Create a new booking for - " + obj1.today + " and "+ obj1.tomorrow)
-                            flag = 0;
-                        }
+                return datesBetween;
+            }
+
+            let dates = [];
+            let dateArr = [];
+
+            bookingCart.forEach(booking => {
+                dates = generateDates(booking.checkIn, booking.checkOut);
+
+                for (let i = 0; i < dates.length; i++) {
+                    if ((i + 1) < dates.length) {
+                        let upload = { today: dates[i], tomorrow: dates[i + 1], roomName: booking.room_name }
+                        dateArr.push(upload)
                     }
                 }
+            });
 
-                if (flag === 0 && isSoldOut === 0) {
-                    //console.log('No conflicts detected! Go to review booking page')
-                    //store the name, email and phone number values to be taken to review booking page
-                    setGuestName(inputValue1)
-                    setGuestEmail(inputValue2)
-                    setGuestPhone(inputValue3)
-                    navigate("/review-booking")
-                    return true;
+            const duplicatesArray = [];
+
+            dateArr.forEach(obj => {
+                const foundIndex = duplicatesArray.findIndex(item =>
+                    item.roomName === obj.roomName &&
+                    item.today === obj.today &&
+                    item.tomorrow === obj.tomorrow
+                );
+
+                if (foundIndex !== -1) {
+                    // If duplicate found, increment count
+                    duplicatesArray[foundIndex].count++;
                 } else {
-                    return null;
+                    // If no duplicate found, add with count 1
+                    duplicatesArray.push({ ...obj, count: 1 });
                 }
+            });
 
-            } catch (error) {
-                console.error('Error fetching rcm data:', error.message);
-                // Handle errors (display message, retry logic)
-            }
-        };
+            //compare uploadDateArr with rcm
+            const fetchRCMData = async () => {
+                try {
+                    const { data: fetchedrcm, error } = await supabase
+                        .from('rcm')
+                        .select('*');
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    let flag = 0;
+                    let isSoldOut = 0;
+                    for (const obj1 of duplicatesArray) {
+                        for (const obj2 of fetchedrcm) {
+                            if (obj1.today === obj2.check_in && obj1.tomorrow === obj2.check_out && obj1.roomName === obj2.room_type) {
+                                //console.log("There is an existing booking for " + obj1.roomName + " - " + obj1.today + " to " + obj1.tomorrow);
+                                if (obj2.count < obj2.limit && (obj1.count + obj2.count) <= obj2.limit) {
+                                    //console.log("Rooms are available!");
+                                } else {
+                                    flag = 1;
+                                    isSoldOut = 1;
+                                    //console.log("Rooms are sold out! :(")
+                                    //conflict toast
+                                    toast.error((obj2.limit - obj2.count) > 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : (obj2.limit - obj2.count) === 1 ? 'Only ' + (obj2.limit - obj2.count) + ' vacancy available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)) : 'No vacancies available for ' + obj1.roomName + ' for the following dates: ' + formatDateStr(String(obj1.today)) + ' and ' + formatDateStr(String(obj1.tomorrow)), {
+                                        position: "top-right",
+                                        autoClose: 7000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        theme: "colored",
+                                    });
+                                    break;
+                                }
+                            } else {
+                                //console.log("Create a new booking for - " + obj1.today + " and "+ obj1.tomorrow)
+                                flag = 0;
+                            }
+                        }
+                    }
+
+                    if (flag === 0 && isSoldOut === 0) {
+                        //console.log('No conflicts detected! Go to review booking page')
+                        //store the name, email and phone number values to be taken to review booking page
+                        setGuestName(inputValue1)
+                        setGuestEmail(inputValue2)
+                        setGuestPhone(inputValue3)
+                        navigate("/review-booking")
+                        return true;
+                    } else {
+                        return null;
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching rcm data:', error.message);
+                    // Handle errors (display message, retry logic)
+                }
+            };
 
         fetchRCMData();
-
+        
     }
 
     function nightsBetween(startDate, endDate) {
@@ -620,7 +620,7 @@ const Bookings = () => {
 
                     <h3>Cancellation Policy</h3>
                     <p>
-                        We understand that plans can change. If you need to cancel your reservation, please do so at least 72 hours before your scheduled check-in time. Bookings can be managed at the 'Manage Booking' section from the <Link to="/bookings-landing" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link>.<Link style={{ textDecoration: 'none' }} to="/cancellation-policy"><span style = {{margin: '0 0 0 0.5rem'}} className="navbar-items-container-bottom-refund">Learn More</span></Link>
+                        We understand that plans can change. If you need to cancel your reservation, please do so at least 72 hours before your scheduled check-in time. Bookings can be managed at the 'Manage Booking' section from the <Link to="/bookings-landing" style={{ textDecoration: 'none', color: '#996132', fontWeight: 'bold' }}>Bookings Page</Link>.<Link style={{ textDecoration: 'none' }} to="/cancellation-policy"><span style={{ margin: '0 0 0 0.5rem' }} className="navbar-items-container-bottom-refund">Learn More</span></Link>
                     </p>
 
                     <h3>Contact Information</h3>
