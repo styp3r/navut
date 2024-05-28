@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import supabase from './supabase'
 
 const useStore = create((set) => ({
-
+    
     deluxeIddArray: [0, 1, 2, 3],
     familyIddArray: [4, 5],
     deluxeIdArrayCount: 0,
@@ -51,7 +51,8 @@ const useStore = create((set) => ({
             }));
         } catch (error) {
             console.error('Error fetching data:', error.message);
-            alert('Error: Data Retrieval Unsuccessful - We apologize, but we are currently unable to retrieve the necessary data from our server. This may be due to temporary server issues or network problems. \n What You Can Do: \n > Please try refreshing the page. \n > If the problem persists, try again later.')
+            alert('Error: We apologize, but we are currently unable to retrieve the necessary data from our server. This may be due to temporary server issues or network problems. \n What You Can Do: \n > Please try refreshing the page. \n > If the problem persists, try again later.')
+            window.location.href = '/';
         }
     },
 

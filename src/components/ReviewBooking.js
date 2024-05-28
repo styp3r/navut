@@ -341,7 +341,7 @@ const ReviewBooking = () => {
                                 <p>Grand Total</p>
                                 <p>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
                             </div>
-                            <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
+                            <button id="pay-now-btn" disabled onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
                             <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
                         </div>
                     </div>

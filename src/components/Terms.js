@@ -1,3 +1,5 @@
+import Footer from './Footer'
+
 const Terms = () => {
 
     window.scrollTo({
@@ -36,6 +38,7 @@ const Terms = () => {
 
                 <p>We, shall be under no liability whatsoever in respect of any loss or damage arising directly or indirectly out of the decline of authorization for any Transaction, on Account of the Cardholder having exceeded the preset limit mutually agreed by us with our acquiring bank from time to time.</p>
             </div>
+            <Footer />
         </div>
     );
 }

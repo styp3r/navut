@@ -48,6 +48,7 @@ const Navbar = () => {
                     <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none', margin: '1rem 5rem 1rem 1rem' }} to="/contact"><p className="navbar-link">Contact Us</p></Link>
                     <div className="navbar-items-container-bottom">
                         <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none' }} to="/terms-and-conditions"><p className="navbar-items-container-bottom-terms">Terms & Conditions</p></Link>
+                        <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none' }} to="/privacy"><p className="navbar-items-container-bottom-privacy">Privacy Policy</p></Link>
                         <Link onClick={() => handleCloseMenu()} style={{ textDecoration: 'none' }} to="/cancellation-policy"><p className="navbar-items-container-bottom-refund">Cancellation & Refund Policy</p></Link>
                     </div>
                 </div>

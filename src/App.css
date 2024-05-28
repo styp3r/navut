@@ -95,17 +95,18 @@ body {
   left: 3rem;
   bottom: 2rem;
   display: flex;
+  flex-direction: column;
 }
 
-.navbar-items-container-bottom-terms,
+.navbar-items-container-bottom-terms, .navbar-items-container-bottom-privacy,
 .navbar-items-container-bottom-refund {
   font-size: 0.7rem;
   text-decoration: underline;
-  margin: 0 0.5rem 0 0;
+  margin: 0.5rem 0 0 0;
   color: #767676;
 }
 
-.navbar-items-container-bottom-terms:hover,
+.navbar-items-container-bottom-terms:hover, .navbar-items-container-bottom-privacy:hover,
 .navbar-items-container-bottom-refund:hover {
   cursor: pointer;
 }
@@ -1542,6 +1543,11 @@ body {
   background-color: #25D366;
 }
 
+#pay-now-btn:disabled{
+  cursor: default;
+  background-color: #bdbdbd;
+}
+
 #error-booking-upload {
   width: 30rem;
   color: #ed5e68;
@@ -2050,6 +2056,26 @@ body {
 }
 
 /* Cancellation Policy Page End */
+
+/* Privacy Policy Page Start */
+#privacy-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.privacy-container {
+  width: 80%;
+  padding: 10rem 0 0 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* Privacy Policy Page End */
 
 /* Price Change Page Start */
 
@@ -3557,7 +3583,7 @@ body {
     flex-direction: column;
   }
 
-  .navbar-items-container-bottom-terms,
+  .navbar-items-container-bottom-terms, .navbar-items-container-bottom-privacy,
   .navbar-items-container-bottom-refund {
     font-size: 0.7rem;
     text-decoration: underline;

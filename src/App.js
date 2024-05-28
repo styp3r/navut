@@ -15,6 +15,7 @@ import NotFound from './components/NotFound'
 import Terms from './components/Terms'
 import Cancellation from './components/Cancellation'
 import PriceChangeManager from './components/PriceChangeManager';
+import Privacy from './components/Privacy'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/bookings-landing" element={<BookingsPageLanding />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/cancellation-policy" element={<Cancellation />} />
           <Route path="/manage-bookings" element={<ManageBooking />} />
           <Route path="/about" element={<About />} />

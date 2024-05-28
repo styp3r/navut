@@ -1,3 +1,5 @@
+import Footer from './Footer'
+
 const Cancellation = () => {
 
     window.scrollTo({
@@ -20,6 +22,7 @@ const Cancellation = () => {
 
                 <p>In case of any Refunds approved by XYKA HOTELS INDIA PRIVATE LIMITED, it will take 3-5 days for the refund to be processed to the end customer.</p>
             </div>
+            <Footer />
         </div>
     );
 }

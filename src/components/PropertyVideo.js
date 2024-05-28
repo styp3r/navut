@@ -1,12 +1,21 @@
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
-import Video from '../images/coorg_video_final.mp4'
+import Video from '../images/coorg_video_final.mp4';
 
 const PropertyVideo = () => {
+    const [isLoading, setIsLoading] = useState(true);
+
+    const handleReady = () => {
+        setIsLoading(false);
+    };
+
     return (
         <div id="property-video">
-            <div className = "property-video-container">
+            <div className="property-video-container">
                 <div className="video-container">
-                    <ReactPlayer className="video"
+                    {isLoading && <p>Loading video...</p>}
+                    <ReactPlayer
+                        className="video"
                         url={Video}
                         controls={true}
                         width='auto'
@@ -14,6 +23,7 @@ const PropertyVideo = () => {
                         muted={true}
                         loop={true}
                         playing={true}
+                        onReady={handleReady}
                     />
                 </div>
                 <div className="video-content-title-container">
