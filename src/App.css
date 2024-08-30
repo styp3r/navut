@@ -1309,6 +1309,7 @@ body {
 }
 
 .spReqInput {
+  display: none;
   width: 20rem;
   height: 3rem;
   resize: none;
