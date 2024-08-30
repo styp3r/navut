@@ -499,19 +499,19 @@ const Bookings = () => {
 
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
                         <p style={{ fontSize: '1.5rem' }}>Finish Your Booking</p>
-                        <p style={{ margin: 0, fontSize: '0.8rem' }}>* Required Fields</p>
                         <p style={{ fontWeight: '600' }}>Guest Details</p>
+                        <p style={{ margin: 0, fontSize: '0.8rem' }}>- All Fields Are Required -</p>
                         <div className="guest-details-input-form">
-                            <input className="guest-input-item1" type="text" placeholder="Full Name *" value={inputValue1} onChange={handleChange1}></input>
-                            <input className="guest-input-item-email" type="text" placeholder="Email Address *" value={inputValue2} onChange={handleChange2}></input>
-                            <p style={{ margin: 0, fontSize: '0.8rem' }}>Booking details will be sent to this Email ID.</p>
-                            <input className="guest-input-item1" type="text" placeholder="Phone Number *" value={inputValue3} onChange={handleChange3}></input>
+                            <input className="guest-input-item1" type="text" placeholder="Full Name" value={inputValue1} onChange={handleChange1}></input>
+                            <input className="guest-input-item-email" type="text" placeholder="Email Address" value={inputValue2} onChange={handleChange2}></input>
+                            <p style={{ margin: 0, fontSize: '0.8rem' }}>Booking details will be sent to this Email ID</p>
+                            <input className="guest-input-item1" type="text" placeholder="Phone Number" value={inputValue3} onChange={handleChange3}></input>
                             <textarea className="spReqInput" type="text" placeholder="Special Requests and Preferences"></textarea>
                             <div className="acknowledgment-checkbox">
                                 <input style={{ display: 'inline-block', margin: '0 0.5rem 0 0.5rem' }} type="checkbox" checked={isChecked} onChange={handleChange4}></input>
-                                <p style={{ display: 'inline-block', margin: 0 }}>I confirm that all information provided is accurate</p>
+                                <p style={{ display: 'inline-block', margin: 0 }}>I confirm that all the information provided is accurate</p>
                             </div>
-                            <p style={{ margin: 0 }}>& I agree with the Reservation Terms. *</p>
+                            <p style={{ margin: 0 }}>& I agree with the Reservation Terms.</p>
                         </div>
                         {/* This button tag below had <Link></Link> tags wrapping it redirecting it to review booking page*/}
                         {isValid1 && isValid2 && isValid3 && inputValue2.includes("@") && isChecked && isDateCorrect && <button id="confirm-booking-btn" onClick={() => handleConfirmBooking()} className="classicBtn">Confirm Your Stay</button>}
