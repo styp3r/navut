@@ -4,6 +4,7 @@ import useStore from './store';
 import { Link, useNavigate } from 'react-router-dom';
 import supabase from './supabase'
 import RazorpayIcon from '../images/decoration/razorpay-icon.png'
+import emailjs from '@emailjs/browser';
 
 const ReviewBooking = () => {
 
@@ -243,6 +244,24 @@ const ReviewBooking = () => {
                     "extras": item.isBreakfast ? "Breakfast Included" : "Breakfast Not Included",
                 };
 
+                // Send confirmation email to guest
+                emailjs.send('service_jx4464p', 'template_dkq2u9i', {
+                    booking_id: bookingID,
+                    check_in_date: item.checkIn,
+                    check_out_date: item.checkOut,
+                    guests: `${item.adultCount} Adults, ${item.childCount} Children`,
+                    room_type: item.room_name,
+                    total_price: `&#8377;${(item.room_price + (item.room_price * 0.18)).toFixed(2)}`,
+                    guest_email: guestEmail,  // Include guest email if necessary
+                    from_name: guestName,
+                    payment_status: 'Paid',
+                }, '7PzgVLJyaETaq4eQh')
+                    .then((result) => {
+                        console.log('Email sent successfully:', result.text);
+                    }, (error) => {
+                        console.log('Error sending email:', error.text);
+                    });
+
                 // Insert each booking object individually
                 const { error } = await supabase
                     .from('bookingData')
@@ -337,12 +356,12 @@ const ReviewBooking = () => {
                                 <p>Taxes & Fees - 18%</p>
                                 <p>&#8377; {(total * 0.18).toFixed(2)}</p>
                             </div>
-                            <div className = "grand-total-container">
+                            <div className="grand-total-container">
                                 <p>Grand Total</p>
                                 <p>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
                             </div>
-                            <button id="pay-now-btn" disabled onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
-                            <p style = {{backgroundColor: '#ff8c66', borderRadius: '0.5rem', padding: '0.5rem', color: '#ffffff'}}>We are currently not accepting new bookings!</p>
+                            <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
+                            <p style={{ backgroundColor: '#ff8c66', borderRadius: '0.5rem', padding: '0.5rem', color: '#ffffff' }}>We are currently not accepting new bookings!</p>
                             <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
                         </div>
                     </div>
