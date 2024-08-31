@@ -12,7 +12,6 @@ const Contact = () => {
                     <h3 style={{ fontWeight: 'bold' }}>Connect With Us</h3>
                     <div style={{ margin: '3rem 0 0 0', padding: '2rem' }}>
                         <p className="contactItem"><span className="material-symbols-outlined">call</span>+91 63644 01444</p>
-                        <p className="contactItem"><span className="material-symbols-outlined">call</span>+91 99452 58005</p>
                         <p className="contactItem"><span className="material-symbols-outlined">mail</span>navuthotels@gmail.com</p>
                     </div>
                 </div>

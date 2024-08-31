@@ -307,7 +307,7 @@ const ReviewBooking = () => {
                 <Link to="/bookings"><span className="material-symbols-outlined go-back-btn">arrow_circle_left</span></Link>
                 <p style={{ margin: '0 0 0 0.5rem', color: '#996132', fontWeight: '500' }}>Go Back</p>
             </div>
-            <p className="review-booking-page-title">Review Booking</p>
+            <p className="review-booking-page-title">Review Your Booking</p>
             <p id="error-booking-upload"><span className="material-symbols-outlined">warning</span>Internal Server Error. Please Try Again Later.</p>
             {bookingCart.length === 0 ? (
                 <div style={{ width: '100%', height: windowHeight, margin: '5rem 0 0 0' }}>
@@ -357,12 +357,15 @@ const ReviewBooking = () => {
                                 <p>&#8377; {(total * 0.18).toFixed(2)}</p>
                             </div>
                             <div className="grand-total-container">
-                                <p>Grand Total</p>
-                                <p>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
+                                <p style = {{color: '#996132'}}>Grand Total</p>
+                                <p style = {{color: '#996132'}}>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
                             </div>
-                            <button id="pay-now-btn" onClick={() => handleUploadData()}><span className="material-symbols-outlined" style={{ margin: '0 0.5rem 0 0' }}>encrypted</span>Pay Now</button>
+                            <button id="pay-now-btn" disabled onClick={() => handleUploadData()}>Pay Now <span className="material-symbols-outlined" style={{ margin: '0 0 0 0.5rem' }}>encrypted</span></button>
                             <p style={{ backgroundColor: '#ff8c66', borderRadius: '0.5rem', padding: '0.5rem', color: '#ffffff' }}>We are currently not accepting new bookings!</p>
-                            <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
+                            <div style={{ width: '80%', display: 'flex', justifyContent: 'center' }}>
+                                <p>Powered by</p>
+                                <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
+                            </div>
                         </div>
                     </div>
 

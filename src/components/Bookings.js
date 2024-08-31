@@ -500,7 +500,7 @@ const Bookings = () => {
                     <div id="guest-details-input-container" style={{ display: bookingCart.length === 0 ? "none" : "flex" }}> {/* Left Dashboard - Main - 2*/}
                         <p style={{ fontSize: '1.5rem' }}>Finish Your Booking</p>
                         <p style={{ fontWeight: '600' }}>Guest Details</p>
-                        <p style={{ margin: 0, fontSize: '0.8rem' }}>- All Fields Are Required -</p>
+                        <p style={{ margin: 0, fontSize: '0.8rem' }}>- All Fields are Required -</p>
                         <div className="guest-details-input-form">
                             <input className="guest-input-item1" type="text" placeholder="Full Name" value={inputValue1} onChange={handleChange1}></input>
                             <input className="guest-input-item-email" type="text" placeholder="Email Address" value={inputValue2} onChange={handleChange2}></input>

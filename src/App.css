@@ -1546,7 +1546,7 @@ body {
 
 #pay-now-btn:disabled{
   cursor: default;
-  background-color: #bdbdbd;
+  background-color: #d0d0d0;
 }
 
 #error-booking-upload {
@@ -2032,6 +2032,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 0 5rem 0;
 }
 
 /* Terms and Conditions Page End */
@@ -2054,6 +2055,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 0 5rem 0;
 }
 
 /* Cancellation Policy Page End */
@@ -2075,6 +2077,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 0 5rem 0;
 }
 /* Privacy Policy Page End */
 
