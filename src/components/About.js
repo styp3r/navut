@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import aboutUsHeroImg from '../images/property/aboutUsHeroImg2.jpg'
+import aboutUsHeroImg from '../images/property/heroImg1.jpg'
 
 const About = () => {
 

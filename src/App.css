@@ -2567,7 +2567,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 90rem;
+    height: 70rem;
   }
 
   .map-information {
@@ -2580,7 +2580,7 @@ body {
 
   #map {
     width: 80%;
-    height: 40rem;
+    height: 20rem;
     border-radius: 0.5rem;
     margin: 5rem;
   }
@@ -3186,7 +3186,7 @@ body {
 
   #mapContact {
     width: 80%;
-    height: 30rem;
+    height: 15rem;
     border-radius: 2rem;
   }
 
