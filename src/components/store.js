@@ -99,9 +99,11 @@ const useStore = create((set) => ({
     guestName: null,
     guestEmail: null,
     guestPhone: null,
+    guestCountry: null,
     setGuestName: (name) => set({ guestName: name }),
     setGuestEmail: (email) => set({ guestEmail: email }),
     setGuestPhone: (phone) => set({ guestPhone: phone }),
+    setGuestCountry: (country) => set({ guestCountry: country }),
 }))
 
 export default useStore;

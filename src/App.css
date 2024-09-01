@@ -1297,6 +1297,18 @@ body {
   padding: 0 0.5rem 0 0.5rem;
 }
 
+.guest-input-country {
+  width: 21rem;
+  height: 2.5rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  color: #787878;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
 .guest-input-item-email {
   width: 20rem;
   height: 2.5rem;

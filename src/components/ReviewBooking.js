@@ -13,7 +13,7 @@ const ReviewBooking = () => {
         behavior: 'smooth' // Optional smooth scrolling behavior
     });
 
-    const { bookingCart, guestName, guestEmail, guestPhone } = useStore();
+    const { bookingCart, guestName, guestEmail, guestPhone, guestCountry } = useStore();
     const [bookingID, setBookingID] = useState('');
     const navigate = useNavigate();
     const windowHeight = window.innerHeight;
@@ -232,6 +232,7 @@ const ReviewBooking = () => {
                     "guest_name": guestName,
                     "guest_email": guestEmail,
                     "guest_phone": guestPhone,
+                    "guest_country": guestCountry,
                     "room_name": item.room_name,
                     "room_price": item.room_price,
                     "isConflict": item.isConflict,
@@ -259,7 +260,17 @@ const ReviewBooking = () => {
                 }
             }
 
-            //SEND EMAIL
+            // Send confirmation email to guest
+            emailjs.send('service_jx4464p', 'template_dkq2u9i', {
+                booking_id: bookingID,
+                guest_email: guestEmail, 
+                from_name: guestName,
+            }, '7PzgVLJyaETaq4eQh')
+                .then((result) => {
+                    console.log('Email sent successfully:', result.text);
+                }, (error) => {
+                    console.log('Error sending email:', error.text);
+                });
 
             // Update rcm
             handleUpdateRCM();
@@ -327,7 +338,9 @@ const ReviewBooking = () => {
                         <div id="display-guest-details">
                             <p className="display-guest-details-item"><span style={{ fontWeight: '500', color: '#996132' }}>Guest Name:</span> {guestName}</p>
                             <p className="display-guest-details-item"><span style={{ fontWeight: '500', color: '#996132' }}>Email Address:</span> {guestEmail}</p>
+                            <p className="display-guest-details-item"><span style={{ fontWeight: '500', color: '#996132' }}>Country:</span> {guestCountry}</p>
                             <p className="display-guest-details-item"><span style={{ fontWeight: '500', color: '#996132' }}>Phone:</span> {guestPhone}</p>
+
                         </div>
                         <div id="display-payment-details-container">
                             <p style={{ fontWeight: '500', margin: '1rem 1rem 2rem 1rem' }}>Payment Summary</p>
@@ -343,7 +356,7 @@ const ReviewBooking = () => {
                                 <p style={{ color: '#996132' }}>Grand Total</p>
                                 <p style={{ color: '#996132' }}>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
                             </div>
-                            <button id="pay-now-btn" disabled onClick={() => handleUploadData()}>Pay Now <span className="material-symbols-outlined" style={{ margin: '0 0 0 0.5rem' }}>encrypted</span></button>
+                            <button id="pay-now-btn" onClick={() => handleUploadData()}>Pay Now <span className="material-symbols-outlined" style={{ margin: '0 0 0 0.5rem' }}>encrypted</span></button>
                             <p style={{ backgroundColor: '#ff8c66', borderRadius: '0.5rem', padding: '0.5rem', color: '#ffffff' }}>We are currently not accepting new bookings!</p>
                             <div style={{ width: '80%', display: 'flex', justifyContent: 'center' }}>
                                 <p>Powered by</p>
