@@ -225,7 +225,6 @@ const ReviewBooking = () => {
     const handleUploadData = async () => {
 
         try {
-
             for (const item of bookingCart) {
                 const bookingObject = {
                     "unique_id": generateUniqueId(5),
@@ -244,24 +243,6 @@ const ReviewBooking = () => {
                     "extras": item.isBreakfast ? "Breakfast Included" : "Breakfast Not Included",
                 };
 
-                // Send confirmation email to guest
-                emailjs.send('service_jx4464p', 'template_dkq2u9i', {
-                    booking_id: bookingID,
-                    check_in_date: item.checkIn,
-                    check_out_date: item.checkOut,
-                    guests: `${item.adultCount} Adults, ${item.childCount} Children`,
-                    room_type: item.room_name,
-                    total_price: `&#8377;${(item.room_price + (item.room_price * 0.18)).toFixed(2)}`,
-                    guest_email: guestEmail,  // Include guest email if necessary
-                    from_name: guestName,
-                    payment_status: 'Paid',
-                }, '7PzgVLJyaETaq4eQh')
-                    .then((result) => {
-                        console.log('Email sent successfully:', result.text);
-                    }, (error) => {
-                        console.log('Error sending email:', error.text);
-                    });
-
                 // Insert each booking object individually
                 const { error } = await supabase
                     .from('bookingData')
@@ -277,6 +258,8 @@ const ReviewBooking = () => {
                     throw error;
                 }
             }
+
+            //SEND EMAIL
 
             // Update rcm
             handleUpdateRCM();
@@ -357,8 +340,8 @@ const ReviewBooking = () => {
                                 <p>&#8377; {(total * 0.18).toFixed(2)}</p>
                             </div>
                             <div className="grand-total-container">
-                                <p style = {{color: '#996132'}}>Grand Total</p>
-                                <p style = {{color: '#996132'}}>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
+                                <p style={{ color: '#996132' }}>Grand Total</p>
+                                <p style={{ color: '#996132' }}>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
                             </div>
                             <button id="pay-now-btn" disabled onClick={() => handleUploadData()}>Pay Now <span className="material-symbols-outlined" style={{ margin: '0 0 0 0.5rem' }}>encrypted</span></button>
                             <p style={{ backgroundColor: '#ff8c66', borderRadius: '0.5rem', padding: '0.5rem', color: '#ffffff' }}>We are currently not accepting new bookings!</p>
