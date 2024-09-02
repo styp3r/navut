@@ -263,7 +263,7 @@ const ReviewBooking = () => {
             // Send confirmation email to guest
             emailjs.send('service_jx4464p', 'template_dkq2u9i', {
                 booking_id: bookingID,
-                guest_email: guestEmail, 
+                guest_email: guestEmail,
                 from_name: guestName,
             }, '7PzgVLJyaETaq4eQh')
                 .then((result) => {
@@ -297,6 +297,25 @@ const ReviewBooking = () => {
 
     return (
         <div id="review-booking-page">
+
+            <div className="progress-bar">
+                <div style={{ display: 'flex' }}>
+                    <span class="material-symbols-outlined">line_start</span>
+                </div>
+                <div className="progress-divider">
+                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132', opacity: '1' }}></hr>
+                </div>
+                <div style={{ opacity: '1' }}>
+                    <span class="material-symbols-outlined">radio_button_checked</span>
+                </div>
+                <div className="progress-divider">
+                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132', opacity: '1' }}></hr>
+                </div>
+                <div style={{ display: 'flex', opacity: '0.2' }}>
+                    <span class="material-symbols-outlined">line_end_circle</span>
+                </div>
+            </div>
+
             <div className="go-back-btn-container">
                 <Link to="/bookings"><span className="material-symbols-outlined go-back-btn">arrow_circle_left</span></Link>
                 <p style={{ margin: '0 0 0 0.5rem', color: '#996132', fontWeight: '500' }}>Go Back</p>

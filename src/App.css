@@ -903,8 +903,8 @@ body {
   align-items: center;
 }
 
-.progress-bar-stage1{
-  width: 80%;
+.progress-bar {
+  width: 50%;
   height: 3rem;
   margin: 10rem 0 0 0;
   display: flex;
@@ -912,6 +912,10 @@ body {
   justify-content: space-between;
   align-items: center;
   color: #996132;
+}
+
+.progress-divider {
+  width: 30%;
 }
 
 .book-your-stay-title {
@@ -956,6 +960,7 @@ body {
   0% {
     box-shadow: 0 0 0 0px #00cc66;
   }
+
   100% {
     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
   }
@@ -1108,7 +1113,7 @@ body {
   margin: 0.5rem 0 0.5rem 0;
 }
 
-.date-divider-cart{
+.date-divider-cart {
   display: flex;
   position: absolute;
   width: 0;
@@ -1645,7 +1650,7 @@ body {
 
 .go-back-btn-container {
   width: 100%;
-  margin: 12rem 0 2rem 5rem;
+  margin: 5rem 0 2rem 5rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -2320,7 +2325,7 @@ body {
   #booking-headers {
     width: 95%;
     height: 7rem;
-    margin: 12rem 0 0 0;
+    margin: 1rem 0 0 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -2495,7 +2500,7 @@ body {
     /* Expanded height */
   }
 
-  .date-divider-cart{
+  .date-divider-cart {
     display: none;
     position: absolute;
     width: 0;
@@ -2773,11 +2778,26 @@ body {
     /* Expanded height */
   }
 
-  .date-divider-cart{
+  .date-divider-cart {
     display: none;
     width: 0;
     color: #996132;
     opacity: 0;
+  }
+
+  .progress-bar {
+    width: 80%;
+    height: 3rem;
+    margin: 10rem 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #996132;
+  }
+
+  .progress-divider {
+    width: 20%;
   }
 }
 
@@ -3038,7 +3058,7 @@ body {
   #booking-headers {
     width: 100%;
     height: 15rem;
-    margin: 12rem 0 0 0;
+    margin: 1rem 0 0 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -3354,12 +3374,27 @@ body {
     /* Expanded height */
   }
 
-  .date-divider-cart{
+  .date-divider-cart {
     display: none;
     position: absolute;
     width: 0;
     color: #996132;
     opacity: 0;
+  }
+
+  .progress-bar {
+    width: 70%;
+    height: 3rem;
+    margin: 10rem 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #996132;
+  }
+
+  .progress-divider {
+    width: 20%;
   }
 }
 
@@ -3529,7 +3564,7 @@ body {
     align-items: center;
   }
 
-  .date-divider-cart{
+  .date-divider-cart {
     display: flex;
     width: 10%;
     position: relative;
@@ -3786,6 +3821,21 @@ body {
     border: solid 1px #ed5e68;
     justify-content: center;
     align-items: center;
+  }
+
+  .progress-bar {
+    width: 80%;
+    height: 3rem;
+    margin: 10rem 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #996132;
+  }
+
+  .progress-divider {
+    width: 20%;
   }
 
 }

@@ -447,32 +447,20 @@ const Bookings = () => {
                 pauseOnHover
                 theme="colored" />
 
-            <div className="progress-bar-stage1">
-                <div>
-                    <span class="material-symbols-outlined">line_start_circle</span>
+            <div className="progress-bar">
+                <div style={{ display: 'flex' }}>
+                    <span class="material-symbols-outlined">line_start</span>
                 </div>
-                <div style = {{width: '10%'}}>
-                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132' }}></hr>
+                <div className="progress-divider">
+                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132', opacity: '1' }}></hr>
                 </div>
-                <div>
+                <div style={{ opacity: '0.2' }}>
                     <span class="material-symbols-outlined">circle</span>
                 </div>
-                <div style = {{width: '10%'}}>
-                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132' }}></hr>
+                <div className="progress-divider">
+                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132', opacity: '0.2' }}></hr>
                 </div>
-                <div>
-                    <span class="material-symbols-outlined">circle</span>
-                </div>
-                <div style = {{width: '10%'}}>
-                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132' }}></hr>
-                </div>
-                <div>
-                    <span class="material-symbols-outlined">circle</span>
-                </div>
-                <div style = {{width: '10%'}}>
-                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132' }}></hr>
-                </div>
-                <div>
+                <div style={{ display: 'flex', opacity: '0.2' }}>
                     <span class="material-symbols-outlined">line_end_circle</span>
                 </div>
             </div>
