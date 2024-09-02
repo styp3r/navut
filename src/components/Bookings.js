@@ -451,10 +451,15 @@ const Bookings = () => {
                 <p className="book-your-stay-title">Book Your Stay</p>
                 <div className="booking-headers-right">
                     <button id="done-btn" className="classicBtn" onClick={() => handleDoneClick()}><span style={{ margin: '0 0.5rem 0 0' }} className="material-symbols-outlined">cancel</span>Cancel Add Room</button>
+
                     <div className="booking-headers-right-description-container">
-                        <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings <span className={bookingCart.length > 0 ? "booking-cart-length" : "booking-cart-length-empty"}>{bookingCart.length}</span><span className="material-symbols-outlined">expand_more</span></p>
-                        <p style={{ fontSize: '0.8rem' }}>Add/Modify Rooms from Your Bookings Cart</p>
+                        <p onClick={() => handleCartDropdownOpen()} className='your-bookings-cart-dropdown-btn'>Your Bookings
+                            <span className={bookingCart.length > 0 ? "booking-cart-length pulse" : "booking-cart-length-empty"}>{bookingCart.length}</span>
+                            <span className="material-symbols-outlined">expand_more</span>
+                        </p>
+                        <p style={{ fontSize: '0.8rem' }}>Tap above to add or modify your booking</p>
                     </div>
+
                 </div>
             </div>
             <div id="booking-dashboard">
@@ -513,7 +518,7 @@ const Bookings = () => {
                             <input className="guest-input-item1" type="text" placeholder="Full Name" value={inputValue1} onChange={handleChange1}></input>
                             <input className="guest-input-item-email" type="text" placeholder="Email Address" value={inputValue2} onChange={handleChange2}></input>
                             <p style={{ margin: 0, fontSize: '0.8rem' }}>Booking details will be sent to this Email ID</p>
-                            <select className="guest-input-country" name="country" value = {inputValueCountry} onChange={handleChangeCountry}>
+                            <select className="guest-input-country" name="country" value={inputValueCountry} onChange={handleChangeCountry}>
                                 <option value="" disabled>Country</option>
                                 <option value="AF">Afghanistan</option>
                                 <option value="AL">Albania</option>
@@ -803,7 +808,7 @@ const Bookings = () => {
                                         <p className="date-display-cart-item">Check-in</p>
                                         <p className="date-display-cart-item">{formatDateStr(String(item.checkIn))}</p>
                                     </div>
-                                    <hr className = "date-divider-cart"></hr>
+                                    <hr className="date-divider-cart"></hr>
                                     <div className="checkout-display-cart">
                                         <p className="date-display-cart-item">Check-out</p>
                                         <p className="date-display-cart-item">{formatDateStr(String(item.checkOut))}</p>
