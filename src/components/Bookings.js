@@ -447,6 +447,36 @@ const Bookings = () => {
                 pauseOnHover
                 theme="colored" />
 
+            <div className="progress-bar-stage1">
+                <div>
+                    <span class="material-symbols-outlined">line_start_circle</span>
+                </div>
+                <div style = {{width: '10%'}}>
+                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132' }}></hr>
+                </div>
+                <div>
+                    <span class="material-symbols-outlined">circle</span>
+                </div>
+                <div style = {{width: '10%'}}>
+                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132' }}></hr>
+                </div>
+                <div>
+                    <span class="material-symbols-outlined">circle</span>
+                </div>
+                <div style = {{width: '10%'}}>
+                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132' }}></hr>
+                </div>
+                <div>
+                    <span class="material-symbols-outlined">circle</span>
+                </div>
+                <div style = {{width: '10%'}}>
+                    <hr style={{ width: '100%', height: '0', border: 'solid 1px #996132' }}></hr>
+                </div>
+                <div>
+                    <span class="material-symbols-outlined">line_end_circle</span>
+                </div>
+            </div>
+
             <div id="booking-headers">
                 <p className="book-your-stay-title">Book Your Stay</p>
                 <div className="booking-headers-right">
