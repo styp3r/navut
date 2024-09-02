@@ -795,7 +795,7 @@ const Bookings = () => {
 
                             <div key={item.id} className={editIndex === index ? "editing" : "default"}>
                                 <p style={{ fontWeight: '550', margin: '1rem', fontSize: '1.3rem' }}>{item.room_name} <span style={{ fontSize: '0.8rem', fontWeight: '300' }}> {String(nightsBetween(item.checkIn, item.checkOut)) > 1 ? String(nightsBetween(item.checkIn, item.checkOut)) + " Nights" : String(nightsBetween(item.checkIn, item.checkOut)) + " Night"}</span></p>
-                                {item.isBreakfast ? <p style={{ margin: '1rem', display: 'flex', justifyContent: 'left', alignItems: 'center' }}><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">king_bed</span> Breakfast Included</p> : <p style={{ margin: '1rem', display: 'flex', justifyContent: 'left', alignItems: 'center' }}><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">king_bed</span> Room Only</p>}
+                                {item.isBreakfast ? <p style={{ margin: '1rem', display: 'flex', justifyContent: 'left', alignItems: 'center' }}><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">king_bed</span><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">restaurant</span> Breakfast Included</p> : <p style={{ margin: '1rem', display: 'flex', justifyContent: 'left', alignItems: 'center' }}><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">king_bed</span><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">no_meals</span> Room Only</p>}
                                 <p style={{ margin: '1rem', display: 'flex', justifyContent: 'left', alignItems: 'center' }}><span style={{ margin: '0 0.5rem 0 0', color: '#996132' }} className="material-symbols-outlined">group</span>{parseInt(item.adultCount) > 1 ? item.adultCount + " Adults" : item.adultCount + " Adult"}, {parseInt(item.childCount) !== 1 ? item.childCount + " Children" : item.childCount + " Child"}</p>
                                 <p style={{ fontStyle: 'italic' }}></p>
                                 <div className="date-display-cart">
@@ -803,6 +803,7 @@ const Bookings = () => {
                                         <p className="date-display-cart-item">Check-in</p>
                                         <p className="date-display-cart-item">{formatDateStr(String(item.checkIn))}</p>
                                     </div>
+                                    <hr className = "date-divider-cart"></hr>
                                     <div className="checkout-display-cart">
                                         <p className="date-display-cart-item">Check-out</p>
                                         <p className="date-display-cart-item">{formatDateStr(String(item.checkOut))}</p>
