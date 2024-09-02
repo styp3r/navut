@@ -357,7 +357,7 @@ const ReviewBooking = () => {
                                 <p style={{ color: '#996132' }}>&#8377; {(total + (total * 0.18)).toFixed(2)}</p>
                             </div>
                             <button id="pay-now-btn" disabled onClick={() => handleUploadData()}>Pay Now <span className="material-symbols-outlined" style={{ margin: '0 0 0 0.5rem' }}>encrypted</span></button>
-                            <p style={{ backgroundColor: '#ff8c66', borderRadius: '0.5rem', padding: '0.5rem', color: '#ffffff' }}>We are currently not accepting new bookings!</p>
+                            <p style={{ width: '80%', backgroundColor: '#ff8c66', borderRadius: '0.5rem', padding: '0.5rem', color: '#ffffff' }}>We are currently not accepting new bookings!</p>
                             <div style={{ width: '80%', display: 'flex', justifyContent: 'center' }}>
                                 <p>Powered by</p>
                                 <img alt='payment partner icon' src={RazorpayIcon} width='90' height='20' style={{ margin: '1rem' }} ></img>
